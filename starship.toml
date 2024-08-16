@@ -1,0 +1,119 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$git_metrics\
+$package\
+$golang\
+$nodejs\
+$python\
+$rust\
+$aws\
+$line_break\
+$character"""
+
+
+right_format="""$cmd_duration"""
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = '[X](bold red)'
+vimcmd_symbol = "[<](bold green)"
+
+[cmd_duration]
+min_time = 0
+show_milliseconds = true
+format='[$duration]($style)'
+style="bold yellow"
+
+[nodejs]
+format = '[${symbol}(${version})](bold green) '
+detect_files = ["package.json", ".node-version"]
+detect_folders = ["node_modules"]
+symbol = "⬢ "
+style="bold green"
+
+[memory_usage]
+format = "with$symbol [${ram} ${ram_pct}( | ${swap} ${swap_pct})]($style) "
+disabled = false
+threshold = -1
+symbol = " "
+style = "bold dimmed green"
+
+[aws]
+format = '[$symbol$profile(\($region\))]($style) '
+style = "bold yellow"
+[aws.region_aliases]
+us-east-1 = "ue1"
+
+[package]
+disabled = true
+
+[docker_context]
+format = "docker: [🐋 $context](blue bold)"
+disabled = false
+
+[hostname]
+ssh_only = false
+format = '[$hostname](red) '
+trim_at = "."
+disabled = false
+
+[status]
+style = "red"
+symbol = "💥 "
+format = '[\[$symbol$status\]]($style) '
+disabled = false
+
+[git_branch]
+always_show_remote = true
+style = "bold blue"
+
+[git_status]
+conflicted = "⚔️ "
+ahead = "🏎️ 💨 ×${count}"
+behind = "🐢 ×${count}"
+diverged = "🔱 🏎️ 💨 ×${ahead_count} 🐢 ×${behind_count}"
+untracked = "🛤️  ×${count}"
+stashed = "📦 "
+modified = "📝 ×${count}"
+staged = "🗃️  ×${count}"
+renamed = "📛 ×${count}"
+deleted = "🗑️  ×${count}"
+style = "bright-white"
+format = "$all_status$ahead_behind"
+
+[rust]
+format ="via [${symbol}(${version} )](208)($style) "
+
+[golang]
+format = "go: [🏎 💨 $version](bold cyan) "
+
+[python]
+format = "[$symbol$version]($style) "
+style = "bold #f57800"
+symbol = "🐍"
+pyenv_version_name = true
+
+
+
+[username]
+format = "💻 [$user]($style) "
+disabled = false
+show_always = true
+style_user= "bold blue"
+
+[line_break]
+disabled = false
+
+[directory]
+truncation_length = 5
+format = "📂️ [$path]($style) | "
+
+[time]
+format = "🕙 %T"
+disabled = false
