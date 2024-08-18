@@ -19,4 +19,7 @@ require("lazy").setup({ { import = "alex.plugins" }, { import = "alex.plugins.ls
   change_detection = {
     notify = false,
   },
+  spec = {
+    { import = "lazyvim.plugins.extras.coding.tabnine" },
+  },
 })
