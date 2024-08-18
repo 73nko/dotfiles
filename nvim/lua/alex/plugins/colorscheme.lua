@@ -1,29 +1,59 @@
 return {
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "folke/tokyonight.nvim",
+    name = "tokyonight",
     priority = 1000,
     opts = {
-      flavour = "mocha",
-      custom_highlights = function(colors)
-        return {
-          WinSeparator = {
-            fg = colors.purple,
-          },
+      style = "storm", -- Puedes cambiar a "night" o "day" según prefieras
+      transparent = true,
+      terminal_colors = true,
+      styles = {
+        comments = { italic = true },
+        keywords = { italic = true },
+        functions = { italic = false },
+        variables = { italic = false },
+        sidebars = "transparent", -- Cambia a "transparent" si prefieres que las sidebars sean transparentes
+        floats = "dark", -- Cambia a "transparent" si prefieres que los floats sean transparentes
+      },
+      sidebars = { "qf", "help", "terminal", "packer" },
+      on_highlights = function(hl, c)
+        hl.WinSeparator = {
+          fg = c.border_highlight,
         }
+        hl.CursorLineNr = {
+          fg = c.orange,
+          bold = true,
+        }
+        hl.NvimTreeNormal = {
+          bg = c.bg_dark,
+          fg = c.fg_dark,
+        }
+        hl.NvimTreeWinSeparator = {
+          fg = c.bg_dark,
+          bg = c.bg_dark,
+        }
+        hl.NvimTreeFolderName = {
+          fg = c.blue,
+        }
+        hl.NvimTreeOpenedFolderName = {
+          fg = c.blue,
+          bold = true,
+        }
+        hl.NvimTreeEmptyFolderName = {
+          fg = c.gray,
+        }
+        hl.NvimTreeIndentMarker = {
+          fg = c.fg_gutter,
+        }
+        hl.NvimTreeRootFolder = {
+          fg = c.red,
+          bold = true,
+        }
+        -- Agrega más personalizaciones aquí si lo deseas
       end,
-      transparent_background = true,
-      integrations = {
-        notify = true,
-      },
-      dim_inactive = {
-        enabled = false, -- dims the background color of inactive window
-        shade = "dark",
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
-      },
     },
     init = function()
-      vim.cmd.colorscheme("catppuccin")
+      vim.cmd.colorscheme("tokyonight")
     end,
   },
   {
