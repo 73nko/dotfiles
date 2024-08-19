@@ -73,6 +73,30 @@ return {
 
         opts.desc = "Restart LSP"
         keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+        opts.desc = "Open definition in a split horizontal buffer"
+        keymap.set("n", "<leader>shd", ":sp | lua vim.lsp.buf.definition()<CR>", {
+          noremap = true,
+          silent = true,
+        }) -- Abrir definición en split horizontal
+
+        opts.desc = "Open implementation in a split horizontal buffr"
+        keymap.set("n", "<leader>shi", ":sp | lua vim.lsp.buf.implementation()<CR>", {
+          noremap = true,
+          silent = true,
+        }) -- Abrir implementación en split horizontal
+
+        opts.desc = "Open LSP definition in a split vertical buffer"
+        keymap.set("n", "<leader>svd", ":vsp | lua vim.lsp.buf.definition()<CR>", {
+          noremap = true,
+          silent = true,
+        }) -- Abrir definición en split vertical
+
+        opts.desc = "Open LSP implementation in a split vertical buffer"
+        keymap.set("n", "<leader>svi", ":vsp | lua vim.lsp.buf.implementation()<CR>", {
+          noremap = true,
+          silent = true,
+        }) -- Abrir implementación en split vertical
       end,
     })
 

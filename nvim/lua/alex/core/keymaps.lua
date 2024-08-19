@@ -51,22 +51,11 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", {
 keymap.set("n", "<A-<>", ":m .+1<CR>==", { noremap = true, silent = true })
 keymap.set("n", "<A->>", ":m .-2<CR>==", { noremap = true, silent = true })
 
-keymap.set("n", "<leader>shd", ":sp | lua vim.lsp.buf.definition()<CR>", {
-  noremap = true,
-  silent = true,
-}) -- Abrir definición en split horizontal
+-- search and replace
+keymap.set("n", "<leader>sr", function()
+  local search = vim.fn.input("Search: ")
+  local replace = vim.fn.input("Replace with: ")
+  vim.cmd(string.format("%%s/%s/%s/gc", search, replace))
+end, { desc = "Search and replace" }) -- search and replac text
 
-keymap.set("n", "<leader>shi", ":sp | lua vim.lsp.buf.implementation()<CR>", {
-  noremap = true,
-  silent = true,
-}) -- Abrir implementación en split horizontal
-
-keymap.set("n", "<leader>svd", ":vsp | lua vim.lsp.buf.definition()<CR>", {
-  noremap = true,
-  silent = true,
-}) -- Abrir definición en split vertical
-
-keymap.set("n", "<leader>svi", ":vsp | lua vim.lsp.buf.implementation()<CR>", {
-  noremap = true,
-  silent = true,
-}) -- Abrir implementación en split vertical
+keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true }) -- save the current buffer
