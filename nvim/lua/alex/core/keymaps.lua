@@ -59,3 +59,9 @@ keymap.set("n", "<leader>sr", function()
 end, { desc = "Search and replace" }) -- search and replac text
 
 keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true }) -- save the current buffer
+keymap.set(
+  "v",
+  "<leader>/",
+  [[y/\V<C-R>=escape(@",'/\')<CR><CR>]],
+  { noremap = true, silent = true, desc = "Search the selected word inside the buffer" }
+)
