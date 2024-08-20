@@ -11,7 +11,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ { import = "alex.plugins" }, { import = "alex.plugins.lsp" } }, {
+require("lazy").setup({
+  { import = "alex.plugins" },
+  { import = "alex.plugins.lsp" },
+}, {
   checker = {
     enabled = true,
     notify = false,
@@ -21,5 +24,9 @@ require("lazy").setup({ { import = "alex.plugins" }, { import = "alex.plugins.ls
   },
   spec = {
     { import = "lazyvim.plugins.extras.coding.tabnine" },
+    { import = "lazyvim.plugins.extras.linting.eslint" },
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.json" },
   },
 })
