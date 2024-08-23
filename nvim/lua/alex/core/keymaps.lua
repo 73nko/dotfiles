@@ -48,8 +48,9 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", {
   desc = "Open current buffer in new tab",
 }) --  move current buffer to new tab
 
-keymap.set("n", "<A-<>", ":m .+1<CR>==", { noremap = true, silent = true })
-keymap.set("n", "<A->>", ":m .-2<CR>==", { noremap = true, silent = true })
+-- Move th line up and down
+keymap.set("n", "<A-<>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move the line down" })
+keymap.set("n", "<A->>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move the line up" })
 
 -- search and replace
 keymap.set("n", "<leader>sr", function()

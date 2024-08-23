@@ -1,5 +1,15 @@
 vim.cmd("let g:netrw_liststyle = 3")
 
+-- Añade esto en tu configuración de Neovim
+vim.cmd([[
+  augroup Illuminate_Colors
+    autocmd!
+    autocmd ColorScheme * highlight IlluminatedWordText guibg=#444b6a guisp=#565f89 gui=bold
+    autocmd ColorScheme * highlight IlluminatedWordRead guibg=#444b6a guisp=#565f89 gui=bold
+    autocmd ColorScheme * highlight IlluminatedWordWrite guibg=#444b6a guisp=#565f89 gui=bold
+  augroup END
+]])
+
 local opt = vim.opt
 
 opt.title = true

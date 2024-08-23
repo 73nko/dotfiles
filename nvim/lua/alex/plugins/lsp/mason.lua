@@ -29,6 +29,7 @@ return {
       ensure_installed = {
         "gopls",
         "html",
+        "htmx",
         "cssls",
         "eslint",
         "lua_ls",
