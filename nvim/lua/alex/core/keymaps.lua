@@ -58,10 +58,14 @@ keymap.set("n", "<leader>sr", function()
   vim.cmd(string.format("%%s/%s/%s/gc", search, replace))
 end, { desc = "Search and replace" }) -- search and replac text
 
+keymap.set("n", "<C-d>", "yyp", { noremap = true, silent = true })
 keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true }) -- save the current buffer
+keymap.set("n", "<leader>q", ":q<CR>", { noremap = true, silent = true }) -- save the current buffer
 keymap.set(
   "v",
   "<leader>/",
   [[y/\V<C-R>=escape(@",'/\')<CR><CR>]],
   { noremap = true, silent = true, desc = "Search the selected word inside the buffer" }
 )
+
+keymap.set("n", "<Esc>", ":noh<CR>", { noremap = true, silent = true, desc = "Removes the searched term" })
