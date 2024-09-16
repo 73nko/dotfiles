@@ -135,12 +135,7 @@ return {
           filetypes = { "graphql", "gql", "typescriptreact", "javascriptreact" },
         })
       end,
-      ["tsserver"] = function()
-        lspconfig.tsserver.setup({
-          capabilities = capabilities,
-          single_file_support = true,
-        })
-      end,
+
       ["lua_ls"] = function()
         -- configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
