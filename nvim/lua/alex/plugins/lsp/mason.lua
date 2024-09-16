@@ -36,7 +36,7 @@ return {
         "graphql",
         "prismals",
         "pyright",
-        "tsserver",
+        "ts_ls",
         "rust_analyzer",
       },
     })
