@@ -38,6 +38,8 @@ return {
         "pyright",
         "ts_ls",
         "rust_analyzer",
+        "emmet_ls",
+        "tailwindcss",
       },
     })
 
@@ -48,10 +50,12 @@ return {
         "isort", -- python formatter
         "black", -- python formatter
         "pylint",
-        "eslint-lsp",
+        "eslint_d",
         "js-debug-adapter",
-        "prettier",
         "typescript-language-server",
+        "codelldb", -- Rust debugger
+        "delve", -- Go debugger
+        "golangci-lint", -- Go linter
       },
     })
   end,

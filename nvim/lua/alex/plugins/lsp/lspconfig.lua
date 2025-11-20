@@ -107,7 +107,6 @@ return {
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     -- Change the Diagnostic symbols in the sign column (gutter)
-    -- (not in youtube nvim video)
     local signs = {
       Error = " ",
       Warn = " ",
@@ -126,6 +125,9 @@ return {
     mason_lspconfig.setup({
       -- default handler for installed servers
       function(server_name)
+        if server_name == "rust_analyzer" then
+            return -- Skip rust_analyzer (handled by rustaceanvim)
+        end
         lspconfig[server_name].setup({
           capabilities = capabilities,
         })
@@ -137,7 +139,13 @@ return {
           filetypes = { "graphql", "gql", "typescriptreact", "javascriptreact" },
         })
       end,
-
+      ["emmet_ls"] = function()
+        -- configure emmet language server
+        lspconfig["emmet_ls"].setup({
+          capabilities = capabilities,
+          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+        })
+      end,
       ["lua_ls"] = function()
         -- configure lua server (with special settings)
         lspconfig["lua_ls"].setup({
@@ -154,6 +162,30 @@ return {
             },
           },
         })
+      end,
+      ["gopls"] = function()
+        lspconfig["gopls"].setup({
+          capabilities = capabilities,
+          settings = {
+            gopls = {
+              completeUnimported = true,
+              usePlaceholders = true,
+              analyses = {
+                unusedparams = true,
+              },
+            },
+          },
+        })
+      end,
+      ["ts_ls"] = function()
+          lspconfig["ts_ls"].setup({
+              capabilities = capabilities,
+          })
+      end,
+      ["cssls"] = function()
+          lspconfig["cssls"].setup({
+              capabilities = capabilities,
+          })
       end,
     })
   end,
