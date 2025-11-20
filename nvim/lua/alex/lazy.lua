@@ -23,7 +23,6 @@ require("lazy").setup({
     notify = false,
   },
   spec = {
-    { import = "lazyvim.plugins.extras.coding.tabnine" },
     { import = "lazyvim.plugins.extras.linting.eslint" },
     { import = "lazyvim.plugins.extras.formatting.prettier" },
     { import = "lazyvim.plugins.extras.lang.typescript" },

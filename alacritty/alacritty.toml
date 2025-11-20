@@ -1,0 +1,150 @@
+# Alacritty Configuration
+# Tokyo Night Theme with Neon Magenta/Cyan Accents
+
+[general]
+working_directory = "None"
+
+# Window configuration
+[window]
+decorations = "buttonless"
+dynamic_title = true
+opacity = 0.85
+title = "Alacritty"
+startup_mode = "Windowed"
+padding = { x = 3, y = 5 }
+
+# Font configuration
+[font]
+size = 14.0
+# Operator Mono Lig (Active el comentario para volver a usarla, pero necesitarás una versión "Nerd Font" para los iconos)
+# normal = { family = "Operator Mono Lig" }
+# bold = { family = "Operator Mono Lig", style = "Bold" }
+# italic = { family = "Operator Mono Lig", style = "Italic" }
+# bold_italic = { family = "Operator Mono Lig", style = "Bold Italic" }
+
+# JetBrainsMono Nerd Font (Instalada y funciona con iconos)
+normal = { family = "JetBrainsMono Nerd Font" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font", style = "Bold Italic" }
+
+# Cursor configuration
+[cursor]
+style = "Block"
+unfocused_hollow = true
+
+# Scrolling configuration
+[scrolling]
+history = 10000
+multiplier = 3
+
+# Selection configuration
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+# Bell configuration
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+color = "#ffffff"
+
+# Keyboard configuration
+[keyboard]
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Plus"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "0"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mods = "Shift"
+
+# Tokyo Night Color Scheme (Neon Magenta/Cyan)
+[colors.primary]
+background = "#0d0f18"
+foreground = "#c0caf5"
+
+[colors.cursor]
+text = "#0d0f18"
+cursor = "#ff00ff"
+
+[colors.selection]
+text = "#0d0f18"
+background = "#3d0c45"
+
+[colors.normal]
+black = "#090a10"
+red = "#f7768e"
+green = "#9ece6a"
+yellow = "#e0af68"
+blue = "#7aa2f7"
+magenta = "#ff00ff"
+cyan = "#00ffff"
+white = "#c0caf5"
+
+[colors.bright]
+black = "#565f89"
+red = "#ff6ec7"
+green = "#00ff00"
+yellow = "#ffd700"
+blue = "#00bfff"
+magenta = "#bd00ff"
+cyan = "#00ffff"
+white = "#ffffff"

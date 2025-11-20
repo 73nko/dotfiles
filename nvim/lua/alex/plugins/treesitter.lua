@@ -17,10 +17,6 @@ return {
       indent = {
         enable = true,
       },
-      -- Habilitar autotagging (con el plugin nvim-ts-autotag)
-      autotag = {
-        enable = true,
-      },
       -- Asegurar que estos parsers de lenguaje estén instalados
       ensure_installed = {
         "json",
