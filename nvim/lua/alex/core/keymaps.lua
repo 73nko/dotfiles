@@ -48,25 +48,24 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", {
   desc = "Open current buffer in new tab",
 }) --  move current buffer to new tab
 
--- Move th line up and down
-keymap.set("n", "<A-<>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move the line down" })
-keymap.set("n", "<A->>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move the line up" })
+keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move the line down" })
+keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move the line up" })
 
--- search and replace
-keymap.set("n", "<leader>sr", function()
-  local search = vim.fn.input("Search: ")
-  local replace = vim.fn.input("Replace with: ")
-  vim.cmd(string.format("%%s/%s/%s/gc", search, replace))
-end, { desc = "Search and replace" }) -- search and replac text
+keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true, desc = "Save the current buffer" })
+keymap.set("n", "<leader>q", ":q<CR>", { noremap = true, silent = true, desc = "Quit" })
 
-keymap.set("n", "<C-d>", "yyp", { noremap = true, silent = true })
-keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true }) -- save the current buffer
-keymap.set("n", "<leader>q", ":q<CR>", { noremap = true, silent = true }) -- save the current buffer
-keymap.set(
-  "v",
-  "<leader>/",
-  [[y/\V<C-R>=escape(@",'/\')<CR><CR>]],
-  { noremap = true, silent = true, desc = "Search the selected word inside the buffer" }
-)
+keymap.set("n", "<Esc>", ":noh<CR>", { silent = true, desc = "Removes the searched term" })
 
-keymap.set("n", "<Esc>", ":noh<CR>", { noremap = true, silent = true, desc = "Removes the searched term" })
+-- Git
+keymap.set("n", "<leader>ga", ":!git add .<CR>", {
+  silent = true,
+  desc = "Stage all the changes in the current project",
+})
+keymap.set("n", "<leader>gc", ":!git commit -m '<left>'", {
+  silent = true,
+  desc = "Commit the changes",
+})
+keymap.set("n", "<leader>gp", ":!git push<CR>", {
+  silent = true,
+  desc = "Push the changes to the remote repository",
+})

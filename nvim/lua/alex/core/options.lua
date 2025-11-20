@@ -1,5 +1,3 @@
-vim.cmd("let g:netrw_liststyle = 3")
-
 -- Añade esto en tu configuración de Neovim
 vim.cmd([[
   augroup Illuminate_Colors
@@ -12,9 +10,15 @@ vim.cmd([[
 
 local opt = vim.opt
 
+-- general
 opt.title = true
 opt.relativenumber = true
 opt.number = true
+opt.hlsearch = true
+opt.showcmd = true
+opt.cmdheight = 0
+opt.cursorline = true
+opt.wrap = false
 
 -- tabs & indentation
 opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
@@ -22,23 +26,12 @@ opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
 opt.smartindent = true
-opt.hlsearch = true
-opt.showcmd = true
-opt.cmdheight = 0
-opt.breakindent = true
-opt.shiftwidth = 2
-
 opt.smarttab = true
 opt.breakindent = true
-opt.shiftwidth = 2
-
-opt.wrap = false
 
 -- search settings
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
-opt.ignorecase = true
-opt.cursorline = true
 
 -- turn on termguicolors for tokyonight colorscheme to work
 -- (have to use iterm2 or any other true color terminal)
