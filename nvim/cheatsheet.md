@@ -69,45 +69,41 @@ A session manager for Neovim.
 
 A plugin that automatically closes pairs of brackets, quotes, etc. It has no keymaps.
 
-### avante.nvim
+### codecompanion.nvim
 
-AI code completion and chat plugin using Gemini.
+A code generation tool.
 
-#### Suggestions
-| Keymap  | Description         |
-| ------- | ------------------- |
-| `<M-l>` | Accept suggestion   |
-| `<M-]>` | Next suggestion     |
-| `<M-[>` | Previous suggestion |
-| `<C-]>` | Dismiss suggestion  |
+| Keymap           | Description              |
+| ---------------- | ------------------------ |
+| `<C-a>`          | CodeCompanion Actions    |
+| `<LocalLeader>a` | CodeCompanion Chat       |
+| `ga`             | CodeCompanion Add Visual |
+| `<C-s>`          | Send message in chat     |
+| `q` or `<C-c>`   | Close chat               |
+| `ga`             | Accept suggested change  |
+| `gr`             | Reject suggested change  |
 
-#### Sidebar
-| Keymap    | Description             |
-| --------- | ----------------------- |
-| `<Tab>`   | Switch windows          |
-| `<S-Tab>` | Reverse switch windows  |
-| `A`       | Apply all changes       |
-| `a`       | Apply changes at cursor |
+**Slash commands:**
+- `/buffer` - Insert open buffers
+- `/fetch` - Insert URL contents
+- `/file` - Insert a file
+- `/help` - Insert content from help tags
+- `/now` - Insert the current date and time
+- `/symbols` - Insert symbols from a selected file
+- `/terminal` - Insert terminal output
 
-#### Conflict Resolution
-| Keymap | Description       |
-| ------ | ----------------- |
-| `co`   | Choose ours       |
-| `ct`   | Choose theirs     |
-| `ca`   | Choose all theirs |
-| `cb`   | Choose both       |
-| `cc`   | Choose cursor     |
-| `]x`   | Next conflict     |
-| `[x`   | Previous conflict |
+**Agents / Tools:**
+- `@cmd_runner` - The LLM will run shell commands (subject to approval)
+- `@editor` - The LLM will edit code in a Neovim buffer
+- `@files` - The LLM will can work with files on the file system (subject to approval)
+- `@full_stack_dev` - Contains the cmd_runner, editor and files tools.
 
-#### Navigation & Submit
-| Keymap  | Description          |
-| ------- | -------------------- |
-| `]]`    | Jump to next         |
-| `[[`    | Jump to previous     |
-| `<CR>`  | Submit (Normal mode) |
-| `<C-s>` | Submit (Insert mode) |
-
+**Prompts:**
+- `/commit` - Generate a commit message
+- `/explain` - Explain how selected code in a buffer works
+- `/fix` - Fix the selected code
+- `/lsp` - Explain the LSP diagnostics for the selected code
+- `/tests` - Generate unit tests for selected code
 
 ### bufferline.nvim
 
