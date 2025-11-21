@@ -9,6 +9,7 @@ return {
     { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
     { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
     { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+    { "<leader>bc", "<Cmd>bd<CR>", desc = "Close Current Buffer" },
     { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
     { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
     { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
@@ -22,8 +23,7 @@ return {
       diagnostics_indicator = function(count, level, diagnostics_dict, context)
         local s = " "
         for e, n in pairs(diagnostics_dict) do
-          local sym = e == "error" and " "
-            or (e == "warning" and " " or "" )
+          local sym = e == "error" and " " or (e == "warning" and " " or "")
           s = s .. n .. sym
         end
         return s

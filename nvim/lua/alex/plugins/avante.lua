@@ -6,11 +6,13 @@ return {
   opts = {
     provider = "gemini",
     auto_suggestions_provider = "gemini",
-    gemini = {
-      model = "gemini-2.5-flash",
-      timeout = 30000,
-      temperature = 0,
-      max_tokens = 4096,
+    providers = {
+      gemini = {
+        model = "gemini-2.5-flash",
+        timeout = 30000,
+        temperature = 0,
+        max_tokens = 4096,
+      },
     },
     behaviour = {
       auto_suggestions = false, -- Experimental stage
