@@ -69,3 +69,12 @@ keymap.set("n", "<leader>gp", ":!git push<CR>", {
   silent = true,
   desc = "Push the changes to the remote repository",
 })
+
+keymap.set("n", "gw", "<cmd>set wrap!<CR>", {
+  desc = "Toggle line wrap",
+})
+
+keymap.set("n", "<leader>bb", "<cmd>b#<CR>", {
+  desc = "Switch to last buffer",
+})
+
