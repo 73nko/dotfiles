@@ -2,6 +2,33 @@
 
 This is a cheatsheet for your Neovim configuration. It contains all the keymaps, commands, and plugins that are configured in your setup.
 
+## Basic Vim Shortcuts
+
+| Keymap            | Description                  |
+| ----------------- | ---------------------------- |
+| **Modes**         |                              |
+| `i`               | Insert mode                  |
+| `v`               | Visual mode                  |
+| `V`               | Visual Line mode             |
+| `<C-v>`           | Visual Block mode            |
+| `Esc`             | Normal mode                  |
+| **Navigation**    |                              |
+| `h` `j` `k` `l`   | Left, Down, Up, Right        |
+| `w` / `b`         | Next / Previous word         |
+| `0` / `$`         | Start / End of line          |
+| `gg` / `G`        | Start / End of file          |
+| `<C-u>` / `<C-d>` | Scroll Up / Down (half page) |
+| **Editing**       |                              |
+| `u` / `<C-r>`     | Undo / Redo                  |
+| `y` / `p`         | Yank (copy) / Paste          |
+| `dd`              | Delete (cut) line            |
+| `ciw`             | Change inner word            |
+| `>>` / `<<`       | Indent / Outdent             |
+| **Search**        |                              |
+| `/pattern`        | Search forward               |
+| `?pattern`        | Search backward              |
+| `n` / `N`         | Next / Previous match        |
+
 ## Core Keymaps
 
 | Keymap       | Description                                  |
