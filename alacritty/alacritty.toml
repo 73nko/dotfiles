@@ -116,6 +116,18 @@ action = "ScrollToBottom"
 key = "End"
 mods = "Shift"
 
+# Alacritty mappings to enable Mac-style word and line deletion in the shell.
+
+[[keyboard.bindings]]
+key = "Backspace"
+mods = "Command"
+chars = "\u0015" # CORRECTED: Sends Ctrl+U, bound to 'backward-kill-line'
+
+[[keyboard.bindings]]
+key = "Backspace"
+mods = "Alt" # Maps to the macOS Option (Opt) key
+chars = "\u0017" # CORRECTED: Sends Ctrl+W, bound to 'backward-kill-word'
+
 # Tokyo Night Color Scheme (Neon Magenta/Cyan)
 [colors.primary]
 background = "#0d0f18"

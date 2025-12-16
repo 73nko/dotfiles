@@ -19,12 +19,8 @@ keymap.set("n", "<leader>-", "<C-x>", {
 }) -- decrement
 
 -- window management
-keymap.set("n", "<leader>sv", "<C-w>v", {
-  desc = "Split window vertically",
-}) -- split window vertically
-keymap.set("n", "<leader>sh", "<C-w>s", {
-  desc = "Split window horizontally",
-}) -- split window horizontally
+keymap.set("n", "|", "<C-w>v", { desc = "Split window vertically" }) -- Más intuitivo
+keymap.set("n", "-", "<C-w>s", { desc = "Split window horizontally" }) -- Más intuitivo
 keymap.set("n", "<leader>se", "<C-w>=", {
   desc = "Make splits equal size",
 }) -- make split windows equal width & height
@@ -77,4 +73,3 @@ keymap.set("n", "gw", "<cmd>set wrap!<CR>", {
 keymap.set("n", "<leader>bb", "<cmd>b#<CR>", {
   desc = "Switch to last buffer",
 })
-

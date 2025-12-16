@@ -1,45 +1,60 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "vim_mode": true,
-  "context_servers": {
-    "mcp-server-context7": {
-      "source": "extension",
-      "enabled": true,
-      "settings": {
-        "default_minimum_tokens": "10000"
-      }
+  "toolbar": {
+    "quick_actions": false
+  },
+  "show_edit_predictions": true,
+  "features": {
+    "edit_prediction_provider": "none"
+  },
+  "terminal": {
+    "shell": "system",
+    "font_family": "IosevkaTerm Nerd Font",
+    "env": {
+      "ZED_TERMINAL": "1"
     },
-    "mcp-server-github": {
-      "source": "extension",
-      "enabled": true,
-      "settings": {
-        "github_personal_access_token": "REDACTED_TOKEN"
-      }
-    }
+    "line_height": { "custom": 1.25 }
+  },
+  "project_panel": {
+    "dock": "left",
+    "indent_size": 12
   },
   "agent": {
-    "always_allow_tool_actions": true
+    "profiles": {
+      "alex": {
+        "name": "alex",
+        "tools": {},
+        "enable_all_context_servers": false,
+        "context_servers": {}
+      }
+    },
+    "always_allow_tool_actions": true,
+    "inline_assistant_model": {
+      "provider": "copilot_chat",
+      "model": "claude-4-sonnet"
+    },
+    "model_parameters": [],
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4"
+    }
   },
-  "features": {
-    "edit_prediction_provider": "zed"
+  "vim_mode": true,
+  "vim": {
+    "toggle_relative_line_numbers": true
   },
-  "base_keymap": "VSCode",
-  "telemetry": {
-    "metrics": false
-  },
-  "ui_font_size": 14,
-  "buffer_font_size": 12,
-  "buffer_font_family": "Comic Code Ligatures",
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "agent_ui_font_size": 16,
+  "ui_font_family": "IosevkaTerm Nerd Font",
+  "buffer_font_family": "IosevkaTerm Nerd Font",
   "theme": {
     "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark"
+    "light": "Kanagawa Lotus",
+    "dark": "Gentleman Kanagawa Blur"
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
   }
 }

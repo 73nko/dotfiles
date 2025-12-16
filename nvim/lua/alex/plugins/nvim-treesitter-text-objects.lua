@@ -40,6 +40,10 @@ return {
 
             ["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
             ["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
+
+            -- === NEW OPTIMIZATION: Generic Block Body ===
+            ["aB"] = { query = "@block.outer", desc = "Select outer part of a code block (including braces/markers)" },
+            ["iB"] = { query = "@block.inner", desc = "Select inner part of a code block (content only)" },
           },
         },
         swap = {
