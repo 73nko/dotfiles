@@ -44,4 +44,11 @@ return {
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Gitsigns select hunk")
     end,
   },
+  {
+    "sindrets/diffview.nvim",
+    event = "VeryLazy",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+  },
+  "tpope/vim-fugitive",
+  "tpope/vim-rhubarb",
 }
