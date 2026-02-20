@@ -73,6 +73,16 @@ This is a cheatsheet for your Neovim configuration. It contains all the keymaps,
 | `<leader>ac` | Toggle **Claude Code** CLI (right sidebar)    |
 | `<leader>ag` | Toggle **Gemini** CLI (right sidebar)         |
 
+### Supermaven (AI inline completion)
+
+| Keymap  | Description                        |
+| ------- | ---------------------------------- |
+| `<Tab>` | Accept full AI suggestion          |
+| `<C-j>` | Accept next word of suggestion     |
+| `<C-]>` | Dismiss suggestion                 |
+
+> Suggestions appear as grey ghost text while you type. `<Tab>` only triggers Supermaven when the cmp menu is closed and no snippet is active.
+
 ## File Navigation
 
 ### Snacks Picker
