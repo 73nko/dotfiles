@@ -1,0 +1,115 @@
+# ============================================
+# Ghostty Config — Nebula Theme
+# Convertido desde Alacritty
+# ============================================
+
+# Shell
+command = /opt/homebrew/bin/fish
+
+# ============================================
+# Window
+# ============================================
+macos-titlebar-style = hidden
+background-opacity = 0.85
+window-padding-x = 3
+window-padding-y = 5
+window-inherit-working-directory = true
+confirm-close-surface = false
+quit-after-last-window-closed = true
+resize-overlay = never
+
+# ============================================
+# macOS
+# ============================================
+macos-option-as-alt = true
+
+# ============================================
+# Shell Integration (killer feature de Ghostty)
+# Permite navegar entre prompts, hereda CWD en splits, etc.
+# ============================================
+shell-integration = detect
+
+# ============================================
+# Mouse
+# ============================================
+mouse-hide-while-typing = true
+
+# ============================================
+# Font
+# ============================================
+font-family = JetBrainsMono Nerd Font
+font-size = 13
+adjust-cell-height = -2
+
+# ============================================
+# Cursor
+# ============================================
+cursor-style = block
+cursor-style-blink = false
+
+# ============================================
+# Scrollback
+# ============================================
+scrollback-limit = 10000
+
+# ============================================
+# Selection
+# ============================================
+copy-on-select = true
+
+# ============================================
+# Nebula Theme — Colors
+# ============================================
+background = #0D0F1E
+foreground = #CDD6F4
+cursor-color = #FF79C6
+cursor-text  = #0D0F1E
+selection-foreground = #CDD6F4
+selection-background = #252840
+
+# Normal colors (0-7)
+palette = 0=#11142B
+palette = 1=#F48FB1
+palette = 2=#A6E3A1
+palette = 3=#F9E2AF
+palette = 4=#7AB9F5
+palette = 5=#BD93F9
+palette = 6=#4DD0E1
+palette = 7=#CDD6F4
+
+# Bright colors (8-15)
+palette = 8=#2A2F4A
+palette = 9=#FF79C6
+palette = 10=#C3E88D
+palette = 11=#FAB387
+palette = 12=#89B4FA
+palette = 13=#CBA6F7
+palette = 14=#89DCEB
+palette = 15=#FFFFFF
+
+# ============================================
+# Keybindings
+# ============================================
+keybind = super+q=quit
+keybind = super+w=close_window
+keybind = super+n=new_window
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+
+# Font size
+keybind = super+equal=increase_font_size:1
+keybind = super+minus=decrease_font_size:1
+keybind = super+zero=reset_font_size
+
+# Scroll
+keybind = shift+page_up=scroll_page_up
+keybind = shift+page_down=scroll_page_down
+keybind = shift+home=scroll_to_top
+keybind = shift+end=scroll_to_bottom
+
+# Borrar palabra/línea (Mac-style)
+keybind = super+backspace=text:\x15
+keybind = alt+backspace=text:\x17
+
+# Shift+Enter manda ESC + Enter (útil en nvim, etc.)
+keybind = shift+enter=text:\e\r

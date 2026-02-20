@@ -1,60 +1,63 @@
 {
+  "edit_predictions": {
+    "provider": "none",
+  },
+  "auto_update": true,
   "toolbar": {
-    "quick_actions": false
+    "quick_actions": false,
   },
-  "show_edit_predictions": true,
-  "features": {
-    "edit_prediction_provider": "none"
-  },
+  "show_edit_predictions": false,
   "terminal": {
     "shell": "system",
     "font_family": "IosevkaTerm Nerd Font",
     "env": {
-      "ZED_TERMINAL": "1"
+      "ZED_TERMINAL": "1",
     },
-    "line_height": { "custom": 1.25 }
+    "line_height": { "custom": 1.25 },
   },
   "project_panel": {
     "dock": "left",
-    "indent_size": 12
+    "indent_size": 12,
   },
   "agent": {
+    "tool_permissions": {
+      "default": "allow",
+    },
     "profiles": {
       "alex": {
         "name": "alex",
         "tools": {},
         "enable_all_context_servers": false,
-        "context_servers": {}
-      }
+        "context_servers": {},
+      },
     },
-    "always_allow_tool_actions": true,
     "inline_assistant_model": {
       "provider": "copilot_chat",
-      "model": "claude-4-sonnet"
+      "model": "claude-sonnet-4",
     },
     "model_parameters": [],
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4"
-    }
+      "model": "claude-sonnet-4",
+    },
   },
   "vim_mode": true,
   "vim": {
-    "toggle_relative_line_numbers": true
+    "toggle_relative_line_numbers": true,
   },
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
-  "agent_ui_font_size": 16,
+  "ui_font_size": 13,
+  "buffer_font_size": 13,
+  "agent_ui_font_size": 13,
   "ui_font_family": "IosevkaTerm Nerd Font",
   "buffer_font_family": "IosevkaTerm Nerd Font",
   "theme": {
     "mode": "system",
     "light": "Kanagawa Lotus",
-    "dark": "Gentleman Kanagawa Blur"
+    "dark": "Gentleman Kanagawa Blur",
   },
   "diagnostics": {
     "inline": {
-      "enabled": true
-    }
-  }
+      "enabled": true,
+    },
+  },
 }

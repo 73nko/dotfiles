@@ -1,42 +1,22 @@
 return {
   "RRethy/vim-illuminate",
-
   config = function()
-    -- Configura vim-illuminate según tus preferencias
     require("illuminate").configure({
-      -- Estas son opciones de configuración, puedes ajustarlas a tu gusto
-      providers = {
-        "lsp",
-        "treesitter",
-        "regex",
-      },
-      delay = 100, -- Tiempo de espera antes de resaltar en milisegundos
+      providers = { "lsp", "treesitter", "regex" },
+      delay = 100,
       filetypes_denylist = {
-        "dirvish",
-        "fugitive",
-        "NvimTree",
-        "packer",
-        "alpha",
-        "dashboard",
-        "NeogitStatus",
-        "NeogitPopup",
-        "qf",
+        "dirvish", "fugitive", "NvimTree", "alpha", "dashboard", "qf",
       },
-      under_cursor = true, -- Resaltar también la palabra bajo el cursor
+      under_cursor = true,
     })
+
+    -- keymaps must live in config, not in `keys` table (illuminate uses non-standard format)
+    vim.keymap.set("n", "<A-n>", function()
+      require("illuminate").next_reference({ wrap = true })
+    end, { desc = "Illuminate next reference" })
+
+    vim.keymap.set("n", "<A-p>", function()
+      require("illuminate").next_reference({ reverse = true, wrap = true })
+    end, { desc = "Illuminate previous reference" })
   end,
-  keys = {
-    ["<A-n>"] = {
-      function()
-        require("illuminate").next_reference({ wrap = true })
-      end,
-      "  next reference",
-    },
-    ["<A-p>"] = {
-      function()
-        require("illuminate").next_reference({ reverse = true, wrap = true })
-      end,
-      "  previous reference",
-    },
-  },
 }

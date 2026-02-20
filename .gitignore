@@ -1,2 +1,25 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Backup files
+*.bak
+*-[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]*
+
+# Logs
+*.log
+
+# Auto-generated caches
+configstore/
+uv/uv-receipt.json
+
+# Runtime state (not config)
+wezterm/wezterm-session-manager/wezterm_state_YOUR-ORG.json
+thefuck/__pycache__/
+
+# Sensitive tool dirs
 github-copilot
 raycast
+
+# Claude local settings
+**/.claude/settings.local.json

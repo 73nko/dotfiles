@@ -4,6 +4,9 @@
 [general]
 working_directory = "None"
 
+[terminal.shell]
+program = "/opt/homebrew/bin/fish"
+
 # Window configuration
 [window]
 decorations = "buttonless"
@@ -69,12 +72,7 @@ mods = "Command"
 [[keyboard.bindings]]
 action = "Copy"
 key = "C"
-mods = "Command|Shift"
-
-[[keyboard.bindings]]
-action = "Paste"
-key = "V"
-mods = "Command|Shift"
+mods = "Command"
 
 [[keyboard.bindings]]
 action = "Paste"
@@ -128,35 +126,40 @@ key = "Backspace"
 mods = "Alt" # Maps to the macOS Option (Opt) key
 chars = "\u0017" # CORRECTED: Sends Ctrl+W, bound to 'backward-kill-word'
 
-# Tokyo Night Color Scheme (Neon Magenta/Cyan)
+# Nebula Theme
 [colors.primary]
-background = "#0d0f18"
-foreground = "#c0caf5"
+background = "#0D0F1E"
+foreground = "#CDD6F4"
 
 [colors.cursor]
-text = "#0d0f18"
-cursor = "#ff00ff"
+text = "#0D0F1E"
+cursor = "#FF79C6"
 
 [colors.selection]
-text = "#0d0f18"
-background = "#3d0c45"
+text = "#CDD6F4"
+background = "#252840"
 
 [colors.normal]
-black = "#090a10"
-red = "#f7768e"
-green = "#9ece6a"
-yellow = "#e0af68"
-blue = "#7aa2f7"
-magenta = "#ff00ff"
-cyan = "#00ffff"
-white = "#c0caf5"
+black   = "#11142B"
+red     = "#F48FB1"
+green   = "#A6E3A1"
+yellow  = "#F9E2AF"
+blue    = "#7AB9F5"
+magenta = "#BD93F9"
+cyan    = "#4DD0E1"
+white   = "#CDD6F4"
 
 [colors.bright]
-black = "#565f89"
-red = "#ff6ec7"
-green = "#00ff00"
-yellow = "#ffd700"
-blue = "#00bfff"
-magenta = "#bd00ff"
-cyan = "#00ffff"
-white = "#ffffff"
+black   = "#2A2F4A"
+red     = "#FF79C6"
+green   = "#C3E88D"
+yellow  = "#FAB387"
+blue    = "#89B4FA"
+magenta = "#CBA6F7"
+cyan    = "#89DCEB"
+white   = "#FFFFFF"
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001b\r"

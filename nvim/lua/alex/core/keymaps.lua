@@ -50,22 +50,6 @@ keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move the line up" })
 keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true, desc = "Save the current buffer" })
 keymap.set("n", "<leader>q", ":q<CR>", { noremap = true, silent = true, desc = "Quit" })
 
-keymap.set("n", "<Esc>", ":noh<CR>", { silent = true, desc = "Removes the searched term" })
-
--- Git
-keymap.set("n", "<leader>ga", ":!git add .<CR>", {
-  silent = true,
-  desc = "Stage all the changes in the current project",
-})
-keymap.set("n", "<leader>gc", ":!git commit -m '<left>'", {
-  silent = true,
-  desc = "Commit the changes",
-})
-keymap.set("n", "<leader>gp", ":!git push<CR>", {
-  silent = true,
-  desc = "Push the changes to the remote repository",
-})
-
 keymap.set("n", "gw", "<cmd>set wrap!<CR>", {
   desc = "Toggle line wrap",
 })

@@ -124,7 +124,7 @@
   {
     "context": "ProjectPanel",
     "bindings": {
-      "ctrl-r": "project_panel::RemoveFromProject"
+      "ctrl-r": "project_panel::Rename"
     }
   }
 ]

@@ -25,37 +25,46 @@ return {
     })
 
     mason_lspconfig.setup({
-      -- list of servers for mason to install
       ensure_installed = {
-        "gopls",
-        "html",
-        "htmx",
-        "cssls",
+        -- JS/TS (core YOUR-ORG stack)
+        "ts_ls",
         "eslint",
-        "lua_ls",
+        "cssls",
+        "html",
+        "emmet_ls",
+        -- Data / API
         "graphql",
         "prismals",
-        "pyright",
-        "ts_ls",
+        "jsonls",
+        "yamlls",
+        -- Shopify
+        "theme_check", -- Liquid / Shopify templates
+        -- Go (SmoothMQ)
+        "gopls",
+        -- Rust
         "rust_analyzer",
-        "emmet_ls",
-        "tailwindcss",
+        -- Python (YOUR-ORG-brain / LangGraph)
+        "pyright",
+        -- Lua (nvim config)
+        "lua_ls",
       },
     })
 
     mason_tool_installer.setup({
       ensure_installed = {
-        "prettier", -- prettier formatter
-        "stylua", -- lua formatter
-        "isort", -- python formatter
-        "black", -- python formatter
-        "pylint",
+        -- Formatters
+        "prettier",
+        "stylua",
+        "ruff",         -- Python formatter + linter (replaces black + isort + pylint)
+        -- Linters
         "eslint_d",
+        "golangci-lint",
+        "shellcheck",   -- shell scripts (deploy scripts, CI hooks)
+        "hadolint",     -- Dockerfile (ECS Fargate images)
+        -- Debuggers
         "js-debug-adapter",
-        "typescript-language-server",
-        "codelldb", -- Rust debugger
-        "delve", -- Go debugger
-        "golangci-lint", -- Go linter
+        "codelldb",     -- Rust
+        "delve",        -- Go
       },
     })
   end,

@@ -21,7 +21,7 @@ return {
           fg = c.border_highlight,
         }
         hl.CursorLineNr = {
-          fg = c.orange,
+          fg = "#FF79C6",
           bold = true,
         }
         hl.NvimTreeNormal = {
@@ -46,10 +46,23 @@ return {
           fg = c.fg_gutter,
         }
         hl.NvimTreeRootFolder = {
-          fg = c.red,
+          fg = "#BD93F9",
           bold = true,
         }
-        -- Agrega más personalizaciones aquí si lo deseas
+
+        -- Nebula: JSX/HTML tag overrides
+        -- Tags como <Frame>, <div>, <Layout> → azul eléctrico
+        hl["@tag"]               = { fg = "#7AB9F5", bold = false }
+        -- Componentes React (PascalCase) → violeta
+        hl["@tag.builtin"]       = { fg = "#4DD0E1" }
+        -- Atributos (selected="bundles", className) → lavanda
+        hl["@tag.attribute"]     = { fg = "#CBA6F7" }
+        -- Angle brackets < > → muted, no llaman la atención
+        hl["@tag.delimiter"]     = { fg = "#4A5480" }
+        -- JSX expressions {} → texto normal
+        hl["@punctuation.bracket"] = { fg = "#CDD6F4" }
+        -- String values en JSX → verde menta (ya heredado)
+        hl["@string"]            = { fg = "#A6E3A1" }
       end,
     },
     init = function()
@@ -57,14 +70,11 @@ return {
     end,
   },
   {
-    "rcarriga/nvim-notify",
-    config = function()
-      vim.notify = require("notify")
-    end,
-  },
-  {
     "mrjones2014/smart-splits.nvim",
     config = function()
+      require("smart-splits").setup({
+        multiplexer_integration = "tmux",
+      })
       vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
       vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
       vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)

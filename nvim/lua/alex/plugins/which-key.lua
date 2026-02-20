@@ -30,7 +30,28 @@ return {
         winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
       },
     },
-    show_help = true, -- show a help message in the command line for using WhichKey
-    show_keys = true, -- show the currently pressed key and its label as a message in the command line
+    show_help = true,
+    show_keys = true,
   },
+  config = function(_, opts)
+    local wk = require("which-key")
+    wk.setup(opts)
+
+    -- Group labels for better discoverability
+    wk.add({
+      { "<leader>a",  group = "AI" },
+      { "<leader>b",  group = "buffer" },
+      { "<leader>c",  group = "code" },
+      { "<leader>d",  group = "debug" },
+      { "<leader>g",  group = "git" },
+      { "<leader>h",  group = "git hunks" },
+      { "<leader>m",  group = "format/marks" },
+      { "<leader>n",  group = "swap next" },
+      { "<leader>p",  group = "swap prev" },
+      { "<leader>r",  group = "refactor/rename" },
+      { "<leader>s",  group = "search/snacks" },
+      { "<leader>t",  group = "test" },
+      { "<leader>x",  group = "trouble/diagnostics" },
+    })
+  end,
 }

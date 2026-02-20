@@ -13,8 +13,8 @@ alt + shift - k : yabai -m window --swap north
 alt + shift - l : yabai -m window --swap east
 
 # Resize windows (alt + -/=)
-alt - 0x1B : yabai -m window --resize left:-50:0; yabai -m window --resize right:-50:0
-alt - 0x18 : yabai -m window --resize right:50:0; yabai -m window --resize left:50:0
+alt - minus : yabai -m window --resize left:-50:0; yabai -m window --resize right:-50:0
+alt - equal : yabai -m window --resize right:50:0; yabai -m window --resize left:50:0
 
 # Resize with arrow keys (more intuitive - alt + arrow keys)
 alt - left : yabai -m window --resize left:-50:0; yabai -m window --resize right:-50:0
@@ -54,8 +54,8 @@ alt + shift - 7 : yabai -m window --space 7 --focus
 alt + shift - f : yabai -m window --toggle zoom-fullscreen
 
 # Layout switching
-alt - 0x2C : yabai -m space --layout bsp
-alt - 0x2B : yabai -m space --layout stack
+alt - comma : yabai -m space --layout bsp
+alt - period : yabai -m space --layout stack
 
 # Workspace back and forth (alt + tab)
 alt - tab : yabai -m space --focus recent

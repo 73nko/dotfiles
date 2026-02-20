@@ -11,7 +11,7 @@ This is a cheatsheet for your Neovim configuration. It contains all the keymaps,
 | `v`               | Visual mode                  |
 | `V`               | Visual Line mode             |
 | `<C-v>`           | Visual Block mode            |
-| `Esc`             | Normal mode                  |
+| `Esc` / `jk`      | Normal mode                  |
 | **Navigation** |                              |
 | `h` `j` `k` `l`   | Left, Down, Up, Right        |
 | `w` / `b`         | Next / Previous word         |
@@ -31,202 +31,78 @@ This is a cheatsheet for your Neovim configuration. It contains all the keymaps,
 
 ## Core Keymaps
 
-| Keymap       | Description                                  |
-| ------------ | -------------------------------------------- |
-| `<leader>`   | Space                                        |
-| `jk`         | Exit insert mode                             |
-| `<leader>nh` | Clear search highlights                      |
-| `<leader>+`  | Increment number                             |
-| `<leader>-`  | Decrement number                             |
-| `<leader>sv` | Split window vertically                      |
-| `<leader>sh` | Split window horizontally                    |
-| `<leader>se` | Make splits equal size                       |
-| `<leader>sx` | Close current split                          |
-| `<leader>to` | Open new tab                                 |
-| `<leader>tx` | Close current tab                            |
-| `<leader>tn` | Go to next tab                               |
-| `<leader>tp` | Go to previous tab                           |
-| `<leader>tf` | Open current buffer in new tab               |
-| `<A-j>`      | Move the line down                           |
-| `<A-k>`      | Move the line up                             |
-| `<leader>w`  | Save the current buffer                      |
-| `<leader>q`  | Quit                                         |
-| `<Esc>`      | Removes the searched term                    |
-| `<leader>ga` | Stage all the changes in the current project |
-| `<leader>gc` | Commit the changes                           |
-| `<leader>gp` | Push the changes to the remote repository    |
+| Keymap                | Description                     |
+| --------------------- | ------------------------------- |
+| `<leader>` = Space    |                                 |
+| `jk`                  | Exit insert mode                |
+| `<leader>nh`          | Clear search highlights         |
+| `<leader>+`           | Increment number                |
+| `<leader>-`           | Decrement number                |
+| `\|`                  | Split window vertically         |
+| `-`                   | Split window horizontally       |
+| `<leader>se`          | Make splits equal size          |
+| `<leader>sx`          | Close current split             |
+| `<leader>to`          | Open new tab                    |
+| `<leader>tx`          | Close current tab               |
+| `<leader>tn` / `tp`   | Next / Prev tab                 |
+| `<leader>tf`          | Open current buffer in new tab  |
+| `<A-j>` / `<A-k>`    | Move line down / up             |
+| `<leader>w`           | Save the current buffer         |
+| `<leader>q`           | Quit                            |
+| `gw`                  | Toggle line wrap                |
+| `<leader>bb`          | Switch to last buffer           |
 
-## Plugins
+## Window Navigation (smart-splits + tmux)
 
-Here is a list of all the plugins that are configured in your Neovim setup.
+| Keymap  | Description              |
+| ------- | ------------------------ |
+| `<C-h>` | Move cursor / pane left  |
+| `<C-j>` | Move cursor / pane down  |
+| `<C-k>` | Move cursor / pane up    |
+| `<C-l>` | Move cursor / pane right |
+| `<C-c>` | Close split              |
+| `<A-h>` | Resize split left        |
+| `<A-j>` | Resize split down        |
+| `<A-k>` | Resize split up          |
+| `<A-l>` | Resize split right       |
 
-### nvim-treesitter-text-objects (Enhanced Text Selection & Navigation)
+## AI Tools
 
-These motions allow precise selection and navigation based on code syntax.
+| Keymap       | Description                                   |
+| ------------ | --------------------------------------------- |
+| `<leader>ac` | Toggle **Claude Code** CLI (right sidebar)    |
+| `<leader>ag` | Toggle **Gemini** CLI (right sidebar)         |
 
-| Keymap        | Description |
-| ------------- | ----------- |
-| **Select** | **(Use with `a`, `i`, `v`, `d`, `y`, `c`)** |
-| `iB` / `aB`   | Inner / Around generic code **Block** (New) |
-| `ia` / `aa`   | Inner / Around **Argument** / **Parameter** |
-| `i:` / `a:`   | Inner / Around **Object Property** (RHS/Outer) |
-| `l:` / `r:`   | Left / Right Hand Side of **Object Property** |
-| `i=` / `a=`   | Inner / Around **Assignment** (Value/Outer) |
-| `l=` / `r=`   | Left / Right Hand Side of **Assignment** |
-| `im` / `am`   | Inner / Around **Function** / **Method** Definition |
-| `if` / `af`   | Inner / Around **Function Call** |
-| `ic` / `ac`   | Inner / Around **Class** |
-| `ii` / `ai`   | Inner / Around **Conditional** (e.g., `if`, `else`) |
-| `il` / `al`   | Inner / Around **Loop** |
-| **Move** | **(Jump between text objects)** |
-| `]m` / `[m`   | Next / Previous **Function** start |
-| `]M` / `[M`   | Next / Previous **Function** end |
-| `]c` / `[c`   | Next / Previous **Class** start |
-| `]C` / `[C`   | Next / Previous **Class** end |
-| `]f` / `[f`   | Next / Previous **Function Call** start |
-| `]F` / `[F`   | Next / Previous **Function Call** end |
-| **Swap** | **(Swap position of adjacent objects)** |
-| `<leader>na` / `<leader>pa` | Swap **Argument** with Next / Previous |
-| `<leader>n:` / `<leader>p:` | Swap **Property** with Next / Previous |
-| `<leader>nm` / `<leader>pm` | Swap **Function** with Next / Previous |
-| **Repeatable Moves** | **(Enhances built-in f/t motions)** |
-| `;` / `,`     | Repeat / Repeat Opposite of last `f`, `F`, `t`, `T`, or Treesitter Move |
-| `f`, `F`, `t`, `T` | Built-in character motions are now repeatable with `;` and `,` |
+## File Navigation
 
-### aerial.nvim
+### Snacks Picker
 
-A code outline window for skimming and quick navigation.
+| Keymap             | Description                  |
+| ------------------ | ---------------------------- |
+| `<leader><leader>` | Find files (fuzzy)           |
+| `<leader>sg`       | Grep (live search in cwd)    |
+| `<leader>sw`       | Grep word under cursor       |
+| `<leader>sr`       | Recent files                 |
+| `<leader>sb`       | Open buffers                 |
+| `<leader>sG`       | Git files                    |
+| `<leader>sl`       | Lines in current buffer      |
+| `<leader>sB`       | Grep open buffers            |
+| `<leader>sd`       | Diagnostics                  |
+| `<leader>ss`       | LSP symbols                  |
+| `<leader>sh`       | Help pages                   |
+| `<leader>sk`       | Keymaps                      |
+| `<leader>sc`       | Command history              |
+| `<leader>sC`       | Commands                     |
+| `<leader>sm`       | Marks                        |
+| `<leader>sj`       | Jump list                    |
+| `<leader>sq`       | Quickfix list                |
+| `<leader>so`       | Colorschemes                 |
+| `<leader>sp`       | Projects                     |
+| `<leader>sR`       | Resume last picker           |
+| `<leader>s"`       | Registers                    |
+| `<leader>st`       | Snacks file tree             |
 
-| Keymap      | Description             |
-| ----------- | ----------------------- |
-| `{`         | Go to previous symbol   |
-| `}`         | Go to next symbol       |
-| `<leader>a` | Toggle Aerial code view |
-
-### alpha-nvim
-
-A dashboard for Neovim.
-
-| Keymap   | Description                           |
-| -------- | ------------------------------------- |
-| `e`      | New File                              |
-| `SPC ee` | Toggle file explorer                  |
-| `SPC ff` | Find File                             |
-| `SPC fs` | Find Word                             |
-| `SPC wr` | Restore Session For Current Directory |
-| `q`      | Quit NVIM                             |
-
-### auto-session
-
-A session manager for Neovim.
-
-| Keymap       | Description                            |
-| ------------ | -------------------------------------- |
-| `<leader>wr` | Restore session for cwd                |
-| `<leader>ws` | Save session for auto session root dir |
-
-### nvim-autopairs
-
-A plugin that automatically closes pairs of brackets, quotes, etc. It has no keymaps.
-
-### opencode.nvim
-
-AI coding assistant plugin.
-
-| Keymap       | Description           |
-| ------------ | --------------------- |
-| `<leader>aa` | Ask AI (@this)        |
-| `<leader>as` | Select AI Action      |
-| `<leader>ac` | Add to Context        |
-| `<leader>at` | Toggle AI Window      |
-| `<leader>au` | Scroll AI Window Up   |
-| `<leader>ad` | Scroll AI Window Down |
-
-### bufferline.nvim
-
-A plugin that shows the open buffers in the tabline.
-
-| Keymap       | Description                |
-| ------------ | -------------------------- |
-| `<S-h>`      | Go to previous buffer      |
-| `<S-l>`      | Go to next buffer          |
-| `[b`         | Go to previous buffer      |
-| `]b`         | Go to next buffer          |
-| `<leader>bp` | Toggle pin buffer          |
-| `<leader>bP` | Close non-pinned buffers   |
-| `<leader>bo` | Close other buffers        |
-| `<leader>br` | Close buffers to the right |
-| `<leader>bl` | Close buffers to the left  |
-
-
-### nvim-dap
-
-Debugging Adapter Protocol (DAP) support.
-
-| Keymap       | Description       |
-| ------------ | ----------------- |
-| `<leader>db` | Toggle Breakpoint |
-| `<leader>dc` | Continue          |
-| `<leader>di` | Step Into         |
-| `<leader>do` | Step Over         |
-| `<leader>dO` | Step Out          |
-| `<leader>dr` | Open REPL         |
-| `<leader>dt` | Toggle DAP UI     |
-
-### neotest
-
-Testing framework integration.
-
-| Keymap       | Description        |
-| ------------ | ------------------ |
-| `<leader>tt` | Run Nearest Test   |
-| `<leader>tT` | Run File Tests     |
-| `<leader>td` | Debug Nearest Test |
-| `<leader>ts` | Toggle Summary     |
-| `<leader>to` | Show Output        |
-
-### nvim-colorizer.lua
-
-A plugin that highlights colors in your code. It has no keymaps.
-
-### tokyonight.nvim
-
-A colorscheme for Neovim. It is set as the default colorscheme.
-
-### nvim-notify
-
-A notification manager for Neovim. It is used to display notifications from other plugins.
-
-### smart-splits.nvim
-
-A plugin for managing window splits.
-
-| Keymap  | Description        |
-| ------- | ------------------ |
-| `<C-h>` | Move cursor left   |
-| `<C-j>` | Move cursor down   |
-| `<C-k>` | Move cursor up     |
-| `<C-l>` | Move cursor right  |
-| `<C-c>` | Close split        |
-| `<A-h>` | Resize split left  |
-| `<A-j>` | Resize split down  |
-| `<A-k>` | Resize split up    |
-| `<A-l>` | Resize split right |
-
-### Comment.nvim
-
-A commenting plugin for Neovim. It provides the following keymaps:
-
-| Keymap        | Description                               |
-| ------------- | ----------------------------------------- |
-| `gcc`         | Toggle comment line                       |
-| `gbc`         | Toggle comment block                      |
-| `gc` + motion | Toggle comment for the given motion       |
-| `gb` + motion | Toggle block comment for the given motion |
-
-### harpoon.nvim
-
-Rapid file bookmarking and navigation.
+### Harpoon v2
 
 | Keymap       | Description                      |
 | ------------ | -------------------------------- |
@@ -238,3 +114,237 @@ Rapid file bookmarking and navigation.
 | `<leader>m2` | Go to Harpoon file 2             |
 | `<leader>m3` | Go to Harpoon file 3             |
 | `<leader>m4` | Go to Harpoon file 4             |
+
+### nvim-tree
+
+| Keymap       | Description                     |
+| ------------ | ------------------------------- |
+| `<leader>ee` | Toggle file explorer            |
+| `<leader>ef` | Toggle explorer on current file |
+| `<leader>ec` | Collapse file explorer          |
+| `<leader>er` | Refresh file explorer           |
+
+## LSP
+
+| Keymap        | Description                              |
+| ------------- | ---------------------------------------- |
+| `gd`          | Go to definition (Snacks)               |
+| `gD`          | Go to declaration                        |
+| `gR`          | Show references (Snacks)                |
+| `gi`          | Show implementations (Snacks)           |
+| `gt`          | Show type definitions (Snacks)          |
+| `gr`          | References (Snacks)                     |
+| `gI`          | Go to implementation (Snacks)           |
+| `gy`          | Go to type definition (Snacks)          |
+| `K`           | Show documentation (hover)              |
+| `<leader>ca`  | Code actions                            |
+| `<leader>rn`  | Smart rename (LSP)                      |
+| `<leader>ri`  | Smart rename (IncRename — inline preview)|
+| `<leader>d`   | Show line diagnostics                   |
+| `<leader>D`   | Show buffer diagnostics (Snacks)        |
+| `[d` / `]d`   | Prev / Next diagnostic                  |
+| `<leader>rs`  | Restart LSP                             |
+| `<leader>shd` | Open definition in horizontal split     |
+| `<leader>svd` | Open definition in vertical split       |
+| `<A-n>`       | Illuminate — next reference             |
+| `<A-p>`       | Illuminate — previous reference         |
+
+## Formatting & Linting
+
+| Keymap       | Description                      |
+| ------------ | -------------------------------- |
+| `<leader>mf` | Format file / selection (conform)|
+| `<leader>l`  | Trigger linting for current file |
+
+Formatters by type:
+- **JS/TS/CSS/HTML/JSON/YAML/GraphQL/Liquid** → `prettier`
+- **Lua** → `stylua`
+- **Python** → `ruff` (format + organize imports)
+- **Go** → `gofmt`
+- **Rust** → `rustfmt`
+
+Linters by type:
+- **JS/TS** → `eslint_d`
+- **Python** → `ruff`
+- **Go** → `golangci-lint`
+- **Shell** → `shellcheck`
+- **Dockerfile** → `hadolint`
+
+## Git
+
+### Snacks Git
+
+| Keymap       | Description    |
+| ------------ | -------------- |
+| `<leader>gb` | Git blame line |
+| `<leader>gl` | Git log        |
+| `<leader>gs` | Git status     |
+| `<leader>sG` | Git files      |
+
+### Gitsigns
+
+| Keymap         | Description            |
+| -------------- | ---------------------- |
+| `]h` / `[h`    | Next / Prev hunk       |
+| `<leader>hs`   | Stage hunk             |
+| `<leader>hr`   | Reset hunk             |
+| `<leader>hS`   | Stage buffer           |
+| `<leader>hR`   | Reset buffer           |
+| `<leader>hu`   | Undo stage hunk        |
+| `<leader>hp`   | Preview hunk           |
+| `<leader>hb`   | Blame line (full)      |
+| `<leader>hB`   | Toggle line blame      |
+| `<leader>hd`   | Diff this              |
+| `<leader>hD`   | Diff this ~            |
+| `ih`           | Select hunk (text obj) |
+
+### LazyGit
+
+| Keymap       | Description  |
+| ------------ | ------------ |
+| `<leader>lg` | Open LazyGit |
+
+## Buffers
+
+| Keymap       | Description                |
+| ------------ | -------------------------- |
+| `<S-h>`      | Go to previous buffer      |
+| `<S-l>`      | Go to next buffer          |
+| `[b`         | Go to previous buffer      |
+| `]b`         | Go to next buffer          |
+| `<leader>bd` | Delete buffer (Snacks)     |
+| `<leader>ba` | Delete all buffers (Snacks)|
+| `<leader>bo` | Delete other buffers (Snacks)|
+| `<leader>bp` | Toggle pin buffer          |
+| `<leader>bP` | Close non-pinned buffers   |
+| `<leader>br` | Close buffers to the right |
+| `<leader>bl` | Close buffers to the left  |
+| `<leader>bc` | Close current buffer       |
+| `<leader>bb` | Switch to last buffer      |
+| `<leader>sb` | Pick buffer (Snacks)       |
+
+## Diagnostics & Trouble
+
+| Keymap       | Description                     |
+| ------------ | ------------------------------- |
+| `<leader>xw` | Workspace diagnostics (Trouble) |
+| `<leader>xd` | Document diagnostics (Trouble)  |
+| `<leader>xq` | Quickfix list (Trouble)         |
+| `<leader>xl` | Location list (Trouble)         |
+| `<leader>xt` | TODOs in Trouble                |
+
+## Debugging (DAP)
+
+| Keymap        | Description               |
+| ------------- | ------------------------- |
+| `<leader>db`  | Toggle Breakpoint         |
+| `<leader>dB`  | Conditional Breakpoint    |
+| `<leader>dc`  | Continue                  |
+| `<leader>di`  | Step Into                 |
+| `<leader>do`  | Step Over                 |
+| `<leader>dO`  | Step Out                  |
+| `<leader>dr`  | Open REPL                 |
+| `<leader>dt`  | Toggle DAP UI             |
+| `<leader>dl`  | Run Last                  |
+
+DAP configurations available:
+- **Launch file** — run current file with Node
+- **Attach to process** — attach to running Node process
+- **Debug Jest Tests** — debug test file with `--inspect-brk`
+- **Debug Next.js server** — launch Next.js dev with debugger
+- **Python** — via nvim-dap-python (LangGraph / YOUR-ORG-brain)
+- **Go** — via dap-go + delve (SmoothMQ)
+- **Rust** — via codelldb (rustaceanvim)
+
+## Testing (Neotest)
+
+| Keymap        | Description        |
+| ------------- | ------------------ |
+| `<leader>tt`  | Run Nearest Test   |
+| `<leader>tT`  | Run File Tests     |
+| `<leader>td`  | Debug Nearest Test |
+| `<leader>ts`  | Toggle Summary     |
+| `<leader>to`  | Show Test Output   |
+
+## Treesitter Text Objects
+
+| Keymap        | Description |
+| ------------- | ----------- |
+| **Select** | **(use with `v`, `d`, `y`, `c`)** |
+| `iB` / `aB`   | Inner / Around **Block**           |
+| `ia` / `aa`   | Inner / Around **Argument**        |
+| `i:` / `a:`   | Inner / Around **Object Property** |
+| `l:` / `r:`   | Left / Right of **Property**       |
+| `i=` / `a=`   | Inner / Around **Assignment**      |
+| `l=` / `r=`   | Left / Right of **Assignment**     |
+| `im` / `am`   | Inner / Around **Function/Method** |
+| `if` / `af`   | Inner / Around **Function Call**   |
+| `ic` / `ac`   | Inner / Around **Class**           |
+| `ii` / `ai`   | Inner / Around **Conditional**     |
+| `il` / `al`   | Inner / Around **Loop**            |
+| **Move** | |
+| `]m` / `[m`   | Next / Prev **Function** start     |
+| `]M` / `[M`   | Next / Prev **Function** end       |
+| `]c` / `[c`   | Next / Prev **Class** start        |
+| `]f` / `[f`   | Next / Prev **Function Call** start|
+| **Swap** | |
+| `<leader>na` / `<leader>pa` | Swap **Argument** next / prev |
+| `<leader>n:` / `<leader>p:` | Swap **Property** next / prev |
+| `<leader>nm` / `<leader>pm` | Swap **Function** next / prev |
+| **Repeatable Moves** | |
+| `;` / `,`     | Repeat / Opposite last treesitter move |
+| `f` `F` `t` `T` | Repeatable with `;` and `,`     |
+
+## Comments
+
+| Keymap        | Description                     |
+| ------------- | ------------------------------- |
+| `gcc`         | Toggle comment line             |
+| `gbc`         | Toggle comment block            |
+| `gc` + motion | Toggle comment for motion       |
+| `gb` + motion | Toggle block comment for motion |
+
+## Surround
+
+| Keymap   | Description                          |
+| -------- | ------------------------------------ |
+| `ys`     | Add surround (`ysiw"` → wrap word)   |
+| `ds`     | Delete surround (`ds"` → remove `"`) |
+| `cs`     | Change surround (`cs"'` → `"` → `'`) |
+| `S`      | Surround selection (visual mode)     |
+
+## Aerial (Code Outline)
+
+| Keymap      | Description             |
+| ----------- | ----------------------- |
+| `<leader>O` | Toggle Aerial code view |
+| `{`         | Go to previous symbol   |
+| `}`         | Go to next symbol       |
+
+## Sessions (auto-session)
+
+| Keymap       | Description              |
+| ------------ | ------------------------ |
+| `<leader>wr` | Restore session for cwd  |
+| `<leader>ws` | Save session             |
+
+## Notifications (Snacks)
+
+| Keymap       | Description             |
+| ------------ | ----------------------- |
+| `<leader>ns` | Show notification history |
+| `<leader>nh` | Hide notification       |
+
+## Markdown (render-markdown.nvim)
+
+| Keymap       | Description               |
+| ------------ | ------------------------- |
+| `<leader>mp` | Toggle Markdown rendering |
+
+## Misc
+
+| Keymap      | Description                         |
+| ----------- | ----------------------------------- |
+| `grr`       | Smart rename (Treesitter refactor)  |
+| `<C-space>` | Expand treesitter selection         |
+| `<bs>`      | Shrink treesitter selection         |

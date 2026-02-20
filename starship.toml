@@ -22,33 +22,33 @@ right_format = """$cmd_duration$time"""
 # Replace the "❯" symbol in the prompt with "➜"
 # Tokyo Night Theme - Neon Magenta/Cyan
 [character]
-success_symbol = "[➜](bold #ff00ff)"     # Neon magenta prompt
-error_symbol = '[X](bold #ff6ec7)'       # Soft magenta for errors
-vimcmd_symbol = "[<](bold #00ffff)"      # Cyan for vim mode
+success_symbol = "[➜](bold #FF79C6)"     # Neon magenta prompt
+error_symbol = '[X](bold #F48FB1)'       # Soft magenta for errors
+vimcmd_symbol = "[<](bold #4DD0E1)"      # Cyan for vim mode
 
 [cmd_duration]
 min_time = 2_000  # Show duration for commands taking longer than 2 seconds
 show_milliseconds = false
 format = "[$duration]($style) "
-style = "bold #00ffff"  # Cyan for duration
+style = "bold #4DD0E1"  # Cyan for duration
 
 [nodejs]
-format = '[${symbol}(${version})](bold #00ffff) '
+format = '[${symbol}(${version})](bold #4DD0E1) '
 detect_files = ["package.json", ".node-version"]
 detect_folders = ["node_modules"]
 symbol = "⬢ "
-style="bold #00ffff"  # Cyan for Node.js
+style="bold #4DD0E1"  # Cyan for Node.js
 
 [memory_usage]
 format = "with$symbol [${ram} ${ram_pct}( | ${swap} ${swap_pct})]($style) "
 disabled = false
-threshold = -1
+threshold = 80
 symbol = " "
-style = "bold dimmed #565f89"  # Dimmed purple-gray
+style = "bold dimmed #4A5480"  # Dimmed purple-gray
 
 [aws]
 format = '[$symbol$profile(\($region\))]($style) '
-style = "bold #ffd700"  # Gold for AWS (keeps visibility)
+style = "bold #F9E2AF"  # Gold for AWS (keeps visibility)
 symbol = "☁️  "
 [aws.region_aliases]
 us-east-1 = "ue1"
@@ -58,21 +58,21 @@ eu-west-1 = "ew1"
 [package]
 format = "[$symbol$version]($style) "
 symbol = "📦 "
-style = "bold #00ffff"  # Cyan for package
+style = "bold #4DD0E1"  # Cyan for package
 
 [docker_context]
 format = "[🐋 $context]($style) "
-style = "bold #00ffff"  # Cyan for Docker
-disabled = false
+style = "bold #4DD0E1"  # Cyan for Docker
+disabled = true
 
 [hostname]
-ssh_only = false
-format = '[$hostname](bold #ff6ec7) '  # Soft magenta for hostname
+ssh_only = true
+format = '[$hostname](bold #F48FB1) '  # Soft magenta for hostname
 trim_at = "."
 disabled = false
 
 [status]
-style = "bold #ff6ec7"  # Soft magenta for errors
+style = "bold #F48FB1"  # Soft magenta for errors
 symbol = "💥 "
 format = '[\[$symbol$status\]]($style) '
 disabled = false
@@ -82,12 +82,12 @@ map_symbol = true
 [git_branch]
 always_show_remote = true
 format = "[$symbol$branch(:$remote_branch)]($style) "
-style = "bold #bd00ff"  # Purple for git branch
+style = "bold #BD93F9"  # Purple for git branch
 symbol = "🌿 "
 
 [git_state]
 format = "[\\($state( $progress_current/$progress_total)\\)]($style) "
-style = "bold #ff6ec7"  # Soft magenta for git state
+style = "bold #F48FB1"  # Soft magenta for git state
 rebase = "REBASING"
 merge = "MERGING"
 revert = "REVERTING"
@@ -97,8 +97,8 @@ am = "AM"
 am_or_rebase = "AM/REBASE"
 
 [git_metrics]
-added_style = "bold #9ece6a"  # Green for added files
-deleted_style = "bold #f7768e"  # Red for deleted files
+added_style = "bold #A6E3A1"  # Green for added files
+deleted_style = "bold #F48FB1"  # Red for deleted files
 format = "[+$added]($added_style) [-$deleted]($deleted_style) "
 disabled = false
 
@@ -113,17 +113,17 @@ modified = "📝 ×${count}"
 staged = "🗃️  ×${count}"
 renamed = "📛 ×${count}"
 deleted = "🗑️  ×${count}"
-style = "bold #c0caf5"  # Light purple for git status
+style = "bold #CDD6F4"  # Light purple for git status
 format = "[$all_status$ahead_behind]($style) "
 
 [rust]
 format = "via [${symbol}(${version} )]($style) "  # Soft magenta for Rust
-style = "bold #ff6ec7"
+style = "bold #F48FB1"
 symbol = "🦀 "
 
 [cpp]
 format = "[$symbol$version]($style) "  # Cyan for C++
-style = "bold #00ffff"
+style = "bold #4DD0E1"
 symbol = "⚙️  "
 detect_files = ["CMakeLists.txt", "Makefile", "CMakeCache.txt"]
 detect_folders = ["build", "cmake", ".cmake"]
@@ -131,14 +131,14 @@ detect_extensions = ["cpp", "cxx", "cc", "hpp", "hxx", "h++", "h", "c"]
 
 [golang]
 format = "[$symbol$version]($style) "  # Cyan for Go
-style = "bold #00ffff"
+style = "bold #4DD0E1"
 symbol = "🐹 "
 detect_files = ["go.mod", "go.sum"]
 detect_folders = ["vendor"]
 
 [python]
 format = "[$symbol$version]($style) "
-style = "bold #ffd700"  # Gold for Python (keeps visibility)
+style = "bold #F9E2AF"  # Gold for Python (keeps visibility)
 symbol = "🐍 "
 pyenv_version_name = true
 detect_files = ["requirements.txt", "pyproject.toml", "setup.py", "Pipfile"]
@@ -147,9 +147,9 @@ detect_folders = [".venv", "venv", "__pycache__"]
 [username]
 format = "[$user]($style) "
 disabled = false
-show_always = true
-style_user = "bold #00ffff"  # Cyan for username
-style_root = "bold #ff00ff"  # Neon magenta for root
+show_always = false
+style_user = "bold #4DD0E1"  # Cyan for username
+style_root = "bold #FF79C6"  # Neon magenta for root
 
 [line_break]
 disabled = false
@@ -158,12 +158,12 @@ disabled = false
 truncation_length = 5
 truncate_to_repo = true
 format = "[$path]($style) "
-style = "bold #bd00ff"  # Purple for directory
+style = "bold #BD93F9"  # Purple for directory
 read_only = " 🔒"
-read_only_style = "bold #ff6ec7"
+read_only_style = "bold #F48FB1"
 
 [time]
 format = "[🕙 $time]($style) "
-style = "bold #565f89"  # Dimmed purple-gray for time
+style = "bold #4A5480"  # Dimmed purple-gray for time
 disabled = false
 time_format = "%T"

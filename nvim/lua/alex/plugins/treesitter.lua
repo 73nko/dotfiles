@@ -2,7 +2,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
-  dependencies = { "windwp/nvim-ts-autotag", "nvim-treesitter/playground", "nvim-treesitter/nvim-treesitter-refactor" },
+  dependencies = { "windwp/nvim-ts-autotag", "nvim-treesitter/nvim-treesitter-refactor", "nvim-treesitter/nvim-treesitter-textobjects" },
   config = function()
     -- Importar el plugin nvim-treesitter
     local treesitter = require("nvim-treesitter.configs")
@@ -51,26 +51,6 @@ return {
         },
       },
       sync_install = false,
-      -- Configuración del playground
-      playground = {
-        enable = true,
-        disable = {},
-        updatetime = 25, -- Tiempo de espera para resaltar nodos en el playground
-        persist_queries = false, -- Si las consultas persisten entre sesiones de vim
-      },
-      -- Text objects basados en la sintaxis
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-          },
-        },
-      },
       -- Refactor (renombrado inteligente y más)
       refactor = {
         highlight_definitions = {

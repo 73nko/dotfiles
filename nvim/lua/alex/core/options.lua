@@ -51,3 +51,24 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- persistent undo
+opt.undofile = true
+
+-- faster CursorHold events (used by LSP, gitsigns, etc.)
+opt.updatetime = 200
+
+-- keep cursor away from top/bottom edges
+opt.scrolloff = 8
+opt.sidescrolloff = 8
+
+-- better completion experience
+opt.pumheight = 10 -- limit completion menu height
+
+-- show substitution preview in split
+opt.inccommand = "split"
+
+-- open folds by default
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 99

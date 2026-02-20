@@ -3,8 +3,7 @@ return {
   dependencies = {
     "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
-    "antoinemadec/FixCursorHold.nvim",
-    "nvim-treesitter/nvim-treesitter",
+"nvim-treesitter/nvim-treesitter",
     "nvim-neotest/neotest-go",
     "haydenmeade/neotest-jest",
     "marilari88/neotest-vitest",
@@ -15,9 +14,18 @@ return {
         require("neotest-go"),
         require("neotest-jest")({
           jestCommand = "npm test --",
-          jestConfigFile = "custom.jest.config.ts",
+          -- dynamically find the jest config closest to the test file
+          jestConfigFile = function(file)
+            for _, name in ipairs({ "jest.config.ts", "jest.config.js", "jest.config.json", "custom.jest.config.ts" }) do
+              local found = vim.fn.findfile(name, vim.fn.fnamemodify(file, ":p:h") .. ";")
+              if found ~= "" then return found end
+            end
+          end,
           env = { CI = true },
-          cwd = function(path)
+          -- run jest from the package root, not global cwd (important for YOUR-ORG monorepo)
+          cwd = function(file)
+            local pkg = vim.fn.findfile("package.json", vim.fn.fnamemodify(file, ":p:h") .. ";")
+            if pkg ~= "" then return vim.fn.fnamemodify(pkg, ":p:h") end
             return vim.fn.getcwd()
           end,
         }),

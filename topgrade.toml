@@ -3,7 +3,7 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["pnpm", "yazi"]
+disable = ["pnpm", "node", "gem", "uv"]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
@@ -41,10 +41,7 @@ disable = ["pnpm", "yazi"]
 [git]
 #max_concurrency = 5
 # Additional git repositories to pull
-#repos = [
-#    "~/src/*/",
-#    "~/.config/something"
-#]
+repos = ["~/YOUR-ORG/*"]
 
 # Don't pull the predefined git repos
 #pull_predefined = false
@@ -106,4 +103,4 @@ disable = ["pnpm", "yazi"]
 # enable_pip_review = true                         ###disabled by default
 # enable_pip_review_local = true                   ###disabled by default
 # pipupgrade_arguments = "-y -u --pip-path pip"    ###disabled by default
-enable_pipupgrade = true                         ###disabled by default
+# enable_pipupgrade = true                       ###disabled by default

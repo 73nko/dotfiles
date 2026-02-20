@@ -18,22 +18,22 @@ return {
         graphql = { "prettier" },
         liquid = { "prettier" },
         lua = { "stylua" },
-        python = { "isort", "black" },
+        python = { "ruff_format", "ruff_organize_imports" },
         go = { "gofmt" },
         rust = { "rustfmt" },
       },
       format_on_save = {
-        lsp_fallback = true,
+        lsp_format = "fallback",
         async = false,
-        timeout_ms = 1000,
+        timeout_ms = 2000,
       },
     })
 
-    vim.keymap.set({ "n", "v" }, "<leader>mp", function()
+    vim.keymap.set({ "n", "v" }, "<leader>mf", function()
       conform.format({
-        lsp_fallback = true,
+        lsp_format = "fallback",
         async = false,
-        timeout_ms = 1000,
+        timeout_ms = 2000,
       })
     end, {
       desc = "Format file or range (in visual mode)",

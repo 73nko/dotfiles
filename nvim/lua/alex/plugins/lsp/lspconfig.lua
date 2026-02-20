@@ -2,17 +2,13 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    { "RRethy/vim-illuminate" },
     "hrsh7th/cmp-nvim-lsp",
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
+    { "b0o/schemastore.nvim" },
     {
       "antosha417/nvim-lsp-file-operations",
       config = true,
-    },
-    {
-      "folke/neodev.nvim",
-      opts = {},
     },
   },
   config = function()
@@ -39,19 +35,19 @@ return {
 
         -- set keybinds
         opts.desc = "Show LSP references"
-        keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+        keymap.set("n", "gR", function() Snacks.picker.lsp_references() end, opts)
 
         opts.desc = "Go to declaration"
-        keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
+        keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
         opts.desc = "Show LSP definitions"
-        keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+        keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, opts)
 
         opts.desc = "Show LSP implementations"
-        keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+        keymap.set("n", "gi", function() Snacks.picker.lsp_implementations() end, opts)
 
         opts.desc = "Show LSP type definitions"
-        keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
+        keymap.set("n", "gt", function() Snacks.picker.lsp_type_definitions() end, opts)
 
         opts.desc = "See available code actions"
         keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
@@ -60,7 +56,7 @@ return {
         keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 
         opts.desc = "Show buffer diagnostics"
-        keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+        keymap.set("n", "<leader>D", function() Snacks.picker.diagnostics({ buf = 0 }) end, opts)
 
         opts.desc = "Show line diagnostics"
         keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
@@ -77,29 +73,17 @@ return {
         opts.desc = "Restart LSP"
         keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
-        opts.desc = "Open definition in a split horizontal buffer"
-        keymap.set("n", "<leader>shd", ":sp | lua vim.lsp.buf.definition()<CR>", {
-          noremap = true,
-          silent = true,
-        }) -- Abrir definición en split horizontal
+        opts.desc = "Open definition in horizontal split"
+        keymap.set("n", "<leader>shd", function()
+          vim.cmd("split")
+          Snacks.picker.lsp_definitions()
+        end, opts)
 
-        opts.desc = "Open implementation in a split horizontal buffr"
-        keymap.set("n", "<leader>shi", ":sp | lua vim.lsp.buf.implementation()<CR>", {
-          noremap = true,
-          silent = true,
-        }) -- Abrir implementación en split horizontal
-
-        opts.desc = "Open LSP definition in a split vertical buffer"
-        keymap.set("n", "<leader>svd", ":vsp | lua vim.lsp.buf.definition()<CR>", {
-          noremap = true,
-          silent = true,
-        }) -- Abrir definición en split vertical
-
-        opts.desc = "Open LSP implementation in a split vertical buffer"
-        keymap.set("n", "<leader>svi", ":vsp | lua vim.lsp.buf.implementation()<CR>", {
-          noremap = true,
-          silent = true,
-        }) -- Abrir implementación en split vertical
+        opts.desc = "Open definition in vertical split"
+        keymap.set("n", "<leader>svd", function()
+          vim.cmd("vsplit")
+          Snacks.picker.lsp_definitions()
+        end, opts)
       end,
     })
 
@@ -178,14 +162,61 @@ return {
         })
       end,
       ["ts_ls"] = function()
-          lspconfig["ts_ls"].setup({
-              capabilities = capabilities,
-          })
+        lspconfig["ts_ls"].setup({
+          capabilities = capabilities,
+          init_options = {
+            preferences = {
+              importModuleSpecifierPreference = "non-relative",
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+            },
+          },
+        })
       end,
       ["cssls"] = function()
-          lspconfig["cssls"].setup({
-              capabilities = capabilities,
-          })
+        lspconfig["cssls"].setup({
+          capabilities = capabilities,
+          settings = {
+            css = { validate = true },
+            scss = { validate = true },
+          },
+          init_options = {
+            provideFormatter = false, -- let prettier handle formatting
+          },
+        })
+      end,
+      ["jsonls"] = function()
+        lspconfig["jsonls"].setup({
+          capabilities = capabilities,
+          settings = {
+            json = {
+              schemas = require("schemastore").json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        })
+      end,
+      ["yamlls"] = function()
+        lspconfig["yamlls"].setup({
+          capabilities = capabilities,
+          settings = {
+            yaml = {
+              schemaStore = { enable = false, url = "" },
+              schemas = require("schemastore").yaml.schemas(),
+              validate = true,
+              completion = true,
+            },
+          },
+        })
+      end,
+      ["theme_check"] = function()
+        lspconfig["theme_check"].setup({
+          capabilities = capabilities,
+        })
       end,
     })
   end,
