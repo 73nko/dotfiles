@@ -2,6 +2,206 @@
 
 This is a cheatsheet for your Neovim configuration. It contains all the keymaps, commands, and plugins that are configured in your setup.
 
+---
+
+## Daily Workflows
+
+### Abrir y navegar archivos
+
+```
+# Abrir un archivo por nombre (fuzzy)
+<leader><leader>
+
+# Volver a un archivo reciente
+<leader>sr
+
+# Archivos del repo git (más rápido que fuzzy en repos grandes)
+<leader>sG
+
+# Archivo que usas constantemente → añádelo a Harpoon
+<leader>ma    → añadir
+<leader>mm    → menú harpoon
+<leader>m1-4  → saltar directo al fichero 1-4
+
+# Saltar al fichero anterior (toggle rápido)
+<leader>bb
+```
+
+---
+
+### Navegar dentro del código
+
+```
+# Ir a definición / volver
+gd   →  ir a definición
+<C-o>  →  volver atrás (jump list)
+<C-i>  →  avanzar en jump list
+
+# Ver referencias / implementaciones
+gR   →  todas las referencias
+gi   →  implementaciones
+K    →  documentación hover
+
+# Ver estructura del fichero (funciones, clases…)
+<leader>O  →  Aerial outline lateral
+
+# Buscar símbolo en el proyecto
+<leader>ss  →  LSP symbols (fichero actual)
+<leader>sg  →  live grep (texto en todo el proyecto)
+<leader>sw  →  grep de la palabra bajo el cursor
+```
+
+---
+
+### Trabajar con splits y paneles
+
+```
+# Abrir splits
+|   →  split vertical
+-   →  split horizontal
+
+# Moverse entre splits (y paneles tmux)
+<C-h> / <C-l>  →  izquierda / derecha
+<C-j> / <C-k>  →  abajo / arriba
+
+# Redimensionar
+<A-h/j/k/l>  →  redimensionar split
+
+# Cerrar / igualar
+<leader>sx  →  cerrar split actual
+<leader>se  →  igualar tamaños
+
+# Abrir definición en split sin perder foco
+<leader>shd  →  horizontal
+<leader>svd  →  vertical
+```
+
+---
+
+### Trabajar con tabs
+
+```
+<leader>to  →  nueva tab
+<leader>tx  →  cerrar tab actual
+<leader>tn  →  siguiente tab
+<leader>tp  →  tab anterior
+<leader>tf  →  abrir buffer actual en nueva tab (útil para "zoom")
+```
+
+---
+
+### Trabajar con buffers
+
+```
+<S-h> / <S-l>  →  buffer anterior / siguiente
+<leader>bb     →  toggle último buffer (muy útil)
+<leader>sb     →  picker de buffers abiertos
+<leader>bd     →  cerrar buffer actual
+<leader>bo     →  cerrar todos menos el actual
+<leader>bp     →  pin buffer (no lo cierra con bo/bP)
+```
+
+---
+
+### Flujo de trabajo con Git
+
+```
+# Ver qué cambió en el fichero actual
+]h / [h          →  saltar entre hunks (cambios)
+<leader>hp       →  preview del hunk bajo el cursor
+<leader>hb       →  blame de la línea actual
+
+# Staging rápido hunk a hunk (sin salir de nvim)
+<leader>hs       →  stage hunk
+<leader>hu       →  undo stage hunk
+<leader>hr       →  reset hunk (descarta cambio)
+
+# Revisar todos los cambios antes de commit
+<leader>gd       →  DiffviewOpen (diff completo del working dir)
+<leader>gf       →  historial del fichero actual
+<leader>gc       →  cerrar diffview
+
+# Commit / push → LazyGit
+<leader>lg       →  LazyGit (desde aquí: stage, commit, push, rebase…)
+```
+
+---
+
+### Flujo de trabajo con código (LSP)
+
+```
+# Diagnósticos
+[d / ]d          →  prev / next error o warning
+<leader>d        →  ver diagnóstico de la línea
+<leader>xw       →  todos los diagnósticos del workspace (Trouble)
+
+# Refactor
+<leader>rn       →  renombrar símbolo
+<leader>ca       →  code actions (fix imports, extraer función…)
+<leader>mf       →  formatear fichero
+
+# Cuando el LSP se cuelga
+<leader>rs       →  reiniciar LSP
+```
+
+---
+
+### Edición eficiente
+
+```
+# Moverse por palabras / objetos
+w / b            →  siguiente / anterior palabra
+ciw              →  cambiar palabra bajo cursor
+cit / cat        →  cambiar contenido de tag HTML
+ci" / ca"        →  cambiar contenido entre comillas
+
+# Mover líneas
+<A-j> / <A-k>   →  mover línea abajo / arriba
+
+# Surround
+ysiw"            →  rodear palabra con "
+cs"'             →  cambiar " por '
+ds"              →  eliminar "
+
+# Comentar
+gcc              →  toggle comentario línea
+gc + movimiento  →  comentar rango (ej. gc3j)
+
+# Selección con treesitter
+<C-space>        →  expandir selección por nodo
+<bs>             →  contraer selección
+
+# Seleccionar función entera
+vam              →  visual around method/function
+```
+
+---
+
+### Búsqueda y reemplazo
+
+```
+# Buscar en el fichero
+/texto           →  buscar hacia adelante
+*                →  buscar palabra bajo cursor
+n / N            →  siguiente / anterior resultado
+<leader>nh       →  limpiar highlights
+
+# Buscar en el proyecto
+<leader>sg       →  live grep interactivo
+<leader>sw       →  grep de la palabra bajo cursor
+
+# Reemplazar en fichero
+:%s/viejo/nuevo/g        →  reemplazar todo
+:%s/viejo/nuevo/gc       →  reemplazar con confirmación
+
+# Reemplazar en múltiples ficheros
+1. <leader>sg  →  busca el texto
+2. En el picker: <C-q>  →  manda resultados al quickfix
+3. :cfdo s/viejo/nuevo/g | w  →  sustituye en todos
+```
+
+---
+
 ## Basic Vim Shortcuts
 
 | Keymap            | Description                  |
@@ -207,6 +407,16 @@ Linters by type:
 | `<leader>hd`   | Diff this              |
 | `<leader>hD`   | Diff this ~            |
 | `ih`           | Select hunk (text obj) |
+
+### Diffview
+
+| Keymap       | Description                   |
+| ------------ | ----------------------------- |
+| `<leader>gd` | Open diff (working dir)       |
+| `<leader>gc` | Close diffview                |
+| `<leader>gf` | File history (current file)   |
+| `<leader>gF` | File history (whole repo)     |
+| `q`          | Close from any diffview panel |
 
 ### LazyGit
 

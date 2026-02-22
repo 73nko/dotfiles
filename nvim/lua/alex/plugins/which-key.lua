@@ -44,6 +44,7 @@ return {
       { "<leader>c",  group = "code" },
       { "<leader>d",  group = "debug" },
       { "<leader>g",  group = "git" },
+      { "<leader>gd", group = "diff view" },
       { "<leader>h",  group = "git hunks" },
       { "<leader>m",  group = "format/marks" },
       { "<leader>n",  group = "swap next" },
