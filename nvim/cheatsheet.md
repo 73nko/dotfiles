@@ -334,6 +334,25 @@ n / N            →  siguiente / anterior resultado
 | `<leader>ec` | Collapse file explorer          |
 | `<leader>er` | Refresh file explorer           |
 
+#### Dentro del explorador
+
+| Keymap | Acción |
+| ------ | ------ |
+| `a`    | Crear fichero (escribe nombre + Enter) |
+| `a` + `carpeta/` | Crear directorio (termina con `/`) |
+| `a` + `ruta/fichero.ts` | Crear fichero con directorios intermedios |
+| `r`    | Renombrar fichero / directorio |
+| `d`    | Borrar |
+| `c`    | Copiar |
+| `x`    | Cortar |
+| `p`    | Pegar |
+| `Enter` / `o` | Abrir fichero |
+| `v`    | Abrir en split vertical |
+| `s`    | Abrir en split horizontal |
+| `H`    | Mostrar/ocultar ficheros ocultos |
+| `W`    | Colapsar todo el árbol |
+| `q`    | Cerrar explorador |
+
 ## LSP
 
 | Keymap        | Description                              |
