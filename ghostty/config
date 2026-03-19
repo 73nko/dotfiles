@@ -1,6 +1,5 @@
 # ============================================
-# Ghostty Config — Nebula Theme
-# Convertido desde Alacritty
+# Ghostty Config — Tokyo Night (custom, matched to nvim)
 # ============================================
 
 # Shell
@@ -28,6 +27,7 @@ macos-option-as-alt = true
 # Permite navegar entre prompts, hereda CWD en splits, etc.
 # ============================================
 shell-integration = detect
+shell-integration-features = cursor,sudo,title
 
 # ============================================
 # Mouse
@@ -50,7 +50,7 @@ cursor-style-blink = false
 # ============================================
 # Scrollback
 # ============================================
-scrollback-limit = 10000
+scrollback-limit = 100000
 
 # ============================================
 # Selection
@@ -58,34 +58,34 @@ scrollback-limit = 10000
 copy-on-select = true
 
 # ============================================
-# Nebula Theme — Colors
+# Tokyo Night — Colors (matched to nvim on_colors/on_highlights)
 # ============================================
-background = #0D0F1E
-foreground = #CDD6F4
-cursor-color = #FF79C6
-cursor-text  = #0D0F1E
-selection-foreground = #CDD6F4
-selection-background = #252840
+background = #06080f
+foreground = #e2e8f0
+cursor-color = #c4a7ff
+cursor-text  = #06080f
+selection-foreground = #e2e8f0
+selection-background = #1e2d4a
 
 # Normal colors (0-7)
-palette = 0=#11142B
-palette = 1=#F48FB1
-palette = 2=#A6E3A1
-palette = 3=#F9E2AF
-palette = 4=#7AB9F5
-palette = 5=#BD93F9
-palette = 6=#4DD0E1
-palette = 7=#CDD6F4
+palette = 0=#111827
+palette = 1=#f472b6
+palette = 2=#6ee7a0
+palette = 3=#fde68a
+palette = 4=#89b4fa
+palette = 5=#c4a7ff
+palette = 6=#56d4e0
+palette = 7=#e2e8f0
 
 # Bright colors (8-15)
-palette = 8=#2A2F4A
-palette = 9=#FF79C6
-palette = 10=#C3E88D
-palette = 11=#FAB387
-palette = 12=#89B4FA
-palette = 13=#CBA6F7
-palette = 14=#89DCEB
-palette = 15=#FFFFFF
+palette = 8=#3b4566
+palette = 9=#f472b6
+palette = 10=#6ee7a0
+palette = 11=#fdba74
+palette = 12=#7dcfff
+palette = 13=#c4a7ff
+palette = 14=#7dcfff
+palette = 15=#ffffff
 
 # ============================================
 # Keybindings
@@ -96,10 +96,6 @@ keybind = super+n=new_window
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard
 
-# Font size
-keybind = super+equal=increase_font_size:1
-keybind = super+minus=decrease_font_size:1
-keybind = super+zero=reset_font_size
 
 # Scroll
 keybind = shift+page_up=scroll_page_up
@@ -111,5 +107,3 @@ keybind = shift+end=scroll_to_bottom
 keybind = super+backspace=text:\x15
 keybind = alt+backspace=text:\x17
 
-# Shift+Enter manda ESC + Enter (útil en nvim, etc.)
-keybind = shift+enter=text:\e\r

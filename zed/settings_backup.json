@@ -1,25 +1,66 @@
 {
+  // ─── Session ───────────────────────────────────────────────
+  "features": {
+    "inline_completion_provider": "supermaven"
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+
+  // ─── Theme & Appearance ────────────────────────────────────
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Tokyo Night Storm"
+  },
+  "icon_theme": "Catppuccin Mocha",
+  "ui_font_size": 13,
+  "buffer_font_size": 13,
+  "agent_ui_font_size": 13,
+  "ui_font_family": "IosevkaTerm Nerd Font",
+  "buffer_font_family": "IosevkaTerm Nerd Font",
+  "buffer_line_height": {
+    "custom": 1.6
+  },
+
+  // ─── Editor ────────────────────────────────────────────────
+  "vim_mode": true,
+  "vim": {
+    "toggle_relative_line_numbers": true
+  },
+  "cursor_blink": false,
+  "show_whitespaces": "boundary",
+  "tab_size": 2,
+  "soft_wrap": "preferred_line_length",
+  "preferred_line_length": 100,
+  "scroll_beyond_last_line": "one_page",
+  "vertical_scroll_margin": 8,
+  "gutter": {
+    "folds": true,
+    "line_numbers": true,
+    "code_actions": true
+  },
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
+  },
   "auto_update": true,
   "toolbar": {
     "quick_actions": false
   },
-  "show_edit_predictions": false,
-  "features": {
-    "edit_prediction_provider": "none"
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
   },
-  "terminal": {
-    "shell": "system",
-    "font_family": "IosevkaTerm Nerd Font",
-    "env": {
-      "ZED_TERMINAL": "1"
-    },
-    "line_height": { "custom": 1.25 }
-  },
-  "project_panel": {
-    "dock": "left",
-    "indent_size": 12
-  },
+
+  // ─── Inline Completions (Supermaven) ───────────────────────
+  "show_edit_predictions": true,
+
+  // ─── AI Agent (Claude via Copilot Chat) ────────────────────
   "agent": {
+    "tool_permissions": {
+      "default": "allow"
+    },
     "profiles": {
       "alex": {
         "name": "alex",
@@ -28,34 +69,227 @@
         "context_servers": {}
       }
     },
-    "always_allow_tool_actions": true,
     "inline_assistant_model": {
       "provider": "copilot_chat",
       "model": "claude-sonnet-4"
     },
-    "model_parameters": [],
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-sonnet-4"
     }
   },
-  "vim_mode": true,
-  "vim": {
-    "toggle_relative_line_numbers": true
-  },
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
-  "agent_ui_font_size": 16,
-  "ui_font_family": "IosevkaTerm Nerd Font",
-  "buffer_font_family": "IosevkaTerm Nerd Font",
-  "theme": {
-    "mode": "system",
-    "light": "Kanagawa Lotus",
-    "dark": "Gentleman Kanagawa Blur"
-  },
+
+  // ─── Diagnostics ───────────────────────────────────────────
   "diagnostics": {
     "inline": {
       "enabled": true
+    },
+    "include_warnings": true
+  },
+
+  // ─── Project Panel ─────────────────────────────────────────
+  "project_panel": {
+    "dock": "left",
+    "default_width": 260,
+    "indent_size": 16,
+    "entry_spacing": "comfortable",
+    "file_icons": true,
+    "folder_icons": true,
+    "git_status": true,
+    "auto_reveal_entries": true,
+    "auto_fold_dirs": true,
+    "bold_folder_labels": true,
+    "sticky_scroll": true,
+    "indent_guides": {
+      "show": "always"
+    },
+    "scrollbar": "auto"
+  },
+
+  // ─── Outline Panel ─────────────────────────────────────────
+  "outline_panel": {
+    "dock": "right"
+  },
+
+  // ─── Terminal ──────────────────────────────────────────────
+  "terminal": {
+    "shell": {
+      "program": "/opt/homebrew/bin/fish"
+    },
+    "font_family": "IosevkaTerm Nerd Font",
+    "font_size": 13,
+    "line_height": { "custom": 1.25 },
+    "env": {
+      "ZED_TERMINAL": "1"
+    },
+    "working_directory": "current_project_directory"
+  },
+
+  // ─── Git ───────────────────────────────────────────────────
+  "git": {
+    "inline_blame": {
+      "enabled": true,
+      "delay_ms": 800
     }
-  }
+  },
+
+  // ─── File Associations ─────────────────────────────────────
+  "file_types": {
+    "TSX": ["tsx"],
+    "TypeScript": ["ts", "mts", "cts"],
+    "JSON": ["json", "jsonc"],
+    "JSONC": [".eslintrc.json", "tsconfig.json", "tsconfig.*.json"]
+  },
+
+  // ─── Language: TypeScript ──────────────────────────────────
+  "languages": {
+    "TypeScript": {
+      "language_servers": ["vtsls", "!typescript-language-server"],
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      },
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true
+      },
+      "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": false
+      }
+    },
+    "TSX": {
+      "language_servers": ["vtsls", "tailwindcss-language-server", "!typescript-language-server"],
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      },
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true
+      },
+      "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": false
+      }
+    },
+    "JavaScript": {
+      "language_servers": ["vtsls", "!typescript-language-server"],
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      },
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true
+      }
+    },
+    "JSON": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      },
+      "format_on_save": "on"
+    },
+    "JSONC": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      },
+      "format_on_save": "on"
+    },
+    "CSS": {
+      "language_servers": ["tailwindcss-language-server"],
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      },
+      "format_on_save": "on"
+    },
+    "Markdown": {
+      "soft_wrap": "preferred_line_length",
+      "preferred_line_length": 80,
+      "format_on_save": "off"
+    }
+  },
+
+  // ─── LSP Settings (vtsls + Tailwind) ──────────────────────
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "suggest": {
+            "completeFunctionCalls": true
+          },
+          "preferences": {
+            "importModuleSpecifier": "non-relative",
+            "quoteStyle": "single"
+          },
+          "inlayHints": {
+            "parameterNames": { "enabled": "literals" },
+            "variableTypes": { "enabled": true },
+            "functionLikeReturnTypes": { "enabled": true },
+            "enumMemberValues": { "enabled": true }
+          }
+        },
+        "javascript": {
+          "suggest": {
+            "completeFunctionCalls": true
+          },
+          "preferences": {
+            "importModuleSpecifier": "non-relative",
+            "quoteStyle": "single"
+          }
+        }
+      }
+    },
+    "tailwindcss-language-server": {
+      "settings": {
+        "tailwindCSS": {
+          "classAttributes": ["class", "className", "tw", "classList"],
+          "emmetCompletions": true
+        }
+      }
+    },
+    "eslint": {
+      "settings": {
+        "rulesCustomizations": [],
+        "run": "onType"
+      }
+    }
+  },
+
+  // ─── File Exclusions ───────────────────────────────────────
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/node_modules",
+    "**/.next",
+    "**/out",
+    "**/dist",
+    "**/build",
+    "**/.turbo",
+    "**/.vercel",
+    "**/coverage"
+  ]
 }

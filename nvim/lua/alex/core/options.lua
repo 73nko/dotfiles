@@ -1,13 +1,3 @@
--- Añade esto en tu configuración de Neovim
-vim.cmd([[
-  augroup Illuminate_Colors
-    autocmd!
-    autocmd ColorScheme * highlight IlluminatedWordText guibg=#444b6a guisp=#565f89 gui=bold
-    autocmd ColorScheme * highlight IlluminatedWordRead guibg=#444b6a guisp=#565f89 gui=bold
-    autocmd ColorScheme * highlight IlluminatedWordWrite guibg=#444b6a guisp=#565f89 gui=bold
-  augroup END
-]])
-
 local opt = vim.opt
 
 -- general
@@ -69,6 +59,23 @@ opt.pumheight = 10 -- limit completion menu height
 opt.inccommand = "split"
 
 -- open folds by default
+-- folding (use native treesitter foldexpr, not deprecated VimScript function)
 opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldlevel = 99
+
+-- previously missing quality-of-life options
+opt.timeoutlen = 300 -- faster which-key popup (default 1000ms is slow)
+opt.confirm = true -- ask to save instead of erroring on :q with unsaved changes
+opt.virtualedit = "block" -- allow cursor beyond line end in visual block mode
+opt.smoothscroll = true -- smooth Ctrl-D/U scrolling (Neovim 0.10+)
+opt.jumpoptions = "stack" -- make jumplist behave like a stack (Neovim 0.11+)
+
+-- filetype-specific overrides
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "python", "go" },
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+  end,
+})

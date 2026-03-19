@@ -2,7 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
+    "saghen/blink.cmp",
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
     { "b0o/schemastore.nvim" },
@@ -12,30 +12,22 @@ return {
     },
   },
   config = function()
-    -- import lspconfig plugin
     local lspconfig = require("lspconfig")
-
-    -- import mason_lspconfig plugin
     local mason_lspconfig = require("mason-lspconfig")
 
-    -- import cmp-nvim-lsp plugin
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    -- blink.cmp provides capabilities (replaces cmp-nvim-lsp)
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-    local keymap = vim.keymap -- for conciseness
+    local keymap = vim.keymap
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(ev)
-        -- Buffer local mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local opts = {
-          buffer = ev.buf,
-          silent = true,
-        }
+        local opts = { buffer = ev.buf, silent = true }
 
-        -- set keybinds
+        -- Navigation (single source of truth - removed duplicates from snacks.lua)
         opts.desc = "Show LSP references"
-        keymap.set("n", "gR", function() Snacks.picker.lsp_references() end, opts)
+        keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, opts)
 
         opts.desc = "Go to declaration"
         keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
@@ -49,29 +41,42 @@ return {
         opts.desc = "Show LSP type definitions"
         keymap.set("n", "gt", function() Snacks.picker.lsp_type_definitions() end, opts)
 
+        -- Actions
         opts.desc = "See available code actions"
-        keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
+        keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
         opts.desc = "Smart rename"
-        keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
+        keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
+        -- Diagnostics (moved line diag from <leader>d to <leader>cd to avoid collision with debug prefix)
         opts.desc = "Show buffer diagnostics"
-        keymap.set("n", "<leader>D", function() Snacks.picker.diagnostics({ buf = 0 }) end, opts)
+        keymap.set("n", "<leader>cD", function() Snacks.picker.diagnostics({ buf = 0 }) end, opts)
 
         opts.desc = "Show line diagnostics"
-        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
+        keymap.set("n", "<leader>cd", vim.diagnostic.open_float, opts)
 
+        -- Diagnostic navigation (use vim.diagnostic.jump instead of deprecated goto_prev/goto_next)
         opts.desc = "Go to previous diagnostic"
-        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+        keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
 
         opts.desc = "Go to next diagnostic"
-        keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+        keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts)
+
+        opts.desc = "Go to previous error"
+        keymap.set("n", "[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR }) end, opts)
+
+        opts.desc = "Go to next error"
+        keymap.set("n", "]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end, opts)
 
         opts.desc = "Show documentation for what is under cursor"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+        keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+        -- Signature help (replaces lsp_signature.nvim plugin)
+        opts.desc = "Signature help"
+        keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
 
         opts.desc = "Restart LSP"
-        keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+        keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 
         opts.desc = "Open definition in horizontal split"
         keymap.set("n", "<leader>shd", function()
@@ -87,24 +92,23 @@ return {
       end,
     })
 
-    -- used to enable autocompletion (assign to every lsp server config)
-    local capabilities = cmp_nvim_lsp.default_capabilities()
-
-    -- Change the Diagnostic symbols in the sign column (gutter)
+    -- Diagnostic signs (modern API)
     local signs = {
       Error = " ",
       Warn = " ",
       Hint = "󰠠 ",
       Info = " ",
     }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, {
-        text = icon,
-        texthl = hl,
-        numhl = "",
-      })
-    end
+    vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = signs.Error,
+          [vim.diagnostic.severity.WARN] = signs.Warn,
+          [vim.diagnostic.severity.HINT] = signs.Hint,
+          [vim.diagnostic.severity.INFO] = signs.Info,
+        },
+      },
+    })
 
     mason_lspconfig.setup({
       -- default handler for installed servers
@@ -123,9 +127,9 @@ return {
           filetypes = { "graphql", "gql", "typescriptreact", "javascriptreact" },
         })
       end,
-      ["emmet_ls"] = function()
-        -- configure emmet language server
-        lspconfig["emmet_ls"].setup({
+      ["emmet_language_server"] = function()
+        -- emmet-language-server (replaces archived emmet_ls)
+        lspconfig["emmet_language_server"].setup({
           capabilities = capabilities,
           filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
         })
@@ -161,18 +165,25 @@ return {
           },
         })
       end,
-      ["ts_ls"] = function()
-        lspconfig["ts_ls"].setup({
+      ["vtsls"] = function()
+        -- vtsls (replaces ts_ls - faster, better monorepo support)
+        lspconfig["vtsls"].setup({
           capabilities = capabilities,
-          init_options = {
-            preferences = {
-              importModuleSpecifierPreference = "non-relative",
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
+          settings = {
+            vtsls = {
+              autoUseWorkspaceTsdk = true,
+            },
+            typescript = {
+              preferences = {
+                importModuleSpecifier = "non-relative",
+              },
+              inlayHints = {
+                parameterNames = { enabled = "all" },
+                parameterTypes = { enabled = true },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+              },
             },
           },
         })

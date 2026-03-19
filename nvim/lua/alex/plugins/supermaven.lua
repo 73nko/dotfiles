@@ -8,7 +8,7 @@ return {
         clear_suggestion = "<C-]>",
         accept_word = "<C-j>",
       },
-      ignore_filetypes = { "TelescopePrompt", "minifiles", "snacks_picker_input" },
+      ignore_filetypes = { "snacks_picker_input", "minifiles" },
       color = {
         suggestion_color = "#6c7086", -- subtle grey (Catppuccin surface2)
         cterm = 244,

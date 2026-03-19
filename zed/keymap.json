@@ -1,4 +1,5 @@
 [
+  // ─── Workspace: pane navigation (vim-tmux style) ───────────
   {
     "context": "Workspace",
     "bindings": {
@@ -9,6 +10,8 @@
       "ctrl-alt-a": "workspace::AddFolderToProject"
     }
   },
+
+  // ─── Editor: general bindings ──────────────────────────────
   {
     "context": "Editor",
     "bindings": {
@@ -33,9 +36,53 @@
       "ctrl-s": "workspace::Save"
     }
   },
+
+  // ─── Vim Normal: leader bindings ───────────────────────────
   {
     "context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting",
     "bindings": {
+      // Panels
+      "space e": "project_panel::ToggleFocus",
+      "space g": "git_panel::ToggleFocus",
+      "space l": "outline_panel::ToggleFocus",
+      "space t": "terminal_panel::ToggleFocus",
+
+      // Navigation
+      "space space": "file_finder::Toggle",
+      "space b q": "pane::CloseOtherItems",
+      "space b d": "pane::CloseActiveItem",
+      "space tab a": "tab_switcher::ToggleAll",
+
+      // Diagnostics
+      "space d d": "diagnostics::Deploy",
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPrevDiagnostic",
+
+      // LSP actions (TS/React workflow)
+      "space c a": "editor::ToggleCodeActions",
+      "space c r": "editor::Rename",
+      "space c f": "editor::Format",
+      "g d": "editor::GoToDefinition",
+      "g r": "editor::FindAllReferences",
+      "g i": "editor::GoToImplementation",
+      "g t": "editor::GoToTypeDefinition",
+      "K": "editor::Hover",
+
+      // Search
+      "space s s": "buffer_search::Deploy",
+      "space s p": "pane::DeploySearch",
+
+      // AI
+      "space a i": "assistant::InlineAssist",
+      "space a d": "agent::OpenAgentDiff",
+      "space a t": "agent::ToggleFocus",
+
+      // UI toggles
+      "space u n": "workspace::ClearAllNotifications",
+      "space u b": "git::Blame",
+      "space u h": "editor::ToggleInlayHints",
+
+      // Debugger
       "space d b": "editor::ToggleBreakpoint",
       "space d s": "debugger::Start",
       "space d e": "debugger::Stop",
@@ -46,18 +93,8 @@
       "space d b a": "debugger::ClearAllBreakpoints",
       "space d s o": "debugger::StepOver",
       "space d s i": "debugger::StepInto",
-      "space e": "project_panel::ToggleFocus",
-      "space g": "git_panel::ToggleFocus",
-      "space l": "outline_panel::ToggleFocus",
-      "space d d": "diagnostics::Deploy",
-      "space space": "file_finder::Toggle",
-      "space a i": "assistant::InlineAssist",
-      "space a d": "agent::OpenAgentDiff",
-      "space a t": "agent::ToggleFocus",
-      "space t": "terminal_panel::ToggleFocus",
-      "space u n": "workspace::ClearAllNotifications",
-      "space u b": "git::Blame",
-      "space b q": "pane::CloseOtherItems",
+
+      // External tools (tasks)
       "space g g": [
         "task::Spawn",
         { "task_name": "Lazygit", "reveal_target": "center" }
@@ -85,34 +122,29 @@
       "-": ["task::Spawn", { "task_name": "Oil", "reveal_target": "center" }],
       "space o f": [
         "task::Spawn",
-        {
-          "task_name": "Oil Float",
-          "reveal_target": "center"
-        }
+        { "task_name": "Oil Float", "reveal_target": "center" }
       ],
       "space o s": [
         "task::Spawn",
-        {
-          "task_name": "Oil Simple",
-          "reveal_target": "center"
-        }
+        { "task_name": "Oil Simple", "reveal_target": "center" }
       ],
-      "space tab a": "tab_switcher::ToggleAll",
       "space o z": [
         "task::Spawn",
-        {
-          "task_name": "Oil",
-          "reveal_target": "center"
-        }
+        { "task_name": "Oil", "reveal_target": "center" }
       ]
     }
   },
+
+  // ─── Vim Visual: AI assist ─────────────────────────────────
   {
     "context": "Editor && vim_mode == visual && !VimWaiting",
     "bindings": {
-      "space a i": "assistant::InlineAssist"
+      "space a i": "assistant::InlineAssist",
+      "space c a": "editor::ToggleCodeActions"
     }
   },
+
+  // ─── Terminal ──────────────────────────────────────────────
   {
     "context": "Terminal",
     "bindings": {
@@ -121,6 +153,8 @@
       "cmd-n": "workspace::NewTerminal"
     }
   },
+
+  // ─── Project Panel ─────────────────────────────────────────
   {
     "context": "ProjectPanel",
     "bindings": {

@@ -51,19 +51,16 @@ return {
         },
       },
       sync_install = false,
-      -- Refactor (renombrado inteligente y más)
+      -- Refactor
       refactor = {
         highlight_definitions = {
-          enable = true,
+          enable = false, -- snacks.words handles this now
         },
         highlight_current_scope = {
           enable = false,
         },
         smart_rename = {
-          enable = true,
-          keymaps = {
-            smart_rename = "grr",
-          },
+          enable = false, -- use <leader>rn (vim.lsp.buf.rename) instead; grr collides with Neovim 0.11+ default
         },
       },
     })

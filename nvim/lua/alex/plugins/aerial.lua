@@ -69,9 +69,9 @@ return {
 				Variable = "󰀫 ",
 			},
 			on_attach = function(bufnr)
-				-- Jump forwards/backwards with '{' and '}'
-				vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-				vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+				-- Use [a/]a instead of {/} to preserve vim's paragraph navigation
+				vim.keymap.set("n", "[a", "<cmd>AerialPrev<CR>", { buffer = bufnr, desc = "Aerial prev symbol" })
+				vim.keymap.set("n", "]a", "<cmd>AerialNext<CR>", { buffer = bufnr, desc = "Aerial next symbol" })
 				vim.keymap.set("n", "<leader>O", "<cmd>AerialToggle!<CR>", { desc = "Toggle Aerial code view" })
 			end,
 		})

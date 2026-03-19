@@ -52,35 +52,11 @@ on = ["<C-s>"]
 run = 'shell "$SHELL" --block --confirm'
 desc = "Open shell here"
 
-[[mgr.prepend_keymap]]
-on = ["k"]
-run = "arrow -1"
-desc = "Move cursor up"
-
-[[mgr.prepend_keymap]]
-on = ["j"]
-run = "arrow 1"
-desc = "Move cursor down"
-
+# l overridden to use smart-enter (the rest are Yazi defaults)
 [[mgr.prepend_keymap]]
 on = ["l"]
 run = "plugin --sync smart-enter"
 desc = "Enter the child directory, or open the file"
-
-[[mgr.prepend_keymap]]
-on = ["h"]
-run = "leave"
-desc = "Go back to the parent directory"
-
-[[mgr.prepend_keymap]]
-on = ["H"]
-run = "back"
-desc = "Go back in history"
-
-[[mgr.prepend_keymap]]
-on = ["L"]
-run = "forward"
-desc = "Go forward in history"
 
 # Git integration bindings (basic)
 [[mgr.prepend_keymap]]
@@ -111,3 +87,30 @@ desc = "Open in Zed"
 on = ["g", "e"]
 run = 'shell "nvim \"$@\"" --block'
 desc = "Open in Neovim"
+
+# Smart filter (fuzzy find in current directory)
+[[mgr.prepend_keymap]]
+on = ["f"]
+run = "plugin smart-filter"
+desc = "Smart filter"
+
+# Bookmarks
+[[mgr.prepend_keymap]]
+on = ["b", "a"]
+run = "plugin bookmarks --args=save"
+desc = "Save bookmark"
+
+[[mgr.prepend_keymap]]
+on = ["b", "g"]
+run = "plugin bookmarks --args=jump"
+desc = "Jump to bookmark"
+
+[[mgr.prepend_keymap]]
+on = ["b", "d"]
+run = "plugin bookmarks --args=delete"
+desc = "Delete bookmark"
+
+[[mgr.prepend_keymap]]
+on = ["b", "D"]
+run = "plugin bookmarks --args=delete_all"
+desc = "Delete all bookmarks"

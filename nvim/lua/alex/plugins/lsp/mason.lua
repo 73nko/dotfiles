@@ -27,11 +27,11 @@ return {
     mason_lspconfig.setup({
       ensure_installed = {
         -- JS/TS (core YOUR-ORG stack)
-        "ts_ls",
+        "vtsls",
         "eslint",
         "cssls",
         "html",
-        "emmet_ls",
+        "emmet_language_server",
         -- Data / API
         "graphql",
         "prismals",

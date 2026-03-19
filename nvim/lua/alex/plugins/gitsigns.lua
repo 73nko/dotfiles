@@ -80,6 +80,5 @@ return {
     },
   },
 
-  "tpope/vim-fugitive",
-  "tpope/vim-rhubarb",
+  -- vim-fugitive and vim-rhubarb removed: lazygit + gitsigns + diffview + snacks git cover everything
 }

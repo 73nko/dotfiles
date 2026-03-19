@@ -393,16 +393,16 @@ return {
       zen = { enabled = true },
     },
     keys = {
-      -- Notify
+      -- Notify (moved from <leader>n* to <leader>N* to avoid collision with swap-next prefix)
       {
-        "<leader>ns",
+        "<leader>Ns",
         function()
           Snacks.notifier.show_history()
         end,
         desc = "Show notifications",
       },
       {
-        "<leader>nh",
+        "<leader>Nh",
         function()
           Snacks.notifier.hide()
         end,
@@ -535,42 +535,13 @@ return {
         desc = "[W]ord",
         mode = { "n", "x" },
       },
-      -- LSP
+      -- LSP pickers (gd, gr, gi, gt are in lspconfig.lua LspAttach - single source of truth)
       {
         "<leader>sd",
         function()
           Snacks.picker.diagnostics()
         end,
         desc = "[D]iagnostics",
-      },
-      {
-        "gd",
-        function()
-          Snacks.picker.lsp_definitions()
-        end,
-        desc = "Goto [D]efinition",
-      },
-      {
-        "gr",
-        function()
-          Snacks.picker.lsp_references()
-        end,
-        nowait = true,
-        desc = "[R]eferences",
-      },
-      {
-        "gI",
-        function()
-          Snacks.picker.lsp_implementations()
-        end,
-        desc = "Goto [I]mplementation",
-      },
-      {
-        "gy",
-        function()
-          Snacks.picker.lsp_type_definitions()
-        end,
-        desc = "Goto T[y]pe Definition",
       },
       {
         "<leader>ss",

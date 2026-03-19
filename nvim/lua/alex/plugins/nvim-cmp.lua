@@ -1,82 +1,56 @@
+-- blink.cmp: Rust-powered completion (replaces nvim-cmp + 5 dependencies)
 return {
-  "hrsh7th/nvim-cmp",
+  "saghen/blink.cmp",
+  version = "1.*",
   event = "InsertEnter",
   dependencies = {
-    "hrsh7th/cmp-buffer", -- source for text in buffer
-    "hrsh7th/cmp-path", -- source for file system paths
-    {
-      "L3MON4D3/LuaSnip",
-      -- follow latest release.
-      version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-      -- install jsregexp (optional!).
-      build = "make install_jsregexp",
-    },
-    "saadparwaiz1/cmp_luasnip", -- for autocompletion
-    "rafamadriz/friendly-snippets", -- useful snippets
-    "onsails/lspkind.nvim", -- vs-code like pictograms
+    "rafamadriz/friendly-snippets", -- vscode-style snippets
   },
-  config = function()
-    local cmp = require("cmp")
-
-    local luasnip = require("luasnip")
-
-    local lspkind = require("lspkind")
-
-    -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-    require("luasnip.loaders.from_vscode").lazy_load()
-
-    cmp.setup({
-      completion = {
-        completeopt = "menu,menuone,preview,noselect",
-      },
-      snippet = { -- configure how nvim-cmp interacts with snippet engine
-        expand = function(args)
-          luasnip.lsp_expand(args.body)
+  ---@module 'blink.cmp'
+  ---@type blink.cmp.Config
+  opts = {
+    keymap = {
+      preset = "none",
+      ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<C-e>"] = { "hide" },
+      ["<CR>"] = { "accept", "fallback" },
+      -- Tab: accept blink if visible + selected, else fall through to Supermaven
+      ["<Tab>"] = {
+        function(cmp)
+          if cmp.is_visible() then
+            return cmp.accept()
+          end
         end,
+        "snippet_forward",
+        "fallback",
       },
-      mapping = cmp.mapping.preset.insert({
-        ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-e>"] = cmp.mapping.abort(), -- close completion window
-        ["<CR>"] = cmp.mapping.confirm({ select = false }), -- only confirm explicitly selected
-        -- Tab: confirm cmp if active, else fall through to Supermaven
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() and cmp.get_selected_entry() then
-            cmp.confirm({ select = false })
-          elseif luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          else
-            fallback() -- lets Supermaven handle Tab
-          end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      }),
-      -- sources for autocompletion
-      sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" }, -- snippets
-        { name = "buffer" }, -- text within current buffer
-        { name = "path" }, -- file system paths
-      }),
-
-      -- configure lspkind for vs-code like pictograms in completion menu
-      formatting = {
-        format = lspkind.cmp_format({
-          maxwidth = 50,
-          ellipsis_char = "...",
-        }),
+      ["<S-Tab>"] = { "snippet_backward", "fallback" },
+      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-j>"] = { "select_next", "fallback" },
+      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+    },
+    completion = {
+      accept = { auto_brackets = { enabled = true } },
+      list = { selection = { preselect = false, auto_insert = false } },
+      menu = {
+        draw = {
+          columns = { { "kind_icon" }, { "label", "label_description", gap = 1 }, { "kind" } },
+        },
       },
-    })
-  end,
+      documentation = { auto_show = true, auto_show_delay_ms = 200 },
+    },
+    sources = {
+      default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+      providers = {
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+        },
+      },
+    },
+    snippets = { preset = "default" },
+    signature = { enabled = true },
+  },
 }

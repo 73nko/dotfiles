@@ -3,7 +3,7 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["pnpm", "node", "gem", "uv"]
+disable = ["pnpm", "node", "gem", "uv", "ruby_gems"]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
@@ -41,7 +41,7 @@ disable = ["pnpm", "node", "gem", "uv"]
 [git]
 #max_concurrency = 5
 # Additional git repositories to pull
-repos = ["~/YOUR-ORG/*"]
+# repos = ["~/YOUR-ORG/*"]
 
 # Don't pull the predefined git repos
 #pull_predefined = false

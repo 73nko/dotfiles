@@ -66,5 +66,57 @@
     "hide": "always",
     "allow_concurrent_runs": false,
     "use_new_terminal": true
+  },
+  {
+    "label": "Next.js Dev",
+    "command": "npm run dev",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "tags": ["dev-server"]
+  },
+  {
+    "label": "TypeScript Check",
+    "command": "npx tsc --noEmit",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "on_success"
+  },
+  {
+    "label": "ESLint Current File",
+    "command": "npx eslint --fix \"$ZED_FILE\"",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "on_success"
+  },
+  {
+    "label": "Next.js Build",
+    "command": "npm run build",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Run Tests (current file)",
+    "command": "npx vitest run \"$ZED_FILE\"",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "on_success"
+  },
+  {
+    "label": "Run Tests (watch)",
+    "command": "npx vitest watch",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
   }
 ]

@@ -1,589 +1,570 @@
 # Neovim Cheatsheet
 
-This is a cheatsheet for your Neovim configuration. It contains all the keymaps, commands, and plugins that are configured in your setup.
+Referencia completa de la config de Neovim. Todos los keymaps, workflows y plugins actualizados.
+
+`<leader>` = Space
 
 ---
 
 ## Daily Workflows
 
-### Abrir y navegar archivos
+### Abrir archivos rapido
 
 ```
-# Abrir un archivo por nombre (fuzzy)
-<leader><leader>
+<leader><leader>     Fuzzy find — busca por nombre en el proyecto
+<leader>sr           Archivos recientes
+<leader>sG           Solo ficheros del repo git (mas rapido en repos grandes)
+<leader>bb           Toggle al fichero anterior instantaneo
 
-# Volver a un archivo reciente
-<leader>sr
-
-# Archivos del repo git (más rápido que fuzzy en repos grandes)
-<leader>sG
-
-# Archivo que usas constantemente → añádelo a Harpoon
-<leader>ma    → añadir
-<leader>mm    → menú harpoon
-<leader>m1-4  → saltar directo al fichero 1-4
-
-# Saltar al fichero anterior (toggle rápido)
-<leader>bb
+# Harpoon — ficheros que usas constantemente
+<leader>ma           Añadir fichero a la lista
+<leader>mm           Menu harpoon
+<leader>m1-m4        Saltar directo al fichero 1-4
+<leader>mj / mk      Siguiente / anterior en lista
 ```
 
 ---
 
-### Navegar dentro del código
+### Revision de cambios Git
 
 ```
-# Ir a definición / volver
-gd   →  ir a definición
-<C-o>  →  volver atrás (jump list)
-<C-i>  →  avanzar en jump list
+]h / [h              Saltar entre hunks del fichero actual
+<leader>hp           Preview del hunk bajo el cursor
+<leader>hb           Blame de la linea actual
 
-# Ver referencias / implementaciones
-gR   →  todas las referencias
-gi   →  implementaciones
-K    →  documentación hover
+# Staging rapido hunk a hunk
+<leader>hs           Stage hunk
+<leader>hu           Undo stage hunk
+<leader>hr           Reset hunk (descartar cambio)
 
-# Ver estructura del fichero (funciones, clases…)
-<leader>O  →  Aerial outline lateral
+# Revisar todos los cambios
+<leader>gd           DiffviewOpen (diff completo del working dir)
+<leader>gf           Historial del fichero actual
+<leader>gc           Cerrar diffview
 
-# Buscar símbolo en el proyecto
-<leader>ss  →  LSP symbols (fichero actual)
-<leader>sg  →  live grep (texto en todo el proyecto)
-<leader>sw  →  grep de la palabra bajo el cursor
-```
-
----
-
-### Trabajar con splits y paneles
-
-```
-# Abrir splits
-|   →  split vertical
--   →  split horizontal
-
-# Moverse entre splits (y paneles tmux)
-<C-h> / <C-l>  →  izquierda / derecha
-<C-j> / <C-k>  →  abajo / arriba
-
-# Redimensionar
-<A-h/j/k/l>  →  redimensionar split
-
-# Cerrar / igualar
-<leader>sx  →  cerrar split actual
-<leader>se  →  igualar tamaños
-
-# Abrir definición en split sin perder foco
-<leader>shd  →  horizontal
-<leader>svd  →  vertical
+# Commit / push
+<leader>lg           LazyGit (stage, commit, push, rebase...)
 ```
 
 ---
 
-### Trabajar con tabs
+### Flujo de refactor
 
 ```
-<leader>to  →  nueva tab
-<leader>tx  →  cerrar tab actual
-<leader>tn  →  siguiente tab
-<leader>tp  →  tab anterior
-<leader>tf  →  abrir buffer actual en nueva tab (útil para "zoom")
-```
-
----
-
-### Trabajar con buffers
-
-```
-<S-h> / <S-l>  →  buffer anterior / siguiente
-<leader>bb     →  toggle último buffer (muy útil)
-<leader>sb     →  picker de buffers abiertos
-<leader>bd     →  cerrar buffer actual
-<leader>bo     →  cerrar todos menos el actual
-<leader>bp     →  pin buffer (no lo cierra con bo/bP)
+gd                   Ir a la definicion del simbolo
+gr                   Ver todas las referencias
+<leader>rn           Renombrar simbolo en todo el proyecto
+<leader>ca           Code actions (fix imports, extraer funcion...)
+<leader>cf           Formatear fichero al acabar
 ```
 
 ---
 
-### Flujo de trabajo con Git
+### Buscar y reemplazar multi-fichero
 
 ```
-# Ver qué cambió en el fichero actual
-]h / [h          →  saltar entre hunks (cambios)
-<leader>hp       →  preview del hunk bajo el cursor
-<leader>hb       →  blame de la línea actual
-
-# Staging rápido hunk a hunk (sin salir de nvim)
-<leader>hs       →  stage hunk
-<leader>hu       →  undo stage hunk
-<leader>hr       →  reset hunk (descarta cambio)
-
-# Revisar todos los cambios antes de commit
-<leader>gd       →  DiffviewOpen (diff completo del working dir)
-<leader>gf       →  historial del fichero actual
-<leader>gc       →  cerrar diffview
-
-# Commit / push → LazyGit
-<leader>lg       →  LazyGit (desde aquí: stage, commit, push, rebase…)
+<leader>sg           Live grep — busca el texto en el proyecto
+                     En el picker: <C-q> manda resultados al quickfix
+:cfdo s/viejo/nuevo/g | w    Reemplaza en todos los ficheros del quickfix
 ```
 
 ---
 
-### Flujo de trabajo con código (LSP)
+### Debug de un test Jest
 
 ```
-# Diagnósticos
-[d / ]d          →  prev / next error o warning
-<leader>d        →  ver diagnóstico de la línea
-<leader>xw       →  todos los diagnósticos del workspace (Trouble)
-
-# Refactor
-<leader>rn       →  renombrar símbolo
-<leader>ca       →  code actions (fix imports, extraer función…)
-<leader>mf       →  formatear fichero
-
-# Cuando el LSP se cuelga
-<leader>rs       →  reiniciar LSP
+<leader>db           Poner breakpoint en la linea que falla
+<leader>td           Debug del test mas cercano al cursor
+<leader>di           Step into — entrar en la funcion
+<leader>do           Step over — siguiente linea
+<leader>dt           Toggle UI de DAP para ver variables
 ```
 
 ---
 
-### Edición eficiente
+### Editar JSX/HTML rapido
 
 ```
-# Moverse por palabras / objetos
-w / b            →  siguiente / anterior palabra
-ciw              →  cambiar palabra bajo cursor
-cit / cat        →  cambiar contenido de tag HTML
-ci" / ca"        →  cambiar contenido entre comillas
-
-# Mover líneas
-<A-j> / <A-k>   →  mover línea abajo / arriba
-
-# Surround
-ysiw"            →  rodear palabra con "
-cs"'             →  cambiar " por '
-ds"              →  eliminar "
-
-# Comentar
-gcc              →  toggle comentario línea
-gc + movimiento  →  comentar rango (ej. gc3j)
-
-# Selección con treesitter
-<C-space>        →  expandir selección por nodo
-<bs>             →  contraer selección
-
-# Seleccionar función entera
-vam              →  visual around method/function
+cit                  Cambiar contenido del tag (change inner tag)
+dat                  Borrar tag completo (delete around tag)
+ysiw"                Envolver palabra en comillas (surround)
+cs"'                 Cambiar comillas dobles a simples
+                     nvim-ts-autotag cierra y renombra tags automaticamente
 ```
 
 ---
 
-### Búsqueda y reemplazo
+### Substitute — pegar sin perder registro
 
 ```
-# Buscar en el fichero
-/texto           →  buscar hacia adelante
-*                →  buscar palabra bajo cursor
-n / N            →  siguiente / anterior resultado
-<leader>nh       →  limpiar highlights
-
-# Buscar en el proyecto
-<leader>sg       →  live grep interactivo
-<leader>sw       →  grep de la palabra bajo cursor
-
-# Reemplazar en fichero
-:%s/viejo/nuevo/g        →  reemplazar todo
-:%s/viejo/nuevo/gc       →  reemplazar con confirmación
-
-# Reemplazar en múltiples ficheros
-1. <leader>sg  →  busca el texto
-2. En el picker: <C-q>  →  manda resultados al quickfix
-3. :cfdo s/viejo/nuevo/g | w  →  sustituye en todos
+yiw                  Copiar la palabra que quieres replicar
+s{motion}            Sustituye el target con lo copiado (ej: siw)
+ss                   Sustituye la linea entera con lo copiado
+S                    Sustituye hasta el final de la linea
+v{select} s          En visual: selecciona y s para sustituir
 ```
 
 ---
 
-## Basic Vim Shortcuts
+### Resolver errores de linting
 
-| Keymap            | Description                  |
-| ----------------- | ---------------------------- |
-| **Modes** |                              |
-| `i`               | Insert mode                  |
-| `v`               | Visual mode                  |
-| `V`               | Visual Line mode             |
-| `<C-v>`           | Visual Block mode            |
-| `Esc` / `jk`      | Normal mode                  |
-| **Navigation** |                              |
-| `h` `j` `k` `l`   | Left, Down, Up, Right        |
-| `w` / `b`         | Next / Previous word         |
-| `0` / `$`         | Start / End of line          |
-| `gg` / `G`        | Start / End of file          |
-| `<C-u>` / `<C-d>` | Scroll Up / Down (half page) |
-| **Editing** |                              |
-| `u` / `<C-r>`     | Undo / Redo                  |
-| `y` / `p`         | Yank (copy) / Paste          |
-| `dd`              | Delete (cut) line            |
-| `ciw`             | Change inner word            |
-| `>>` / `<<`       | Indent / Outdent             |
-| **Search** |                              |
-| `/pattern`        | Search forward               |
-| `?pattern`        | Search backward              |
-| `n` / `N`         | Next / Previous match        |
+```
+<leader>cd           Ver diagnostico de la linea actual
+]d / [d              Saltar al siguiente / anterior diagnostico
+]e / [e              Saltar al siguiente / anterior error (solo ERROR)
+<leader>ca           Code action — auto-fix si hay sugerencia
+<leader>xw           Ver todos los errores del workspace en Trouble
+<leader>cf           Formatear para resolver problemas de estilo
+```
 
-## Core Keymaps
+---
 
-| Keymap                | Description                     |
-| --------------------- | ------------------------------- |
-| `<leader>` = Space    |                                 |
-| `jk`                  | Exit insert mode                |
-| `<leader>nh`          | Clear search highlights         |
-| `<leader>+`           | Increment number                |
-| `<leader>-`           | Decrement number                |
-| `\|`                  | Split window vertically         |
-| `-`                   | Split window horizontally       |
-| `<leader>se`          | Make splits equal size          |
-| `<leader>sx`          | Close current split             |
-| `<leader>to`          | Open new tab                    |
-| `<leader>tx`          | Close current tab               |
-| `<leader>tn` / `tp`   | Next / Prev tab                 |
-| `<leader>tf`          | Open current buffer in new tab  |
-| `<A-j>` / `<A-k>`    | Move line down / up             |
-| `<leader>w`           | Save the current buffer         |
-| `<leader>q`           | Quit                            |
-| `gw`                  | Toggle line wrap                |
-| `<leader>bb`          | Switch to last buffer           |
+### AI Pair Programming
 
-## Window Navigation (smart-splits + tmux)
+```
+<leader>ac           Abrir Claude Code en split lateral
+<Tab>                Aceptar sugerencia de Supermaven
+<C-j>                Aceptar solo la siguiente palabra
+<C-]>                Rechazar sugerencia
+<leader>ag           Abrir Gemini CLI como alternativa
+```
 
-| Keymap  | Description              |
-| ------- | ------------------------ |
-| `<C-h>` | Move cursor / pane left  |
-| `<C-j>` | Move cursor / pane down  |
-| `<C-k>` | Move cursor / pane up    |
-| `<C-l>` | Move cursor / pane right |
-| `<C-c>` | Close split              |
-| `<A-h>` | Resize split left        |
-| `<A-j>` | Resize split down        |
-| `<A-k>` | Resize split up          |
-| `<A-l>` | Resize split right       |
+---
 
-## AI Tools
+### Navegar codigo como un pro
 
-| Keymap       | Description                                   |
-| ------------ | --------------------------------------------- |
-| `<leader>ac` | Toggle **Claude Code** CLI (right sidebar)    |
-| `<leader>ag` | Toggle **Gemini** CLI (right sidebar)         |
+```
+]m / [m              Saltar a la siguiente / anterior funcion
+]c / [c              Saltar a la siguiente / anterior clase
+]t / [t              Saltar al siguiente / anterior TODO
+; / ,                Repetir ultimo salto treesitter (adelante / atras)
+<leader>O            Aerial — vista panoramica de la estructura
+```
 
-### Supermaven (AI inline completion)
+---
 
-| Keymap  | Description                        |
-| ------- | ---------------------------------- |
-| `<Tab>` | Accept full AI suggestion          |
-| `<C-j>` | Accept next word of suggestion     |
-| `<C-]>` | Dismiss suggestion                 |
+## Vim Basico
 
-> Suggestions appear as grey ghost text while you type. `<Tab>` only triggers Supermaven when the cmp menu is closed and no snippet is active.
+| Keymap | Descripcion |
+| --- | --- |
+| `i` | Insert mode |
+| `v` | Visual mode |
+| `V` | Visual Line mode |
+| `<C-v>` | Visual Block mode |
+| `Esc` / `jk` | Normal mode |
+| `w` / `b` | Siguiente / anterior palabra |
+| `0` / `$` | Inicio / fin de linea |
+| `gg` / `G` | Inicio / fin de fichero |
+| `<C-u>` / `<C-d>` | Scroll media pagina arriba / abajo |
+| `u` / `<C-r>` | Undo / Redo |
+| `y` / `p` | Yank (copiar) / Paste |
+| `dd` | Borrar linea |
+| `ciw` | Cambiar palabra bajo cursor |
+| `ci"` | Cambiar contenido entre comillas |
+| `cit` | Cambiar contenido de tag HTML |
+| `>>` / `<<` | Indentar / Desindentar |
+| `/pattern` | Buscar hacia adelante |
+| `n` / `N` | Siguiente / anterior resultado |
+| `*` | Buscar palabra bajo cursor |
 
-## File Navigation
+## Keymaps Core
 
-### Snacks Picker
+| Keymap | Descripcion |
+| --- | --- |
+| `jk` | Salir de insert mode |
+| `<Esc>` | Limpiar search highlights |
+| `<leader>w` | Guardar buffer |
+| `<leader>q` | Salir |
+| `\|` | Split vertical |
+| `-` | Split horizontal |
+| `<leader>se` | Igualar splits |
+| `<leader>sx` | Cerrar split actual |
+| `<S-A-j>` / `<S-A-k>` | Mover linea abajo / arriba |
+| `gw` | Toggle line wrap |
+| `<leader>bb` | Ultimo buffer (toggle) |
+| `<leader>+` / `<leader>-` | Incrementar / decrementar numero |
 
-| Keymap             | Description                  |
-| ------------------ | ---------------------------- |
-| `<leader><leader>` | Find files (fuzzy)           |
-| `<leader>sg`       | Grep (live search in cwd)    |
-| `<leader>sw`       | Grep word under cursor       |
-| `<leader>sr`       | Recent files                 |
-| `<leader>sb`       | Open buffers                 |
-| `<leader>sG`       | Git files                    |
-| `<leader>sl`       | Lines in current buffer      |
-| `<leader>sB`       | Grep open buffers            |
-| `<leader>sd`       | Diagnostics                  |
-| `<leader>ss`       | LSP symbols                  |
-| `<leader>sh`       | Help pages                   |
-| `<leader>sk`       | Keymaps                      |
-| `<leader>sc`       | Command history              |
-| `<leader>sC`       | Commands                     |
-| `<leader>sm`       | Marks                        |
-| `<leader>sj`       | Jump list                    |
-| `<leader>sq`       | Quickfix list                |
-| `<leader>so`       | Colorschemes                 |
-| `<leader>sp`       | Projects                     |
-| `<leader>sR`       | Resume last picker           |
-| `<leader>s"`       | Registers                    |
-| `<leader>st`       | Snacks file tree             |
+## Windows & Tmux (smart-splits)
 
-### Harpoon v2
+| Keymap | Descripcion |
+| --- | --- |
+| `<C-h>` / `<C-l>` | Mover izquierda / derecha |
+| `<C-j>` / `<C-k>` | Mover abajo / arriba |
+| `<A-h>` / `<A-l>` | Redimensionar izquierda / derecha |
+| `<A-j>` / `<A-k>` | Redimensionar abajo / arriba |
+| `<leader>shd` | Definicion en split horizontal |
+| `<leader>svd` | Definicion en split vertical |
 
-| Keymap       | Description                      |
-| ------------ | -------------------------------- |
-| `<leader>ma` | Add current file to Harpoon list |
-| `<leader>mm` | Toggle Harpoon quick menu        |
-| `<leader>mj` | Jump to next Harpoon file        |
-| `<leader>mk` | Jump to previous Harpoon file    |
-| `<leader>m1` | Go to Harpoon file 1             |
-| `<leader>m2` | Go to Harpoon file 2             |
-| `<leader>m3` | Go to Harpoon file 3             |
-| `<leader>m4` | Go to Harpoon file 4             |
+## Buscar Archivos (Snacks Picker)
 
-### nvim-tree
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader><leader>` | Find files (fuzzy) |
+| `<leader>sg` | Live grep (proyecto) |
+| `<leader>sw` | Grep palabra bajo cursor |
+| `<leader>sr` | Archivos recientes |
+| `<leader>sb` | Buffers abiertos |
+| `<leader>sG` | Git files |
+| `<leader>sl` | Lineas del buffer actual |
+| `<leader>sd` | Diagnosticos |
+| `<leader>ss` | LSP symbols |
+| `<leader>sh` | Help pages |
+| `<leader>sk` | Keymaps |
+| `<leader>sc` | Historial de comandos |
+| `<leader>sm` | Marks |
+| `<leader>sj` | Jump list |
+| `<leader>sq` | Quickfix list |
+| `<leader>sp` | Proyectos |
+| `<leader>sR` | Reanudar ultimo picker |
+| `<leader>s"` | Registros |
+| `<leader>st` | File tree |
 
-| Keymap       | Description                     |
-| ------------ | ------------------------------- |
-| `<leader>ee` | Toggle file explorer            |
-| `<leader>ef` | Toggle explorer on current file |
-| `<leader>ec` | Collapse file explorer          |
-| `<leader>er` | Refresh file explorer           |
+## Harpoon v2
 
-#### Dentro del explorador
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>ma` | Añadir fichero a la lista |
+| `<leader>mm` | Toggle menu harpoon |
+| `<leader>m1` | Saltar al fichero 1 |
+| `<leader>m2` | Saltar al fichero 2 |
+| `<leader>m3` | Saltar al fichero 3 |
+| `<leader>m4` | Saltar al fichero 4 |
+| `<leader>mj` | Siguiente fichero |
+| `<leader>mk` | Anterior fichero |
 
-| Keymap | Acción |
-| ------ | ------ |
-| `a`    | Crear fichero (escribe nombre + Enter) |
-| `a` + `carpeta/` | Crear directorio (termina con `/`) |
-| `a` + `ruta/fichero.ts` | Crear fichero con directorios intermedios |
-| `r`    | Renombrar fichero / directorio |
-| `d`    | Borrar |
-| `c`    | Copiar |
-| `x`    | Cortar |
-| `p`    | Pegar |
+## File Explorer (nvim-tree)
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>ee` | Toggle explorador |
+| `<leader>ef` | Explorador en fichero actual |
+| `<leader>ec` | Colapsar explorador |
+| `<leader>er` | Refrescar explorador |
+
+### Dentro del explorador
+
+| Keymap | Accion |
+| --- | --- |
+| `a` | Crear fichero (nombre + Enter) |
+| `a` + `carpeta/` | Crear directorio (termina en `/`) |
+| `a` + `ruta/fichero.ts` | Crear con directorios intermedios |
+| `r` | Renombrar |
+| `d` | Borrar |
+| `c` / `x` / `p` | Copiar / Cortar / Pegar |
 | `Enter` / `o` | Abrir fichero |
-| `v`    | Abrir en split vertical |
-| `s`    | Abrir en split horizontal |
-| `H`    | Mostrar/ocultar ficheros ocultos |
-| `W`    | Colapsar todo el árbol |
-| `q`    | Cerrar explorador |
+| `v` | Abrir en split vertical |
+| `s` | Abrir en split horizontal |
+| `H` | Mostrar/ocultar ficheros ocultos |
+| `W` | Colapsar todo el arbol |
+| `q` | Cerrar explorador |
 
-## LSP
+## Buffers & Tabs
 
-| Keymap        | Description                              |
-| ------------- | ---------------------------------------- |
-| `gd`          | Go to definition (Snacks)               |
-| `gD`          | Go to declaration                        |
-| `gR`          | Show references (Snacks)                |
-| `gi`          | Show implementations (Snacks)           |
-| `gt`          | Show type definitions (Snacks)          |
-| `gr`          | References (Snacks)                     |
-| `gI`          | Go to implementation (Snacks)           |
-| `gy`          | Go to type definition (Snacks)          |
-| `K`           | Show documentation (hover)              |
-| `<leader>ca`  | Code actions                            |
-| `<leader>rn`  | Smart rename (LSP)                      |
-| `<leader>ri`  | Smart rename (IncRename — inline preview)|
-| `<leader>d`   | Show line diagnostics                   |
-| `<leader>D`   | Show buffer diagnostics (Snacks)        |
-| `[d` / `]d`   | Prev / Next diagnostic                  |
-| `<leader>rs`  | Restart LSP                             |
-| `<leader>shd` | Open definition in horizontal split     |
-| `<leader>svd` | Open definition in vertical split       |
-| `<A-n>`       | Illuminate — next reference             |
-| `<A-p>`       | Illuminate — previous reference         |
+| Keymap | Descripcion |
+| --- | --- |
+| `<S-h>` / `<S-l>` | Buffer anterior / siguiente |
+| `<leader>bb` | Toggle ultimo buffer |
+| `<leader>sb` | Picker de buffers |
+| `<leader>bd` | Cerrar buffer |
+| `<leader>bo` | Cerrar todos menos el actual |
+| `<leader>bp` | Pin buffer |
+| `<leader>bP` | Cerrar buffers no-pinned |
+| `<leader>br` | Cerrar buffers a la derecha |
+| `<leader>bl` | Cerrar buffers a la izquierda |
+| `<leader>To` | Nueva tab |
+| `<leader>Tx` | Cerrar tab |
+| `<leader>Tn` / `<leader>Tp` | Siguiente / anterior tab |
+| `<leader>Tf` | Buffer actual en nueva tab |
 
-## Formatting & Linting
+## LSP & Codigo
 
-| Keymap       | Description                      |
-| ------------ | -------------------------------- |
-| `<leader>mf` | Format file / selection (conform)|
-| `<leader>l`  | Trigger linting for current file |
+| Keymap | Descripcion |
+| --- | --- |
+| `gd` | Go to definition |
+| `gD` | Go to declaration |
+| `gr` | Show references |
+| `gi` | Implementations |
+| `gt` | Type definitions |
+| `<C-o>` / `<C-i>` | Jump back / forward (jumplist) |
+| `K` | Hover docs |
+| `<C-s>` | Signature help (insert mode) |
+| `<leader>ca` | Code actions |
+| `<leader>rn` | Rename symbol |
+| `<leader>ri` | Incremental rename (preview inline) |
+| `<leader>cd` | Line diagnostics |
+| `<leader>cD` | Buffer diagnostics |
+| `[d` / `]d` | Prev / Next diagnostic |
+| `[e` / `]e` | Prev / Next error (solo ERROR) |
+| `<leader>rs` | Restart LSP |
+| `<leader>shd` | Definicion en split horizontal |
+| `<leader>svd` | Definicion en split vertical |
 
-Formatters by type:
-- **JS/TS/CSS/HTML/JSON/YAML/GraphQL/Liquid** → `prettier`
-- **Lua** → `stylua`
-- **Python** → `ruff` (format + organize imports)
-- **Go** → `gofmt`
-- **Rust** → `rustfmt`
+## Completion (blink.cmp)
 
-Linters by type:
-- **JS/TS** → `eslint_d`
-- **Python** → `ruff`
-- **Go** → `golangci-lint`
-- **Shell** → `shellcheck`
-- **Dockerfile** → `hadolint`
+| Keymap | Descripcion |
+| --- | --- |
+| `<C-Space>` | Mostrar completions |
+| `<C-e>` | Cerrar menu |
+| `<CR>` | Confirmar seleccion |
+| `<Tab>` | Confirmar / fallback a Supermaven |
+| `<C-k>` / `<C-j>` | Item anterior / siguiente |
+| `<C-b>` / `<C-f>` | Scroll docs arriba / abajo |
+| `<Tab>` / `<S-Tab>` | Siguiente / anterior placeholder (snippets) |
+| `<C-s>` | Signature help (insert mode) |
+
+> Tab acepta blink.cmp si el menu esta visible. Si no, acepta la sugerencia ghost de Supermaven. Si no hay ninguna, inserta tab normal.
+
+## Formato & Linting
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>cf` | Formatear fichero / seleccion (conform) |
+| `<leader>l` | Trigger linting del fichero actual |
+
+Formateadores por tipo:
+- JS/TS/CSS/HTML/JSON/YAML/GraphQL/Liquid: `prettier`
+- Lua: `stylua`
+- Python: `ruff` (format + organize imports)
+- Go: `gofmt`
+- Rust: `rustfmt`
+
+Linters por tipo:
+- JS/TS: `eslint_d`
+- Python: `ruff`
+- Go: `golangci-lint`
+- Shell: `shellcheck`
+- Dockerfile: `hadolint`
 
 ## Git
 
-### Snacks Git
-
-| Keymap       | Description    |
-| ------------ | -------------- |
-| `<leader>gb` | Git blame line |
-| `<leader>gl` | Git log        |
-| `<leader>gs` | Git status     |
-| `<leader>sG` | Git files      |
-
 ### Gitsigns
 
-| Keymap         | Description            |
-| -------------- | ---------------------- |
-| `]h` / `[h`    | Next / Prev hunk       |
-| `<leader>hs`   | Stage hunk             |
-| `<leader>hr`   | Reset hunk             |
-| `<leader>hS`   | Stage buffer           |
-| `<leader>hR`   | Reset buffer           |
-| `<leader>hu`   | Undo stage hunk        |
-| `<leader>hp`   | Preview hunk           |
-| `<leader>hb`   | Blame line (full)      |
-| `<leader>hB`   | Toggle line blame      |
-| `<leader>hd`   | Diff this              |
-| `<leader>hD`   | Diff this ~            |
-| `ih`           | Select hunk (text obj) |
+| Keymap | Descripcion |
+| --- | --- |
+| `]h` / `[h` | Siguiente / anterior hunk |
+| `<leader>hs` | Stage hunk |
+| `<leader>hr` | Reset hunk |
+| `<leader>hu` | Undo stage hunk |
+| `<leader>hS` | Stage buffer completo |
+| `<leader>hR` | Reset buffer completo |
+| `<leader>hp` | Preview hunk |
+| `<leader>hb` | Blame line |
+| `<leader>hB` | Toggle line blame |
+| `<leader>hd` | Diff this |
+| `ih` | Seleccionar hunk (text object) |
 
 ### Diffview
 
-| Keymap       | Description                   |
-| ------------ | ----------------------------- |
-| `<leader>gd` | Open diff (working dir)       |
-| `<leader>gc` | Close diffview                |
-| `<leader>gf` | File history (current file)   |
-| `<leader>gF` | File history (whole repo)     |
-| `q`          | Close from any diffview panel |
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>gd` | Abrir diff (working dir) |
+| `<leader>gc` | Cerrar diffview |
+| `<leader>gf` | Historial fichero actual |
+| `<leader>gF` | Historial repo completo |
 
-### LazyGit
+### Snacks Git + LazyGit
 
-| Keymap       | Description  |
-| ------------ | ------------ |
-| `<leader>lg` | Open LazyGit |
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>gb` | Git blame |
+| `<leader>gl` | Git log |
+| `<leader>gs` | Git status |
+| `<leader>lg` | LazyGit |
 
-## Buffers
+## Edicion
 
-| Keymap       | Description                |
-| ------------ | -------------------------- |
-| `<S-h>`      | Go to previous buffer      |
-| `<S-l>`      | Go to next buffer          |
-| `[b`         | Go to previous buffer      |
-| `]b`         | Go to next buffer          |
-| `<leader>bd` | Delete buffer (Snacks)     |
-| `<leader>ba` | Delete all buffers (Snacks)|
-| `<leader>bo` | Delete other buffers (Snacks)|
-| `<leader>bp` | Toggle pin buffer          |
-| `<leader>bP` | Close non-pinned buffers   |
-| `<leader>br` | Close buffers to the right |
-| `<leader>bl` | Close buffers to the left  |
-| `<leader>bc` | Close current buffer       |
-| `<leader>bb` | Switch to last buffer      |
-| `<leader>sb` | Pick buffer (Snacks)       |
-
-## Diagnostics & Trouble
-
-| Keymap       | Description                     |
-| ------------ | ------------------------------- |
-| `<leader>xw` | Workspace diagnostics (Trouble) |
-| `<leader>xd` | Document diagnostics (Trouble)  |
-| `<leader>xq` | Quickfix list (Trouble)         |
-| `<leader>xl` | Location list (Trouble)         |
-| `<leader>xt` | TODOs in Trouble                |
-
-## Debugging (DAP)
-
-| Keymap        | Description               |
-| ------------- | ------------------------- |
-| `<leader>db`  | Toggle Breakpoint         |
-| `<leader>dB`  | Conditional Breakpoint    |
-| `<leader>dc`  | Continue                  |
-| `<leader>di`  | Step Into                 |
-| `<leader>do`  | Step Over                 |
-| `<leader>dO`  | Step Out                  |
-| `<leader>dr`  | Open REPL                 |
-| `<leader>dt`  | Toggle DAP UI             |
-| `<leader>dl`  | Run Last                  |
-
-DAP configurations available:
-- **Launch file** — run current file with Node
-- **Attach to process** — attach to running Node process
-- **Debug Jest Tests** — debug test file with `--inspect-brk`
-- **Debug Next.js server** — launch Next.js dev with debugger
-- **Python** — via nvim-dap-python (LangGraph / YOUR-ORG-brain)
-- **Go** — via dap-go + delve (SmoothMQ)
-- **Rust** — via codelldb (rustaceanvim)
-
-## Testing (Neotest)
-
-| Keymap        | Description        |
-| ------------- | ------------------ |
-| `<leader>tt`  | Run Nearest Test   |
-| `<leader>tT`  | Run File Tests     |
-| `<leader>td`  | Debug Nearest Test |
-| `<leader>ts`  | Toggle Summary     |
-| `<leader>to`  | Show Test Output   |
-
-## Treesitter Text Objects
-
-| Keymap        | Description |
-| ------------- | ----------- |
-| **Select** | **(use with `v`, `d`, `y`, `c`)** |
-| `iB` / `aB`   | Inner / Around **Block**           |
-| `ia` / `aa`   | Inner / Around **Argument**        |
-| `i:` / `a:`   | Inner / Around **Object Property** |
-| `l:` / `r:`   | Left / Right of **Property**       |
-| `i=` / `a=`   | Inner / Around **Assignment**      |
-| `l=` / `r=`   | Left / Right of **Assignment**     |
-| `im` / `am`   | Inner / Around **Function/Method** |
-| `if` / `af`   | Inner / Around **Function Call**   |
-| `ic` / `ac`   | Inner / Around **Class**           |
-| `ii` / `ai`   | Inner / Around **Conditional**     |
-| `il` / `al`   | Inner / Around **Loop**            |
-| **Move** | |
-| `]m` / `[m`   | Next / Prev **Function** start     |
-| `]M` / `[M`   | Next / Prev **Function** end       |
-| `]c` / `[c`   | Next / Prev **Class** start        |
-| `]f` / `[f`   | Next / Prev **Function Call** start|
-| **Swap** | |
-| `<leader>na` / `<leader>pa` | Swap **Argument** next / prev |
-| `<leader>n:` / `<leader>p:` | Swap **Property** next / prev |
-| `<leader>nm` / `<leader>pm` | Swap **Function** next / prev |
-| **Repeatable Moves** | |
-| `;` / `,`     | Repeat / Opposite last treesitter move |
-| `f` `F` `t` `T` | Repeatable with `;` and `,`     |
-
-## Comments
-
-| Keymap        | Description                     |
-| ------------- | ------------------------------- |
-| `gcc`         | Toggle comment line             |
-| `gbc`         | Toggle comment block            |
-| `gc` + motion | Toggle comment for motion       |
-| `gb` + motion | Toggle block comment for motion |
+| Keymap | Descripcion |
+| --- | --- |
+| `gcc` | Toggle comentario linea |
+| `gbc` | Toggle comentario bloque |
+| `gc{motion}` | Comentar con movimiento (ej: gc3j) |
+| `<C-space>` | Expandir seleccion (treesitter node) |
+| `<bs>` | Contraer seleccion |
+| `<S-A-j>` / `<S-A-k>` | Mover linea abajo / arriba |
 
 ## Surround
 
-| Keymap   | Description                          |
-| -------- | ------------------------------------ |
-| `ys`     | Add surround (`ysiw"` → wrap word)   |
-| `ds`     | Delete surround (`ds"` → remove `"`) |
-| `cs`     | Change surround (`cs"'` → `"` → `'`) |
-| `S`      | Surround selection (visual mode)     |
+| Keymap | Descripcion |
+| --- | --- |
+| `ys{motion}{char}` | Añadir surround (ysiw" ysiw) ysiw}) |
+| `ysiw"` | Envolver palabra en comillas |
+| `yss"` | Envolver linea entera |
+| `cs{old}{new}` | Cambiar surround (cs"' cambia " por ') |
+| `ds{char}` | Borrar surround (ds" borra comillas) |
+| `S{char}` | Surround en visual mode |
+
+## Substitute (Paste-Replace)
+
+| Keymap | Descripcion |
+| --- | --- |
+| `s{motion}` | Sustituir con lo copiado (ej: siw) |
+| `ss` | Sustituir linea entera |
+| `S` | Sustituir hasta fin de linea |
+| `s` (visual) | Sustituir seleccion |
+
+## Treesitter Text Objects
+
+### Seleccion (usar con v, d, y, c)
+
+| Keymap | Descripcion |
+| --- | --- |
+| `im` / `am` | Inner / Around funcion |
+| `ic` / `ac` | Inner / Around clase |
+| `ia` / `aa` | Inner / Around parametro |
+| `ii` / `ai` | Inner / Around condicional |
+| `il` / `al` | Inner / Around loop |
+| `if` / `af` | Inner / Around function call |
+| `iB` / `aB` | Inner / Around bloque {} |
+| `i=` / `a=` | Inner / Around assignment |
+| `l=` / `r=` | Left / Right de assignment |
+| `i:` / `a:` | Inner / Around propiedad (JS/TS) |
+| `l:` / `r:` | Left / Right de propiedad |
+
+### Movimiento
+
+| Keymap | Descripcion |
+| --- | --- |
+| `]m` / `[m` | Siguiente / anterior funcion |
+| `]M` / `[M` | Siguiente / anterior fin de funcion |
+| `]c` / `[c` | Siguiente / anterior clase |
+| `;` / `,` | Repetir / invertir ultimo movimiento treesitter |
+
+### Swap
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>na` / `<leader>pa` | Swap argumento siguiente / anterior |
+| `<leader>n:` / `<leader>p:` | Swap propiedad siguiente / anterior |
+| `<leader>nm` / `<leader>pm` | Swap funcion siguiente / anterior |
+
+## AI Tools
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>ac` | Toggle Claude Code (split derecho) |
+| `<leader>ag` | Toggle Gemini CLI (split derecho) |
+| `<Tab>` | Aceptar sugerencia Supermaven |
+| `<C-j>` | Aceptar siguiente palabra |
+| `<C-]>` | Rechazar sugerencia |
+
+> Las sugerencias aparecen como ghost text gris mientras escribes. Tab solo activa Supermaven cuando el menu de blink.cmp esta cerrado y no hay snippet activo.
+
+## Debug (DAP)
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>db` | Toggle breakpoint |
+| `<leader>dB` | Breakpoint condicional |
+| `<leader>dc` | Continue |
+| `<leader>di` | Step into |
+| `<leader>do` | Step over |
+| `<leader>dO` | Step out |
+| `<leader>dl` | Run last |
+| `<leader>dr` | Abrir REPL |
+| `<leader>dt` | Toggle DAP UI |
+
+Configuraciones DAP disponibles:
+- Launch file: ejecutar fichero actual con Node
+- Attach to process: conectar a proceso Node corriendo
+- Debug Jest Tests: debug con --inspect-brk
+- Debug Next.js server: Next.js dev con debugger
+- Python: via nvim-dap-python
+- Go: via dap-go + delve
+- Rust: via codelldb (rustaceanvim)
+
+## Testing (Neotest)
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>tt` | Run test mas cercano |
+| `<leader>tT` | Run tests del fichero |
+| `<leader>td` | Debug test mas cercano |
+| `<leader>ts` | Toggle resumen |
+| `<leader>to` | Mostrar output |
+
+## Trouble & Diagnostics
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>xw` | Diagnosticos del workspace |
+| `<leader>xd` | Diagnosticos del documento |
+| `<leader>xq` | Quickfix list |
+| `<leader>xl` | Location list |
+| `<leader>xt` | TODOs |
+| `<leader>cd` | Diagnostico de la linea |
+| `<leader>cD` | Diagnosticos del buffer |
+| `]d` / `[d` | Siguiente / anterior diagnostico |
+| `]e` / `[e` | Siguiente / anterior error (solo ERROR) |
+| `]t` / `[t` | Siguiente / anterior TODO |
+
+## Vim Power Moves
+
+| Keymap | Descripcion |
+| --- | --- |
+| `.` | Repetir ultimo cambio (el mas poderoso de vim) |
+| `q{reg}` | Grabar macro (qa ... q graba en "a") |
+| `@{reg}` | Ejecutar macro (@a ejecuta, @@ repite ultima) |
+| `{N}@{reg}` | Ejecutar macro N veces (10@a) |
+| `r{char}` | Reemplazar caracter bajo cursor |
+| `R` | Replace mode (sobreescribir) |
+| `J` | Juntar linea actual con la siguiente |
+| `gv` | Reseleccionar ultimo visual |
+| `%` | Ir al bracket que cierra/abre |
+| `<C-a>` / `<C-x>` | Incrementar / decrementar numero |
+| `I` / `A` | Insertar al inicio / final de linea |
+| `o` / `O` | Abrir linea abajo / arriba |
+| `D` / `C` | Borrar / cambiar hasta fin de linea |
+| `P` | Pegar antes del cursor |
+| `"_d{motion}` | Borrar sin copiar (black hole) |
+| `"+y` | Copiar al clipboard del sistema |
+| `<C-o>` / `<C-i>` | Atras / adelante en jumplist |
+| `m{a-z}` | Marcar posicion (ma marca, 'a salta) |
+| `'{a-z}` | Ir a marca |
+
+## Command Line Tips
+
+| Keymap | Descripcion |
+| --- | --- |
+| `:%s/old/new/g` | Reemplazar en todo el fichero |
+| `:%s/old/new/gc` | Reemplazar con confirmacion |
+| `:s/old/new/g` | Reemplazar en seleccion (V primero) |
+| `:!{cmd}` | Ejecutar comando shell |
+| `:r !{cmd}` | Insertar output de comando en buffer |
+| `:sort` | Ordenar lineas |
+| `:sort u` | Ordenar y eliminar duplicados |
+| `:g/pattern/d` | Borrar lineas que matchean |
+| `:v/pattern/d` | Quedarse solo con lineas que matchean |
+| `:set ft={type}` | Cambiar filetype (:set ft=json) |
 
 ## Aerial (Code Outline)
 
-| Keymap      | Description             |
-| ----------- | ----------------------- |
-| `<leader>O` | Toggle Aerial code view |
-| `{`         | Go to previous symbol   |
-| `}`         | Go to next symbol       |
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>O` | Toggle vista de estructura |
+| `[a` / `]a` | Anterior / siguiente simbolo |
 
 ## Sessions (auto-session)
 
-| Keymap       | Description              |
-| ------------ | ------------------------ |
-| `<leader>wr` | Restore session for cwd  |
-| `<leader>ws` | Save session             |
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>wr` | Restaurar sesion del cwd |
+| `<leader>ws` | Guardar sesion |
 
 ## Notifications (Snacks)
 
-| Keymap       | Description             |
-| ------------ | ----------------------- |
-| `<leader>ns` | Show notification history |
-| `<leader>nh` | Hide notification       |
-
-## Markdown (render-markdown.nvim)
-
-| Keymap       | Description               |
-| ------------ | ------------------------- |
-| `<leader>mp` | Toggle Markdown rendering |
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>Ns` | Historial de notificaciones |
+| `<leader>Nh` | Ocultar notificaciones |
 
 ## Misc
 
-| Keymap      | Description                         |
-| ----------- | ----------------------------------- |
-| `grr`       | Smart rename (Treesitter refactor)  |
-| `<C-space>` | Expand treesitter selection         |
-| `<bs>`      | Shrink treesitter selection         |
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>mp` | Toggle render markdown |
+| `<leader>l` | Trigger lint |
+| `:ColorizerToggle` | Toggle preview de colores |
+| `:Lazy` | Plugin manager |
+| `:Mason` | LSP/formatter/linter manager |
+| `<leader>ri` | Incremental rename (preview inline) |
+| `<leader>r` (visual) | Menu de refactor (extract, inline...) |
