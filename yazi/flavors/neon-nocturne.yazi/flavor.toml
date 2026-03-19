@@ -1,0 +1,191 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+# Neon Nocturne — The Luminous Editor design system for Yazi
+
+# : Manager {{{
+
+[mgr]
+cwd = { fg = "#81d4fa" }
+
+# Hovered
+hovered         = { reversed = true }
+preview_hovered = { underline = true }
+
+# Find
+find_keyword  = { fg = "#ffa8a3", bold = true, italic = true, underline = true }
+find_position = { fg = "#b39ddb", bg = "reset", bold = true, italic = true }
+
+# Marker
+marker_copied   = { fg = "#abddad", bg = "#abddad" }
+marker_cut      = { fg = "#ffcc80", bg = "#ffa8a3" }
+marker_marked   = { fg = "#81d4fa", bg = "#55aacf" }
+marker_selected = { fg = "#ffcc80", bg = "#ffcc80" }
+
+# Count
+count_copied   = { fg = "#0a0e14", bg = "#abddad" }
+count_cut      = { fg = "#0a0e14", bg = "#ffcc80" }
+count_selected = { fg = "#0a0e14", bg = "#81d4fa" }
+
+# Border — ghost border (subtle surface shift, not solid lines)
+border_symbol = "│"
+border_style  = { fg = "#151a21" }
+
+# : }}}
+
+
+# : Tabs {{{
+
+[tabs]
+active   = { fg = "#00485e", bg = "#81d4fa", bold = true }
+inactive = { fg = "#81d4fa", bg = "#0f141a" }
+
+# : }}}
+
+
+# : Mode {{{
+
+[mode]
+
+normal_main = { fg = "#00485e", bg = "#81d4fa", bold = true }
+normal_alt  = { fg = "#81d4fa", bg = "#0f141a" }
+
+# Select mode
+select_main = { fg = "#0a0e14", bg = "#abddad", bold = true }
+select_alt  = { fg = "#81d4fa", bg = "#0f141a" }
+
+# Unset mode
+unset_main = { fg = "#0a0e14", bg = "#b39ddb", bold = true }
+unset_alt  = { fg = "#81d4fa", bg = "#0f141a" }
+
+# : }}}
+
+
+# : Status bar {{{
+
+[status]
+overall = { fg = "#81d4fa" }
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+
+# Progress
+progress_label = { fg = "#0a0e14", bold = true }
+progress_normal = { fg = "#81d4fa", bg = "#0f141a" }
+progress_error = { fg = "#ffa8a3", bg = "#0f141a" }
+
+# Permissions
+perm_sep   = { fg = "#81d4fa" }
+perm_type  = { fg = "#abddad" }
+perm_read  = { fg = "#ffcc80" }
+perm_write = { fg = "#ffa8a3" }
+perm_exec  = { fg = "#b39ddb" }
+
+
+# : }}}
+
+# : Pick {{{
+
+[pick]
+border = { fg = "#81d4fa" }
+active = { fg = "#b39ddb", bold = true }
+inactive = {}
+
+# : }}}
+
+
+# : Input {{{
+
+[input]
+border   = { fg = "#81d4fa" }
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+# : }}}
+
+
+# : Completion {{{
+
+[cmp]
+border = { fg = "#81d4fa" }
+
+# : }}}
+
+
+# : Tasks {{{
+
+[tasks]
+border  = { fg = "#81d4fa" }
+title   = {}
+hovered = { fg = "#b39ddb", underline = true }
+
+# : }}}
+
+
+# : Which {{{
+
+[which]
+mask            = { bg = "#151a21" }
+cand            = { fg = "#abddad" }
+rest            = { fg = "#c5cde0" }
+desc            = { fg = "#b39ddb" }
+separator       = "  "
+separator_style = { fg = "#3d4f6e" }
+
+# : }}}
+
+
+# : Help {{{
+
+[help]
+on      = { fg = "#abddad" }
+run     = { fg = "#b39ddb" }
+hovered = { reversed = true, bold = true }
+footer  = { fg = "#0a0e14", bg = "#c5cde0" }
+
+# : }}}
+
+
+# : Notify {{{
+
+[notify]
+title_info  = { fg = "#abddad" }
+title_warn  = { fg = "#ffd54f" }
+title_error = { fg = "#ffa8a3" }
+
+# : }}}
+
+
+# : File-specific styles {{{
+
+[filetype]
+
+rules = [
+	# Images
+	{ mime = "image/*", fg = "#ffcc80" },
+
+	# Media
+	{ mime = "video/*", fg = "#ffa8a3" },
+	{ mime = "audio/*", fg = "#ffa8a3" },
+
+	# Archives
+	{ mime = "application/zip",             fg = "#b39ddb" },
+	{ mime = "application/x-tar",           fg = "#b39ddb" },
+	{ mime = "application/x-bzip*",         fg = "#b39ddb" },
+	{ mime = "application/x-bzip2",         fg = "#b39ddb" },
+	{ mime = "application/x-7z-compressed", fg = "#b39ddb" },
+	{ mime = "application/x-rar",           fg = "#b39ddb" },
+	{ mime = "application/x-xz",            fg = "#b39ddb" },
+
+	# Documents
+	{ mime = "application/doc",        fg = "#abddad" },
+	{ mime = "application/epub+zip",   fg = "#abddad" },
+	{ mime = "application/pdf",        fg = "#abddad" },
+	{ mime = "application/rtf",        fg = "#abddad" },
+	{ mime = "application/vnd.*",      fg = "#abddad" },
+
+	# Fallback
+	{ name = "*", fg = "#c5cde0" },
+	{ name = "*/", fg = "#81d4fa" }
+]
+
+# : }}}

@@ -11,26 +11,26 @@ fish_add_path /Applications/Docker.app/Contents/Resources/bin
 set -g fish_greeting ""
 
 # ============================================
-# Tokyo Night — fish syntax highlighting (matched to nvim)
+# Neon Nocturne — fish syntax highlighting (The Luminous Editor)
 # ============================================
-set -g fish_color_command        89b4fa    # blue    — commands (@function)
-set -g fish_color_builtin        7dcfff    # cyan    — builtins (@function.builtin)
-set -g fish_color_keyword        c4a7ff    # purple  — keywords (@keyword)
-set -g fish_color_param          e2e8f0    # text    — arguments (@variable)
-set -g fish_color_quote          6ee7a0    # mint    — strings (@string)
-set -g fish_color_redirection    56d4e0    # teal    — redirections (@type)
-set -g fish_color_end            c4a7ff    # purple  — semicolons, &&
-set -g fish_color_error          f472b6    # pink    — errors
-set -g fish_color_comment        3b4566    # muted   — comments (@comment)
-set -g fish_color_operator       89b4fa    # blue    — operators (@operator)
-set -g fish_color_escape         fdba74    # orange  — escape sequences (@constant)
-set -g fish_color_autosuggestion 3b4566    # muted   — ghost text
-set -g fish_color_cancel         f472b6    # pink    — Ctrl+C
-set -g fish_color_search_match   --background=1e2d4a
-set -g fish_pager_color_prefix        c4a7ff --bold --underline
-set -g fish_pager_color_completion    e2e8f0
-set -g fish_pager_color_description  3b4566
-set -g fish_pager_color_progress     56d4e0 --background=04060b
+set -g fish_color_command        81d4fa    # primary   — commands (@function)
+set -g fish_color_builtin        55aacf    # primary-c — builtins (@function.builtin)
+set -g fish_color_keyword        b39ddb    # tertiary  — keywords (@keyword)
+set -g fish_color_param          f1f3fc    # on-surface — arguments (@variable)
+set -g fish_color_quote          abddad    # secondary — strings (@string)
+set -g fish_color_redirection    55aacf    # primary-c — redirections (@type)
+set -g fish_color_end            b39ddb    # tertiary  — semicolons, &&
+set -g fish_color_error          ffa8a3    # error     — errors
+set -g fish_color_comment        3d4f6e    # variant   — comments (@comment)
+set -g fish_color_operator       81d4fa    # primary   — operators (@operator)
+set -g fish_color_escape         ffcc80    # amber     — escape sequences (@constant)
+set -g fish_color_autosuggestion 3d4f6e    # variant   — ghost text
+set -g fish_color_cancel         ffa8a3    # error     — Ctrl+C
+set -g fish_color_search_match   --background=24502c
+set -g fish_pager_color_prefix        81d4fa --bold --underline
+set -g fish_pager_color_completion    f1f3fc
+set -g fish_pager_color_description  3d4f6e
+set -g fish_pager_color_progress     81d4fa --background=0a0e14
 
 # ============================================
 # Vi Mode
@@ -100,10 +100,10 @@ set -x FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -x FZF_ALT_C_COMMAND "fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
 set -x FZF_DEFAULT_OPTS "\
-  --color=fg:#e2e8f0,bg:#06080f,hl:#c4a7ff \
-  --color=fg+:#e2e8f0,bg+:#1e2d4a,hl+:#c4a7ff \
-  --color=info:#56d4e0,prompt:#c4a7ff,pointer:#f472b6 \
-  --color=marker:#6ee7a0,spinner:#56d4e0,header:#89b4fa"
+  --color=fg:#f1f3fc,bg:#0a0e14,hl:#81d4fa \
+  --color=fg+:#abddad,bg+:#24502c,hl+:#81d4fa \
+  --color=info:#55aacf,prompt:#81d4fa,pointer:#ffa8a3 \
+  --color=marker:#abddad,spinner:#55aacf,header:#81d4fa"
 
 set -x FZF_CTRL_T_OPTS "--preview 'bat -n --color=always --line-range :500 {}'"
 set -x FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"

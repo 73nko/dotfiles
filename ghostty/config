@@ -1,5 +1,5 @@
 # ============================================
-# Ghostty Config — Tokyo Night (custom, matched to nvim)
+# Ghostty Config — Neon Nocturne (The Luminous Editor)
 # ============================================
 
 # Shell
@@ -9,7 +9,7 @@ command = /opt/homebrew/bin/fish
 # Window
 # ============================================
 macos-titlebar-style = hidden
-background-opacity = 0.85
+background-opacity = 0.80
 window-padding-x = 3
 window-padding-y = 5
 window-inherit-working-directory = true
@@ -58,34 +58,34 @@ scrollback-limit = 100000
 copy-on-select = true
 
 # ============================================
-# Tokyo Night — Colors (matched to nvim on_colors/on_highlights)
+# Neon Nocturne — Colors (The Luminous Editor design system)
 # ============================================
-background = #06080f
-foreground = #e2e8f0
-cursor-color = #c4a7ff
-cursor-text  = #06080f
-selection-foreground = #e2e8f0
-selection-background = #1e2d4a
+background = #0a0e14
+foreground = #f1f3fc
+cursor-color = #81d4fa
+cursor-text  = #0a0e14
+selection-foreground = #abddad
+selection-background = #24502c
 
 # Normal colors (0-7)
-palette = 0=#111827
-palette = 1=#f472b6
-palette = 2=#6ee7a0
-palette = 3=#fde68a
-palette = 4=#89b4fa
-palette = 5=#c4a7ff
-palette = 6=#56d4e0
-palette = 7=#e2e8f0
+palette = 0=#0f141a
+palette = 1=#ffa8a3
+palette = 2=#abddad
+palette = 3=#ffd54f
+palette = 4=#81d4fa
+palette = 5=#b39ddb
+palette = 6=#55aacf
+palette = 7=#c5cde0
 
 # Bright colors (8-15)
-palette = 8=#3b4566
-palette = 9=#f472b6
-palette = 10=#6ee7a0
-palette = 11=#fdba74
-palette = 12=#7dcfff
-palette = 13=#c4a7ff
-palette = 14=#7dcfff
-palette = 15=#ffffff
+palette = 8=#3d4f6e
+palette = 9=#ffa8a3
+palette = 10=#abddad
+palette = 11=#ffcc80
+palette = 12=#81d4fa
+palette = 13=#ce93d8
+palette = 14=#81d4fa
+palette = 15=#f1f3fc
 
 # ============================================
 # Keybindings
