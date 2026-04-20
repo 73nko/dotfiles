@@ -1,5 +1,16 @@
 local opt = vim.opt
 
+-- Ensure Homebrew binaries are in PATH (needed for tree-sitter CLI when Neovim
+-- is launched from a GUI and doesn't inherit the shell's full PATH)
+local homebrew_paths = { "/opt/homebrew/bin", "/usr/local/bin" }
+local current_path = vim.env.PATH or ""
+for _, p in ipairs(homebrew_paths) do
+  if not current_path:find(p, 1, true) then
+    vim.env.PATH = p .. ":" .. current_path
+    current_path = vim.env.PATH
+  end
+end
+
 -- general
 opt.title = true
 opt.relativenumber = true

@@ -52,9 +52,11 @@ Referencia completa de la config de Neovim. Todos los keymaps, workflows y plugi
 
 ```
 gd                   Ir a la definicion del simbolo
-gr                   Ver todas las referencias
-<leader>rn           Renombrar simbolo en todo el proyecto
-<leader>ca           Code actions (fix imports, extraer funcion...)
+grr                  Ver todas las referencias (Snacks picker)
+grn                  Renombrar simbolo (built-in 0.12)
+<leader>rn           Renombrar simbolo (alias custom)
+gra                  Code actions (built-in 0.12)
+<leader>ca           Code actions (alias custom)
 <leader>cf           Formatear fichero al acabar
 ```
 
@@ -278,24 +280,35 @@ v{select} s          En visual: selecciona y s para sustituir
 
 ## LSP & Codigo
 
+### Built-in Neovim 0.12 (funcionan sin config)
+
 | Keymap | Descripcion |
 | --- | --- |
-| `gd` | Go to definition |
+| `K` | Hover docs (default 0.12) |
+| `grn` | Rename symbol (default 0.12) |
+| `gra` | Code actions (default 0.12) |
+| `grr` | References (override: Snacks picker) |
+| `gri` | Implementations (override: Snacks picker) |
+| `grt` | Type definitions (override: Snacks picker) |
+| `grx` | Run codelens (default 0.12) |
+| `gO` | Document symbols (default 0.12) |
+| `<C-s>` | Signature help en insert mode (default 0.12) |
+
+### Custom keymaps
+
+| Keymap | Descripcion |
+| --- | --- |
+| `gd` | Go to definition (Snacks picker) |
 | `gD` | Go to declaration |
-| `gr` | Show references |
-| `gi` | Implementations |
-| `gt` | Type definitions |
 | `<C-o>` / `<C-i>` | Jump back / forward (jumplist) |
-| `K` | Hover docs |
-| `<C-s>` | Signature help (insert mode) |
-| `<leader>ca` | Code actions |
-| `<leader>rn` | Rename symbol |
+| `<leader>ca` | Code actions (alias de gra) |
+| `<leader>rn` | Rename symbol (alias de grn) |
 | `<leader>ri` | Incremental rename (preview inline) |
 | `<leader>cd` | Line diagnostics |
 | `<leader>cD` | Buffer diagnostics |
 | `[d` / `]d` | Prev / Next diagnostic |
 | `[e` / `]e` | Prev / Next error (solo ERROR) |
-| `<leader>rs` | Restart LSP |
+| `<leader>rs` | Restart LSP (`:lsp restart`) |
 | `<leader>shd` | Definicion en split horizontal |
 | `<leader>svd` | Definicion en split vertical |
 

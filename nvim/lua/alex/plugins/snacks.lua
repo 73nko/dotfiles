@@ -4,6 +4,7 @@ return {
     lazy = false,
     opts = {
       bigfile = { enabled = true },
+      image = { enabled = false }, -- disabled: incompatible with Neovim 0.12.0 treesitter API (range nil error)
       bufdelete = { enabled = true },
       dashboard = {
         preset = {
@@ -127,8 +128,8 @@ return {
               row = -1,
               width = 0,
               height = 0.4,
-              border = "none",
-              title = "{title} {live} {flags}",
+              border = "top",
+              title = " {title} {live} {flags}",
               title_pos = "left",
               {
                 box = "horizontal",
@@ -436,9 +437,6 @@ return {
           Snacks.picker.buffers({
             unloaded = true,
             current = true,
-            layout = {
-              preset = "mivy_test",
-            },
             win = {
               input = {
                 keys = {
@@ -456,7 +454,6 @@ return {
           Snacks.picker.files({
             finder = "files",
             hidden = true,
-            layout = { preset = "mivy_test" },
           })
         end,
         desc = "[F]iles",

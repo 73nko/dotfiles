@@ -1,22 +1,137 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = false, -- must load early so lsp/<server>.lua definitions are in runtimepath for vim.lsp.config()
   dependencies = {
     "saghen/blink.cmp",
     { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
     { "b0o/schemastore.nvim" },
     {
       "antosha417/nvim-lsp-file-operations",
       config = true,
     },
   },
+  -- NOTE: mason-lspconfig removed as a dependency here.
+  -- The new pattern uses vim.lsp.config() + vim.lsp.enable() directly.
+  -- nvim-lspconfig just provides server definitions in lsp/ runtimepath.
   config = function()
-    local lspconfig = require("lspconfig")
-    local mason_lspconfig = require("mason-lspconfig")
-
-    -- blink.cmp provides capabilities (replaces cmp-nvim-lsp)
+    -- blink.cmp capabilities (sent to all servers via wildcard config)
     local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+    -----------------------------------------------------------------
+    -- 1. Global config for ALL servers
+    -----------------------------------------------------------------
+    vim.lsp.config("*", {
+      capabilities = capabilities,
+      root_markers = { ".git" },
+    })
+
+    -----------------------------------------------------------------
+    -- 2. Per-server overrides (replaces lspconfig[server].setup({}))
+    -----------------------------------------------------------------
+    vim.lsp.config("lua_ls", {
+      settings = {
+        Lua = {
+          diagnostics = { globals = { "vim" } },
+          completion = { callSnippet = "Replace" },
+        },
+      },
+    })
+
+    vim.lsp.config("vtsls", {
+      settings = {
+        vtsls = { autoUseWorkspaceTsdk = true },
+        typescript = {
+          preferences = { importModuleSpecifier = "non-relative" },
+          inlayHints = {
+            parameterNames = { enabled = "all" },
+            parameterTypes = { enabled = true },
+            variableTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+          },
+        },
+      },
+    })
+
+    vim.lsp.config("gopls", {
+      settings = {
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = { unusedparams = true },
+        },
+      },
+    })
+
+    vim.lsp.config("graphql", {
+      filetypes = { "graphql", "gql", "typescriptreact", "javascriptreact" },
+    })
+
+    vim.lsp.config("emmet_language_server", {
+      filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+    })
+
+    vim.lsp.config("cssls", {
+      settings = {
+        css = { validate = true },
+        scss = { validate = true },
+      },
+      init_options = { provideFormatter = false },
+    })
+
+    vim.lsp.config("jsonls", {
+      settings = {
+        json = {
+          schemas = require("schemastore").json.schemas(),
+          validate = { enable = true },
+        },
+      },
+    })
+
+    vim.lsp.config("yamlls", {
+      settings = {
+        yaml = {
+          schemaStore = { enable = false, url = "" },
+          schemas = require("schemastore").yaml.schemas(),
+          validate = true,
+          completion = true,
+        },
+      },
+    })
+
+    -- rust_analyzer is handled by rustaceanvim, so NOT listed in enable()
+
+    -----------------------------------------------------------------
+    -- 3. Enable all servers (auto-attaches to matching filetypes)
+    -----------------------------------------------------------------
+    vim.lsp.enable({
+      "lua_ls",
+      "vtsls",
+      "eslint",
+      "cssls",
+      "html",
+      "emmet_language_server",
+      "graphql",
+      "prismals",
+      "jsonls",
+      "yamlls",
+      "shopify_theme_ls",
+      "gopls",
+      "pyright",
+    })
+
+    -----------------------------------------------------------------
+    -- 4. Keymaps (LspAttach) - only custom ones, defaults handled by Neovim 0.12
+    -----------------------------------------------------------------
+    -- Built-in defaults (DO NOT remap, they just work):
+    --   K          -> hover
+    --   grn        -> rename
+    --   gra        -> code action
+    --   grr        -> references
+    --   gri        -> implementation
+    --   grt        -> type definition
+    --   gO         -> document symbols
+    --   <C-s> (i)  -> signature help
 
     local keymap = vim.keymap
 
@@ -25,37 +140,36 @@ return {
       callback = function(ev)
         local opts = { buffer = ev.buf, silent = true }
 
-        -- Navigation (single source of truth - removed duplicates from snacks.lua)
-        opts.desc = "Show LSP references"
-        keymap.set("n", "gr", function() Snacks.picker.lsp_references() end, opts)
+        -- Override defaults with Snacks picker for better UI
+        opts.desc = "Show LSP references (Snacks)"
+        keymap.set("n", "grr", function() Snacks.picker.lsp_references() end, opts)
+
+        opts.desc = "Show LSP definitions (Snacks)"
+        keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, opts)
 
         opts.desc = "Go to declaration"
         keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
-        opts.desc = "Show LSP definitions"
-        keymap.set("n", "gd", function() Snacks.picker.lsp_definitions() end, opts)
+        opts.desc = "Show LSP implementations (Snacks)"
+        keymap.set("n", "gri", function() Snacks.picker.lsp_implementations() end, opts)
 
-        opts.desc = "Show LSP implementations"
-        keymap.set("n", "gi", function() Snacks.picker.lsp_implementations() end, opts)
+        opts.desc = "Show LSP type definitions (Snacks)"
+        keymap.set("n", "grt", function() Snacks.picker.lsp_type_definitions() end, opts)
 
-        opts.desc = "Show LSP type definitions"
-        keymap.set("n", "gt", function() Snacks.picker.lsp_type_definitions() end, opts)
-
-        -- Actions
+        -- Keep custom leader keymaps for muscle memory
         opts.desc = "See available code actions"
         keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 
         opts.desc = "Smart rename"
         keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
-        -- Diagnostics (moved line diag from <leader>d to <leader>cd to avoid collision with debug prefix)
+        -- Diagnostics
         opts.desc = "Show buffer diagnostics"
         keymap.set("n", "<leader>cD", function() Snacks.picker.diagnostics({ buf = 0 }) end, opts)
 
         opts.desc = "Show line diagnostics"
         keymap.set("n", "<leader>cd", vim.diagnostic.open_float, opts)
 
-        -- Diagnostic navigation (use vim.diagnostic.jump instead of deprecated goto_prev/goto_next)
         opts.desc = "Go to previous diagnostic"
         keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
 
@@ -68,16 +182,11 @@ return {
         opts.desc = "Go to next error"
         keymap.set("n", "]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR }) end, opts)
 
-        opts.desc = "Show documentation for what is under cursor"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
-        -- Signature help (replaces lsp_signature.nvim plugin)
-        opts.desc = "Signature help"
-        keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
-
+        -- Restart LSP (now uses built-in :lsp command)
         opts.desc = "Restart LSP"
-        keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+        keymap.set("n", "<leader>rs", "<cmd>lsp restart<CR>", opts)
 
+        -- Split definitions
         opts.desc = "Open definition in horizontal split"
         keymap.set("n", "<leader>shd", function()
           vim.cmd("split")
@@ -92,12 +201,14 @@ return {
       end,
     })
 
-    -- Diagnostic signs (modern API)
+    -----------------------------------------------------------------
+    -- 5. Diagnostic config
+    -----------------------------------------------------------------
     local signs = {
-      Error = " ",
-      Warn = " ",
+      Error = " ",
+      Warn = " ",
       Hint = "󰠠 ",
-      Info = " ",
+      Info = " ",
     }
     vim.diagnostic.config({
       signs = {
@@ -108,127 +219,6 @@ return {
           [vim.diagnostic.severity.INFO] = signs.Info,
         },
       },
-    })
-
-    mason_lspconfig.setup({
-      -- default handler for installed servers
-      function(server_name)
-        if server_name == "rust_analyzer" then
-            return -- Skip rust_analyzer (handled by rustaceanvim)
-        end
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["graphql"] = function()
-        -- configure graphql language server
-        lspconfig["graphql"].setup({
-          capabilities = capabilities,
-          filetypes = { "graphql", "gql", "typescriptreact", "javascriptreact" },
-        })
-      end,
-      ["emmet_language_server"] = function()
-        -- emmet-language-server (replaces archived emmet_ls)
-        lspconfig["emmet_language_server"].setup({
-          capabilities = capabilities,
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-        })
-      end,
-      ["lua_ls"] = function()
-        -- configure lua server (with special settings)
-        lspconfig["lua_ls"].setup({
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              -- make the language server recognize "vim" global
-              diagnostics = {
-                globals = { "vim" },
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-        })
-      end,
-      ["gopls"] = function()
-        lspconfig["gopls"].setup({
-          capabilities = capabilities,
-          settings = {
-            gopls = {
-              completeUnimported = true,
-              usePlaceholders = true,
-              analyses = {
-                unusedparams = true,
-              },
-            },
-          },
-        })
-      end,
-      ["vtsls"] = function()
-        -- vtsls (replaces ts_ls - faster, better monorepo support)
-        lspconfig["vtsls"].setup({
-          capabilities = capabilities,
-          settings = {
-            vtsls = {
-              autoUseWorkspaceTsdk = true,
-            },
-            typescript = {
-              preferences = {
-                importModuleSpecifier = "non-relative",
-              },
-              inlayHints = {
-                parameterNames = { enabled = "all" },
-                parameterTypes = { enabled = true },
-                variableTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-              },
-            },
-          },
-        })
-      end,
-      ["cssls"] = function()
-        lspconfig["cssls"].setup({
-          capabilities = capabilities,
-          settings = {
-            css = { validate = true },
-            scss = { validate = true },
-          },
-          init_options = {
-            provideFormatter = false, -- let prettier handle formatting
-          },
-        })
-      end,
-      ["jsonls"] = function()
-        lspconfig["jsonls"].setup({
-          capabilities = capabilities,
-          settings = {
-            json = {
-              schemas = require("schemastore").json.schemas(),
-              validate = { enable = true },
-            },
-          },
-        })
-      end,
-      ["yamlls"] = function()
-        lspconfig["yamlls"].setup({
-          capabilities = capabilities,
-          settings = {
-            yaml = {
-              schemaStore = { enable = false, url = "" },
-              schemas = require("schemastore").yaml.schemas(),
-              validate = true,
-              completion = true,
-            },
-          },
-        })
-      end,
-      ["theme_check"] = function()
-        lspconfig["theme_check"].setup({
-          capabilities = capabilities,
-        })
-      end,
     })
   end,
 }

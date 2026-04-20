@@ -9,13 +9,15 @@ command = /opt/homebrew/bin/fish
 # Window
 # ============================================
 macos-titlebar-style = hidden
-background-opacity = 0.80
-window-padding-x = 3
-window-padding-y = 5
+background-opacity = 0.90
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
 window-inherit-working-directory = true
 confirm-close-surface = false
 quit-after-last-window-closed = true
 resize-overlay = never
+bell-features = system,border
 
 # ============================================
 # macOS
@@ -106,4 +108,32 @@ keybind = shift+end=scroll_to_bottom
 # Borrar palabra/línea (Mac-style)
 keybind = super+backspace=text:\x15
 keybind = alt+backspace=text:\x17
+
+# ============================================
+# Vim-mode keytable — navegar el scrollback con vim bindings
+# Activar con alt+v, salir con esc / q / i
+# ============================================
+keybind = alt+v=activate_key_table:vim
+
+# Movimiento línea / página
+keybind = vim/j=scroll_page_lines:1
+keybind = vim/k=scroll_page_lines:-1
+keybind = vim/ctrl+d=scroll_page_down
+keybind = vim/ctrl+u=scroll_page_up
+keybind = vim/ctrl+f=scroll_page_down
+keybind = vim/ctrl+b=scroll_page_up
+keybind = vim/shift+j=scroll_page_down
+keybind = vim/shift+k=scroll_page_up
+
+# Top / bottom
+keybind = vim/shift+g=scroll_to_bottom
+
+# Copy / yank
+keybind = vim/v=copy_to_clipboard
+keybind = vim/y=copy_to_clipboard
+
+# Salir
+keybind = vim/escape=deactivate_key_table
+keybind = vim/q=deactivate_key_table
+keybind = vim/i=deactivate_key_table
 

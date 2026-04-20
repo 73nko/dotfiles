@@ -105,8 +105,8 @@ set -x FZF_DEFAULT_OPTS "\
   --color=info:#55aacf,prompt:#81d4fa,pointer:#ffa8a3 \
   --color=marker:#abddad,spinner:#55aacf,header:#81d4fa"
 
-set -x FZF_CTRL_T_OPTS "--preview 'bat -n --color=always --line-range :500 {}'"
-set -x FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"
+set -x FZF_CTRL_T_OPTS "--preview 'bat -n --color=always --line-range :500 {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+set -x FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # ============================================
 # Node — fnm (loaded via conf.d/fnm.fish)

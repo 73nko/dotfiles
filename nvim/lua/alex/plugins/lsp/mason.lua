@@ -5,16 +5,7 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
-    -- import mason
-    local mason = require("mason")
-
-    -- import mason-lspconfig
-    local mason_lspconfig = require("mason-lspconfig")
-
-    local mason_tool_installer = require("mason-tool-installer")
-
-    -- enable mason and configure icons
-    mason.setup({
+    require("mason").setup({
       ui = {
         icons = {
           package_installed = "✓",
@@ -24,7 +15,10 @@ return {
       },
     })
 
-    mason_lspconfig.setup({
+    -- mason-lspconfig: only used for ensure_installed now.
+    -- Server setup/handlers are gone; vim.lsp.config() + vim.lsp.enable() handle that.
+    require("mason-lspconfig").setup({
+      automatic_enable = false, -- we use vim.lsp.enable() in lspconfig.lua, not mason-lspconfig's auto-enable
       ensure_installed = {
         -- JS/TS (core YOUR-ORG stack)
         "vtsls",
@@ -38,7 +32,7 @@ return {
         "jsonls",
         "yamlls",
         -- Shopify
-        "theme_check", -- Liquid / Shopify templates
+        "shopify_theme_ls",
         -- Go (SmoothMQ)
         "gopls",
         -- Rust
@@ -48,23 +42,24 @@ return {
         -- Lua (nvim config)
         "lua_ls",
       },
+      -- No handlers! Server config is now in lspconfig.lua via vim.lsp.config()
     })
 
-    mason_tool_installer.setup({
+    require("mason-tool-installer").setup({
       ensure_installed = {
         -- Formatters
         "prettier",
         "stylua",
-        "ruff",         -- Python formatter + linter (replaces black + isort + pylint)
+        "ruff",
         -- Linters
         "eslint_d",
         "golangci-lint",
-        "shellcheck",   -- shell scripts (deploy scripts, CI hooks)
-        "hadolint",     -- Dockerfile (ECS Fargate images)
+        "shellcheck",
+        "hadolint",
         -- Debuggers
         "js-debug-adapter",
-        "codelldb",     -- Rust
-        "delve",        -- Go
+        "codelldb",
+        "delve",
       },
     })
   end,
