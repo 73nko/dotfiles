@@ -2,8 +2,7 @@
 # Ghostty Config — Neon Nocturne (The Luminous Editor)
 # ============================================
 
-# Shell
-command = /opt/homebrew/bin/fish
+# Shell (uses system default via chsh — works on both Intel and Apple Silicon)
 
 # ============================================
 # Window

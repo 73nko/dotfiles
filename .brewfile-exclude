@@ -1,0 +1,8 @@
+# Packages to exclude when running brew-export.sh
+# One pattern per line (matched against Brewfile lines)
+bash-completion
+skhd
+neofetch
+thefuck
+python@3.12
+koekeishiya/formulae

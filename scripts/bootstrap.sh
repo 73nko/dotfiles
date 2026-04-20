@@ -25,7 +25,7 @@ BLUE='\033[0;34m'
 NC='\033[0m'
 
 step=0
-total_steps=12
+total_steps=14
 
 progress() {
     step=$((step + 1))
@@ -97,7 +97,22 @@ else
 fi
 
 # ============================================
-# 3. Install everything from Brewfile
+# 3. Rust toolchain (needed BEFORE Brewfile for cargo packages)
+# ============================================
+progress "Rust toolchain"
+if command -v rustup &>/dev/null; then
+    ok "Rustup already installed"
+elif command -v rustc &>/dev/null; then
+    ok "Rust available via Homebrew"
+else
+    echo "  Installing Rust via rustup..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y 2>&1 | tee -a "$LOG_FILE"
+    source "$HOME/.cargo/env"
+    ok "Rust installed"
+fi
+
+# ============================================
+# 4. Install everything from Brewfile
 # ============================================
 progress "Brew packages, casks, and Mac App Store apps"
 if [[ -f "$DOTFILES_DIR/.Brewfile" ]]; then
@@ -105,17 +120,20 @@ if [[ -f "$DOTFILES_DIR/.Brewfile" ]]; then
     echo "  Go binaries, Cargo crates, and Mac App Store apps."
     echo "  It may take 10-20 minutes on a fresh machine."
     echo ""
-    brew bundle --file="$DOTFILES_DIR/.Brewfile" --no-lock 2>&1 | tee -a "$LOG_FILE"
+    brew bundle --file="$DOTFILES_DIR/.Brewfile" 2>&1 | tee -a "$LOG_FILE"
     ok "Brewfile installed"
 else
     fail ".Brewfile not found at $DOTFILES_DIR/.Brewfile"
 fi
 
 # ============================================
-# 4. Set Fish as default shell
+# 5. Set Fish as default shell
 # ============================================
 progress "Fish shell as default"
-FISH_PATH="$(which fish 2>/dev/null || echo /opt/homebrew/bin/fish)"
+FISH_PATH="$(command -v fish 2>/dev/null)"
+if [[ -z "$FISH_PATH" ]]; then
+    fail "Fish not found. It should have been installed via Brewfile"
+fi
 
 if [[ "$SHELL" == *"fish"* ]]; then
     ok "Already default shell"
@@ -129,7 +147,7 @@ else
 fi
 
 # ============================================
-# 5. Fisher + Fish plugins
+# 6. Fisher + Fish plugins
 # ============================================
 progress "Fisher plugin manager and Fish plugins"
 if [[ -f "$DOTFILES_DIR/fish/functions/fisher.fish" ]]; then
@@ -150,7 +168,7 @@ else
 fi
 
 # ============================================
-# 6. Tide prompt configuration
+# 7. Tide prompt configuration
 # ============================================
 progress "Tide prompt"
 # Tide's universal variables are stored in fish_variables which is already
@@ -163,7 +181,7 @@ else
 fi
 
 # ============================================
-# 7. TPM (tmux plugin manager)
+# 8. TPM (tmux plugin manager)
 # ============================================
 progress "Tmux Plugin Manager (TPM)"
 TPM_DIR="$DOTFILES_DIR/tmux/plugins/tpm"
@@ -180,7 +198,7 @@ echo "  Installing tmux plugins..."
 ok "Tmux plugins installed"
 
 # ============================================
-# 8. Yazi plugins
+# 9. Yazi plugins
 # ============================================
 progress "Yazi plugins"
 if command -v ya &>/dev/null; then
@@ -191,24 +209,8 @@ else
 fi
 
 # ============================================
-# 9. Rust toolchain (for cargo crates)
-# ============================================
-progress "Rust toolchain"
-if command -v rustup &>/dev/null; then
-    ok "Rustup already installed"
-else
-    if command -v rustc &>/dev/null; then
-        ok "Rust available via Homebrew"
-    else
-        echo "  Installing Rust via rustup..."
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y 2>&1 | tee -a "$LOG_FILE"
-        source "$HOME/.cargo/env"
-        ok "Rust installed"
-    fi
-fi
-
-# ============================================
 # 10. Node.js via fnm
+
 # ============================================
 progress "Node.js via fnm"
 if command -v fnm &>/dev/null; then
@@ -227,6 +229,7 @@ fi
 
 # ============================================
 # 11. Borders service (window borders)
+
 # ============================================
 progress "Borders service"
 if command -v borders &>/dev/null; then
@@ -259,6 +262,99 @@ mkdir -p "$HOME/Screenshots"
 defaults write com.apple.screencapture location -string "$HOME/Screenshots"
 
 ok "macOS preferences set"
+
+# ============================================
+# 13. Git identity
+# ============================================
+progress "Git identity"
+GIT_NAME=$(git config --global user.name 2>/dev/null || echo "")
+GIT_EMAIL=$(git config --global user.email 2>/dev/null || echo "")
+
+if [[ -z "$GIT_NAME" ]]; then
+    echo -n "  Your name for git commits: "
+    read -r GIT_NAME
+    git config --global user.name "$GIT_NAME"
+    ok "Set git user.name = $GIT_NAME"
+else
+    ok "Already set: $GIT_NAME"
+fi
+
+if [[ -z "$GIT_EMAIL" ]]; then
+    echo -n "  Your email for git commits: "
+    read -r GIT_EMAIL
+    git config --global user.email "$GIT_EMAIL"
+    ok "Set git user.email = $GIT_EMAIL"
+else
+    ok "Already set: $GIT_EMAIL"
+fi
+
+# Set sensible git defaults
+git config --global init.defaultBranch main
+git config --global push.autoSetupRemote true
+git config --global pull.rebase true
+git config --global core.editor nvim
+ok "Git defaults set (main branch, auto remote, rebase pull, nvim editor)"
+
+# ============================================
+# 14. Health check
+# ============================================
+progress "Health check"
+echo ""
+ERRORS=0
+
+check_cmd() {
+    if command -v "$1" &>/dev/null; then
+        echo -e "  ${GREEN}OK${NC}  $1 $(command -v "$1")"
+    else
+        echo -e "  ${RED}MISSING${NC}  $1"
+        ERRORS=$((ERRORS + 1))
+    fi
+}
+
+echo "  Core tools:"
+check_cmd fish
+check_cmd nvim
+check_cmd tmux
+check_cmd git
+check_cmd brew
+
+echo "  Terminal & shell:"
+check_cmd ghostty
+check_cmd fzf
+check_cmd fd
+check_cmd bat
+check_cmd eza
+check_cmd zoxide
+check_cmd pay-respects
+check_cmd fastfetch
+check_cmd direnv
+check_cmd fnm
+check_cmd yazi
+
+echo "  Dev tools:"
+check_cmd node
+check_cmd go
+check_cmd rustc
+check_cmd cargo
+check_cmd bun
+check_cmd deno
+check_cmd docker
+check_cmd gh
+check_cmd lazygit
+
+echo "  Services:"
+if brew services list 2>/dev/null | grep -q "borders.*started"; then
+    echo -e "  ${GREEN}OK${NC}  borders (running)"
+else
+    echo -e "  ${YELLOW}WARN${NC}  borders (not running)"
+fi
+
+echo ""
+if [[ $ERRORS -eq 0 ]]; then
+    echo -e "  ${GREEN}All checks passed!${NC}"
+else
+    echo -e "  ${YELLOW}$ERRORS tool(s) missing. Check the log for install errors.${NC}"
+fi
 
 # ============================================
 # Done

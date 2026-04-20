@@ -1,8 +1,12 @@
 # ============================================
 # PATH
 # ============================================
+# Homebrew — Apple Silicon (/opt/homebrew) and Intel (/usr/local)
+# fish_add_path silently skips non-existent paths
 fish_add_path /opt/homebrew/bin
 fish_add_path /opt/homebrew/sbin
+fish_add_path /usr/local/bin
+fish_add_path /usr/local/sbin
 fish_add_path ~/.local/bin
 fish_add_path ~/.cargo/bin
 fish_add_path /Applications/Docker.app/Contents/Resources/bin

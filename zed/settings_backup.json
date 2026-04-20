@@ -114,7 +114,7 @@
   // ─── Terminal ──────────────────────────────────────────────
   "terminal": {
     "shell": {
-      "program": "/opt/homebrew/bin/fish"
+      "program": "fish"
     },
     "font_family": "IosevkaTerm Nerd Font",
     "font_size": 13,
