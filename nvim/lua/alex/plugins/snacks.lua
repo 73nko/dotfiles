@@ -7,44 +7,68 @@ return {
       image = { enabled = false }, -- disabled: incompatible with Neovim 0.12.0 treesitter API (range nil error)
       bufdelete = { enabled = true },
       dashboard = {
+        width = 60,
+        pane_gap = 6,
         preset = {
           header = [[
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░██╗░██╗███████╗██╗░░░░░██╗░░░░░░█████╗░░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░██║░██║██╔════╝██║░░░░░██║░░░░░██╔══██╗░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░██████║█████╗░░██║░░░░░██║░░░░░██║░░██║░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░██╔═██║██╔══╝░░██║░░░░░██║░░░░░██║░░██║░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░██║░██║███████╗███████╗███████╗╚█████╔╝░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░╚═╝░╚═╝╚══════╝╚══════╝╚══════╝░╚════╝░░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░██╗░░░░░░░██╗░█████╗░██████╗░██╗░░░░░██████╗░░░░░░░░░░░░░
-  ░░░░░░░░░░░░██║░░██╗░░██║██╔══██╗██╔══██╗██║░░░░░██╔══██╗░░░░░░░░░░░░
-  ░░░░░░░░░░░░╚██╗████╗██╔╝██║░░██║██████╔╝██║░░░░░██║░░██║░░░░░░░░░░░░
-  ░░░░░░░░░░░░░████╔═████║░██║░░██║██╔══██╗██║░░░░░██║░░██║░░░░░░░░░░░░
-  ░░░░░░░░░░░░░╚██╔╝░╚██╔╝░╚█████╔╝██║░░██║███████╗██████╔╝░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░╚═╝░░░╚═╝░░░╚════╝░╚═╝░░╚═╝╚══════╝╚═════╝░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-  ]],
+    _           _                  _      
+   / \__      _| |_ ___  _ __ ___ (_) ___ 
+  / _ \ \ /\ / / __/ _ \| '_ ` _ \| |/ __|
+ / ___ \ V  V /| || (_) | | | | | | | (__ 
+/_/   \_\_/\_/  \__\___/|_| |_| |_|_|\___|
+          ]],
           keys = {
-            { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-            { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-            { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+            { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+            { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+            { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
             { icon = "󰙅 ", key = "e", desc = "File Explorer", action = ":lua Snacks.explorer()" },
             {
-              icon = " ",
+              icon = " ",
               key = "c",
               desc = "Config",
               action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
             },
-            { icon = " ", key = "s", desc = "Restore Session", action = ":SessionRestore" },
-            { icon = " ", key = "x", desc = "Lazy Extras", action = ":LazyExtras" },
-            { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
-            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+            { icon = " ", key = "s", desc = "Restore Session", action = ":SessionRestore" },
+            { icon = " ", key = "L", desc = "Lazy", action = ":Lazy" },
+            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
+        },
+        formats = {
+          key = function(item)
+            return { { "[", hl = "SnacksDashboardDesc" }, { item.key, hl = "SnacksDashboardKey" }, { "]", hl = "SnacksDashboardDesc" } }
+          end,
+        },
+        sections = {
+          { section = "header" },
+          { section = "keys", gap = 1, padding = 1 },
+          { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+          { pane = 2, icon = " ", title = "Projects",     section = "projects",     indent = 2, padding = 1 },
+          {
+            pane = 2,
+            icon = " ",
+            title = "Git Status",
+            section = "terminal",
+            -- Check estricto: solo mostramos el pane cuando el cwd es raiz
+            -- de repo (.git/ directamente dentro). En ~/YOUR-ORG (root con
+            -- muchos repos dentro pero sin .git propio), el pane NO aparece.
+            -- Entras a un repo concreto -> aparece.
+            enabled = function()
+              local cwd = vim.loop.cwd()
+              if not cwd then return false end
+              local git = cwd .. "/.git"
+              return vim.fn.isdirectory(git) == 1 or vim.fn.filereadable(git) == 1
+            end,
+            -- git -C <cwd> evita cualquier resolucion magica de shell/fish.
+            -- 2>/dev/null silencia warnings en el caso borde de race condition
+            -- (.git desaparece entre enabled y cmd).
+            cmd = "git -C " .. (vim.loop.cwd() or ".") .. " --no-pager diff --stat -B -M -C 2>/dev/null",
+            height = 10,
+            padding = 1,
+            ttl = 5 * 60,
+            indent = 2,
+          },
+          { section = "startup" },
         },
       },
       indent = {

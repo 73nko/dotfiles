@@ -93,3 +93,40 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.shiftwidth = 4
   end,
 })
+
+-- Netrw esta desactivado en init.lua. Este hook redirige cualquier :e directorio/
+-- hacia el comportamiento adecuado segun el contexto:
+--   - Arranque (nvim . o nvim ~/proyecto): cd al dir y dispara Snacks.dashboard
+--     explicitamente tras VimEnter. NO abrimos explorer: el dashboard es la
+--     pantalla de inicio.
+--   - Post arranque (:e dir/): abrimos Snacks.explorer() directamente.
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = vim.api.nvim_create_augroup("alex_dir_hijack", { clear = true }),
+  callback = function(args)
+    local bufname = vim.api.nvim_buf_get_name(args.buf)
+    if bufname == "" then return end
+    local stat = vim.uv.fs_stat(bufname)
+    if not (stat and stat.type == "directory") then return end
+
+    vim.api.nvim_buf_delete(args.buf, { force = true })
+    vim.cmd.cd(bufname)
+
+    if vim.v.vim_did_enter == 0 then
+      -- Arranque: vim.schedule posterga hasta despues de VimEnter, que es
+      -- cuando Snacks esta cargado y dashboard.open puede tomar el buffer
+      -- scratch que dejamos detras.
+      vim.cmd("enew")
+      vim.schedule(function()
+        if pcall(require, "snacks") and _G.Snacks and Snacks.dashboard then
+          Snacks.dashboard.open()
+        end
+      end)
+      return
+    end
+
+    -- Post arranque: abrir explorer como lo pediste con :e dir/.
+    if pcall(require, "snacks") then
+      require("snacks").explorer()
+    end
+  end,
+})

@@ -16,7 +16,7 @@
   "lualine.nvim": { "branch": "master", "commit": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "0a3b42c3e503df87aef6d6513e13148381495c3a" },
   "mason-tool-installer.nvim": { "branch": "main", "commit": "443f1ef8b5e6bf47045cb2217b6f748a223cf7dc" },
-  "mason.nvim": { "branch": "main", "commit": "cf8f0f84b0b7866b0b8153cd07902770e1fc02d0" },
+  "mason.nvim": { "branch": "main", "commit": "12ddd182d9efbdc848b540f16484a583d52da0fb" },
   "neotest": { "branch": "master", "commit": "fd0b7986dd0ae04e38ec7dc0c78a432e3820839c" },
   "neotest-go": { "branch": "main", "commit": "59b50505053f9c45a9febb79e11a56206c3e3901" },
   "neotest-jest": { "branch": "main", "commit": "0e7979d51301dfae5ef839d771bd28cf593fde3f" },

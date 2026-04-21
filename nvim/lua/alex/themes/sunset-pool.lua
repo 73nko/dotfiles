@@ -68,7 +68,7 @@ function M.apply()
   -- ========================================================================
   hl("Normal",            { fg = c.rosegold, bg = c.none })
   hl("NormalNC",          { fg = c.rosegold, bg = c.none })
-  hl("NormalFloat",       { fg = c.rosegold, bg = c.plum })
+  hl("NormalFloat",       { fg = c.rosegold, bg = c.none })
   hl("FloatBorder",       { fg = c.magenta,  bg = c.none })
   hl("FloatTitle",        { fg = c.magenta_hi, bold = true })
   hl("WinSeparator",      { fg = c.pane_border, bg = c.none })
@@ -386,6 +386,15 @@ function M.apply()
   hl("SnacksPickerPrompt",      { fg = c.magenta, bold = true })
   hl("SnacksPickerCursorLine",  { bg = c.branch_bg })
   hl("SnacksPickerSelected",    { fg = c.turquoise_hi, bold = true })
+  -- Forzar transparencia en los paneles (list/preview/input) para que no
+  -- se rellenen con bg propio por encima de NormalFloat.
+  hl("SnacksPickerList",        { bg = c.none })
+  hl("SnacksPickerListNC",      { bg = c.none })
+  hl("SnacksPickerPreview",     { bg = c.none })
+  hl("SnacksPickerPreviewNC",   { bg = c.none })
+  hl("SnacksPickerInput",       { bg = c.none })
+  hl("SnacksPickerInputNC",     { bg = c.none })
+  hl("SnacksPickerBox",         { bg = c.none })
 
   hl("SnacksDashboardTitle",  { fg = c.magenta_hi, bold = true })
   hl("SnacksDashboardHeader", { fg = c.magenta_hi, bold = true })
@@ -410,6 +419,24 @@ function M.apply()
   hl("SnacksExplorerFile",        { fg = c.rosegold })
   hl("SnacksExplorerIcon",        { fg = c.tangerine })
   hl("SnacksExplorerRootName",    { fg = c.magenta_hi, bold = true })
+
+  -- Hidden/ignored/dimmed entries (dotfiles, gitignored). NonText fallback queda
+  -- en c.indent (#1B2F3A) que es casi invisible sobre Dusk (#1A0A28). Declaramos
+  -- los grupos de Snacks explicitamente con c.muted (#A58670) para atenuar sin
+  -- ocultar, y en italic para senalar que estan "dim".
+  hl("SnacksPickerDimmed",        { fg = c.muted })
+  hl("SnacksPickerDirHidden",     { fg = c.muted, italic = true })
+  hl("SnacksPickerFileHidden",    { fg = c.muted, italic = true })
+  hl("SnacksPickerDirIgnored",    { fg = c.muted, italic = true })
+  hl("SnacksPickerFileIgnored",   { fg = c.muted, italic = true })
+  hl("SnacksPickerPathHidden",    { fg = c.muted, italic = true })
+  hl("SnacksPickerPathIgnored",   { fg = c.muted, italic = true })
+  hl("SnacksExplorerDirHidden",   { fg = c.muted, italic = true })
+  hl("SnacksExplorerFileHidden",  { fg = c.muted, italic = true })
+  hl("SnacksExplorerDirIgnored",  { fg = c.muted, italic = true })
+  hl("SnacksExplorerFileIgnored", { fg = c.muted, italic = true })
+  hl("SnacksExplorerPathHidden",  { fg = c.muted, italic = true })
+  hl("SnacksExplorerPathIgnored", { fg = c.muted, italic = true })
 
   -- ========================================================================
   -- blink.cmp

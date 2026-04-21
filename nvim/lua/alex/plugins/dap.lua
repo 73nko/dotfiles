@@ -93,7 +93,27 @@ return {
     vim.keymap.set("n", "<leader>dB", function()
       dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
     end, { desc = "Conditional Breakpoint" })
-    vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue" })
+
+    -- Continue defensivo: si hay sesion activa, sigue; si no, valida que el buffer
+    -- actual tenga configuracion de DAP antes de llamar continue().
+    -- Filetypes no-codigo (snacks explorer, dashboard, terminal, aerial, trouble, etc.)
+    -- daban un traceback de Lua en vez de un mensaje claro.
+    vim.keymap.set("n", "<leader>dc", function()
+      if dap.session() then
+        dap.continue()
+        return
+      end
+      local ft = vim.bo.filetype
+      if ft == "" or dap.configurations[ft] == nil then
+        vim.notify(
+          ("DAP: no hay configuracion para filetype '%s'. Muevete a un buffer de codigo (ts/js/py/go) o usa <leader>dl para 'Run Last'."):format(ft ~= "" and ft or "none"),
+          vim.log.levels.WARN,
+          { title = "DAP" }
+        )
+        return
+      end
+      dap.continue()
+    end, { desc = "Continue (safe)" })
     vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step Into" })
     vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step Over" })
     vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Step Out" })
