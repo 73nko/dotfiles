@@ -1,16 +1,16 @@
 # ============================================
-# Ghostty Config — Neon Nocturne (The Luminous Editor)
+# Ghostty Config - Sunset · Pool Splash
+# Miami sunset gradient meets turquoise pool
 # ============================================
-
-# Shell (uses system default via chsh — works on both Intel and Apple Silicon)
 
 # ============================================
 # Window
 # ============================================
 macos-titlebar-style = hidden
-background-opacity = 0.90
-window-padding-x = 10
-window-padding-y = 10
+background-opacity = 0.72
+background-blur-radius = 24
+window-padding-x = 16
+window-padding-y = 12
 window-padding-balance = true
 window-inherit-working-directory = true
 confirm-close-surface = false
@@ -24,8 +24,7 @@ bell-features = system,border
 macos-option-as-alt = true
 
 # ============================================
-# Shell Integration (killer feature de Ghostty)
-# Permite navegar entre prompts, hereda CWD en splits, etc.
+# Shell Integration
 # ============================================
 shell-integration = detect
 shell-integration-features = cursor,sudo,title
@@ -36,17 +35,26 @@ shell-integration-features = cursor,sudo,title
 mouse-hide-while-typing = true
 
 # ============================================
-# Font
+# Font - Monaspace Neon NF con fallback JetBrains Mono
 # ============================================
+font-family = Monaspace Neon
 font-family = JetBrainsMono Nerd Font
 font-size = 13
-adjust-cell-height = -2
+font-feature = calt
+font-feature = liga
+font-feature = ss01
+font-feature = ss02
+font-feature = ss03
+adjust-cell-height = -1
+font-style-italic = Italic
 
 # ============================================
-# Cursor
+# Cursor - Tangerine block, sin blink
 # ============================================
 cursor-style = block
 cursor-style-blink = false
+cursor-color = #FF8A3D
+cursor-text = #1A0A28
 
 # ============================================
 # Scrollback
@@ -54,42 +62,58 @@ cursor-style-blink = false
 scrollback-limit = 100000
 
 # ============================================
-# Selection
+# Selection / Copy
 # ============================================
 copy-on-select = true
+selection-background = #5a1a3c
+selection-foreground = #FFC6A0
 
 # ============================================
-# Neon Nocturne — Colors (The Luminous Editor design system)
+# Sunset · Pool Splash palette
+# background = Dusk #1A0A28 @72% con blur sobre wallpaper gradient
+# foreground = Rosegold #FFC6A0
 # ============================================
-background = #0a0e14
-foreground = #f1f3fc
-cursor-color = #81d4fa
-cursor-text  = #0a0e14
-selection-foreground = #abddad
-selection-background = #24502c
+background = #1A0A28
+foreground = #FFC6A0
 
-# Normal colors (0-7)
-palette = 0=#0f141a
-palette = 1=#ffa8a3
-palette = 2=#abddad
-palette = 3=#ffd54f
-palette = 4=#81d4fa
-palette = 5=#b39ddb
-palette = 6=#55aacf
-palette = 7=#c5cde0
+# Normal (0-7)
+# 0 black  = Dusk
+# 1 red    = Magenta (warm pink axis)
+# 2 green  = Turquoise Hi (cool axis, collapsed onto "green" slot)
+# 3 yellow = Gold
+# 4 blue   = Turquoise
+# 5 magenta= Magenta (same warm pink axis)
+# 6 cyan   = Aqua
+# 7 white  = Rosegold
+palette = 0=#1A0A28
+palette = 1=#FF3D8A
+palette = 2=#7FE0EB
+palette = 3=#FFD67A
+palette = 4=#4EC9D7
+palette = 5=#FF3D8A
+palette = 6=#8FE3E8
+palette = 7=#FFC6A0
 
-# Bright colors (8-15)
-palette = 8=#3d4f6e
-palette = 9=#ffa8a3
-palette = 10=#abddad
-palette = 11=#ffcc80
-palette = 12=#81d4fa
-palette = 13=#ce93d8
-palette = 14=#81d4fa
-palette = 15=#f1f3fc
+# Bright (8-15)
+# 8 bright black  = Plum
+# 9 bright red    = Magenta Hi
+# 10 bright green = Aqua
+# 11 bright yellow= Peach
+# 12 bright blue  = Turquoise Hi
+# 13 bright mag   = Tangerine
+# 14 bright cyan  = Turquoise Hi
+# 15 bright white = Cream
+palette = 8=#3A1550
+palette = 9=#FFB8D5
+palette = 10=#8FE3E8
+palette = 11=#FFB07A
+palette = 12=#7FE0EB
+palette = 13=#FF8A3D
+palette = 14=#7FE0EB
+palette = 15=#F5ECD7
 
 # ============================================
-# Keybindings
+# Keybindings (sin cambios)
 # ============================================
 keybind = super+q=quit
 keybind = super+w=close_window
@@ -97,24 +121,21 @@ keybind = super+n=new_window
 keybind = super+c=copy_to_clipboard
 keybind = super+v=paste_from_clipboard
 
-
 # Scroll
 keybind = shift+page_up=scroll_page_up
 keybind = shift+page_down=scroll_page_down
 keybind = shift+home=scroll_to_top
 keybind = shift+end=scroll_to_bottom
 
-# Borrar palabra/línea (Mac-style)
+# Mac-style word/line erase
 keybind = super+backspace=text:\x15
 keybind = alt+backspace=text:\x17
 
 # ============================================
-# Vim-mode keytable — navegar el scrollback con vim bindings
+# Vim-mode keytable para navegar scrollback
 # Activar con alt+v, salir con esc / q / i
 # ============================================
 keybind = alt+v=activate_key_table:vim
-
-# Movimiento línea / página
 keybind = vim/j=scroll_page_lines:1
 keybind = vim/k=scroll_page_lines:-1
 keybind = vim/ctrl+d=scroll_page_down
@@ -123,16 +144,9 @@ keybind = vim/ctrl+f=scroll_page_down
 keybind = vim/ctrl+b=scroll_page_up
 keybind = vim/shift+j=scroll_page_down
 keybind = vim/shift+k=scroll_page_up
-
-# Top / bottom
 keybind = vim/shift+g=scroll_to_bottom
-
-# Copy / yank
 keybind = vim/v=copy_to_clipboard
 keybind = vim/y=copy_to_clipboard
-
-# Salir
 keybind = vim/escape=deactivate_key_table
 keybind = vim/q=deactivate_key_table
 keybind = vim/i=deactivate_key_table
-

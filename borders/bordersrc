@@ -1,11 +1,17 @@
 #!/bin/bash
+# ============================================
+# JankyBorders - Sunset · Pool Splash
+# Active: Magenta #FF3D8A @80%
+# Inactive: Rosegold #FFC6A0 @25% (muy tenue, solo insinuacion)
+# ============================================
 
 options=(
 	style=round
-	width=6.0
+	width=4.0
 	hidpi=on
-	active_color=0xc081d4fa
-	inactive_color=0xc03d4f6e
+	background_color=0x00000000
+	active_color=0xccFF3D8A
+	inactive_color=0x40FFC6A0
 )
 
 borders "${options[@]}"

@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "version": "1.1.0",
+  "name": "Sunset Pool Splash",
+  "description": "Miami sunset + turquoise pool. Gradient bg en new tab, dusk/plum chrome con acentos magenta y rosegold text.",
+  "theme": {
+    "images": {
+      "theme_ntp_background": "images/ntp-bg.png",
+      "theme_toolbar": "images/toolbar-bg.png"
+    },
+    "colors": {
+      "frame": [26, 10, 40],
+      "frame_inactive": [31, 13, 48],
+      "frame_incognito": [13, 72, 88],
+      "frame_incognito_inactive": [20, 85, 100],
+
+      "toolbar": [42, 17, 62],
+      "toolbar_text": [255, 198, 160],
+
+      "tab_text": [255, 198, 160],
+      "tab_background_text": [165, 134, 112],
+      "tab_background_text_inactive": [107, 89, 77],
+
+      "bookmark_text": [255, 198, 160],
+
+      "ntp_background": [26, 10, 40],
+      "ntp_text": [255, 198, 160],
+      "ntp_link": [127, 224, 235],
+      "ntp_header": [255, 61, 138],
+
+      "button_background": [255, 61, 138],
+
+      "omnibox_background": [31, 62, 72],
+      "omnibox_text": [255, 214, 122]
+    },
+    "tints": {
+      "buttons": [0.92, 0.55, 0.72],
+      "frame": [-1, -1, -1],
+      "background_tab": [-1, -1, 0.15]
+    },
+    "properties": {
+      "ntp_background_alignment": "bottom",
+      "ntp_background_repeat": "no-repeat"
+    }
+  }
+}

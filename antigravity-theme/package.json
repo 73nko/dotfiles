@@ -1,0 +1,25 @@
+{
+  "name": "sunset-pool-splash",
+  "displayName": "Sunset Pool Splash",
+  "description": "Miami sunset warm identity + turquoise pool structure. Dusk/plum ground con acentos magenta y rosegold text. Compatible con Antigravity, VSCode, Cursor, Windsurf, VSCodium.",
+  "version": "1.0.0",
+  "publisher": "alexramos",
+  "author": {
+    "name": "Alex Ramos",
+    "email": "apramos89@gmail.com"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Themes"],
+  "keywords": ["theme", "dark", "sunset", "pool", "miami", "warm"],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Sunset Pool Splash",
+        "uiTheme": "vs-dark",
+        "path": "./themes/sunset-pool-color-theme.json"
+      }
+    ]
+  }
+}

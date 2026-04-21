@@ -1,3 +1,7 @@
+-- Bufferline - pill tabs, Sunset · Pool Splash
+-- Active: turquoise pill (bg branch_bg, fg turquoise_hi)
+-- Inactive: very faint rosegold
+-- Modified dot: Magenta
 return {
   "akinsho/bufferline.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -14,37 +18,84 @@ return {
     { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
     { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
   },
-  opts = {
-    options = {
-      -- mode = "buffers", -- "buffers" is the default
-      diagnostics = "nvim_lsp",
-      always_show_bufferline = false,
-      separator_style = "thin",
-      diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        local s = " "
-        for e, n in pairs(diagnostics_dict) do
-          local sym = e == "error" and " " or (e == "warning" and " " or "")
-          s = s .. n .. sym
-        end
-        return s
-      end,
-    },
-    highlights = {
-      fill = { bg = "#04060b" },
-      background = { fg = "#3b4566", bg = "#06080f" },
-      buffer_selected = { fg = "#e2e8f0", bg = "#0d1117", bold = true },
-      buffer_visible = { fg = "#64748b", bg = "#06080f" },
-      close_button = { fg = "#3b4566", bg = "#06080f" },
-      close_button_selected = { fg = "#f472b6", bg = "#0d1117" },
-      separator = { fg = "#04060b", bg = "#06080f" },
-      separator_selected = { fg = "#04060b", bg = "#0d1117" },
-      indicator_selected = { fg = "#c4a7ff", bg = "#0d1117" },
-      modified = { fg = "#fde68a", bg = "#06080f" },
-      modified_selected = { fg = "#fde68a", bg = "#0d1117" },
-      tab = { fg = "#3b4566", bg = "#06080f" },
-      tab_selected = { fg = "#c4a7ff", bg = "#0d1117", bold = true },
-      error_selected = { fg = "#f472b6", bg = "#0d1117", bold = true },
-      warning_selected = { fg = "#fde68a", bg = "#0d1117", bold = true },
-    },
-  },
+  opts = function()
+    local c = require("alex.themes.sunset-pool").palette
+    return {
+      options = {
+        mode = "buffers",
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
+        show_close_icon = false,
+        show_buffer_close_icons = false,
+        separator_style = { "", "" }, -- sin barras, dejamos que los backgrounds hagan de pill
+        indicator = { style = "none" },
+        offsets = {
+          {
+            filetype = "snacks_layout_box",
+            text = "  Explorer",
+            text_align = "left",
+            separator = true,
+            highlight = "Directory",
+          },
+        },
+        modified_icon = "●",
+        diagnostics_indicator = function(count, level, _, _)
+          local sym = level:match("error") and " " or (level:match("warn") and " " or " ")
+          return " " .. sym .. count
+        end,
+      },
+      highlights = {
+        -- Barra completa
+        fill                  = { fg = c.muted,       bg = c.none },
+        background            = { fg = c.muted,       bg = c.none },
+
+        -- Tab inactive / visible / selected
+        buffer_selected       = { fg = c.turquoise_hi, bg = c.branch_bg, bold = true, italic = false },
+        buffer_visible        = { fg = c.muted,        bg = c.none },
+
+        -- Modified dot
+        modified              = { fg = c.magenta,      bg = c.none },
+        modified_selected     = { fg = c.magenta,      bg = c.branch_bg },
+        modified_visible      = { fg = c.magenta,      bg = c.none },
+
+        -- Diagnostic indicators on tab
+        error                 = { fg = c.magenta,     bg = c.none },
+        error_selected        = { fg = c.magenta,     bg = c.branch_bg, bold = true },
+        warning               = { fg = c.tangerine,   bg = c.none },
+        warning_selected      = { fg = c.tangerine,   bg = c.branch_bg, bold = true },
+        info                  = { fg = c.aqua,        bg = c.none },
+        info_selected         = { fg = c.aqua,        bg = c.branch_bg, bold = true },
+        hint                  = { fg = c.turquoise_hi, bg = c.none },
+        hint_selected         = { fg = c.turquoise_hi, bg = c.branch_bg, bold = true },
+
+        -- Separators - transparent, pill shape comes from bg only
+        separator             = { fg = c.none,         bg = c.none },
+        separator_selected    = { fg = c.none,         bg = c.none },
+        separator_visible     = { fg = c.none,         bg = c.none },
+
+        -- Indicator / close
+        indicator_selected    = { fg = c.turquoise_hi, bg = c.branch_bg },
+        close_button          = { fg = c.muted,        bg = c.none },
+        close_button_selected = { fg = c.magenta,      bg = c.branch_bg },
+        close_button_visible  = { fg = c.muted,        bg = c.none },
+
+        -- Tabs (group headers / pinned)
+        tab                   = { fg = c.muted,        bg = c.none },
+        tab_selected          = { fg = c.magenta_hi,   bg = c.branch_bg, bold = true },
+        tab_separator         = { fg = c.none,         bg = c.none },
+        tab_separator_selected= { fg = c.none,         bg = c.none },
+        duplicate             = { fg = c.muted,        bg = c.none, italic = true },
+        duplicate_selected    = { fg = c.turquoise_hi, bg = c.branch_bg, bold = true, italic = true },
+
+        -- Numbers
+        numbers               = { fg = c.muted,        bg = c.none },
+        numbers_selected      = { fg = c.turquoise_hi, bg = c.branch_bg, bold = true },
+
+        -- Pick
+        pick                  = { fg = c.magenta,      bg = c.none, bold = true, italic = true },
+        pick_selected         = { fg = c.magenta,      bg = c.branch_bg, bold = true },
+        pick_visible          = { fg = c.magenta,      bg = c.none, bold = true, italic = true },
+      },
+    }
+  end,
 }
