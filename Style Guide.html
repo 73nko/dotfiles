@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sunset · Pool Splash — Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Monaspace+Neon:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dusk: #1a0a28;
+    --duskDeep: #0d0518;
+    --plum: #3a1550;
+    --wine: #6a2050;
+    --sunBurn: #c95a4a;
+    --sunSoft: #f2a070;
+    --magenta: #ff3d8a;
+    --magentaHi: #ffb8d5;
+    --peach: #ffb07a;
+    --tangerine: #ff8a3d;
+    --rosegold: #ffc6a0;
+    --gold: #ffd67a;
+    --turquoise: #4ec9d7;
+    --turquoiseHi: #7fe0eb;
+    --aqua: #8fe3e8;
+    --deepPool: #0d4858;
+    --cream: #f5ecd7;
+
+    --paper: #18101f;
+    --ink: #1f1630;
+    --inkLine: rgba(255,198,160,.14);
+    --fg: #efe2d2;
+    --muted: rgba(239,226,210,.62);
+    --faint: rgba(239,226,210,.35);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--fg);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .page {
+    max-width: 1180px; margin: 0 auto; padding: 80px 48px 160px;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,61,138,.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(127,224,235,.08) 0%, transparent 70%);
+  }
+
+  /* Hero */
+  .hero { margin-bottom: 96px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--turquoiseHi);
+    padding: 6px 12px;
+    background: rgba(127,224,235,.08);
+    border: 1px solid rgba(127,224,235,.22);
+    border-radius: 999px;
+  }
+  .eyebrow::before { content: '☀'; color: var(--magenta); font-size: 14px; }
+  h1.title {
+    font-size: 72px; font-weight: 800; letter-spacing: -2px; line-height: 1.02;
+    margin: 24px 0 20px;
+    background: linear-gradient(100deg, var(--magentaHi) 0%, var(--magenta) 30%, var(--tangerine) 55%, var(--turquoiseHi) 95%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { font-size: 20px; line-height: 1.55; color: var(--fg); max-width: 780px; opacity: .9; }
+  .lede em { font-style: normal; color: var(--magentaHi); font-weight: 500; }
+  .meta { display: flex; gap: 28px; margin-top: 36px; font-size: 13px; color: var(--muted);
+    font-family: 'JetBrains Mono', monospace; }
+  .meta span strong { color: var(--turquoiseHi); font-weight: 500; }
+
+  /* Section */
+  section { margin-bottom: 96px; }
+  .sec-head { display: flex; align-items: baseline; gap: 20px; margin-bottom: 36px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--inkLine); }
+  .sec-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--magenta);
+    letter-spacing: 2px; font-weight: 500; }
+  h2 { font-size: 36px; font-weight: 700; letter-spacing: -.6px; margin: 0; }
+  h2 .accent { color: var(--turquoiseHi); }
+  h3 { font-size: 20px; font-weight: 600; letter-spacing: -.3px; margin: 32px 0 14px; }
+  h4 { font-size: 15px; font-weight: 600; margin: 22px 0 8px; color: var(--cream);
+    font-family: 'JetBrains Mono', monospace; letter-spacing: .5px; text-transform: uppercase; font-size: 11px; }
+
+  p { margin: 0 0 14px; color: var(--fg); opacity: .88; }
+  ul { padding-left: 0; list-style: none; margin: 12px 0; }
+  ul li { position: relative; padding-left: 24px; margin-bottom: 10px; color: var(--fg); opacity: .88; }
+  ul li::before { content: '◉'; position: absolute; left: 0; top: 2px; color: var(--turquoiseHi); font-size: 10px; }
+  strong { color: var(--magentaHi); font-weight: 600; }
+
+  code, .mono { font-family: 'JetBrains Mono', 'Monaspace Neon', monospace; font-size: 13px; }
+  p code, li code { background: rgba(127,224,235,.08); color: var(--aqua); padding: 1px 7px; border-radius: 4px;
+    border: 1px solid rgba(127,224,235,.15); font-size: 12.5px; }
+
+  /* Principle cards */
+  .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 20px; }
+  .principle { padding: 24px 24px 22px; background: var(--ink); border: 1px solid var(--inkLine); border-radius: 14px;
+    position: relative; overflow: hidden; }
+  .principle::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--magenta), var(--turquoiseHi)); opacity: .8; }
+  .principle .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--magenta);
+    letter-spacing: 2px; font-weight: 500; margin-bottom: 6px; display: block; }
+  .principle h4 { margin: 0 0 8px; color: var(--fg); font-size: 16px; text-transform: none; letter-spacing: -.2px;
+    font-family: 'Inter', sans-serif; font-weight: 600; }
+  .principle p { font-size: 13.5px; margin: 0; color: var(--muted); line-height: 1.5; }
+
+  /* Swatches */
+  .palette { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin: 20px 0 32px; }
+  .palette.warm { grid-template-columns: repeat(5, 1fr); }
+  .palette.cool { grid-template-columns: repeat(4, 1fr); }
+  .palette.neutral { grid-template-columns: repeat(5, 1fr); }
+  .swatch {
+    border-radius: 12px; padding: 16px 14px 14px; min-height: 130px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    border: 1px solid rgba(255,255,255,.06);
+    font-family: 'JetBrains Mono', monospace;
+    position: relative; overflow: hidden;
+  }
+  .swatch .name { font-size: 12px; font-weight: 600; letter-spacing: .3px; }
+  .swatch .hex { font-size: 11px; margin-top: 2px; opacity: .75; }
+  .swatch .role { font-size: 10px; margin-top: 8px; opacity: .6; line-height: 1.3;
+    text-transform: uppercase; letter-spacing: .8px; }
+  .swatch.dark { color: var(--cream); }
+  .swatch.light { color: var(--dusk); }
+
+  /* Color table */
+  .ctable { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+  .ctable th { text-align: left; padding: 10px 12px; font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; color: var(--muted); letter-spacing: 1.2px; text-transform: uppercase;
+    border-bottom: 1px solid var(--inkLine); font-weight: 500; }
+  .ctable td { padding: 11px 12px; border-bottom: 1px solid var(--inkLine); vertical-align: middle; }
+  .ctable .chip { width: 16px; height: 16px; border-radius: 4px; display: inline-block; vertical-align: middle;
+    margin-right: 10px; border: 1px solid rgba(255,255,255,.12); }
+  .ctable code { font-size: 12px; }
+
+  /* Usage ratio bar */
+  .ratio { display: flex; height: 44px; border-radius: 10px; overflow: hidden; margin: 12px 0 22px;
+    border: 1px solid var(--inkLine); }
+  .ratio > div { display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; }
+
+  /* Code terminal preview */
+  .terminal {
+    background: linear-gradient(175deg,#1a0a28 0%,#3a1550 25%,#6a2050 55%,#c95a4a 85%,#f2a070 100%);
+    padding: 28px; border-radius: 16px; margin: 14px 0 24px;
+    box-shadow: 0 20px 50px rgba(40,5,30,.5);
+  }
+  .tw {
+    background: rgba(30,10,40,0.72);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,61,138,.15);
+    border-radius: 12px; overflow: hidden;
+    font-family: 'Monaspace Neon', 'JetBrains Mono', monospace;
+    font-size: 12.5px; line-height: 1.6;
+    color: var(--rosegold);
+  }
+  .tw .titlebar { height: 30px; display: flex; align-items: center; padding: 0 14px; gap: 8px;
+    background: rgba(255,61,138,.04); border-bottom: 1px solid rgba(255,255,255,.05); }
+  .tw .tl { display: flex; gap: 6px; }
+  .tw .tl span { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .tw .tl .c1 { background: #ff5f57; } .tw .tl .c2 { background: #febc2e; } .tw .tl .c3 { background: #28c840; }
+  .tw .ttl { flex: 1; text-align: center; font-size: 11px; color: rgba(255,198,160,.6); }
+  .tw .body { padding: 16px 18px; }
+  .tw .body .line { display: flex; gap: 10px; }
+  .tw .body .ln { color: rgba(127,224,235,.35); width: 24px; text-align: right; flex-shrink: 0;
+    font-variant-numeric: tabular-nums; }
+  .tw .body .ln.cur { color: var(--tangerine); font-weight: 600; }
+  .tw .kw { color: var(--magenta); } .tw .st { color: var(--turquoiseHi); } .tw .nm { color: var(--gold); }
+  .tw .fn { color: var(--tangerine); } .tw .tp { color: var(--aqua); } .tw .cm { color: rgba(127,224,235,.55); }
+  .tw .pn { color: rgba(255,198,160,.55); } .tw .pr { color: var(--magenta); }
+
+  /* Statusline bars */
+  .bar { display: flex; height: 24px; border-radius: 4px; overflow: hidden; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; margin: 6px 0 16px; }
+  .bar > div { padding: 0 12px; display: flex; align-items: center; gap: 6px; }
+  .bar .flex { flex: 1; }
+  .bar .mode { background: var(--magenta); color: var(--dusk); font-weight: 700; letter-spacing: 1px; }
+  .bar .branch { background: rgba(127,224,235,.2); color: var(--turquoiseHi); }
+  .bar .file { background: rgba(0,0,0,.25); color: rgba(255,198,160,.72); }
+  .bar .diag { background: rgba(255,138,61,.18); color: var(--tangerine); }
+  .bar .pos { background: var(--turquoise); color: var(--dusk); font-weight: 600; }
+  .bar .ses { background: var(--magenta); color: var(--dusk); font-weight: 600; }
+  .bar .win { color: rgba(255,198,160,.45); background: transparent; }
+  .bar .win.a { background: rgba(127,224,235,.2); color: var(--turquoiseHi); font-weight: 600; }
+  .bar .clk { background: var(--turquoise); color: var(--dusk); font-weight: 600; }
+  .bar .bat { color: var(--gold); background: transparent; }
+
+  /* Semantic mapping table */
+  .maptab { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0 20px; }
+  .maptab th, .maptab td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--inkLine); vertical-align: top; }
+  .maptab th { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted);
+    letter-spacing: 1.2px; text-transform: uppercase; font-weight: 500; }
+  .maptab td code { font-size: 12px; }
+  .maptab .tok { font-family: 'JetBrains Mono', monospace; color: var(--turquoiseHi); font-weight: 500; }
+
+  /* Do / Don't */
+  .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 18px 0; }
+  .do, .dont { padding: 20px 22px; border-radius: 12px; border: 1px solid; }
+  .do { background: rgba(127,224,235,.05); border-color: rgba(127,224,235,.25); }
+  .dont { background: rgba(255,61,138,.05); border-color: rgba(255,61,138,.25); }
+  .do h4, .dont h4 { margin-top: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase; }
+  .do h4 { color: var(--turquoiseHi); }
+  .dont h4 { color: var(--magentaHi); }
+  .do ul li::before { content: '✓'; color: var(--turquoiseHi); }
+  .dont ul li::before { content: '✕'; color: var(--magenta); }
+
+  /* Tokens block */
+  .tokens { background: var(--ink); border: 1px solid var(--inkLine); border-radius: 12px;
+    padding: 22px 24px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.7;
+    overflow-x: auto; }
+  .tokens .k { color: var(--magenta); }
+  .tokens .v { color: var(--turquoiseHi); }
+  .tokens .c { color: rgba(127,224,235,.5); font-style: italic; }
+  .tokens .g { color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    display: block; margin: 14px 0 6px; }
+  .tokens .g:first-child { margin-top: 0; }
+
+  /* Checklist */
+  .checklist { background: var(--ink); border: 1px solid var(--inkLine); border-radius: 12px;
+    padding: 24px 28px; }
+  .checklist h3 { margin-top: 0; }
+  .checklist ul { margin: 0; }
+  .checklist li { padding-left: 28px; }
+  .checklist li::before { content: '◻'; color: var(--turquoiseHi); font-size: 14px; top: 0; }
+
+  /* Footer */
+  footer { margin-top: 120px; padding-top: 32px; border-top: 1px solid var(--inkLine);
+    font-size: 12px; color: var(--faint); font-family: 'JetBrains Mono', monospace; }
+  footer a { color: var(--turquoiseHi); }
+
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--inkLine), transparent);
+    margin: 48px 0; }
+
+  /* Gradient text utility */
+  .g-text { background: linear-gradient(100deg, var(--magenta), var(--tangerine), var(--turquoiseHi));
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="hero">
+  <span class="eyebrow">Style Guide · v1.0</span>
+  <h1 class="title">Sunset · Pool&nbsp;Splash</h1>
+  <p class="lede">
+    A <em>summer-evening</em> visual system for the terminal stack —
+    Ghostty, tmux, Neovim, and Claude Code. A <em>Miami-sunset</em> gradient sets the mood;
+    a <em>turquoise pool</em> holds it in balance. Warm tones carry syntax and state;
+    cool tones carry structure and navigation. The tension between them is the whole idea.
+  </p>
+  <div class="meta">
+    <span>Target <strong>Ghostty · tmux · Neovim · Claude Code</strong></span>
+    <span>Platform <strong>macOS</strong></span>
+    <span>Background <strong>translucent + blur</strong></span>
+  </div>
+</header>
+
+<!-- 01 Design Principles -->
+<section>
+  <div class="sec-head"><span class="sec-num">01</span><h2>Design <span class="accent">principles</span></h2></div>
+  <div class="principles">
+    <div class="principle"><span class="num">01</span>
+      <h4>Warm leads, cool balances.</h4>
+      <p>Sunset pinks, corals, and tangerines drive identity. Pool turquoise is the counterweight — never just decoration. If a screen is all-warm, something is missing.</p></div>
+    <div class="principle"><span class="num">02</span>
+      <h4>Accents earn their place.</h4>
+      <p>Magenta and turquoise are loud. Use them for the things that matter: cursor position, active buffer, the current tmux window, the prompt glyph. Muted rosegold carries the rest.</p></div>
+    <div class="principle"><span class="num">03</span>
+      <h4>The wallpaper is part of the theme.</h4>
+      <p>A vertical sunset gradient (dusk → plum → wine → sunburn → peach) bleeds through the terminal background at ~30% opacity. Do not use a flat color desktop.</p></div>
+    <div class="principle"><span class="num">04</span>
+      <h4>Glass, not chrome.</h4>
+      <p>Heavy backdrop blur, rounded 14px window corners, soft inner glows instead of hard borders. This is a dusk pool deck, not a cockpit.</p></div>
+  </div>
+</section>
+
+<!-- 02 Palette -->
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><h2>Color <span class="accent">palette</span></h2></div>
+  <p>Four families. Every color in the system is derived from one of these — don't introduce new hues without a reason.</p>
+
+  <h4>Warm — identity + syntax</h4>
+  <div class="palette warm">
+    <div class="swatch dark" style="background:#ff3d8a"><div class="name">Magenta</div><div class="hex">#FF3D8A</div><div class="role">Primary · keywords · mode · prompt</div></div>
+    <div class="swatch dark" style="background:#ffb8d5;color:#6a2050"><div class="name" style="color:#6a2050">Magenta Hi</div><div class="hex" style="color:#6a2050">#FFB8D5</div><div class="role" style="color:#6a2050">Active tab · titles</div></div>
+    <div class="swatch dark" style="background:#ff8a3d"><div class="name">Tangerine</div><div class="hex">#FF8A3D</div><div class="role">Functions · cursor · diagnostics</div></div>
+    <div class="swatch dark" style="background:#ffb07a;color:#3a1550"><div class="name" style="color:#3a1550">Peach</div><div class="hex" style="color:#3a1550">#FFB07A</div><div class="role" style="color:#3a1550">Secondary strings · glow</div></div>
+    <div class="swatch dark" style="background:#ffd67a;color:#3a1550"><div class="name" style="color:#3a1550">Gold</div><div class="hex" style="color:#3a1550">#FFD67A</div><div class="role" style="color:#3a1550">Numbers · booleans · battery</div></div>
+  </div>
+
+  <h4>Cool — navigation + structure</h4>
+  <div class="palette cool">
+    <div class="swatch dark" style="background:#4ec9d7;color:#051a22"><div class="name" style="color:#051a22">Turquoise</div><div class="hex" style="color:#051a22">#4EC9D7</div><div class="role" style="color:#051a22">Clock · session · structural</div></div>
+    <div class="swatch dark" style="background:#7fe0eb;color:#051a22"><div class="name" style="color:#051a22">Turquoise Hi</div><div class="hex" style="color:#051a22">#7FE0EB</div><div class="role" style="color:#051a22">Active tab · branch · strings</div></div>
+    <div class="swatch dark" style="background:#8fe3e8;color:#051a22"><div class="name" style="color:#051a22">Aqua</div><div class="hex" style="color:#051a22">#8FE3E8</div><div class="role" style="color:#051a22">Types · keys · quieter blue</div></div>
+    <div class="swatch dark" style="background:#0d4858"><div class="name">Deep Pool</div><div class="hex">#0D4858</div><div class="role">On-turquoise text · shadow hint</div></div>
+  </div>
+
+  <h4>Ground — wallpaper + surfaces</h4>
+  <div class="palette">
+    <div class="swatch dark" style="background:#1a0a28"><div class="name">Dusk</div><div class="hex">#1A0A28</div><div class="role">Window top · on-warm text</div></div>
+    <div class="swatch dark" style="background:#3a1550"><div class="name">Plum</div><div class="hex">#3A1550</div><div class="role">Wallpaper stop 2</div></div>
+    <div class="swatch dark" style="background:#6a2050"><div class="name">Wine</div><div class="hex">#6A2050</div><div class="role">Wallpaper stop 3</div></div>
+    <div class="swatch dark" style="background:#c95a4a"><div class="name">Sunburn</div><div class="hex">#C95A4A</div><div class="role">Wallpaper stop 4</div></div>
+    <div class="swatch dark" style="background:#f2a070;color:#3a1550"><div class="name" style="color:#3a1550">Sun Soft</div><div class="hex" style="color:#3a1550">#F2A070</div><div class="role" style="color:#3a1550">Wallpaper stop 5</div></div>
+    <div class="swatch light" style="background:#ffc6a0;color:#3a1550"><div class="name" style="color:#3a1550">Rosegold</div><div class="hex" style="color:#3a1550">#FFC6A0</div><div class="role" style="color:#3a1550">Default foreground</div></div>
+  </div>
+
+  <h4>Usage ratio</h4>
+  <p style="font-size:13.5px;color:var(--muted);max-width:720px">
+    Aim for roughly this distribution across any given screen. Rosegold foreground dominates; warm and cool accents punctuate.
+  </p>
+  <div class="ratio">
+    <div style="background:#ffc6a0;color:#3a1550;flex:60">60 · Rosegold fg</div>
+    <div style="background:#ff3d8a;color:#1a0a28;flex:12">12 · Magenta</div>
+    <div style="background:#7fe0eb;color:#051a22;flex:12">12 · Turquoise Hi</div>
+    <div style="background:#ff8a3d;color:#1a0a28;flex:8">8 · Tangerine</div>
+    <div style="background:#ffd67a;color:#3a1550;flex:5">5 · Gold</div>
+    <div style="background:rgba(255,198,160,.2);color:var(--rosegold);flex:3">3 · Muted</div>
+  </div>
+</section>
+
+<!-- 03 Typography -->
+<section>
+  <div class="sec-head"><span class="sec-num">03</span><h2>Typography & <span class="accent">rhythm</span></h2></div>
+  <ul>
+    <li><strong>Primary terminal font: Monaspace Neon</strong> at <code>13pt</code> (macOS) — its rounded, glassy character fits the poolside mood. Enable stylistic ligatures (<code>=&gt;</code>, <code>!=</code>).</li>
+    <li><strong>Fallback:</strong> JetBrains Mono at the same size, weight 400 for code / 500 for statuslines.</li>
+    <li><strong>Line height:</strong> <code>1.55–1.6</code>. Airy, not compact. This is a lounging theme.</li>
+    <li><strong>Cell padding:</strong> Ghostty <code>window-padding-x = 16</code>, <code>window-padding-y = 12</code>. Leave breathing room.</li>
+    <li><strong>No bold for keywords</strong> — color carries weight. Reserve bold for statusline mode and clock.</li>
+    <li><strong>Italic for comments</strong> only, and only if the font renders italic well (Monaspace Neon does).</li>
+  </ul>
+</section>
+
+<!-- 04 Semantic Mapping -->
+<section>
+  <div class="sec-head"><span class="sec-num">04</span><h2>Semantic <span class="accent">mapping</span></h2></div>
+  <p>These assignments are not suggestions — they are the contract. If you change one, change it everywhere.</p>
+
+  <h4>Syntax (Treesitter / LSP)</h4>
+  <table class="maptab">
+    <thead><tr><th>Token</th><th>Hex</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td class="tok">@keyword, @operator, @conditional</td><td><span class="chip" style="background:#ff3d8a"></span><code>#FF3D8A</code></td><td>Magenta — the drumbeat of the code</td></tr>
+      <tr><td class="tok">@function, @function.call, @constructor</td><td><span class="chip" style="background:#ff8a3d"></span><code>#FF8A3D</code></td><td>Tangerine — action verbs</td></tr>
+      <tr><td class="tok">@string, @string.regex</td><td><span class="chip" style="background:#7fe0eb"></span><code>#7FE0EB</code></td><td>Turquoise Hi — the cool pause in warm code</td></tr>
+      <tr><td class="tok">@type, @type.builtin, @namespace</td><td><span class="chip" style="background:#8fe3e8"></span><code>#8FE3E8</code></td><td>Aqua</td></tr>
+      <tr><td class="tok">@number, @boolean, @constant</td><td><span class="chip" style="background:#ffd67a"></span><code>#FFD67A</code></td><td>Gold</td></tr>
+      <tr><td class="tok">@property, @field, @tag</td><td><span class="chip" style="background:#ff3d8a"></span><code>#FF3D8A</code></td><td>Magenta (same as kw — intentional)</td></tr>
+      <tr><td class="tok">@variable, @parameter</td><td><span class="chip" style="background:#ffc6a0"></span><code>#FFC6A0</code></td><td>Rosegold — the default foreground</td></tr>
+      <tr><td class="tok">@comment</td><td><span class="chip" style="background:rgba(127,224,235,.55)"></span><code>rgba(127,224,235,.55)</code></td><td>Turquoise · 55% · italic</td></tr>
+      <tr><td class="tok">@punctuation.*</td><td><span class="chip" style="background:rgba(255,198,160,.55)"></span><code>rgba(255,198,160,.55)</code></td><td>Rosegold · 55%</td></tr>
+      <tr><td class="tok">@tag.attribute (JSX)</td><td><span class="chip" style="background:#ff8a3d"></span><code>#FF8A3D</code></td><td>Tangerine</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Editor chrome</h4>
+  <table class="maptab">
+    <thead><tr><th>Element</th><th>Treatment</th></tr></thead>
+    <tbody>
+      <tr><td class="tok">Background</td><td><code>rgba(30,10,40,0.72)</code> over blurred sunset wallpaper</td></tr>
+      <tr><td class="tok">Cursor</td><td>Tangerine <code>#FF8A3D</code>, block, no blink</td></tr>
+      <tr><td class="tok">Cursor line background</td><td><code>rgba(127,224,235,.06)</code> — subtle turquoise wash</td></tr>
+      <tr><td class="tok">Line numbers (gutter)</td><td><code>rgba(127,224,235,.32)</code>, relative, active line Tangerine bold</td></tr>
+      <tr><td class="tok">Indent guides</td><td><code>rgba(127,224,235,.12)</code>, 1px solid — barely visible</td></tr>
+      <tr><td class="tok">Visual selection</td><td><code>rgba(255,61,138,.22)</code></td></tr>
+      <tr><td class="tok">Search match</td><td>Gold fg on <code>rgba(255,214,122,.18)</code> bg</td></tr>
+      <tr><td class="tok">Diagnostic error / warn / info / hint</td><td>Magenta / Tangerine / Aqua / Turquoise — underline, no sign-column fill</td></tr>
+      <tr><td class="tok">Diff add / del / change</td><td>Turquoise Hi / Magenta / Gold</td></tr>
+      <tr><td class="tok">Git signs</td><td>Same as diff, column width 1</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Neovim bufferline (tabs)</h4>
+  <ul>
+    <li><strong>Style:</strong> pill tabs — <code>border-radius: 999px</code>, no borders, transparent bar background.</li>
+    <li><strong>Height:</strong> 28px. Padding <code>3px 14px</code>, margin <code>4px 4px 4px 0</code>.</li>
+    <li><strong>Active:</strong> <code>bg rgba(127,224,235,.22)</code>, <code>fg #7FE0EB</code>. (Pool pill.)</li>
+    <li><strong>Inactive:</strong> <code>bg rgba(255,198,160,.05)</code>, <code>fg rgba(255,198,160,.5)</code>.</li>
+    <li><strong>Modified dot:</strong> Magenta <code>●</code>, 8px, 4px right of filename.</li>
+    <li><strong>Filetype icon:</strong> render in its native color at 60% opacity.</li>
+    <li><strong>No close ×</strong> on tabs — cleaner.</li>
+  </ul>
+
+  <h4>Neovim statusline</h4>
+  <p style="font-size:13px">Powerline segments, arrow separator, order: mode → branch → file → diagnostics → filetype → position.</p>
+  <div class="bar">
+    <div class="mode">NORMAL</div>
+    <div class="branch">  main</div>
+    <div class="file flex">src/AnalyticsView.tsx</div>
+    <div class="diag">✓ 0  ✗ 0</div>
+    <div class="pos">122:20</div>
+  </div>
+  <ul>
+    <li><strong>Mode:</strong> Magenta bg, Dusk fg, uppercase, letter-spacing <code>1px</code>, bold. NORMAL/INSERT/VISUAL/REPLACE all share the same style — no per-mode color switch.</li>
+    <li><strong>Branch segment:</strong> bg <code>rgba(127,224,235,.2)</code>, fg Turquoise Hi. Nerd-font branch glyph.</li>
+    <li><strong>File:</strong> transparent bg, fg rgba(255,198,160,.72). Relative path.</li>
+    <li><strong>Diagnostics:</strong> bg <code>rgba(255,138,61,.18)</code>, fg Tangerine. Format <code>✓ N  ✗ N</code>.</li>
+    <li><strong>Position:</strong> Turquoise bg, Dusk fg, bold. Line:col only — no percentage.</li>
+    <li><strong>Separators:</strong> powerline arrow  (triangle), same-colored, no border.</li>
+  </ul>
+
+  <h4>tmux status bar</h4>
+  <div class="bar">
+    <div class="ses"> claude</div>
+    <div class="win">1 bundle-shopify</div>
+    <div class="win">2 dotfiles</div>
+    <div class="win a">3 claude ●</div>
+    <div class="win">4 server</div>
+    <div class="flex"></div>
+    <div class="bat">⚡ 92%</div>
+    <div class="clk">14:37</div>
+  </div>
+  <ul>
+    <li><strong>Position:</strong> bottom, height 24px.</li>
+    <li><strong>Background:</strong> <code>rgba(20,5,30,.55)</code> — warm dusk over the window.</li>
+    <li><strong>Session segment (left):</strong> Magenta bg, Dusk fg. Prefix with tmux glyph <code></code>.</li>
+    <li><strong>Window list:</strong> inactive <code>rgba(255,198,160,.45)</code>, active <code>bg rgba(127,224,235,.2)</code>, <code>fg #7FE0EB</code>, 6px gap between windows, 10px h-padding.</li>
+    <li><strong>Active window marker:</strong> Gold <code>●</code> after the window name.</li>
+    <li><strong>Right side, in order:</strong> battery (Gold glyph + percentage), date (rosegold 45%), clock in Turquoise bg + Dusk fg bold.</li>
+    <li><strong>Pane borders:</strong> inactive <code>rgba(255,61,138,.12)</code>, active <code>rgba(127,224,235,.35)</code> — cool when focused, warm when idle.</li>
+  </ul>
+
+  <h4>Claude Code conversation</h4>
+  <ul>
+    <li><strong>User bullet:</strong> Magenta <code>&gt;</code> character, bold.</li>
+    <li><strong>Assistant bullet:</strong> Turquoise Hi <code>◉</code>, followed by rosegold body text.</li>
+    <li><strong>Tool invocation title:</strong> Turquoise Hi <code>◉</code> + Tangerine tool name.</li>
+    <li><strong>Tool output paths:</strong> muted rosegold (<code>rgba(255,198,160,.6)</code>).</li>
+    <li><strong>Diff <code>+</code> lines:</strong> Turquoise Hi. <strong><code>-</code> lines:</strong> Magenta.</li>
+    <li><strong>Errors:</strong> <code>#FF5A5A</code> prefix <code>→ Error:</code>, body in muted rosegold.</li>
+    <li><strong>Prompt glyph:</strong> Magenta <code>&gt;</code>. Model indicator dot: Turquoise Hi <code>●</code> before model name.</li>
+    <li><strong>Hint text (e.g. "accept edits on"):</strong> muted rosegold 50%.</li>
+  </ul>
+</section>
+
+<!-- 05 Terminal preview -->
+<section>
+  <div class="sec-head"><span class="sec-num">05</span><h2>Preview <span class="accent">target</span></h2></div>
+  <p>A rendered approximation of what correctly-applied theme tokens should look like. Use as a visual reference when verifying output.</p>
+  <div class="terminal">
+    <div class="tw">
+      <div class="titlebar">
+        <div class="tl"><span class="c1"></span><span class="c2"></span><span class="c3"></span></div>
+        <div class="ttl">☀ ≈ nvim — networks ≈ ☀</div>
+        <div style="width:44px"></div>
+      </div>
+      <div class="body">
+        <div class="line"><span class="ln">1</span><span><span class="kw">const</span> <span class="fn">handleTabChange</span> <span class="pr">=</span> <span class="kw">useCallback</span>(() <span class="pr">=&gt;</span> {</span></div>
+        <div class="line"><span class="ln">2</span><span>  <span class="kw">const</span> tabIndex <span class="pr">=</span> tabs.<span class="fn">findIndex</span>((tab) <span class="pr">=&gt;</span> tab.id <span class="kw">===</span> id);</span></div>
+        <div class="line"><span class="ln">3</span><span>  <span class="cm">// Persist across navigation</span></span></div>
+        <div class="line"><span class="ln cur">122</span><span>  frequency: <span class="st">'weekly'</span>,</span></div>
+        <div class="line"><span class="ln">1</span><span>  shouldCompare: shouldCompare <span class="pr">&amp;&amp;</span> (compareStartDate <span class="pr">!==</span> <span class="nm">null</span>),</span></div>
+        <div class="line"><span class="ln">2</span><span>  <span class="pn">};</span></span></div>
+      </div>
+      <div class="bar" style="margin:0;border-radius:0;border-top:1px solid rgba(255,255,255,.05)">
+        <div class="mode">NORMAL</div>
+        <div class="branch"> main</div>
+        <div class="file flex">src/AnalyticsView.tsx</div>
+        <div class="diag">✓ 0  ✗ 0</div>
+        <div class="pos">122:20</div>
+      </div>
+      <div class="bar" style="margin:0;border-radius:0;background:rgba(20,5,30,.7)">
+        <div class="ses"> claude</div>
+        <div class="win">1 shopify</div>
+        <div class="win a">2 networks ●</div>
+        <div class="win">3 server</div>
+        <div class="flex"></div>
+        <div class="bat">⚡ 92%</div>
+        <div class="clk">14:37</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 Ghostty -->
+<section>
+  <div class="sec-head"><span class="sec-num">06</span><h2>Ghostty <span class="accent">window</span></h2></div>
+  <ul>
+    <li><strong>Background:</strong> <code>#1E0A28</code> at <strong>72% opacity</strong>, backdrop blur enabled.</li>
+    <li><strong>Foreground default:</strong> <code>#FFC6A0</code> (Rosegold).</li>
+    <li><strong>Cursor:</strong> block, <code>#FF8A3D</code> (Tangerine). No blink. Cursor-line tint <code>rgba(127,224,235,.06)</code>.</li>
+    <li><strong>Selection bg:</strong> <code>rgba(255,61,138,.22)</code>. Selection fg inherits.</li>
+    <li><strong>Window padding:</strong> 16px horizontal, 12px vertical. Corner radius 14px.</li>
+    <li><strong>Title bar:</strong> translucent, no background tint except a faint <code>rgba(255,61,138,.04)</code> wash. Title text <code>rgba(255,198,160,.6)</code>, 11px.</li>
+    <li><strong>macOS desktop wallpaper:</strong> linear gradient 175°: <code>#1A0A28 0% → #3A1550 25% → #6A2050 55% → #C95A4A 85% → #F2A070 100%</code>. Export as a 5K static image.</li>
+  </ul>
+
+  <h4>ANSI palette (16-color)</h4>
+  <table class="maptab">
+    <thead><tr><th>#</th><th>Normal</th><th>Bright</th></tr></thead>
+    <tbody>
+      <tr><td>0 · black</td><td><span class="chip" style="background:#1a0a28"></span><code>#1A0A28</code></td><td><span class="chip" style="background:#3a1550"></span><code>#3A1550</code></td></tr>
+      <tr><td>1 · red</td><td><span class="chip" style="background:#ff3d8a"></span><code>#FF3D8A</code></td><td><span class="chip" style="background:#ffb8d5"></span><code>#FFB8D5</code></td></tr>
+      <tr><td>2 · green</td><td><span class="chip" style="background:#7fe0eb"></span><code>#7FE0EB</code></td><td><span class="chip" style="background:#8fe3e8"></span><code>#8FE3E8</code></td></tr>
+      <tr><td>3 · yellow</td><td><span class="chip" style="background:#ffd67a"></span><code>#FFD67A</code></td><td><span class="chip" style="background:#ffb07a"></span><code>#FFB07A</code></td></tr>
+      <tr><td>4 · blue</td><td><span class="chip" style="background:#4ec9d7"></span><code>#4EC9D7</code></td><td><span class="chip" style="background:#7fe0eb"></span><code>#7FE0EB</code></td></tr>
+      <tr><td>5 · magenta</td><td><span class="chip" style="background:#ff3d8a"></span><code>#FF3D8A</code></td><td><span class="chip" style="background:#ff8a3d"></span><code>#FF8A3D</code></td></tr>
+      <tr><td>6 · cyan</td><td><span class="chip" style="background:#8fe3e8"></span><code>#8FE3E8</code></td><td><span class="chip" style="background:#7fe0eb"></span><code>#7FE0EB</code></td></tr>
+      <tr><td>7 · white</td><td><span class="chip" style="background:#ffc6a0"></span><code>#FFC6A0</code></td><td><span class="chip" style="background:#f5ecd7"></span><code>#F5ECD7</code></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:var(--muted)">
+    Mapping note: we collapse red and magenta onto the same warm-pink axis, and blue and cyan onto the same turquoise axis. This is deliberate — the theme has two poles, not six.
+  </p>
+</section>
+
+<!-- 07 Shell prompt -->
+<section>
+  <div class="sec-head"><span class="sec-num">07</span><h2>Shell <span class="accent">prompt</span></h2></div>
+  <p>Minimal, two-line. No powerline arrows in the prompt — keep those for the editor statusline so the pieces feel distinct.</p>
+  <ul>
+    <li><strong>Line 1:</strong> <code style="color:var(--turquoiseHi)">~/code/networks</code> in Turquoise Hi · <code style="color:var(--tangerine)">  main</code> in Tangerine · <code style="color:var(--gold)">●</code> Gold dot if dirty, <code style="color:var(--turquoiseHi)">○</code> hollow if clean.</li>
+    <li><strong>Line 2:</strong> Magenta <code>❯</code> glyph, single space, then input. On non-zero exit, change glyph to Tangerine <code>❯</code>.</li>
+    <li><strong>Duration:</strong> right-aligned on line 1 if command took &gt;2s, format <code>2.4s</code> in muted rosegold.</li>
+    <li><strong>No hostname, no username.</strong> You know where you are.</li>
+  </ul>
+</section>
+
+<!-- 08 Do / Don't -->
+<section>
+  <div class="sec-head"><span class="sec-num">08</span><h2>Do &amp; <span class="accent">don't</span></h2></div>
+  <div class="dodont">
+    <div class="do">
+      <h4>Do</h4>
+      <ul>
+        <li>Let the sunset wallpaper bleed through the window at ~28–32% darkness</li>
+        <li>Use turquoise for <em>structure</em> (branch, session, clock, indent guides)</li>
+        <li>Use magenta for <em>identity</em> (keywords, mode, prompt, props)</li>
+        <li>Keep comments quiet — turquoise at 55% italic</li>
+        <li>Preserve the 60/12/12/8/5/3 usage ratio at a glance</li>
+        <li>Use rounded 999px pills for the bufferline and rounded 4px for tmux</li>
+      </ul>
+    </div>
+    <div class="dont">
+      <h4>Don't</h4>
+      <ul>
+        <li>Don't add green, red, or blue LSP-state colors — route everything through the 4 warm + 3 cool tokens</li>
+        <li>Don't bold keywords (color carries weight) — reserve bold for Mode and Clock</li>
+        <li>Don't use a flat black or solid desktop — the gradient is part of the theme</li>
+        <li>Don't let warm colors sit alone on a screen — if there's no turquoise visible, something is off</li>
+        <li>Don't introduce drop shadows on UI text — glass and glow only</li>
+        <li>Don't use emoji as icons in statuslines — use nerdfont glyphs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 09 Tokens -->
+<section>
+  <div class="sec-head"><span class="sec-num">09</span><h2>Token <span class="accent">reference</span></h2></div>
+  <p>The single source of truth. Any config the implementing agent writes should reference these names, not raw hex.</p>
+  <div class="tokens">
+<span class="g">// identity — warm</span>
+<span class="k">--sp-magenta</span>:     <span class="v">#FF3D8A</span>;  <span class="c">/* keywords, mode, prompt, props */</span>
+<span class="k">--sp-magenta-hi</span>:  <span class="v">#FFB8D5</span>;  <span class="c">/* active tab, titles */</span>
+<span class="k">--sp-tangerine</span>:   <span class="v">#FF8A3D</span>;  <span class="c">/* functions, cursor, diagnostics */</span>
+<span class="k">--sp-peach</span>:       <span class="v">#FFB07A</span>;  <span class="c">/* glow, soft warm */</span>
+<span class="k">--sp-gold</span>:        <span class="v">#FFD67A</span>;  <span class="c">/* numbers, booleans, battery */</span>
+
+<span class="g">// structure — cool</span>
+<span class="k">--sp-turquoise</span>:   <span class="v">#4EC9D7</span>;  <span class="c">/* clock, session, position */</span>
+<span class="k">--sp-turquoise-hi</span>:<span class="v">#7FE0EB</span>;  <span class="c">/* active tmux window, branch, strings */</span>
+<span class="k">--sp-aqua</span>:        <span class="v">#8FE3E8</span>;  <span class="c">/* types, cyan fallback */</span>
+<span class="k">--sp-deep-pool</span>:   <span class="v">#0D4858</span>;
+
+<span class="g">// ground</span>
+<span class="k">--sp-dusk</span>:        <span class="v">#1A0A28</span>;  <span class="c">/* window bg base, on-warm text */</span>
+<span class="k">--sp-plum</span>:        <span class="v">#3A1550</span>;
+<span class="k">--sp-wine</span>:        <span class="v">#6A2050</span>;
+<span class="k">--sp-sunburn</span>:     <span class="v">#C95A4A</span>;
+<span class="k">--sp-sunsoft</span>:     <span class="v">#F2A070</span>;
+<span class="k">--sp-rosegold</span>:    <span class="v">#FFC6A0</span>;  <span class="c">/* default foreground */</span>
+<span class="k">--sp-cream</span>:       <span class="v">#F5ECD7</span>;  <span class="c">/* high-contrast fg, rare */</span>
+
+<span class="g">// surfaces + alpha</span>
+<span class="k">--sp-bg</span>:          <span class="v">rgba(30,10,40,0.72)</span>;
+<span class="k">--sp-cursorline</span>:  <span class="v">rgba(127,224,235,0.06)</span>;
+<span class="k">--sp-selection</span>:   <span class="v">rgba(255,61,138,0.22)</span>;
+<span class="k">--sp-indent</span>:      <span class="v">rgba(127,224,235,0.12)</span>;
+<span class="k">--sp-comment</span>:     <span class="v">rgba(127,224,235,0.55)</span>;
+<span class="k">--sp-punct</span>:       <span class="v">rgba(255,198,160,0.55)</span>;
+<span class="k">--sp-muted</span>:       <span class="v">rgba(255,198,160,0.60)</span>;
+<span class="k">--sp-pane-border</span>: <span class="v">rgba(255,61,138,0.12)</span>;
+<span class="k">--sp-pane-active</span>: <span class="v">rgba(127,224,235,0.35)</span>;
+  </div>
+</section>
+
+<!-- 10 Checklist -->
+<section>
+  <div class="sec-head"><span class="sec-num">10</span><h2>Implementation <span class="accent">checklist</span></h2></div>
+  <div class="checklist">
+    <h3>For the agent applying this guide</h3>
+    <ul>
+      <li>Produce a 5K desktop wallpaper matching the gradient spec in §06.</li>
+      <li>Ghostty: config with background + opacity + cursor + selection + ANSI palette + padding + radius.</li>
+      <li>Neovim: colorscheme that maps every Treesitter capture listed in §04. No highlight group should be left at its default.</li>
+      <li>Neovim: configure bufferline plugin with pill tabs per §04. Enable relative numbers, indent guides (1px, alpha 12%), signcolumn.</li>
+      <li>Neovim: statusline plugin configured to the powerline layout in §04, nerdfont glyphs required.</li>
+      <li>tmux: status bar bottom, height 1, segments and colors per §04. Pane borders cool-when-active, warm-when-idle.</li>
+      <li>tmux: prefix + copy-mode indicators tinted Magenta to stay on-theme.</li>
+      <li>Claude Code CLI: terminal color overrides (if supported) to ensure <code>+</code> diffs render Turquoise Hi and tool titles Tangerine.</li>
+      <li>Shell prompt: Starship or similar, matching §07 two-line spec. Two-line.</li>
+      <li>Verify the 60/12/12/8/5/3 usage ratio on a real screen — if cool accents disappear, rebalance.</li>
+      <li>Nerdfont installed and set in Ghostty (recommended: Monaspace Neon NF, fallback JetBrains Mono NF).</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  Sunset · Pool Splash — Style Guide v1.0 · April 2026
+</footer>
+
+</div>
+</body>
+</html>
