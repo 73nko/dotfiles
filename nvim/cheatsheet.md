@@ -53,10 +53,10 @@ Referencia completa de la config de Neovim. Todos los keymaps, workflows y plugi
 ```
 gd                   Ir a la definicion del simbolo
 grr                  Ver todas las referencias (Snacks picker)
-grn                  Renombrar simbolo (built-in 0.12)
-<leader>rn           Renombrar simbolo (alias custom)
-gra                  Code actions (built-in 0.12)
-<leader>ca           Code actions (alias custom)
+grn                  Renombrar simbolo (built-in 0.11+)
+gra                  Code actions (built-in 0.11+)
+<leader>ri           Incremental rename con preview inline
+<leader>rr           (visual) Menu de refactor (extract, inline...)
 <leader>cf           Formatear fichero al acabar
 ```
 
@@ -65,8 +65,9 @@ gra                  Code actions (built-in 0.12)
 ### Buscar y reemplazar multi-fichero
 
 ```
-<leader>sg           Live grep — busca el texto en el proyecto
+<leader>sg           Live grep, busca el texto en el proyecto
                      En el picker: <C-q> manda resultados al quickfix
+<leader>sF           Find and replace global con grug-far (preview en buffer)
 :cfdo s/viejo/nuevo/g | w    Reemplaza en todos los ficheros del quickfix
 ```
 
@@ -114,7 +115,7 @@ v{select} s          En visual: selecciona y s para sustituir
 <leader>cd           Ver diagnostico de la linea actual
 ]d / [d              Saltar al siguiente / anterior diagnostico
 ]e / [e              Saltar al siguiente / anterior error (solo ERROR)
-<leader>ca           Code action — auto-fix si hay sugerencia
+gra                  Code action, auto-fix si hay sugerencia
 <leader>xw           Ver todos los errores del workspace en Trouble
 <leader>cf           Formatear para resolver problemas de estilo
 ```
@@ -126,7 +127,7 @@ v{select} s          En visual: selecciona y s para sustituir
 ```
 <leader>ac           Abrir Claude Code en split lateral
 <Tab>                Aceptar sugerencia de Supermaven
-<C-j>                Aceptar solo la siguiente palabra
+<M-l>                Aceptar solo la siguiente palabra (Alt+L)
 <C-]>                Rechazar sugerencia
 <leader>ag           Abrir Gemini CLI como alternativa
 ```
@@ -140,7 +141,8 @@ v{select} s          En visual: selecciona y s para sustituir
 ]c / [c              Saltar a la siguiente / anterior clase
 ]t / [t              Saltar al siguiente / anterior TODO
 ; / ,                Repetir ultimo salto treesitter (adelante / atras)
-<leader>O            Aerial — vista panoramica de la estructura
+<leader>co           Aerial, vista panoramica de la estructura
+<leader>ut           Toggle treesitter-context (sticky header con scope actual)
 ```
 
 ---
@@ -218,8 +220,9 @@ v{select} s          En visual: selecciona y s para sustituir
 | `<leader>sq` | Quickfix list |
 | `<leader>sp` | Proyectos |
 | `<leader>sR` | Reanudar ultimo picker |
+| `<leader>sF` | Find & Replace global (grug-far) |
 | `<leader>s"` | Registros |
-| `<leader>st` | File tree |
+| `<leader>st` | File tree (reveal) |
 
 ## Harpoon v2
 
@@ -234,14 +237,15 @@ v{select} s          En visual: selecciona y s para sustituir
 | `<leader>mj` | Siguiente fichero |
 | `<leader>mk` | Anterior fichero |
 
-## File Explorer (nvim-tree)
+## File Explorer (Snacks)
+
+nvim-tree eliminado el 2026-04-21. Snacks.explorer es ahora la unica via.
 
 | Keymap | Descripcion |
 | --- | --- |
 | `<leader>ee` | Toggle explorador |
-| `<leader>ef` | Explorador en fichero actual |
-| `<leader>ec` | Colapsar explorador |
-| `<leader>er` | Refrescar explorador |
+| `<leader>ef` | Reveal fichero actual en el explorador |
+| `<leader>st` | Alias de reveal (legacy, Snacks search/tree) |
 
 ### Dentro del explorador
 
@@ -249,15 +253,13 @@ v{select} s          En visual: selecciona y s para sustituir
 | --- | --- |
 | `a` | Crear fichero (nombre + Enter) |
 | `a` + `carpeta/` | Crear directorio (termina en `/`) |
-| `a` + `ruta/fichero.ts` | Crear con directorios intermedios |
 | `r` | Renombrar |
 | `d` | Borrar |
 | `c` / `x` / `p` | Copiar / Cortar / Pegar |
-| `Enter` / `o` | Abrir fichero |
-| `v` | Abrir en split vertical |
-| `s` | Abrir en split horizontal |
-| `H` | Mostrar/ocultar ficheros ocultos |
-| `W` | Colapsar todo el arbol |
+| `<CR>` | Abrir fichero |
+| `<C-v>` | Abrir en split vertical |
+| `<C-s>` | Abrir en split horizontal |
+| `H` | Toggle ficheros ocultos |
 | `q` | Cerrar explorador |
 
 ## Buffers & Tabs
@@ -296,14 +298,17 @@ v{select} s          En visual: selecciona y s para sustituir
 
 ### Custom keymaps
 
+`<leader>ca` y `<leader>rn` eliminados el 2026-04-21: duplicaban los defaults 0.11+ (`gra`, `grn`).
+
 | Keymap | Descripcion |
 | --- | --- |
 | `gd` | Go to definition (Snacks picker) |
 | `gD` | Go to declaration |
 | `<C-o>` / `<C-i>` | Jump back / forward (jumplist) |
-| `<leader>ca` | Code actions (alias de gra) |
-| `<leader>rn` | Rename symbol (alias de grn) |
 | `<leader>ri` | Incremental rename (preview inline) |
+| `<leader>rr` (visual) | Menu de refactor (extract, inline...) |
+| `<leader>co` | Toggle Aerial (code outline) |
+| `<leader>cp` | Toggle render-markdown preview (en buffers markdown) |
 | `<leader>cd` | Line diagnostics |
 | `<leader>cD` | Buffer diagnostics |
 | `[d` / `]d` | Prev / Next diagnostic |
@@ -457,7 +462,7 @@ Linters por tipo:
 | `<leader>ac` | Toggle Claude Code (split derecho) |
 | `<leader>ag` | Toggle Gemini CLI (split derecho) |
 | `<Tab>` | Aceptar sugerencia Supermaven |
-| `<C-j>` | Aceptar siguiente palabra |
+| `<M-l>` | Aceptar siguiente palabra (Alt+L, convencion Copilot) |
 | `<C-]>` | Rechazar sugerencia |
 
 > Las sugerencias aparecen como ghost text gris mientras escribes. Tab solo activa Supermaven cuando el menu de blink.cmp esta cerrado y no hay snippet activo.
@@ -481,6 +486,7 @@ Configuraciones DAP disponibles:
 - Attach to process: conectar a proceso Node corriendo
 - Debug Jest Tests: debug con --inspect-brk
 - Debug Next.js server: Next.js dev con debugger
+- Launch Chrome against localhost:3000: debug frontend React/Next con source maps
 - Python: via nvim-dap-python
 - Go: via dap-go + delve
 - Rust: via codelldb (rustaceanvim)
@@ -553,7 +559,7 @@ Configuraciones DAP disponibles:
 
 | Keymap | Descripcion |
 | --- | --- |
-| `<leader>O` | Toggle vista de estructura |
+| `<leader>co` | Toggle vista de estructura (code outline) |
 | `[a` / `]a` | Anterior / siguiente simbolo |
 
 ## Sessions (auto-session)
@@ -570,14 +576,21 @@ Configuraciones DAP disponibles:
 | `<leader>Ns` | Historial de notificaciones |
 | `<leader>Nh` | Ocultar notificaciones |
 
+## UI Toggles
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>cp` | Toggle render-markdown preview |
+| `<leader>ut` | Toggle treesitter-context (sticky header) |
+| `<leader>co` | Toggle Aerial (code outline) |
+| `:ColorizerToggle` | Toggle preview de colores |
+
 ## Misc
 
 | Keymap | Descripcion |
 | --- | --- |
-| `<leader>mp` | Toggle render markdown |
 | `<leader>l` | Trigger lint |
-| `:ColorizerToggle` | Toggle preview de colores |
 | `:Lazy` | Plugin manager |
 | `:Mason` | LSP/formatter/linter manager |
 | `<leader>ri` | Incremental rename (preview inline) |
-| `<leader>r` (visual) | Menu de refactor (extract, inline...) |
+| `<leader>rr` (visual) | Menu de refactor (extract, inline...) |

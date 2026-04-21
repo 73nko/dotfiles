@@ -56,6 +56,9 @@ opt.swapfile = false
 -- persistent undo
 opt.undofile = true
 
+-- reread file when modified externally (needed for Claude/Gemini CLI edits)
+opt.autoread = true
+
 -- faster CursorHold events (used by LSP, gitsigns, etc.)
 opt.updatetime = 200
 

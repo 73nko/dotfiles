@@ -75,6 +75,16 @@ return {
           cwd = "${workspaceFolder}",
           console = "integratedTerminal",
         },
+        -- Next.js / React frontend (launch Chrome against dev server)
+        {
+          type = "pwa-chrome",
+          request = "launch",
+          name = "Launch Chrome against localhost:3000",
+          url = "http://localhost:3000",
+          webRoot = "${workspaceFolder}",
+          sourceMaps = true,
+          userDataDir = false,
+        },
       }
     end
 

@@ -28,6 +28,6 @@ return {
     link = { enabled = true },
   },
   keys = {
-    { "<leader>mp", "<cmd>RenderMarkdown toggle<CR>", ft = "markdown", desc = "Toggle Markdown Preview" },
+    { "<leader>cp", "<cmd>RenderMarkdown toggle<CR>", ft = "markdown", desc = "Toggle Markdown Preview" },
   },
 }

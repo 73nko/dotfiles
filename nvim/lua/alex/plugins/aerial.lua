@@ -32,7 +32,6 @@ return {
 				Array = " ",
 				Boolean = "󰨙 ",
 				Class = " ",
-				Codeium = "󰘦 ",
 				Color = " ",
 				Control = " ",
 				Collapsed = " ",
@@ -72,7 +71,7 @@ return {
 				-- Use [a/]a instead of {/} to preserve vim's paragraph navigation
 				vim.keymap.set("n", "[a", "<cmd>AerialPrev<CR>", { buffer = bufnr, desc = "Aerial prev symbol" })
 				vim.keymap.set("n", "]a", "<cmd>AerialNext<CR>", { buffer = bufnr, desc = "Aerial next symbol" })
-				vim.keymap.set("n", "<leader>O", "<cmd>AerialToggle!<CR>", { desc = "Toggle Aerial code view" })
+				vim.keymap.set("n", "<leader>co", "<cmd>AerialToggle!<CR>", { desc = "Toggle Aerial code outline" })
 			end,
 		})
 	end,

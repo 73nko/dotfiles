@@ -6,9 +6,9 @@ return {
       keymaps = {
         accept_suggestion = "<Tab>",
         clear_suggestion = "<C-]>",
-        accept_word = "<C-j>",
+        accept_word = "<M-l>",
       },
-      ignore_filetypes = { "snacks_picker_input", "minifiles" },
+      ignore_filetypes = { "snacks_picker_input", "snacks_dashboard" },
       color = {
         suggestion_color = "#6c7086", -- subtle grey (Catppuccin surface2)
         cterm = 244,

@@ -23,7 +23,7 @@ return {
     "ThePrimeagen/refactoring.nvim",
     keys = {
       {
-        "<leader>r",
+        "<leader>rr",
         function()
           require("refactoring").select_refactor({
             show_success_message = true,
@@ -33,6 +33,7 @@ return {
         noremap = true,
         silent = true,
         expr = false,
+        desc = "Refactor menu",
       },
     },
     opts = {},

@@ -156,12 +156,9 @@ return {
         opts.desc = "Show LSP type definitions (Snacks)"
         keymap.set("n", "grt", function() Snacks.picker.lsp_type_definitions() end, opts)
 
-        -- Keep custom leader keymaps for muscle memory
-        opts.desc = "See available code actions"
-        keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-
-        opts.desc = "Smart rename"
-        keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+        -- LSP defaults (Neovim 0.11+) already provide:
+        --   gra -> code action, grn -> rename, grr -> references, gri -> implementations
+        -- Custom <leader>ca / <leader>rn removed on 2026-04-21 to avoid duplication.
 
         -- Diagnostics
         opts.desc = "Show buffer diagnostics"

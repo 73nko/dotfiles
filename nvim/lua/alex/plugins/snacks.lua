@@ -33,7 +33,7 @@ return {
             { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
             { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
             { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-            { icon = "󰙅 ", key = "e", desc = "File Exporer", action = ":lua require('ranger-nvim').open(true)" },
+            { icon = "󰙅 ", key = "e", desc = "File Explorer", action = ":lua Snacks.explorer()" },
             {
               icon = " ",
               key = "c",
@@ -463,7 +463,41 @@ return {
         function()
           Snacks.explorer.reveal({ hidden = true })
         end,
-        desc = "[T]ree",
+        desc = "[T]ree (reveal current)",
+      },
+      -- File explorer (migrated from nvim-tree on 2026-04-21)
+      {
+        "<leader>ee",
+        function()
+          Snacks.explorer()
+        end,
+        desc = "Toggle file explorer",
+      },
+      {
+        "<leader>ef",
+        function()
+          Snacks.explorer.reveal({ hidden = true })
+        end,
+        desc = "Reveal file in explorer",
+      },
+      -- AI terminals (migrated from claude.lua and gemini.lua on 2026-04-21)
+      {
+        "<leader>ac",
+        function()
+          Snacks.terminal.toggle("claude", {
+            win = { position = "right", width = 0.4, border = "rounded" },
+          })
+        end,
+        desc = "Toggle Claude Code",
+      },
+      {
+        "<leader>ag",
+        function()
+          Snacks.terminal.toggle("gemini", {
+            win = { position = "right", width = 0.4, border = "rounded" },
+          })
+        end,
+        desc = "Toggle Gemini CLI",
       },
       {
         "<leader>sr",

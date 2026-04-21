@@ -43,6 +43,7 @@ return {
       { "<leader>b",  group = "buffer" },
       { "<leader>c",  group = "code" },
       { "<leader>d",  group = "debug" },
+      { "<leader>e",  group = "explorer" },
       { "<leader>g",  group = "git" },
       { "<leader>gd", group = "diff view" },
       { "<leader>h",  group = "git hunks" },
@@ -54,6 +55,8 @@ return {
       { "<leader>s",  group = "search/snacks" },
       { "<leader>t",  group = "test" },
       { "<leader>T",  group = "tabs" },
+      { "<leader>u",  group = "ui toggles" },
+      { "<leader>w",  group = "workspace/session" },
       { "<leader>x",  group = "trouble/diagnostics" },
     })
   end,

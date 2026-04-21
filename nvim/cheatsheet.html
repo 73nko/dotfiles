@@ -304,7 +304,7 @@ const WORKFLOWS = [
     steps: [
       { keys: '<leader>cd', text: 'Ver diagnostico de la linea actual' },
       { keys: ']d / [d', text: 'Saltar al siguiente / anterior error' },
-      { keys: '<leader>ca', text: 'Code action — auto-fix si hay sugerencia' },
+      { keys: 'gra', text: 'Code action, auto-fix si hay sugerencia' },
       { keys: '<leader>xw', text: 'Ver todos los errores del workspace en Trouble' },
       { keys: '<leader>cf', text: 'Formatear para resolver problemas de estilo' },
     ]
@@ -315,7 +315,7 @@ const WORKFLOWS = [
     steps: [
       { keys: '<leader>ac', text: 'Abrir Claude Code en split lateral' },
       { keys: '<Tab>', text: 'Aceptar sugerencia de Supermaven' },
-      { keys: '<C-j>', text: 'Aceptar solo la siguiente palabra' },
+      { keys: '<M-l>', text: 'Aceptar solo la siguiente palabra (Alt+L, convencion Copilot)' },
       { keys: '<C-]>', text: 'Rechazar sugerencia' },
       { keys: '<leader>ag', text: 'Abrir Gemini CLI como alternativa' },
     ]
@@ -328,7 +328,8 @@ const WORKFLOWS = [
       { keys: ']c / [c', text: 'Saltar a la siguiente / anterior clase' },
       { keys: ']t / [t', text: 'Saltar al siguiente / anterior TODO' },
       { keys: '; / ,', text: 'Repetir ultimo salto treesitter (adelante / atras)' },
-      { keys: '<leader>O', text: 'Aerial — vista panoramica de la estructura' },
+      { keys: '<leader>co', text: 'Aerial, vista panoramica de la estructura' },
+      { keys: '<leader>ut', text: 'Toggle treesitter-context (sticky header del scope)' },
     ]
   },
 ];
@@ -416,6 +417,7 @@ const SECTIONS = [
       ['Quickfix', '<leader>sq'],
       ['Projects', '<leader>sp'],
       ['Resume last picker', '<leader>sR'],
+      ['Find & Replace (grug-far)', '<leader>sF', 'Buffer global con preview'],
       ['Registers', '<leader>s"'],
       ['File tree', '<leader>st'],
       ['Help pages', '<leader>sh'],
@@ -440,27 +442,24 @@ const SECTIONS = [
   },
   {
     id: 'explorer',
-    title: 'File Explorer',
+    title: 'File Explorer (Snacks)',
     icon: '🌲',
     color: 'green',
     items: [
-      ['Toggle explorer', '<leader>ee'],
-      ['Explorer on current file', '<leader>ef'],
-      ['Collapse explorer', '<leader>ec'],
-      ['Refresh explorer', '<leader>er'],
+      ['Toggle explorer', '<leader>ee', 'Snacks.explorer (nvim-tree eliminado 2026-04-21)'],
+      ['Reveal current file', '<leader>ef'],
+      ['Reveal (alias)', '<leader>st', 'Snacks search/tree legacy'],
       ['Crear fichero', 'a', 'Escribe nombre + Enter'],
       ['Crear directorio', 'a + nombre/', 'Termina en / para crear carpeta'],
-      ['Crear con ruta completa', 'a + ruta/fichero.ts', 'Crea directorios intermedios'],
       ['Renombrar', 'r'],
       ['Borrar', 'd'],
       ['Copiar', 'c'],
       ['Cortar', 'x'],
       ['Pegar', 'p'],
-      ['Abrir fichero', 'Enter / o'],
-      ['Abrir split vertical', 'v'],
-      ['Abrir split horizontal', 's'],
-      ['Mostrar/ocultar ocultos', 'H'],
-      ['Colapsar todo', 'W'],
+      ['Abrir fichero', '<CR>'],
+      ['Abrir split vertical', '<C-v>'],
+      ['Abrir split horizontal', '<C-s>'],
+      ['Toggle ficheros ocultos', 'H'],
       ['Cerrar explorador', 'q'],
     ]
   },
@@ -504,8 +503,6 @@ const SECTIONS = [
       ['Go to declaration', 'gD'],
       ['Jump back (jumplist)', '<C-o>'],
       ['Jump forward', '<C-i>'],
-      ['Code actions (alias)', '<leader>ca'],
-      ['Rename symbol (alias)', '<leader>rn'],
       ['Line diagnostics', '<leader>cd'],
       ['Buffer diagnostics', '<leader>cD'],
       ['Prev / Next diagnostic', '[d / ]d'],
@@ -599,7 +596,7 @@ const SECTIONS = [
       ['Toggle Claude Code', '<leader>ac'],
       ['Toggle Gemini CLI', '<leader>ag'],
       ['Accept AI suggestion (Tab)', '<Tab>', 'Supermaven ghost text'],
-      ['Accept next word', '<C-j>', 'Supermaven partial accept'],
+      ['Accept next word', '<M-l>', 'Supermaven partial accept (Alt+L)'],
       ['Dismiss suggestion', '<C-]>'],
     ]
   },
@@ -618,6 +615,10 @@ const SECTIONS = [
       ['Run last', '<leader>dl'],
       ['Open REPL', '<leader>dr'],
       ['Toggle DAP UI', '<leader>dt'],
+      ['Launch: file (pwa-node)', ':DapContinue', 'JS/TS config "Launch file"'],
+      ['Launch: Jest tests', ':DapContinue', 'Config "Debug Jest Tests"'],
+      ['Launch: Next.js server', ':DapContinue', 'Config "Debug Next.js server"'],
+      ['Launch: Chrome localhost:3000', ':DapContinue', 'Config "Launch Chrome" (pwa-chrome)'],
     ]
   },
   {
@@ -760,24 +761,33 @@ const SECTIONS = [
     ]
   },
   {
+    id: 'ui-toggles',
+    title: 'UI Toggles',
+    icon: '🎛️',
+    color: 'cyan',
+    items: [
+      ['Code outline (Aerial)', '<leader>co', 'Antes <leader>O'],
+      ['Prev / Next symbol (Aerial)', '[a / ]a'],
+      ['Toggle treesitter context', '<leader>ut', 'Sticky JSX/func headers'],
+      ['Toggle markdown render', '<leader>cp', 'render-markdown.nvim (antes <leader>mp)'],
+      ['Toggle color preview', ':ColorizerToggle'],
+      ['Notification history', '<leader>Ns'],
+      ['Hide notifications', '<leader>Nh'],
+    ]
+  },
+  {
     id: 'misc',
     title: 'Misc & Session',
     icon: '🔧',
     color: 'muted',
     items: [
-      ['Code outline (Aerial)', '<leader>O'],
-      ['Prev / Next symbol', '[a / ]a', 'En Aerial'],
       ['Restore session', '<leader>wr'],
       ['Save session', '<leader>ws'],
-      ['Toggle markdown render', '<leader>mp'],
-      ['Notification history', '<leader>Ns'],
-      ['Hide notifications', '<leader>Nh'],
       ['Trigger lint', '<leader>l'],
-      ['Toggle color preview', ':ColorizerToggle'],
       ['Lazy plugin manager', ':Lazy'],
       ['Mason LSP manager', ':Mason'],
       ['Incremental rename', '<leader>ri', 'Preview del rename inline'],
-      ['Visual refactor menu', '<leader>r', 'En visual mode: extract, inline...'],
+      ['Visual refactor menu', '<leader>rr', 'En visual mode: extract, inline... (antes <leader>r)'],
     ]
   },
 ];
