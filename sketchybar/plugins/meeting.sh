@@ -3,10 +3,10 @@
 # icalBuddy needs Full Disk Access to read Calendar (System Settings > Privacy).
 source "$HOME/.config/sketchybar/colors.sh"
 
-ICALBUDDY=/opt/homebrew/bin/icalBuddy
+ICALBUDDY="$(command -v icalBuddy 2>/dev/null)"
 GLYPH=$''   # nf-fa-calendar
 
-if [ ! -x "$ICALBUDDY" ]; then
+if [ -z "$ICALBUDDY" ] || [ ! -x "$ICALBUDDY" ]; then
   sketchybar --set "$NAME" icon="$GLYPH" label="no icalBuddy" icon.color="$FAINT" label.color="$FAINT"
   exit 0
 fi

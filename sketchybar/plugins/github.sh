@@ -3,10 +3,10 @@
 # Falls back gracefully if offline / not logged in.
 source "$HOME/.config/sketchybar/colors.sh"
 
-GH=/opt/homebrew/bin/gh
+GH="$(command -v gh 2>/dev/null)"
 GLYPH=$''   # nf-fa-github
 
-if [ ! -x "$GH" ] || ! "$GH" auth status >/dev/null 2>&1; then
+if [ -z "$GH" ] || [ ! -x "$GH" ] || ! "$GH" auth status >/dev/null 2>&1; then
   sketchybar --set "$NAME" icon="$GLYPH" label="--" icon.color="$FAINT" label.color="$FAINT"
   exit 0
 fi
