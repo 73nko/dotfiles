@@ -167,6 +167,16 @@ else
     warn "fish_plugins manifest not found"
 fi
 
+# Re-apply Tide fish-path patch (fisher update overwrites it).
+# Tide bakes the resolved Cellar fish path into fish_prompt at session start,
+# so upgrading fish via brew breaks every running session. Swap to the stable
+# symlink so the baked-in path survives upgrades.
+TIDE_PROMPT="$DOTFILES_DIR/fish/functions/fish_prompt.fish"
+if [[ -f "$TIDE_PROMPT" ]] && grep -q '^status fish-path | read -l fish_path' "$TIDE_PROMPT"; then
+    sed -i '' 's#^status fish-path | read -l fish_path#command -v fish | read -l fish_path#' "$TIDE_PROMPT"
+    ok "Patched Tide fish_prompt to use stable fish path"
+fi
+
 # ============================================
 # 7. Tide prompt configuration
 # ============================================
@@ -363,6 +373,11 @@ echo ""
 echo -e "${GREEN}=== Bootstrap complete! ===${NC}"
 echo ""
 echo "What to do now:"
+echo ""
+echo "  IMPORTANT: if you ran this from an existing fish session, that"
+echo "  session's prompt now references a stale Cellar fish path (brew"
+echo "  upgraded fish out from under it). Run 'exec fish' or open a new"
+echo "  terminal to refresh."
 echo ""
 echo "  1. Open Ghostty (it's your terminal now)"
 echo "  2. Fish + Tide prompt should load automatically"

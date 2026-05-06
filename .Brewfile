@@ -36,7 +36,6 @@ brew "fish"
 brew "fnm"
 brew "fzf"
 brew "gh"
-brew "ghostscript"
 brew "git"
 brew "glow"
 brew "httpie"
@@ -106,7 +105,6 @@ cask "obsidian"
 cask "raycast"
 cask "sf-symbols"
 cask "slack"
-cask "updatest/tap/updatest@beta"
 cask "visual-studio-code"
 cask "whatsapp"
 cask "xdevplatform/tap/xurl"
@@ -114,9 +112,6 @@ cask "zed"
 mas "Amphetamine", id: 937984704
 mas "Canva", id: 897446215
 mas "GeoGebra Calculator Suite", id: 1504416652
-mas "Menu Bar Calendar", id: 1558360383
-mas "Pages", id: 409201541
-mas "Pages", id: 361309726
 go "github.com/go-delve/delve/cmd/dlv"
 go "github.com/abice/go-enum"
 go "github.com/Gelio/go-global-update"
@@ -131,5 +126,4 @@ go "golang.org/x/vuln/cmd/govulncheck"
 go "github.com/koron/iferr"
 cargo "cargo-generate"
 cargo "cargo-update"
-cargo "simple-completion-language-server"
 uv "nano-pdf"
