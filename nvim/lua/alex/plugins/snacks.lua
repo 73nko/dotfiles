@@ -43,7 +43,10 @@ return {
           { section = "header" },
           { section = "keys", gap = 1, padding = 1 },
           { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-          { pane = 2, icon = " ", title = "Projects",     section = "projects",     indent = 2, padding = 1 },
+          -- session = false evita el self:action recursivo que crashea cuando
+          -- el proyecto tiene sesion guardada (auto-session). Ver is_float()
+          -- sobre self.win = nil. Restaurar sesion queda en <leader>wr.
+          { pane = 2, icon = " ", title = "Projects",     section = "projects",     indent = 2, padding = 1, session = false },
           {
             pane = 2,
             icon = " ",
@@ -59,10 +62,12 @@ return {
               local git = cwd .. "/.git"
               return vim.fn.isdirectory(git) == 1 or vim.fn.filereadable(git) == 1
             end,
-            -- git -C <cwd> evita cualquier resolucion magica de shell/fish.
-            -- 2>/dev/null silencia warnings en el caso borde de race condition
-            -- (.git desaparece entre enabled y cmd).
-            cmd = "git -C " .. (vim.loop.cwd() or ".") .. " --no-pager diff --stat -B -M -C 2>/dev/null",
+            -- NO usar "git -C <path>" con un path calculado aqui: esta tabla se
+            -- evalua cuando lazy construye el spec (cwd = donde se lanzo nvim),
+            -- no cuando se renderiza el dashboard (cwd = tras el :cd del hijack).
+            -- Dejamos que git herede el cwd de nvim en tiempo de ejecucion.
+            -- `enabled` ya garantiza que ese cwd tiene .git.
+            cmd = "git --no-pager diff --stat -B -M -C 2>/dev/null",
             height = 10,
             padding = 1,
             ttl = 5 * 60,
@@ -418,6 +423,14 @@ return {
       zen = { enabled = true },
     },
     keys = {
+      -- Dashboard: volver a la pantalla de inicio
+      {
+        "<leader>H",
+        function()
+          Snacks.dashboard()
+        end,
+        desc = "Home (Dashboard)",
+      },
       -- Notify (moved from <leader>n* to <leader>N* to avoid collision with swap-next prefix)
       {
         "<leader>Ns",

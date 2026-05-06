@@ -1,0 +1,137 @@
+# ============================================================================
+# AeroSpace — Sunset · Pool Splash
+# ----------------------------------------------------------------------------
+# Tiling WM for macOS. No SIP changes needed.
+# Bindings cluster: alt = focus / launch, alt+shift = move, alt+ctrl = layout.
+# ============================================================================
+
+# Start AeroSpace at login. Borders + SketchyBar are already brew services
+# (homebrew.mxcl.{borders,sketchybar}) so we do NOT relaunch them here.
+start-at-login = true
+
+# Don't show AeroSpace in the menu bar (SketchyBar will visualise spaces).
+automatically-unhide-macos-hidden-apps = false
+
+# Notify SketchyBar so the workspace pills update live.
+exec-on-workspace-change = [
+  '/bin/bash',
+  '-c',
+  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+]
+
+# ----------------------------------------------------------------------------
+# Mouse follows focus, focus follows mouse — feels native.
+# ----------------------------------------------------------------------------
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focus-changed = ['move-mouse window-lazy-center']
+
+# ----------------------------------------------------------------------------
+# Layout
+# ----------------------------------------------------------------------------
+# Default = tiles. Accordion is alt+/ (toggle).
+[gaps]
+inner.horizontal = 8
+inner.vertical = 8
+outer.left = 8
+outer.bottom = 8
+outer.right = 8
+# Top gap reserves space for SketchyBar.
+# bar height 32 + y_offset 4 + bar shadow ~8 + breathing 6 = 50
+outer.top = 45
+
+# ----------------------------------------------------------------------------
+# Apps that should always float (settings dialogs, calculators, finder, etc.)
+# ----------------------------------------------------------------------------
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.raycast.macos'
+run = 'layout floating'
+
+# ----------------------------------------------------------------------------
+# Main mode bindings
+# ----------------------------------------------------------------------------
+[mode.main.binding]
+
+# focus
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# move (swap with neighbour)
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# resize current node
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+
+# layouts
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+# alt+shift+space is hijacked by Spanish layouts (non-breaking space).
+# alt+shift+t = toggle float/tiling.
+alt-shift-t = 'layout floating tiling'
+
+# go to workspace
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+
+# move window to workspace
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+
+# back-and-forth between last two workspaces
+alt-tab = 'workspace-back-and-forth'
+
+# move whole workspace between monitors (only works with multiple displays)
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# join split / fullscreen
+alt-f = 'fullscreen'
+alt-shift-f = 'macos-native-fullscreen'
+
+# reload config without restart
+alt-shift-c = 'reload-config'
+
+# enter resize mode (then h/j/k/l = resize, esc = exit)
+alt-r = 'mode resize'
+
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+enter = 'mode main'
+esc = 'mode main'

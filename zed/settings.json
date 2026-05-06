@@ -1,5 +1,11 @@
 {
   // ─── Session ───────────────────────────────────────────────
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "git_panel": {
+    "dock": "right"
+  },
   "edit_predictions": {
     "provider": "zed"
   },
@@ -57,6 +63,7 @@
 
   // ─── AI Agent (Claude via Copilot Chat) ────────────────────
   "agent": {
+    "dock": "left",
     "tool_permissions": {
       "default": "allow"
     },
@@ -89,7 +96,7 @@
 
   // ─── Project Panel ─────────────────────────────────────────
   "project_panel": {
-    "dock": "left",
+    "dock": "right",
     "default_width": 260,
     "indent_size": 16,
     "entry_spacing": "comfortable",

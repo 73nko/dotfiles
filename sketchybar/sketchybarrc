@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# ============================================================================
+# SketchyBar — Sunset · Pool Splash
+# ============================================================================
+# Floating top bar inspired by ~/.config/Style Guide.html.
+# Layout: [apple] [front_app]  ...  [volume] [wifi] [battery] [calendar] [clock]
+# Mode without tiling WM: shows only system info, no workspace pills.
+# ============================================================================
+
+CONFIG_DIR="$HOME/.config/sketchybar"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+ITEM_DIR="$CONFIG_DIR/items"
+
+source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/icons.sh"
+
+##### Custom events (registered before items subscribe) #####
+sketchybar --add event aerospace_workspace_change
+
+##### Bar appearance #####
+# Floating, rounded, glassy. Sits above the native menu bar (which we auto-hide
+# in defaults). corner_radius makes it a pill-bar; y_offset+margin float it.
+sketchybar --bar \
+  height=32 \
+  position=top \
+  sticky=on \
+  padding_left=10 \
+  padding_right=10 \
+  color="$BAR_COLOR" \
+  corner_radius=14 \
+  blur_radius=18 \
+  y_offset=4 \
+  margin=10 \
+  notch_width=210 \
+  topmost=window \
+  shadow=on \
+  font_smoothing=on \
+  border_color=0x33ff3d8a \
+  border_width=1
+
+##### Item defaults #####
+sketchybar --default \
+  updates=when_shown \
+  icon.font="JetBrainsMono Nerd Font:Bold:14.0" \
+  icon.color="$ROSEGOLD" \
+  icon.padding_left=10 \
+  icon.padding_right=4 \
+  label.font="JetBrainsMono Nerd Font:Semibold:12.0" \
+  label.color="$ROSEGOLD" \
+  label.padding_left=4 \
+  label.padding_right=10 \
+  background.corner_radius=999 \
+  background.height=22 \
+  background.color="$TRANSPARENT" \
+  padding_left=2 \
+  padding_right=2
+
+##### Left side #####
+source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/front_app.sh"
+
+##### Right side (rendered right-to-left, so first sourced = rightmost) #####
+source "$ITEM_DIR/clock.sh"
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/wifi.sh"
+source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/amphetamine.sh"
+source "$ITEM_DIR/github.sh"
+source "$ITEM_DIR/meeting.sh"
+
+##### Hot-reload listener #####
+sketchybar --hotload on
+
+##### Force initial update #####
+sketchybar --update
+
+echo "sketchybar configured: Sunset · Pool Splash"
