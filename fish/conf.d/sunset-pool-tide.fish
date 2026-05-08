@@ -9,6 +9,17 @@ if not status is-interactive
     exit
 end
 
+# ---- Layout: items en cada lado del prompt ---------------------------------
+# Universales (-U) para sobrevivir reinicios. Solo se siembran si NO existen
+# (primera instalacion en maquina nueva). Asi un `tide configure` posterior
+# puede customizarlos sin que este conf.d los pise en cada shell.
+if not set -q _tide_left_items
+    set -U _tide_left_items os pwd git newline character
+end
+if not set -q _tide_right_items
+    set -U _tide_right_items status cmd_duration context jobs direnv node python rustc java ruby go kubectl aws elixir time
+end
+
 # ---- Character (prompt glyph, linea 2) -------------------------------------
 set -g tide_character_color            FF3D8A   # magenta normal
 set -g tide_character_color_failure    FF8A3D   # tangerine en fallo
