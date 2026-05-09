@@ -19,8 +19,44 @@ thefuck/__pycache__/
 
 # Sensitive tool dirs
 github-copilot
-raycast
+
+# Raycast: app data binaria (extensiones, AI history, settings) NO se versiona.
+# Solo dejamos pasar el theme y el README para que viajen al migrar de equipo.
+raycast/*
+!raycast/README.md
+!raycast/sunset-pool-splash.json
 
 # Claude local settings
 **/.claude/settings.local.json
+
+# ============================================================================
+# Fish: solo versionar lo nuestro. Todo lo de fisher/plugins se reinstala
+# en cada maquina via `fisher update` leyendo fish_plugins.
+# ============================================================================
+
+# Fish state files (universal vars + atomic-write artifacts) NUNCA versionar.
 fish/fish_variables
+fish/fish_variables*
+
+# functions/: ignoramos todo y permitimos solo las nuestras.
+fish/functions/*
+!fish/functions/dy.fish
+!fish/functions/log.fish
+!fish/functions/ssh.fish
+
+# conf.d/: ignoramos todo y permitimos solo las nuestras (no _tide_init).
+fish/conf.d/*
+!fish/conf.d/atuin.fish
+!fish/conf.d/direnv.fish
+!fish/conf.d/env.fish
+!fish/conf.d/fnm.fish
+!fish/conf.d/fzf.fish
+!fish/conf.d/git.fish
+!fish/conf.d/navi.fish
+!fish/conf.d/pay-respects.fish
+!fish/conf.d/rustup.fish
+!fish/conf.d/sunset-pool-tide.fish
+!fish/conf.d/zoxide.fish
+
+# completions/: las generan los binarios al instalarse. Nada de versionar.
+fish/completions/*

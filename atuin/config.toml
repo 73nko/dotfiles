@@ -1,0 +1,24 @@
+# atuin — local history config.
+# Synced to cloud only if you opt-in with `atuin register`/`atuin login`.
+
+# UI
+style = "compact"           # cleaner than full
+inline_height = 12          # rows shown in fzf-like overlay
+show_preview = true         # preview the selected command
+show_help = false
+
+# Search behaviour
+search_mode = "fuzzy"
+filter_mode = "global"      # search across all dirs by default
+filter_mode_shell_up_key_binding = "session"   # ↑ = current shell only, Ctrl-R = global
+
+# Don't save these
+history_filter = [
+    "^secret-",
+    "^GITHUB_TOKEN=",
+]
+
+# Privacy
+update_check = false
+sync_frequency = "5m"
+auto_sync = true            # only matters if you've registered an account

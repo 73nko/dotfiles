@@ -3,7 +3,7 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["pnpm", "node", "gem", "uv", "ruby_gems"]
+disable = ["pnpm", "node", "gem", "ruby_gems"]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
@@ -58,7 +58,10 @@ disable = ["pnpm", "node", "gem", "uv", "ruby_gems"]
 
 # Custom commands
 [commands]
-#"Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
+# Trunca el log de operaciones de mole a las ultimas 500 lineas si existe.
+# Sin esto, cada limpieza con mole anade a operations.log indefinidamente.
+# El || true evita que falle topgrade si mole nunca se ha ejecutado.
+"Trim mole logs" = "if [ -f ~/.config/mole/operations.log ]; then tail -n 500 ~/.config/mole/operations.log > /tmp/mole-trim.log && mv /tmp/mole-trim.log ~/.config/mole/operations.log; fi"
 
 [brew]
 #greedy_cask = true

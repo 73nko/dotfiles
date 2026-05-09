@@ -92,6 +92,33 @@ else
 fi
 
 # ----------------------------------------------------------------------------
+bold "[5b/9] Tier S/A/B tooling — bat theme + gh extensions"
+# ----------------------------------------------------------------------------
+# Rebuild bat cache so the Sunset Pool Splash tmTheme is registered.
+if command -v bat >/dev/null 2>&1; then
+  bat cache --build >/dev/null 2>&1 && ok "bat theme cache rebuilt (Sunset Pool Splash)"
+fi
+# gh extensions: dashboard de PRs/issues (gh-dash), limpieza de branches con
+# PR merged (gh-poi), y CLI assistant (gh-copilot).
+if command -v gh >/dev/null 2>&1; then
+  install_gh_ext() {
+    local repo="$1"
+    local match="$2"
+    if ! gh extension list 2>/dev/null | grep -q "$match"; then
+      gh extension install "$repo" >/dev/null 2>&1 && ok "installed $match extension"
+    else
+      skip "$match extension already installed"
+    fi
+  }
+  install_gh_ext "dlvhdr/gh-dash"        "gh dash"
+  install_gh_ext "seachicken/gh-poi"     "gh poi"
+  install_gh_ext "github/gh-copilot"     "gh copilot"
+fi
+# delta gitconfig keys: ahora viven en ~/.config/git/config (versionado).
+# El bloque que escribia git config --global aqui se borro para tener una
+# unica fuente de verdad y evitar drift entre maquinas.
+
+# ----------------------------------------------------------------------------
 bold "[6/9] Brew services — borders + sketchybar"
 # ----------------------------------------------------------------------------
 for svc in borders sketchybar; do
@@ -121,6 +148,10 @@ info "macOS Tahoe gates a few things. Toggle them in System Settings:"
 info "  Privacy & Security > Screen Recording > sketchybar = ON"
 info "  Privacy & Security > Accessibility   > AeroSpace  = ON"
 info "  Privacy & Security > Calendar        > icalBuddy  = ON   (for the meeting widget)"
+info ""
+info "If sketchybar's permission gets revoked after a brew upgrade (cdhash"
+info "mismatch), remove its entry in the Screen Recording panel and add the"
+info "binary back at /opt/homebrew/opt/sketchybar/bin/sketchybar."
 
 # ----------------------------------------------------------------------------
 bold "[9/9] Final hint"
@@ -130,5 +161,12 @@ info "Reload tmux:          tmux source-file ~/.config/tmux/tmux.conf"
 info "Re-export Brewfile:   bash ~/.config/scripts/brew-export.sh"
 info "Update Yazi plugins:  ya pkg upgrade"
 info "Test pay-respects:    mistype a command then press F"
+info ""
+info "New goodies installed today:"
+info "  atuin     ↑ for fuzzy shell history (also Ctrl+R)"
+info "  delta     enriches git diff / show / log -p / lazygit previews"
+info "  gh dash   TUI dashboard for PRs and issues"
+info "  navi      Ctrl+G launches an interactive cheatsheet picker"
+info "  pomodoro  click the hourglass pill in SketchyBar to start/stop"
 
 bold "Migration complete."

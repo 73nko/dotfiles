@@ -1,0 +1,108 @@
+# gh-dash · Sunset Pool Splash
+# Run with:  gh dash
+# Switch sections with:  Tab / Shift+Tab
+# Switch PRs/Issues with:  s
+# Filter:  /
+
+prSections:
+  - title: Reviews waiting on me
+    filters: is:open review-requested:@me archived:false
+    limit: 50
+  - title: My open PRs
+    filters: is:open author:@me archived:false
+    limit: 30
+  - title: YOUR-ORG — all open
+    filters: is:open org:YOUR-ORG archived:false
+    limit: 50
+  - title: Mentioned & assigned
+    filters: is:open mentions:@me archived:false
+    limit: 30
+  - title: Recently merged (mine)
+    filters: is:merged author:@me
+    limit: 20
+    layout:
+      title:
+        grow: true
+      author:
+        hidden: true
+
+issuesSections:
+  - title: Assigned to me
+    filters: is:open assignee:@me archived:false
+    limit: 50
+  - title: My open issues
+    filters: is:open author:@me archived:false
+    limit: 30
+  - title: YOUR-ORG — all open
+    filters: is:open org:YOUR-ORG archived:false
+    limit: 50
+
+defaults:
+  preview:
+    open: true
+    width: 50
+  prsLimit: 50
+  issuesLimit: 50
+  view: prs
+  layout:
+    prs:
+      updatedAt:
+        width: 7
+      repo:
+        width: 28
+      author:
+        width: 16
+      authorIcon:
+        hidden: false
+      assignees:
+        width: 14
+      base:
+        width: 12
+        hidden: false
+      lines:
+        width: 16
+    issues:
+      updatedAt:
+        width: 7
+      repo:
+        width: 28
+      creator:
+        width: 16
+      assignees:
+        width: 14
+  refetchIntervalMinutes: 30
+  dateFormat: "DD-MM-YY"
+
+# Theme — Sunset Pool Splash
+theme:
+  ui:
+    sectionsShowCount: true
+    table:
+      showSeparator: true
+      compact: false
+  colors:
+    text:
+      primary:   "#FFC6A0"   # rosegold
+      secondary: "#7FE0EB"   # turquoise hi
+      inverted:  "#1A0A28"   # dusk
+      faint:     "#A37B70"   # rosegold @ 60% pre-mixed over dusk
+      warning:   "#FF8A3D"   # tangerine
+      success:   "#7FE0EB"   # turquoise hi
+      error:     "#FF3D8A"   # magenta
+    background:
+      selected:  "#3A1550"   # plum
+    border:
+      primary:   "#7FE0EB"   # turquoise hi
+      secondary: "#3A1550"   # plum
+      faint:     "#2D1140"   # plum @ 60% pre-mixed over dusk
+
+keybindings:
+  prs:
+    - key: O
+      command: gh pr checkout {{.PrNumber}}
+    - key: c
+      command: gh pr comment {{.PrNumber}}
+  issues: []
+
+repoPaths:
+  YOUR-ORG/*: ~/YOUR-ORG

@@ -20,6 +20,7 @@ source "$CONFIG_DIR/icons.sh"
 
 ##### Custom events (registered before items subscribe) #####
 sketchybar --add event aerospace_workspace_change
+sketchybar --add event aerospace_mode_change
 
 ##### Bar appearance #####
 # Floating, rounded, glassy. Sits above the native menu bar (which we auto-hide
@@ -62,17 +63,19 @@ sketchybar --default \
 ##### Left side #####
 source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/spaces.sh"
+source "$ITEM_DIR/aerospace_mode.sh"
 source "$ITEM_DIR/front_app.sh"
 
 ##### Right side (rendered right-to-left, so first sourced = rightmost) #####
 source "$ITEM_DIR/clock.sh"
 source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/meeting.sh"
 source "$ITEM_DIR/battery.sh"
 source "$ITEM_DIR/wifi.sh"
 source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/pomodoro.sh"
 source "$ITEM_DIR/amphetamine.sh"
 source "$ITEM_DIR/github.sh"
-source "$ITEM_DIR/meeting.sh"
 
 ##### Hot-reload listener #####
 sketchybar --hotload on

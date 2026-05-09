@@ -1,0 +1,110 @@
+# Git config global versionado en ~/.config (XDG).
+#
+# Importante sobre prioridades:
+# - ~/.gitconfig (si existe) tiene prioridad sobre este fichero.
+# - Mantener identidad (user.name, user.email) y signing en ~/.gitconfig
+#   para no exponer correos en el repo publico de dotfiles.
+# - Aqui solo van defaults razonables y portables entre maquinas.
+#
+# Pre-requisitos: delta (git-delta brew) para el pager. Si no lo tienes:
+#   brew install git-delta
+
+[core]
+  editor = nvim
+  pager = delta
+  # fsmonitor activa el daemon de macOS para detectar cambios sin escanear.
+  # Mejora dramatica en repos grandes (YOUR-ORG-brain, monorepos).
+  fsmonitor = true
+  # Cache de archivos no rastreados para que git status no relea todo siempre.
+  untrackedCache = true
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+  light = false
+  side-by-side = false
+  line-numbers = true
+  # Tema custom que registras via `bat cache --build` en migrate-terminal-setup.
+  # Si delta no lo encuentra (ej. en maquina antes del primer bat cache), cae
+  # a default. No rompe.
+  syntax-theme = Sunset Pool Splash
+  # Paths clicables en terminales que soporten OSC 8 (ghostty, iterm2, kitty).
+  hyperlinks = true
+
+[diff]
+  # colorMoved colorea bloques movidos distinto a anadidos/borrados puros.
+  colorMoved = default
+  # Algoritmo histogram detecta refactors mejor que el Myers default.
+  algorithm = histogram
+
+[merge]
+  # zdiff3 muestra el ancestro comun en los conflict markers. Ayuda a entender
+  # que cambio cada lado, no solo que esta en conflicto.
+  conflictstyle = zdiff3
+
+[rerere]
+  # rerere = "reuse recorded resolution". Recuerda como resolviste un conflicto
+  # y lo aplica automaticamente la siguiente vez. Util en rebases largos.
+  enabled = true
+  autoUpdate = true
+
+[branch]
+  # Lista branches por fecha del ultimo commit, mas reciente primero.
+  sort = -committerdate
+
+[tag]
+  # Tags ordenados por version semantica, no alfabeticamente.
+  sort = -version:refname
+
+[fetch]
+  # Borra refs locales de branches que ya no existen en remote.
+  prune = true
+  pruneTags = true
+  # Paraleliza fetch en multiples remotes.
+  parallel = 0
+
+[rebase]
+  # Auto-stash de cambios pendientes antes de rebase, restaura despues.
+  autoStash = true
+  # Auto-squash respeta commits con prefijo fixup! / squash!.
+  autoSquash = true
+  # Actualiza refs de branches encima del rebase.
+  updateRefs = true
+
+[pull]
+  # ff = only previene merge commits accidentales. Si no avanza fast-forward,
+  # falla y te obliga a rebase explicitamente.
+  ff = only
+
+[push]
+  # autoSetupRemote evita el "git push --set-upstream origin branch" eterno.
+  autoSetupRemote = true
+  # Push solo de la branch actual a su upstream.
+  default = simple
+  # Verifica refs remotos antes de pushear (proteccion contra force-push roto).
+  followTags = true
+
+[init]
+  defaultBranch = main
+
+[help]
+  # Si escribes mal un comando, sugerencias en vez de error seco.
+  autocorrect = prompt
+
+[column]
+  # git branch / git status en columnas si la terminal es ancha.
+  ui = auto
+
+[commit]
+  verbose = true
+
+[log]
+  # Tema de fechas relativo (hace 2 horas) en logs.
+  date = relative
+
+[status]
+  # Muestra branch tracking info en git status.
+  branch = true
+  showStash = true

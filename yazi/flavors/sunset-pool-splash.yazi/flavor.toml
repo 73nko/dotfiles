@@ -1,0 +1,115 @@
+# Yazi flavor — Sunset · Pool Splash
+# Aligned with ~/.config/Style Guide.html
+# warm = identity (magenta/tangerine/peach/gold)
+# cool = structure (turquoise/turquoise_hi/aqua)
+# ground = dusk/plum/wine/rosegold
+# Syntax highlighting in preview pane is delegated to ./tmtheme.xml
+# (symlinked to ~/.config/bat/themes/Sunset Pool Splash.tmTheme).
+
+[manager]
+cwd = { fg = "#7FE0EB", bold = true }
+hovered = { fg = "#1A0A28", bg = "#7FE0EB", bold = true }
+preview_hovered = { underline = true }
+find_keyword = { fg = "#FFD67A", bold = true, italic = true }
+find_position = { fg = "#FF3D8A", bg = "reset", bold = true, italic = true }
+
+marker_copied = { fg = "#FFB07A", bg = "#FFB07A" }
+marker_cut = { fg = "#FF3D8A", bg = "#FF3D8A" }
+marker_marked = { fg = "#7FE0EB", bg = "#7FE0EB" }
+marker_selected = { fg = "#FFB8D5", bg = "#FFB8D5" }
+
+tab_active = { fg = "#1A0A28", bg = "#7FE0EB", bold = true }
+tab_inactive = { fg = "#FFC6A0", bg = "#3A1550" }
+# tab_width removed — yazi 25+ no longer accepts a plain integer here.
+
+count_copied = { fg = "#1A0A28", bg = "#FFB07A" }
+count_cut = { fg = "#1A0A28", bg = "#FF3D8A" }
+count_selected = { fg = "#1A0A28", bg = "#7FE0EB" }
+
+border_symbol = "│"
+border_style = { fg = "#7FE0EB" }
+
+syntect_theme = "tmtheme.xml"
+
+[status]
+separator_open = ""
+separator_close = ""
+separator_style = { fg = "#3A1550", bg = "#3A1550" }
+
+mode_normal = { fg = "#1A0A28", bg = "#7FE0EB", bold = true }
+mode_select = { fg = "#1A0A28", bg = "#FF3D8A", bold = true }
+mode_unset = { fg = "#1A0A28", bg = "#FFB07A", bold = true }
+
+progress_label = { fg = "#FFC6A0", bold = true }
+progress_normal = { fg = "#7FE0EB", bg = "#3A1550" }
+progress_error = { fg = "#FF3D8A", bg = "#3A1550" }
+
+permissions_t = { fg = "#7FE0EB" }
+permissions_r = { fg = "#FFD67A" }
+permissions_w = { fg = "#FF8A3D" }
+permissions_x = { fg = "#FFB07A" }
+permissions_s = { fg = "#FFC6A0" }
+
+[select]
+border = { fg = "#7FE0EB" }
+active = { fg = "#FF3D8A", bold = true }
+inactive = {}
+
+[input]
+border = { fg = "#7FE0EB" }
+title = {}
+value = {}
+selected = { reversed = true }
+
+[completion]
+border = { fg = "#7FE0EB" }
+active = { bg = "#3A1550" }
+inactive = {}
+
+icon_file = { fg = "#FFC6A0" }
+icon_folder = { fg = "#7FE0EB" }
+icon_command = { fg = "#FF8A3D" }
+
+[tasks]
+border = { fg = "#7FE0EB" }
+title = {}
+hovered = { underline = true }
+
+[which]
+mask = { bg = "#1A0A28" }
+cand = { fg = "#7FE0EB" }
+rest = { fg = "#FFC6A0" }
+desc = { fg = "#FF8A3D" }
+separator = "  "
+separator_style = { fg = "#A37B70" }
+
+[help]
+on = { fg = "#7FE0EB" }
+exec = { fg = "#FF8A3D" }
+desc = { fg = "#FFC6A0" }
+hovered = { bg = "#3A1550", bold = true }
+footer = { fg = "#1A0A28", bg = "#FFC6A0" }
+
+[filetype]
+# Yazi 25+ requires `url` (or `mime`/`is`) on every rule. `name` was removed.
+rules = [
+  # Image
+  { mime = "image/*", fg = "#7FE0EB" },
+  # Video
+  { mime = "video/*", fg = "#FFB07A" },
+  # Audio
+  { mime = "audio/*", fg = "#FFD67A" },
+  # Archive
+  { mime = "application/{zip,rar,7z,tar,gzip,xz,zstd,bzip*}", fg = "#FF8A3D" },
+  # Code / text
+  { url = "*.{md,markdown,html,xml,yaml,toml,json,csv}", fg = "#FFC6A0" },
+  { url = "*.{ts,tsx,js,jsx,py,rs,go,c,cpp,h,sh,fish,lua}", fg = "#FFC6A0" },
+  # Hidden
+  { url = ".*", fg = "#A37B70" },
+  # Executable
+  { url = "*", is = "exec", fg = "#FF3D8A" },
+  # Directories — turquoise hi
+  { url = "*/", fg = "#7FE0EB" },
+  # Fallback (everything else)
+  { url = "*", fg = "#FFC6A0" },
+]

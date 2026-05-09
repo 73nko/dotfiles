@@ -39,8 +39,9 @@ play = [
 ]
 
 [open]
+# Yazi 25+: each rule needs `url` (or `mime`/`is`). `name` was removed.
 rules = [
-    { name = "*/", use = [
+    { url = "*/", use = [
         "edit",
         "open",
         "reveal",
@@ -69,7 +70,7 @@ rules = [
         "edit",
         "reveal",
     ] },
-    { mime = "*/", use = [
+    { mime = "*/*", use = [
         "open",
         "reveal",
     ] },
@@ -84,9 +85,10 @@ image_bound = [0, 0]
 suppress_preload = false
 
 [plugin]
+# Yazi 25+ requires `group` as a string ("files" or "directories").
 fetchers = [
-    { id = "git", name = "*", run = "git" },
-    { id = "git", name = "*/", run = "git" },
+    { id = "git", url = "*",  run = "git", group = "files" },
+    { id = "git", url = "*/", run = "git", group = "directories" },
 ]
 
 [input]

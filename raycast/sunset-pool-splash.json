@@ -1,0 +1,22 @@
+{
+  "appearance": "dark",
+  "version": "1",
+  "name": "Sunset Pool Splash",
+  "author": "Alex Ramos",
+  "authorUsername": "apramos89",
+  "description": "Miami sunset warmth + cool pool structure. Warm id (magenta/tangerine/gold) over dusk/plum ground, turquoise for active states.",
+  "colors": {
+    "background": "#1A0A28",
+    "backgroundSecondary": "#3A1550",
+    "text": "#FFC6A0",
+    "selection": "#FF3D8A",
+    "loader": "#7FE0EB",
+    "red": "#FF3D8A",
+    "orange": "#FF8A3D",
+    "yellow": "#FFD67A",
+    "green": "#7FE0EB",
+    "blue": "#4EC9D7",
+    "purple": "#C95A4A",
+    "magenta": "#FFB8D5"
+  }
+}

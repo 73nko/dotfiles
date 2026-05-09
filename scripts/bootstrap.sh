@@ -99,16 +99,21 @@ fi
 # ============================================
 # 3. Rust toolchain (needed BEFORE Brewfile for cargo packages)
 # ============================================
+# Instalado via brew rustup-init en lugar de curl|sh: reproducible, idempotente,
+# verificable contra el manifest de Homebrew. brew solo provee el instalador;
+# el toolchain real va a ~/.cargo/bin como con rustup.rs.
 progress "Rust toolchain"
 if command -v rustup &>/dev/null; then
     ok "Rustup already installed"
 elif command -v rustc &>/dev/null; then
     ok "Rust available via Homebrew"
 else
-    echo "  Installing Rust via rustup..."
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y 2>&1 | tee -a "$LOG_FILE"
+    echo "  Installing rustup-init via Homebrew..."
+    brew install rustup-init >/dev/null 2>&1 || true
+    echo "  Bootstrapping default toolchain..."
+    rustup-init -y --no-modify-path --quiet --default-toolchain stable 2>&1 | tee -a "$LOG_FILE"
     source "$HOME/.cargo/env"
-    ok "Rust installed"
+    ok "Rust installed via brew rustup-init"
 fi
 
 # ============================================
@@ -149,28 +154,35 @@ fi
 # ============================================
 # 6. Fisher + Fish plugins
 # ============================================
+# Reglas: fish_plugins es la fuente de verdad. Las funciones/completions de
+# plugins NO se versionan (gitignore las excluye); fisher update las (re)instala
+# en cada bootstrap. Asi nunca tenemos drift entre dos maquinas.
 progress "Fisher plugin manager and Fish plugins"
-if [[ -f "$DOTFILES_DIR/fish/functions/fisher.fish" ]]; then
-    ok "Fisher already present in config"
+
+# 1. Fisher self-install si no existe (check funcional, no por path).
+if fish -c "type -q fisher" 2>/dev/null; then
+    ok "Fisher already installed"
 else
     echo "  Installing Fisher..."
     fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher" 2>&1 | tee -a "$LOG_FILE"
     ok "Fisher installed"
 fi
 
-# Install plugins from fish_plugins manifest
+# 2. Sincronizar plugins desde el manifesto. `fisher update` instala los que
+#    faltan, actualiza los existentes, desinstala los que no estan listados.
 if [[ -f "$DOTFILES_DIR/fish/fish_plugins" ]]; then
-    echo "  Installing Fish plugins from manifest..."
+    echo "  Syncing plugins from fish_plugins..."
     fish -c "fisher update" 2>&1 | tee -a "$LOG_FILE"
-    ok "Fish plugins installed (fisher, plugin-git, tide)"
+    ok "Fish plugins synced from manifest"
 else
     warn "fish_plugins manifest not found"
 fi
 
-# Re-apply Tide fish-path patch (fisher update overwrites it).
-# Tide bakes the resolved Cellar fish path into fish_prompt at session start,
-# so upgrading fish via brew breaks every running session. Swap to the stable
-# symlink so the baked-in path survives upgrades.
+# 3. Patch fish_prompt para sobrevivir upgrades de fish via brew.
+# Tide cachea la ruta absoluta de fish (Cellar) cuando arranca el prompt. Si
+# brew actualiza fish, la ruta cacheada apunta a una version eliminada y rompe
+# el prompt en cualquier shell ya abierta. Cambiamos a `command -v fish` que
+# resuelve el symlink estable.
 TIDE_PROMPT="$DOTFILES_DIR/fish/functions/fish_prompt.fish"
 if [[ -f "$TIDE_PROMPT" ]] && grep -q '^status fish-path | read -l fish_path' "$TIDE_PROMPT"; then
     sed -i '' 's#^status fish-path | read -l fish_path#command -v fish | read -l fish_path#' "$TIDE_PROMPT"
@@ -180,15 +192,12 @@ fi
 # ============================================
 # 7. Tide prompt configuration
 # ============================================
+# La configuracion de tide (colores + layout) viene del conf.d
+# sunset-pool-tide.fish, que siembra _tide_left_items / _tide_right_items
+# como universales solo si no existen, y aplica colores en cada shell.
+# No dependemos de fish_variables (estado de maquina, no versionado).
 progress "Tide prompt"
-# Tide's universal variables are stored in fish_variables which is already
-# part of the config. If it exists, Tide will pick up the configuration
-# automatically on first launch.
-if [[ -f "$DOTFILES_DIR/fish/fish_variables" ]]; then
-    ok "Tide configuration found in fish_variables (will auto-load)"
-else
-    warn "fish_variables not found. Run 'tide configure' manually after first launch"
-fi
+ok "Tide layout + colors come from conf.d/sunset-pool-tide.fish"
 
 # ============================================
 # 8. TPM (tmux plugin manager)

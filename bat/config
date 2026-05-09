@@ -1,0 +1,5 @@
+# bat — Sunset Pool Splash
+--theme="Sunset Pool Splash"
+--style="numbers,changes,header"
+--paging=auto
+--tabs=2

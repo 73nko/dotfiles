@@ -1,0 +1,81 @@
+#  Btop theme  ·  Sunset · Pool Splash
+#  Aligned with ~/.config/Style Guide.html — warm leads, cool balances.
+#  -------------------------------------------------------------------
+#  Identity (warm)        magenta #FF3D8A · tangerine #FF8A3D · peach #FFB07A · gold #FFD67A
+#  Structure (cool)       turquoise #4EC9D7 · turquoise hi #7FE0EB · aqua #8FE3E8
+#  Ground                 dusk #1A0A28 · plum #3A1550 · rosegold #FFC6A0
+#  -------------------------------------------------------------------
+
+# Main area — solid dusk background with rosegold foreground
+theme[main_bg]="#1a0a28"
+theme[main_fg]="#ffc6a0"
+
+# Title and major highlight
+theme[title]="#ffc6a0"
+theme[hi_fg]="#ff3d8a"
+
+# Selected background/foreground
+theme[selected_bg]="#3a1550"
+theme[selected_fg]="#ffb8d5"
+
+# Inactive elements — muted rosegold
+theme[inactive_fg]="#6a4a3a"
+
+# Text inside graphs/meters
+theme[graph_text]="#ffc6a0"
+
+# Misc element coloring (process state, mem available, etc.)
+theme[meter_bg]="#3a1550"
+theme[proc_misc]="#7fe0eb"
+
+# CPU box — magenta border (identity)
+theme[cpu_box]="#ff3d8a"
+
+# Memory box — aqua (cool/structural)
+theme[mem_box]="#7fe0eb"
+
+# Network box — peach (warm soft)
+theme[net_box]="#ffb07a"
+
+# Processes box — magenta hi
+theme[proc_box]="#ffb8d5"
+
+# Single-bar dividers between boxes
+theme[div_line]="#3a1550"
+
+# CPU temperature gradient: cool → warm → hot
+theme[temp_start]="#7fe0eb"
+theme[temp_mid]="#ff8a3d"
+theme[temp_end]="#ff3d8a"
+
+# CPU usage gradient: aqua (idle) → tangerine (busy) → magenta (max)
+theme[cpu_start]="#8fe3e8"
+theme[cpu_mid]="#ff8a3d"
+theme[cpu_end]="#ff3d8a"
+
+# Memory: free → available → cached → used (turquoise → aqua → peach → tangerine)
+theme[free_start]="#7fe0eb"
+theme[free_mid]=""
+theme[free_end]=""
+theme[available_start]="#8fe3e8"
+theme[available_mid]=""
+theme[available_end]=""
+theme[cached_start]="#ffb07a"
+theme[cached_mid]=""
+theme[cached_end]=""
+theme[used_start]="#ff8a3d"
+theme[used_mid]="#ff3d8a"
+theme[used_end]="#ff3d8a"
+
+# Disk I/O gradient
+theme[download_start]="#8fe3e8"
+theme[download_mid]="#7fe0eb"
+theme[download_end]="#ffb07a"
+theme[upload_start]="#ffb07a"
+theme[upload_mid]="#ff8a3d"
+theme[upload_end]="#ff3d8a"
+
+# Process activity gradient: idle → active → hot
+theme[process_start]="#7fe0eb"
+theme[process_mid]="#ff8a3d"
+theme[process_end]="#ff3d8a"
