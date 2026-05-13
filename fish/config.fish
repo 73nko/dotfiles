@@ -132,3 +132,6 @@ fish_add_path "$HOME/.antigravity/antigravity/bin"
 if test -f "$HOME/.openclaw/completions/openclaw.fish"
     source "$HOME/.openclaw/completions/openclaw.fish"
 end
+
+# Added by Antigravity IDE
+fish_add_path $HOME/.antigravity-ide/antigravity-ide/bin
