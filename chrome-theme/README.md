@@ -1,4 +1,4 @@
-# Chrome - Sunset Pool Splash theme
+# Chrome - Violet Hour · Glass theme
 
 Incluye background en el new tab page usando el mismo gradiente 175° del wallpaper, a 2560x1440.
 
@@ -8,13 +8,13 @@ Incluye background en el new tab page usando el mismo gradiente 175° del wallpa
 2. Activa "Developer mode" (toggle arriba a la derecha).
 3. Click en "Load unpacked".
 4. Selecciona la carpeta `~/.config/chrome-theme/` entera (la que contiene `manifest.json` + `images/`).
-5. Chrome aplica el theme inmediatamente. Aparece en `chrome://settings/appearance` como "Sunset Pool Splash".
+5. Chrome aplica el theme inmediatamente. Aparece en `chrome://settings/appearance` como "Violet Hour · Glass".
 
 Mismo flow funciona para Arc, Brave, Vivaldi y Edge (son Chromium). Para Safari no sirve, Safari no soporta temas declarativos.
 
 ## Imagenes
 
-- `images/ntp-bg.png` - 2560x1440, gradiente completo. Se muestra en la new tab page, alineado al bottom, sin repeat. El sunset queda abajo (donde los ojos lo esperan) y el dusk arriba conecta visualmente con el frame.
+- `images/ntp-bg.png` - 2560x1440, recorte del wallpaper Violet Hour · Aurora. Se muestra en la new tab page alineado al bottom, sin repeat. La aurora queda arriba y el night abajo conecta con el frame.
 - `images/toolbar-bg.png` - tile 4x2 pixeles plum solido. Fuerza a Chrome a usar ese tono exacto en la toolbar sin interpolar con tints.
 
 Si cambias tu monitor a 5K o mayor y el `ntp-bg.png` se ve pixelado, regeneralo mas grande ajustando la ultima llamada `build(W, H)` en el script de wallpapers a `build(3840, 2160)` y lanzandolo de nuevo. Peso esperado: ~200KB en PNG.

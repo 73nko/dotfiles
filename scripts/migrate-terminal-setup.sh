@@ -3,7 +3,7 @@
 # Terminal + Desktop Setup Migration
 # ----------------------------------------------------------------------------
 # One-shot script that brings any of your machines from "fresh dotfiles" to
-# the current state: deprecated stuff cleaned, Sunset · Pool Splash applied,
+# the current state: deprecated stuff cleaned, Violet Hour · Glass applied,
 # SketchyBar + JankyBorders + AeroSpace running, macOS tweaks in.
 #
 # Idempotent — safe to re-run. Each block checks before acting.
@@ -61,25 +61,26 @@ for plugin in tmux-colors-solarized tmux-themepack tmux-tokyo-night tmux-yank; d
 done
 
 # ----------------------------------------------------------------------------
-bold "[4/9] Wallpaper — Sunset · Pool Splash"
+bold "[4/9] Violet Hour — wallpaper + capa visual macOS"
 # ----------------------------------------------------------------------------
 WALLDIR="$HOME/.config/wallpapers"
-WALLPAPER="$WALLDIR/sunset-pool-splash-5120x1440.png"
 mkdir -p "$WALLDIR"
-if [ ! -f "$WALLPAPER" ]; then
-  if [ -f "$HOME/.config/scripts/generate_wallpaper.py" ]; then
-    /opt/homebrew/bin/python3 "$HOME/.config/scripts/generate_wallpaper.py" >/dev/null 2>&1 \
-      && ok "wallpapers generated in $WALLDIR" \
-      || warn "wallpaper generation failed (PIL not installed?)"
-  else
-    warn "generate_wallpaper.py missing — copy it from your dotfiles"
-  fi
+# El master 5K (violet-hour-aurora-5120x3200.png) viene versionado en el repo.
+# generate_wallpaper.py deriva las variantes por pantalla (ultrawide + portatil).
+if [ -f "$HOME/.config/scripts/generate_wallpaper.py" ]; then
+  /opt/homebrew/bin/python3 "$HOME/.config/scripts/generate_wallpaper.py" >/dev/null 2>&1 \
+    && ok "variantes de wallpaper derivadas del master" \
+    || warn "generate_wallpaper.py fallo (Pillow no instalado?)"
 else
-  skip "wallpaper already present"
+  warn "generate_wallpaper.py missing — copy it from your dotfiles"
 fi
-if [ -f "$WALLPAPER" ]; then
-  osascript -e "tell application \"System Events\" to tell every desktop to set picture to \"$WALLPAPER\"" \
-    >/dev/null 2>&1 && ok "wallpaper applied to all desktops"
+# Capa visual: wallpaper + accent + highlight + puntero + iconos de carpeta.
+if [ -f "$HOME/.config/scripts/macos-violet-hour.sh" ]; then
+  bash "$HOME/.config/scripts/macos-violet-hour.sh" >/dev/null 2>&1 \
+    && ok "capa visual Violet Hour aplicada (wallpaper, accent, puntero, carpetas)" \
+    || warn "macos-violet-hour.sh tuvo errores — revisalo a mano"
+else
+  warn "macos-violet-hour.sh not found"
 fi
 
 # ----------------------------------------------------------------------------
@@ -94,9 +95,9 @@ fi
 # ----------------------------------------------------------------------------
 bold "[5b/9] Tier S/A/B tooling — bat theme + gh extensions"
 # ----------------------------------------------------------------------------
-# Rebuild bat cache so the Sunset Pool Splash tmTheme is registered.
+# Rebuild bat cache so the Violet Hour tmTheme is registered.
 if command -v bat >/dev/null 2>&1; then
-  bat cache --build >/dev/null 2>&1 && ok "bat theme cache rebuilt (Sunset Pool Splash)"
+  bat cache --build >/dev/null 2>&1 && ok "bat theme cache rebuilt (Violet Hour)"
 fi
 # gh extensions: dashboard de PRs/issues (gh-dash), limpieza de branches con
 # PR merged (gh-poi), y CLI assistant (gh-copilot).

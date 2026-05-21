@@ -9,7 +9,7 @@
 # distintos equipos divergen. Falla silencioso si no hay conexion.
 "Atuin history sync" = "atuin sync 2>/dev/null || true"
 
-# Rebuild del cache de bat para que temas custom (Sunset Pool Splash) se
+# Rebuild del cache de bat para que temas custom (Violet Hour) se
 # registren tras updates. Idempotente.
 "Bat themes cache" = "command -v bat >/dev/null && bat cache --build >/dev/null 2>&1 || true"
 

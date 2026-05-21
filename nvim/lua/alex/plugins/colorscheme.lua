@@ -1,16 +1,16 @@
--- Sunset · Pool Splash (custom)
--- Colorscheme puro en lua/alex/themes/sunset-pool.lua; no requiere plugin externo.
+-- Violet Hour · Glass (custom)
+-- Colorscheme puro en lua/alex/themes/violet-hour.lua; no requiere plugin externo.
 -- Lazy expone un "fake" plugin dir-local para que priority se respete en el orden de carga.
 
 return {
   {
     -- Dummy spec: Lazy no lo descarga, solo asegura que corramos en priority 1000
-    name = "sunset-pool",
+    name = "violet-hour",
     dir = vim.fn.stdpath("config"),
     priority = 1000,
     lazy = false,
     config = function()
-      require("alex.themes.sunset-pool").apply()
+      require("alex.themes.violet-hour").apply()
     end,
   },
   {

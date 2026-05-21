@@ -1,0 +1,27 @@
+Violet Hour · Glass — Slack theme
+=================================
+
+Slack guarda el theme en su propia app (no es un dotfile). Esta es la cadena
+de 8 colores para pegarla y que quede versionada aquí.
+
+CADENA (pégala tal cual):
+
+  #1A1745,#2C2766,#B39DFF,#0D0D2C,#2C2766,#ECE6FF,#A8C9FF,#E2BCFF
+
+Las 8 ranuras:
+  1  Column BG          #1A1745  indigo      — fondo de la barra lateral
+  2  Menu BG Hover      #2C2766  violet      — hover del menú
+  3  Active Item        #B39DFF  orchid      — canal seleccionado (pill)
+  4  Active Item Text   #0D0D2C  night       — texto sobre el pill orchid
+  5  Hover Item         #2C2766  violet      — hover de canal
+  6  Text Color         #ECE6FF  star        — texto de la barra lateral
+  7  Active Presence    #A8C9FF  ice         — punto de "en línea"
+  8  Mention Badge      #E2BCFF  rose mist   — badge de menciones
+
+Cómo aplicarlo:
+  Opción rápida — pega la cadena en cualquier mensaje de Slack (un DM
+  contigo mismo vale). Slack detecta que es un theme y muestra un botón
+  "Cambiar tema de la barra lateral". Púlsalo.
+
+  Opción manual — Slack > Ajustes (Cmd+,) > Temas > abajo del todo,
+  crea un tema personalizado y mete los 8 colores de arriba.

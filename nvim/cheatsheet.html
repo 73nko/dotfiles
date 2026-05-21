@@ -6,26 +6,26 @@
 <title>Neovim Cheatsheet</title>
 <style>
 :root {
-  /* Sunset · Pool Splash - mapping a los nombres legacy del cheatsheet.
+  /* Violet Hour · Glass Splash - mapping a los nombres legacy del cheatsheet.
      Nombres viejos (purple/cyan/pink/green/yellow/orange) se mantienen
      para no tocar el JS: cada workflow y seccion elige su acento
-     por nombre legacy pero los valores son del palette Sunset Pool. */
-  --bg:       #1A0A28;  /* Dusk */
-  --bg2:      #1E0A2E;  /* bg_alt */
-  --card:     #1E0A2E;  /* bg_alt */
-  --card-h:   #2A1040;  /* plum elevated */
-  --border:   #331127;  /* pane_border warm */
-  --purple:   #FFB8D5;  /* magenta_hi - accent primario */
-  --cyan:     #7FE0EB;  /* turquoise_hi - active/focus */
-  --pink:     #FF3D8A;  /* magenta - high emphasis */
-  --green:    #8FE3E8;  /* aqua - success cool (no verde, per guide) */
-  --yellow:   #FFD67A;  /* gold */
-  --orange:   #FF8A3D;  /* tangerine */
-  --text:     #FFC6A0;  /* rosegold */
-  --muted:    #A58670;  /* rosegold muted */
-  --muted2:   #A6826F;  /* punct brown */
-  --kbd:      #1F3E48;  /* branch_bg - pool cool */
-  --kbd-b:    #2E5260;  /* pane_active */
+     por nombre legacy pero los valores son del palette Violet Hour. */
+  --bg:       #0D0D2C;  /* Dusk */
+  --bg2:      #14123A;  /* bg_alt */
+  --card:     #14123A;  /* bg_alt */
+  --card-h:   #1A1745;  /* plum elevated */
+  --border:   #211E45;  /* pane_border warm */
+  --purple:   #D6C8FF;  /* magenta_hi - accent primario */
+  --cyan:     #A8C9FF;  /* turquoise_hi - active/focus */
+  --pink:     #B39DFF;  /* magenta - high emphasis */
+  --green:    #B9E0FF;  /* aqua - success cool (no verde, per guide) */
+  --yellow:   #F0D2FF;  /* gold */
+  --orange:   #E2BCFF;  /* tangerine */
+  --text:     #ECE6FF;  /* rosegold */
+  --muted:    #777494;  /* rosegold muted */
+  --muted2:   #67618B;  /* punct brown */
+  --kbd:      #2F365A;  /* branch_bg - pool cool */
+  --kbd-b:    #434F76;  /* pane_active */
   --r:        10px;
   --r-sm:     6px;
 }
@@ -63,7 +63,7 @@ header {
   color: var(--text); font-size: .85rem; outline: none;
   transition: border-color .2s, box-shadow .2s;
 }
-#search:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(255,61,138,.18); }
+#search:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(179,157,255,.18); }
 #search::placeholder { color: var(--muted2); }
 .header-right { margin-left: auto; display: flex; align-items: center; gap: .75rem; }
 #count { font-size: .72rem; color: var(--muted2); white-space: nowrap; }
@@ -83,8 +83,8 @@ nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
   font-size: .78rem; color: var(--muted2); cursor: pointer;
   transition: all .15s; text-decoration: none; width: 100%; border: none; background: none; text-align: left;
 }
-.nav-item:hover { color: var(--text); background: rgba(255,198,160,.06); }
-.nav-item.active { color: var(--cyan); background: rgba(127,224,235,.12); border-left: 2px solid var(--pink); padding-left: calc(.6rem - 2px); }
+.nav-item:hover { color: var(--text); background: rgba(236,230,255,.06); }
+.nav-item.active { color: var(--cyan); background: rgba(168,201,255,.12); border-left: 2px solid var(--pink); padding-left: calc(.6rem - 2px); }
 .nav-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
 /* ─── MAIN ──────────────────────────────────── */
@@ -113,7 +113,7 @@ kbd {
   transition: background .15s, border-color .15s, color .15s;
   box-shadow: 0 1px 2px rgba(0,0,0,.35);
 }
-.card:hover kbd { background: #2E5260; border-color: #7FE0EB; color: #B8F0F5; }
+.card:hover kbd { background: #434F76; border-color: #A8C9FF; color: #D4F0FF; }
 
 /* ─── SHORTCUT CARDS ────────────────────────── */
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: .5rem; }
@@ -161,10 +161,10 @@ kbd {
 /* ─── COPY TOAST ─────────────────────────────── */
 #toast {
   position: fixed; bottom: 2rem; left: 50%; z-index: 999;
-  background: linear-gradient(135deg, var(--pink), var(--orange)); color: #1A0A28;
+  background: linear-gradient(135deg, var(--pink), var(--orange)); color: #0D0D2C;
   padding: .5rem 1.2rem; border-radius: 20px;
   font-size: .75rem; font-weight: 700;
-  box-shadow: 0 8px 32px rgba(255,61,138,.35), 0 0 0 1px rgba(255,138,61,.2);
+  box-shadow: 0 8px 32px rgba(179,157,255,.35), 0 0 0 1px rgba(226,188,255,.2);
   transform: translateX(-50%) translateY(80px);
   transition: transform .3s cubic-bezier(.34,1.56,.64,1);
   pointer-events: none;

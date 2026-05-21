@@ -193,11 +193,11 @@ fi
 # 7. Tide prompt configuration
 # ============================================
 # La configuracion de tide (colores + layout) viene del conf.d
-# sunset-pool-tide.fish, que siembra _tide_left_items / _tide_right_items
+# violet-hour-tide.fish, que siembra _tide_left_items / _tide_right_items
 # como universales solo si no existen, y aplica colores en cada shell.
 # No dependemos de fish_variables (estado de maquina, no versionado).
 progress "Tide prompt"
-ok "Tide layout + colors come from conf.d/sunset-pool-tide.fish"
+ok "Tide layout + colors come from conf.d/violet-hour-tide.fish"
 
 # ============================================
 # 8. TPM (tmux plugin manager)

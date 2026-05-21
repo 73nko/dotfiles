@@ -1,4 +1,4 @@
-# gh-dash · Sunset Pool Splash
+# gh-dash · Violet Hour · Glass
 # Run with:  gh dash
 # Switch sections with:  Tab / Shift+Tab
 # Switch PRs/Issues with:  s
@@ -73,7 +73,7 @@ defaults:
   refetchIntervalMinutes: 30
   dateFormat: "DD-MM-YY"
 
-# Theme — Sunset Pool Splash
+# Theme — Violet Hour · Glass
 theme:
   ui:
     sectionsShowCount: true
@@ -82,19 +82,19 @@ theme:
       compact: false
   colors:
     text:
-      primary:   "#FFC6A0"   # rosegold
-      secondary: "#7FE0EB"   # turquoise hi
-      inverted:  "#1A0A28"   # dusk
-      faint:     "#A37B70"   # rosegold @ 60% pre-mixed over dusk
-      warning:   "#FF8A3D"   # tangerine
-      success:   "#7FE0EB"   # turquoise hi
-      error:     "#FF3D8A"   # magenta
+      primary:   "#ECE6FF"   # star
+      secondary: "#A8C9FF"   # ice
+      inverted:  "#0D0D2C"   # night
+      faint:     "#777494"   # silver @ 58% pre-mixed over night
+      warning:   "#F0D2FF"   # bloom
+      success:   "#A8C9FF"   # ice
+      error:     "#E2BCFF"   # rose mist
     background:
-      selected:  "#3A1550"   # plum
+      selected:  "#1A1745"   # indigo
     border:
-      primary:   "#7FE0EB"   # turquoise hi
-      secondary: "#3A1550"   # plum
-      faint:     "#2D1140"   # plum @ 60% pre-mixed over dusk
+      primary:   "#A8C9FF"   # ice
+      secondary: "#1A1745"   # indigo
+      faint:     "#211E45"   # orchid @ 12% pre-mixed over night
 
 keybindings:
   prs:

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>Violet Hour folder</title>
+  <defs>
+    <linearGradient id="back" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#8da7ff"/>
+      <stop offset="100%" stop-color="#6e5ec4"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#d6c8ff"/>
+      <stop offset="55%" stop-color="#b39dff"/>
+      <stop offset="100%" stop-color="#8da7ff"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"  stop-color="#f0d2ff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#f0d2ff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- back panel + tab -->
+  <path d="M150 322
+           h250
+           q26 0 42 20 l30 38 q16 20 42 20 h318
+           q40 0 40 40 v70 H110 V362 q0 -40 40 -40 z"
+        fill="url(#back)"/>
+
+  <!-- front panel (the classic two-tone macOS folder face) -->
+  <rect x="110" y="404" width="804" height="392" rx="44" ry="44" fill="url(#front)"/>
+
+  <!-- top sheen on the front panel -->
+  <rect x="110" y="404" width="804" height="150" rx="44" ry="44" fill="url(#sheen)"/>
+
+  <!-- hairline edge -->
+  <rect x="110.5" y="404.5" width="803" height="391" rx="43.5" ry="43.5"
+        fill="none" stroke="#ece6ff" stroke-opacity="0.22" stroke-width="1.5"/>
+</svg>

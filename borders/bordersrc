@@ -1,12 +1,12 @@
 #!/bin/bash
 # ============================================================================
-# JankyBorders — Sunset · Pool Splash
+# JankyBorders — Violet Hour · Glass
 # ----------------------------------------------------------------------------
-# Aligned with Style Guide §04 ("Pane borders: cool when focused, warm when
-# idle") and the §02 rule that turquoise carries structure / focus.
+# Guide v2 §05: pane/window borders are "cool when focused, violet when idle".
+# Ice carries focus; orchid hums quietly in the background.
 #
-#   Active   = Turquoise Hi #7FE0EB @ 90%   -> 0xe67fe0eb
-#   Inactive = Magenta      #FF3D8A @ 10%   -> 0x1aff3d8a   (whisper-tenue)
+#   Active   = Ice    #A8C9FF @ 90%   -> 0xe6a8c9ff
+#   Inactive = Orchid #B39DFF @ 22%   -> 0x38b39dff   (hairline whisper)
 #   Style    = round, width 4.0, hidpi on
 # ============================================================================
 
@@ -15,8 +15,8 @@ options=(
 	width=4.0
 	hidpi=on
 	background_color=0x00000000
-	active_color=0xe67fe0eb
-	inactive_color=0xffff3d8a
+	active_color=0xe6a8c9ff
+	inactive_color=0x38b39dff
 	blur_radius=2.0
 )
 

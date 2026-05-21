@@ -1,16 +1,16 @@
 # ============================================
-# Ghostty Config - Sunset · Pool Splash
-# Miami sunset gradient meets turquoise pool
+# Ghostty Config - Violet Hour · Glass
+# Ten minutes after sunset: deep indigo, glass, aurora
 # ============================================
 
 # ============================================
-# Window
+# Window - heavy glass, the wallpaper is the light
 # ============================================
 macos-titlebar-style = hidden
-background-opacity = 0.72
-background-blur-radius = 24
-window-padding-x = 16
-window-padding-y = 12
+background-opacity = 0.55
+background-blur-radius = 40
+window-padding-x = 18
+window-padding-y = 14
 window-padding-balance = true
 window-inherit-working-directory = true
 confirm-close-surface = false
@@ -36,25 +36,26 @@ mouse-hide-while-typing = true
 
 # ============================================
 # Font - Monaspace Neon NF con fallback JetBrains Mono
+# Guide v2 §04: 13.5pt, mas aire que Sunset (la glass necesita espacio)
 # ============================================
 font-family = Monaspace Neon
 font-family = JetBrainsMono Nerd Font
-font-size = 13
+font-size = 13.5
 font-feature = calt
 font-feature = liga
 font-feature = ss01
 font-feature = ss02
 font-feature = ss03
-adjust-cell-height = -1
+adjust-cell-height = 8%
 font-style-italic = Italic
 
 # ============================================
-# Cursor - Tangerine block, sin blink
+# Cursor - Rose Mist block, sin blink (§07: visible pero no insistente)
 # ============================================
 cursor-style = block
 cursor-style-blink = false
-cursor-color = #FF8A3D
-cursor-text = #1A0A28
+cursor-color = #E2BCFF
+cursor-text = #0D0D2C
 
 # ============================================
 # Scrollback
@@ -62,55 +63,55 @@ cursor-text = #1A0A28
 scrollback-limit = 100000
 
 # ============================================
-# Selection / Copy
+# Selection / Copy - Orchid wash (§07)
 # ============================================
 copy-on-select = true
-selection-background = #5a1a3c
-selection-foreground = #FFC6A0
+selection-background = #322d5a
+selection-foreground = #ECE6FF
 
 # ============================================
-# Sunset · Pool Splash palette
-# background = Dusk #1A0A28 @72% con blur sobre wallpaper gradient
-# foreground = Rosegold #FFC6A0
+# Violet Hour · Glass palette
+# background = Night #0D0D2C @55% con blur 40 sobre wallpaper aurora
+# foreground = Star #ECE6FF
 # ============================================
-background = #1A0A28
-foreground = #FFC6A0
+background = #0D0D2C
+foreground = #ECE6FF
 
-# Normal (0-7)
-# 0 black  = Dusk
-# 1 red    = Magenta (warm pink axis)
-# 2 green  = Turquoise Hi (cool axis, collapsed onto "green" slot)
-# 3 yellow = Gold
-# 4 blue   = Turquoise
-# 5 magenta= Magenta (same warm pink axis)
-# 6 cyan   = Aqua
-# 7 white  = Rosegold
-palette = 0=#1A0A28
-palette = 1=#FF3D8A
-palette = 2=#7FE0EB
-palette = 3=#FFD67A
-palette = 4=#4EC9D7
-palette = 5=#FF3D8A
-palette = 6=#8FE3E8
-palette = 7=#FFC6A0
+# Normal (0-7) — §07 ANSI mapping
+# 0 black  = Abyss
+# 1 red    = Rose Mist (gentler than real red, still distinct)
+# 2 green  = Ice (cool axis, collapsed onto "green" slot)
+# 3 yellow = Bloom
+# 4 blue   = Periwinkle
+# 5 magenta= Orchid (identity)
+# 6 cyan   = Cyan Mist
+# 7 white  = Silver
+palette = 0=#06061A
+palette = 1=#E2BCFF
+palette = 2=#A8C9FF
+palette = 3=#F0D2FF
+palette = 4=#8DA7FF
+palette = 5=#B39DFF
+palette = 6=#B9E0FF
+palette = 7=#C4BEE0
 
 # Bright (8-15)
-# 8 bright black  = Plum
-# 9 bright red    = Magenta Hi
-# 10 bright green = Aqua
-# 11 bright yellow= Peach
-# 12 bright blue  = Turquoise Hi
-# 13 bright mag   = Tangerine
-# 14 bright cyan  = Turquoise Hi
-# 15 bright white = Cream
-palette = 8=#3A1550
-palette = 9=#FFB8D5
-palette = 10=#8FE3E8
-palette = 11=#FFB07A
-palette = 12=#7FE0EB
-palette = 13=#FF8A3D
-palette = 14=#7FE0EB
-palette = 15=#F5ECD7
+# 8  bright black  = Indigo
+# 9  bright red    = Bloom
+# 10 bright green  = Cyan Mist
+# 11 bright yellow = Lilac
+# 12 bright blue   = Ice
+# 13 bright mag    = Lilac
+# 14 bright cyan   = Ice
+# 15 bright white  = Star
+palette = 8=#1A1745
+palette = 9=#F0D2FF
+palette = 10=#B9E0FF
+palette = 11=#D6C8FF
+palette = 12=#A8C9FF
+palette = 13=#D6C8FF
+palette = 14=#A8C9FF
+palette = 15=#ECE6FF
 
 # ============================================
 # Keybindings (sin cambios)

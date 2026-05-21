@@ -2,64 +2,64 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>name</key><string>Sunset Pool Splash</string>
-  <key>uuid</key><string>5E0F0A7E-5050-49B2-A9F7-5F0F50A75F0A</string>
-  <key>semanticClass</key><string>theme.dark.sunset-pool-splash</string>
+  <key>name</key><string>Violet Hour</string>
+  <key>uuid</key><string>7E0F0A7E-9090-49B2-A9F7-7E0F90A77E0F</string>
+  <key>semanticClass</key><string>theme.dark.violet-hour</string>
   <key>colorSpaceName</key><string>sRGB</string>
   <key>settings</key>
   <array>
-    <!-- Editor chrome — matches Style Guide §04 -->
+    <!-- Editor chrome — matches Style Guide v2 §05 -->
     <dict>
       <key>settings</key>
       <dict>
-        <key>background</key><string>#1A0A28</string>
-        <key>foreground</key><string>#FFC6A0</string>
-        <key>caret</key><string>#FF8A3D</string>
-        <key>lineHighlight</key><string>#7FE0EB10</string>
-        <key>selection</key><string>#FF3D8A38</string>
-        <key>selectionBorder</key><string>#FF3D8A55</string>
-        <key>invisibles</key><string>#FFC6A059</string>
-        <key>guide</key><string>#7FE0EB1F</string>
-        <key>activeGuide</key><string>#7FE0EB55</string>
-        <key>stackGuide</key><string>#7FE0EB1F</string>
-        <key>findHighlight</key><string>#FFD67A2E</string>
-        <key>findHighlightForeground</key><string>#FFD67A</string>
-        <key>misspelling</key><string>#FF3D8A</string>
-        <key>bracketsForeground</key><string>#FF3D8A</string>
+        <key>background</key><string>#0D0D2C</string>
+        <key>foreground</key><string>#ECE6FF</string>
+        <key>caret</key><string>#E2BCFF</string>
+        <key>lineHighlight</key><string>#A8C9FF10</string>
+        <key>selection</key><string>#B39DFF38</string>
+        <key>selectionBorder</key><string>#B39DFF55</string>
+        <key>invisibles</key><string>#C4BEE059</string>
+        <key>guide</key><string>#A8C9FF1F</string>
+        <key>activeGuide</key><string>#A8C9FF59</string>
+        <key>stackGuide</key><string>#A8C9FF1F</string>
+        <key>findHighlight</key><string>#F0D2FF24</string>
+        <key>findHighlightForeground</key><string>#F0D2FF</string>
+        <key>misspelling</key><string>#E2BCFF</string>
+        <key>bracketsForeground</key><string>#E2BCFF</string>
         <key>bracketsOptions</key><string>underline</string>
-        <key>bracketContentsForeground</key><string>#FF3D8A</string>
+        <key>bracketContentsForeground</key><string>#E2BCFF</string>
         <key>tagsOptions</key><string>stippled_underline</string>
       </dict>
     </dict>
 
-    <!-- Comments — turquoise @ 55% italic -->
+    <!-- Comments — ice @ 50% italic -->
     <dict>
       <key>name</key><string>Comment</string>
       <key>scope</key><string>comment, punctuation.definition.comment</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#7FE0EB8C</string>
+        <key>foreground</key><string>#A8C9FF80</string>
         <key>fontStyle</key><string>italic</string>
       </dict>
     </dict>
 
-    <!-- Punctuation — rosegold @ 55% -->
+    <!-- Punctuation — silver @ 45% -->
     <dict>
       <key>name</key><string>Punctuation</string>
       <key>scope</key><string>punctuation, meta.brace, meta.delimiter</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FFC6A08C</string>
+        <key>foreground</key><string>#C4BEE073</string>
       </dict>
     </dict>
 
-    <!-- Keywords / control flow / operators — magenta -->
+    <!-- Keywords / control flow / operators — orchid -->
     <dict>
       <key>name</key><string>Keyword</string>
       <key>scope</key><string>keyword, keyword.control, keyword.operator, storage.type.function, storage.modifier</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#B39DFF</string>
       </dict>
     </dict>
 
@@ -69,7 +69,7 @@
       <key>scope</key><string>keyword.operator, punctuation.accessor</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#B39DFF</string>
       </dict>
     </dict>
 
@@ -79,17 +79,17 @@
       <key>scope</key><string>storage, storage.type</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#B39DFF</string>
       </dict>
     </dict>
 
-    <!-- Strings — turquoise hi -->
+    <!-- Strings — ice -->
     <dict>
       <key>name</key><string>String</string>
       <key>scope</key><string>string, string.quoted, string.template</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#7FE0EB</string>
+        <key>foreground</key><string>#A8C9FF</string>
       </dict>
     </dict>
 
@@ -99,7 +99,7 @@
       <key>scope</key><string>constant.character.escape, punctuation.definition.template-expression</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FFD67A</string>
+        <key>foreground</key><string>#E2BCFF</string>
       </dict>
     </dict>
 
@@ -109,7 +109,7 @@
       <key>scope</key><string>string.regexp</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#7FE0EB</string>
+        <key>foreground</key><string>#A8C9FF</string>
       </dict>
     </dict>
 
@@ -119,7 +119,7 @@
       <key>scope</key><string>constant.numeric, constant.language, constant.language.boolean, constant.language.null</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FFD67A</string>
+        <key>foreground</key><string>#F0D2FF</string>
       </dict>
     </dict>
 
@@ -129,77 +129,77 @@
       <key>scope</key><string>constant, support.constant</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FFD67A</string>
+        <key>foreground</key><string>#F0D2FF</string>
       </dict>
     </dict>
 
-    <!-- Functions / methods / constructors — tangerine -->
+    <!-- Functions / methods / constructors — rose mist -->
     <dict>
       <key>name</key><string>Function</string>
       <key>scope</key><string>entity.name.function, meta.function-call, support.function, variable.function</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF8A3D</string>
+        <key>foreground</key><string>#E2BCFF</string>
       </dict>
     </dict>
 
-    <!-- Function parameters — rosegold (default fg) -->
+    <!-- Function parameters — star (default fg) -->
     <dict>
       <key>name</key><string>Parameter</string>
       <key>scope</key><string>variable.parameter, meta.parameter</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FFC6A0</string>
+        <key>foreground</key><string>#ECE6FF</string>
       </dict>
     </dict>
 
-    <!-- Types / classes — aqua -->
+    <!-- Types / classes — cyan mist -->
     <dict>
       <key>name</key><string>Type</string>
       <key>scope</key><string>support.type, support.class, entity.name.type, entity.name.class, entity.name.namespace, storage.type.primitive, storage.type.built-in</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#8FE3E8</string>
+        <key>foreground</key><string>#B9E0FF</string>
       </dict>
     </dict>
 
-    <!-- Variables — rosegold (default fg) -->
+    <!-- Variables — star (default fg) -->
     <dict>
       <key>name</key><string>Variable</string>
       <key>scope</key><string>variable, variable.other</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FFC6A0</string>
+        <key>foreground</key><string>#ECE6FF</string>
       </dict>
     </dict>
 
-    <!-- Property / field — magenta (per §04) -->
+    <!-- Property / field — orchid (per §05) -->
     <dict>
       <key>name</key><string>Property</string>
       <key>scope</key><string>variable.other.property, variable.other.member, meta.property, support.type.property-name</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#B39DFF</string>
       </dict>
     </dict>
 
-    <!-- HTML/JSX tags — magenta -->
+    <!-- HTML/JSX tags — orchid -->
     <dict>
       <key>name</key><string>Tag</string>
       <key>scope</key><string>entity.name.tag, meta.tag</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#B39DFF</string>
       </dict>
     </dict>
 
-    <!-- HTML/JSX attribute — tangerine -->
+    <!-- HTML/JSX attribute — rose mist -->
     <dict>
       <key>name</key><string>Tag attribute</string>
       <key>scope</key><string>entity.other.attribute-name</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF8A3D</string>
+        <key>foreground</key><string>#E2BCFF</string>
       </dict>
     </dict>
 
@@ -209,7 +209,7 @@
       <key>scope</key><string>meta.decorator, punctuation.decorator</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF8A3D</string>
+        <key>foreground</key><string>#E2BCFF</string>
       </dict>
     </dict>
 
@@ -219,7 +219,7 @@
       <key>scope</key><string>variable.language</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#B39DFF</string>
         <key>fontStyle</key><string>italic</string>
       </dict>
     </dict>
@@ -230,7 +230,7 @@
       <key>scope</key><string>keyword.control.import, keyword.control.export, keyword.control.from</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#B39DFF</string>
       </dict>
     </dict>
 
@@ -240,7 +240,7 @@
       <key>scope</key><string>markup.heading</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FFB8D5</string>
+        <key>foreground</key><string>#D6C8FF</string>
         <key>fontStyle</key><string>bold</string>
       </dict>
     </dict>
@@ -251,7 +251,7 @@
       <key>scope</key><string>markup.bold</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#D6C8FF</string>
         <key>fontStyle</key><string>bold</string>
       </dict>
     </dict>
@@ -260,7 +260,7 @@
       <key>scope</key><string>markup.italic</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF8A3D</string>
+        <key>foreground</key><string>#F0D2FF</string>
         <key>fontStyle</key><string>italic</string>
       </dict>
     </dict>
@@ -269,7 +269,7 @@
       <key>scope</key><string>markup.underline.link, string.other.link</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#7FE0EB</string>
+        <key>foreground</key><string>#A8C9FF</string>
         <key>fontStyle</key><string>underline</string>
       </dict>
     </dict>
@@ -278,17 +278,17 @@
       <key>scope</key><string>markup.raw, markup.inline.raw</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FFD67A</string>
+        <key>foreground</key><string>#F0D2FF</string>
       </dict>
     </dict>
 
-    <!-- Diff -->
+    <!-- Diff — add Ice / del Orchid / change Bloom -->
     <dict>
       <key>name</key><string>Diff inserted</string>
       <key>scope</key><string>markup.inserted, meta.diff.header.to-file</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#7FE0EB</string>
+        <key>foreground</key><string>#A8C9FF</string>
       </dict>
     </dict>
     <dict>
@@ -296,7 +296,7 @@
       <key>scope</key><string>markup.deleted, meta.diff.header.from-file</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#B39DFF</string>
       </dict>
     </dict>
     <dict>
@@ -304,7 +304,7 @@
       <key>scope</key><string>markup.changed</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FFD67A</string>
+        <key>foreground</key><string>#F0D2FF</string>
       </dict>
     </dict>
 
@@ -314,7 +314,7 @@
       <key>scope</key><string>invalid, invalid.illegal</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF3D8A</string>
+        <key>foreground</key><string>#E2BCFF</string>
         <key>fontStyle</key><string>underline</string>
       </dict>
     </dict>
@@ -323,7 +323,7 @@
       <key>scope</key><string>invalid.deprecated</string>
       <key>settings</key>
       <dict>
-        <key>foreground</key><string>#FF8A3D</string>
+        <key>foreground</key><string>#777494</string>
         <key>fontStyle</key><string>strikethrough</string>
       </dict>
     </dict>

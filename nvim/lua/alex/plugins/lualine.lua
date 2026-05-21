@@ -1,6 +1,6 @@
--- Lualine - Sunset · Pool Splash powerline layout (§04 del guide)
+-- Lualine - Violet Hour . Glass (guide v2 §05)
 -- mode -> branch -> file -> diagnostics -> filetype -> position
--- Todos los modos comparten el mismo estilo magenta/dusk (sin per-mode color).
+-- Flat segments: sin powerline arrows. Mismo color de modo en todos los modos.
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -8,14 +8,14 @@ return {
   config = function()
     local lualine = require("lualine")
     local lazy_status = require("lazy.status")
-    local c = require("alex.themes.sunset-pool").palette
+    local c = require("alex.themes.violet-hour").palette
 
-    -- Segmentos compartidos - no per-mode switching
-    local mode_seg   = { bg = c.magenta,     fg = c.dusk,     gui = "bold" }
-    local branch_seg = { bg = c.branch_bg,   fg = c.turquoise_hi }
-    local mid_seg    = { bg = c.none,        fg = c.muted }
-    local diag_seg   = { bg = c.diag_bg,     fg = c.tangerine }
-    local pos_seg    = { bg = c.turquoise,   fg = c.dusk,     gui = "bold" }
+    -- Segmentos compartidos - no per-mode switching (§05)
+    local mode_seg   = { bg = c.orchid,     fg = c.night, gui = "bold" }
+    local branch_seg = { bg = c.branch_bg,  fg = c.ice }
+    local mid_seg    = { bg = c.none,       fg = c.muted }
+    local diag_seg   = { bg = c.diag_bg,    fg = c.rose_mist }
+    local pos_seg    = { bg = c.periwinkle, fg = c.night, gui = "bold" }
 
     local theme = {
       normal   = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
@@ -38,7 +38,8 @@ return {
       options = {
         theme = theme,
         globalstatus = true,
-        component_separators = "",
+        -- Flat: sin separadores ni arrows (§05/§10 "powerline arrows are too 2014")
+        component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         disabled_filetypes = { statusline = { "snacks_dashboard", "dashboard" } },
       },
@@ -46,16 +47,14 @@ return {
         lualine_a = {
           {
             "mode",
-            fmt = function(m) return m end, -- Lualine ya lo pone UPPERCASE
-            separator = { right = "" },
+            fmt = function(m) return m end,
             padding = { left = 1, right = 1 },
           },
         },
         lualine_b = {
           {
             "branch",
-            icon = "",
-            separator = { right = "" },
+            icon = "",
             padding = { left = 1, right = 1 },
           },
         },
@@ -63,7 +62,7 @@ return {
           {
             "filename",
             path = 1,
-            symbols = { modified = " ●", readonly = " ", unnamed = "[No Name]" },
+            symbols = { modified = " ●", readonly = " ", unnamed = "[No Name]" },
             padding = { left = 1, right = 1 },
           },
         },
@@ -71,19 +70,18 @@ return {
           {
             lazy_status.updates,
             cond = lazy_status.has_updates,
-            color = { fg = c.gold, bg = c.none },
+            color = { fg = c.bloom, bg = c.none },
           },
           {
             "diagnostics",
             sources = { "nvim_diagnostic" },
-            symbols = { error = " ", warn = " ", info = " ", hint = " " },
+            symbols = { error = " ", warn = " ", info = " ", hint = " " },
             diagnostics_color = {
-              error = { fg = c.magenta },
-              warn  = { fg = c.tangerine },
-              info  = { fg = c.aqua },
-              hint  = { fg = c.turquoise_hi },
+              error = { fg = c.rose_mist },
+              warn  = { fg = c.bloom },
+              info  = { fg = c.cyan_mist },
+              hint  = { fg = c.periwinkle },
             },
-            separator = { left = "", right = "" },
             padding = { left = 1, right = 1 },
           },
         },
@@ -93,7 +91,6 @@ return {
         lualine_z = {
           {
             "location",
-            separator = { left = "" },
             padding = { left = 1, right = 1 },
           },
         },

@@ -6,22 +6,22 @@
 <title>Neovim Cheatsheet</title>
 <style>
 :root {
-  --bg:       #080c1a;
-  --bg2:      #0e1221;
-  --card:     #111827;
-  --card-h:   #17203a;
-  --border:   #1e2d4a;
-  --purple:   #bd93f9;
-  --cyan:     #4dd0e1;
-  --pink:     #ff79c6;
-  --green:    #50fa7b;
-  --yellow:   #f1fa8c;
-  --orange:   #ffb86c;
-  --text:     #cdd6f4;
-  --muted:    #4a5480;
-  --muted2:   #6272a4;
-  --kbd:      #1a2340;
-  --kbd-b:    #2d3f6e;
+  --bg:       #06061a;
+  --bg2:      #0d0d2c;
+  --card:     #14123a;
+  --card-h:   #1a1745;
+  --border:   #211e45;
+  --purple:   #d6c8ff;
+  --cyan:     #a8c9ff;
+  --pink:     #b39dff;
+  --green:    #b9e0ff;
+  --yellow:   #f0d2ff;
+  --orange:   #e2bcff;
+  --text:     #ece6ff;
+  --muted:    #777494;
+  --muted2:   #67618b;
+  --kbd:      #2f365a;
+  --kbd-b:    #434f76;
   --r:        8px;
   --r-sm:     5px;
 }
@@ -100,7 +100,7 @@ kbd {
   font-size: .68rem; color: var(--cyan); white-space: nowrap; line-height: 1.6;
   transition: background .15s, border-color .15s;
 }
-.card:hover kbd { background: #1f2d50; border-color: #3a5080; }
+.card:hover kbd { background: #2f365a; border-color: #434f76; }
 
 /* ─── SHORTCUT CARDS ────────────────────────── */
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: .5rem; }
@@ -148,7 +148,7 @@ kbd {
 /* ─── COPY TOAST ─────────────────────────────── */
 #toast {
   position: fixed; bottom: 2rem; left: 50%; z-index: 999;
-  background: var(--purple); color: #080c1a;
+  background: var(--purple); color: #06061a;
   padding: .5rem 1.1rem; border-radius: 20px;
   font-size: .75rem; font-weight: 700;
   transform: translateX(-50%) translateY(80px);

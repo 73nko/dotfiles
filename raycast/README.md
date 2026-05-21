@@ -1,11 +1,11 @@
-# Raycast - Sunset Pool Splash
+# Raycast - Violet Hour · Glass
 
 ## Instalacion
 
 1. Abre Raycast (`Cmd+Space` si es tu hotkey).
 2. Escribe `Import Theme` y dale Enter.
-3. Selecciona `~/.config/raycast/sunset-pool-splash.json`.
-4. Raycast cambia al theme automaticamente. Si no: Settings → Appearance → Theme → Sunset Pool Splash.
+3. Selecciona `~/.config/raycast/violet-hour.json`.
+4. Raycast cambia al theme automaticamente. Si no: Settings → Appearance → Theme → Violet Hour.
 
 ## Mapeo de slots (por si quieres ajustar)
 

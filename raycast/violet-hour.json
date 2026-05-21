@@ -1,0 +1,22 @@
+{
+  "appearance": "dark",
+  "version": "1",
+  "name": "Violet Hour",
+  "author": "Alex Ramos",
+  "authorUsername": "apramos89",
+  "description": "Twilight violeta: identidad orchid/lilac/rose-mist sobre night/indigo, ice para estados activos.",
+  "colors": {
+    "background": "#0D0D2C",
+    "backgroundSecondary": "#1A1745",
+    "text": "#ECE6FF",
+    "selection": "#B39DFF",
+    "loader": "#A8C9FF",
+    "red": "#E2BCFF",
+    "orange": "#F0D2FF",
+    "yellow": "#D6C8FF",
+    "green": "#A8C9FF",
+    "blue": "#8DA7FF",
+    "purple": "#B39DFF",
+    "magenta": "#B9E0FF"
+  }
+}

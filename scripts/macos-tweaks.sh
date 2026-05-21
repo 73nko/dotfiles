@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================================
-# macOS tweaks — Sunset · Pool Splash setup (balanced)
+# macOS tweaks — Violet Hour · Glass setup (balanced)
 # ----------------------------------------------------------------------------
 # Goals:
 #   1. Faster, snappier UI (kill slow window animations).

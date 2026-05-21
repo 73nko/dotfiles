@@ -29,7 +29,7 @@
   # Tema custom que registras via `bat cache --build` en migrate-terminal-setup.
   # Si delta no lo encuentra (ej. en maquina antes del primer bat cache), cae
   # a default. No rompe.
-  syntax-theme = Sunset Pool Splash
+  syntax-theme = Violet Hour
   # Paths clicables en terminales que soporten OSC 8 (ghostty, iterm2, kitty).
   hyperlinks = true
 
