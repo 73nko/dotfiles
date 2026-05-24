@@ -20,7 +20,9 @@ defaults delete com.apple.universalaccess cursorOutline 2>/dev/null
 defaults delete com.apple.universalaccess cursorIsCustomized 2>/dev/null
 killall universalaccessd 2>/dev/null
 
-# Iconos de carpeta -> quitar el custom icon
+# Iconos de carpeta -> limpiar los custom icons ya aplicados.
+# La capa de "aplicar" se quitó de macos-violet-hour.sh; este bloque se queda
+# solo para borrar el legado de carpetas que sí se llegaron a tintar.
 if command -v fileicon >/dev/null 2>&1; then
   for d in Desktop Documents Downloads Developer Projects Movies Music Pictures Public Sites; do
     [ -d "$HOME/$d" ] && fileicon rm "$HOME/$d" >/dev/null 2>&1

@@ -74,10 +74,10 @@ if [ -f "$HOME/.config/scripts/generate_wallpaper.py" ]; then
 else
   warn "generate_wallpaper.py missing — copy it from your dotfiles"
 fi
-# Capa visual: wallpaper + accent + highlight + puntero + iconos de carpeta.
+# Capa visual: wallpaper + accent + highlight + puntero.
 if [ -f "$HOME/.config/scripts/macos-violet-hour.sh" ]; then
   bash "$HOME/.config/scripts/macos-violet-hour.sh" >/dev/null 2>&1 \
-    && ok "capa visual Violet Hour aplicada (wallpaper, accent, puntero, carpetas)" \
+    && ok "capa visual Violet Hour aplicada (wallpaper, accent, puntero)" \
     || warn "macos-violet-hour.sh tuvo errores — revisalo a mano"
 else
   warn "macos-violet-hour.sh not found"

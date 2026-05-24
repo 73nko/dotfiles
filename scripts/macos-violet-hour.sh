@@ -3,7 +3,7 @@
 # Violet Hour · Glass — macOS visual identity layer
 # ----------------------------------------------------------------------------
 # Aplica la capa VISUAL del tema al sistema: wallpaper, accent, color de
-# selección, color del puntero y iconos de carpeta tintados.
+# selección y color del puntero.
 #
 # Los tweaks de comportamiento/rendimiento (Dock autohide, Finder, key repeat,
 # animaciones) viven aparte en  macos-tweaks.sh  — este script NO los toca.
@@ -71,27 +71,6 @@ else
   warn "  relleno de puntero   -> hex B39DFF"
   warn "  contorno de puntero  -> hex ECE6FF"
   open "x-apple.systempreferences:com.apple.Accessibility-Settings.extension" 2>/dev/null
-fi
-
-# ----------------------------------------------------------------------------
-head "Iconos de carpeta — tintados Violet Hour"
-# ----------------------------------------------------------------------------
-ICON_PNG="$CFG/icons/violet-hour-folder.png"
-if ! command -v fileicon >/dev/null 2>&1; then
-  warn "fileicon no instalado — brew install fileicon (ya está en el Brewfile)"
-  warn "saltando el tintado de carpetas"
-elif [ ! -f "$ICON_PNG" ]; then
-  warn "falta $ICON_PNG — saltando"
-else
-  # Carpetas de nivel home. Edita esta lista a tu gusto.
-  for d in Desktop Documents Downloads Developer Projects Movies Music Pictures Public Sites; do
-    target="$HOME/$d"
-    if [ -d "$target" ]; then
-      fileicon set "$target" "$ICON_PNG" >/dev/null 2>&1 && say "tintada ~/$d"
-    fi
-  done
-  # ~/.config también, por gusto.
-  fileicon set "$CFG" "$ICON_PNG" >/dev/null 2>&1 && say "tintada ~/.config"
 fi
 
 # ----------------------------------------------------------------------------

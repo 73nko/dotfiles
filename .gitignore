@@ -60,3 +60,5 @@ fish/conf.d/*
 
 # completions/: las generan los binarios al instalarse. Nada de versionar.
 fish/completions/*
+
+raycast
