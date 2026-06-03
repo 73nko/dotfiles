@@ -23,6 +23,7 @@ github-copilot
 # Raycast: app data binaria (extensiones, AI history, settings) NO se versiona.
 # Solo dejamos pasar el theme y el README para que viajen al migrar de equipo.
 raycast/*
+raycast/extensions/
 !raycast/README.md
 !raycast/violet-hour.json
 
