@@ -1,7 +1,7 @@
 return {
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim", -- migrado de williamboman (v2, mayo 2025)
   dependencies = {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
@@ -35,8 +35,10 @@ return {
         "shopify_theme_ls",
         -- Go (SmoothMQ)
         "gopls",
-        -- Rust
+        -- Rust (rust_analyzer lo arranca rustaceanvim, NO va en vim.lsp.enable)
         "rust_analyzer",
+        -- TOML (Cargo.toml con schema, igual que jsonls/yamlls con schemastore)
+        "taplo",
         -- Python (YOUR-ORG-brain / LangGraph)
         "pyright",
         -- Lua (nvim config)
@@ -51,8 +53,7 @@ return {
         "prettier",
         "stylua",
         "ruff",
-        -- Linters
-        "eslint_d",
+        -- Linters (eslint_d eliminado: el LSP eslint cubre JS/TS)
         "golangci-lint",
         "shellcheck",
         "hadolint",

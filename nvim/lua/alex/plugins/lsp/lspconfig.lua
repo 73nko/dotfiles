@@ -3,12 +3,10 @@ return {
   lazy = false, -- must load early so lsp/<server>.lua definitions are in runtimepath for vim.lsp.config()
   dependencies = {
     "saghen/blink.cmp",
-    { "williamboman/mason.nvim" },
+    { "mason-org/mason.nvim" },
     { "b0o/schemastore.nvim" },
-    {
-      "antosha417/nvim-lsp-file-operations",
-      config = true,
-    },
+    -- nvim-lsp-file-operations eliminado: solo se integra con nvim-tree/neo-tree.
+    -- Con Snacks explorer no hacia nada; snacks.rename cubre el rename LSP-aware.
   },
   -- NOTE: mason-lspconfig removed as a dependency here.
   -- The new pattern uses vim.lsp.config() + vim.lsp.enable() directly.
@@ -118,6 +116,7 @@ return {
       "shopify_theme_ls",
       "gopls",
       "pyright",
+      "taplo", -- TOML: Cargo.toml, pyproject.toml, etc.
     })
 
     -----------------------------------------------------------------

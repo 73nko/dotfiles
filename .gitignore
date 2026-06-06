@@ -30,6 +30,10 @@ raycast/extensions/
 # Claude local settings
 **/.claude/settings.local.json
 
+# tmux plugins: los gestiona TPM (prefix+I), no el repo.
+# Antes eran gitlinks sin .gitmodules = irrecuperables en un clone nuevo.
+tmux/plugins/
+
 # ============================================================================
 # Fish: solo versionar lo nuestro. Todo lo de fisher/plugins se reinstala
 # en cada maquina via `fisher update` leyendo fish_plugins.
@@ -47,17 +51,18 @@ fish/functions/*
 
 # conf.d/: ignoramos todo y permitimos solo las nuestras (no _tide_init).
 fish/conf.d/*
-!fish/conf.d/atuin.fish
 !fish/conf.d/direnv.fish
 !fish/conf.d/env.fish
-!fish/conf.d/fnm.fish
 !fish/conf.d/fzf.fish
 !fish/conf.d/git.fish
+!fish/conf.d/mise.fish
 !fish/conf.d/navi.fish
 !fish/conf.d/pay-respects.fish
 !fish/conf.d/rustup.fish
 !fish/conf.d/violet-hour-tide.fish
 !fish/conf.d/zoxide.fish
+# zz- fuerza carga DESPUES de fzf.fish para que atuin se quede con Ctrl-R
+!fish/conf.d/zz-atuin.fish
 
 # completions/: las generan los binarios al instalarse. Nada de versionar.
 fish/completions/*

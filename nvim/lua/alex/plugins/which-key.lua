@@ -42,6 +42,7 @@ return {
       { "<leader>a",  group = "AI" },
       { "<leader>b",  group = "buffer" },
       { "<leader>c",  group = "code" },
+      { "<leader>C",  group = "crates (Cargo.toml)" },
       { "<leader>d",  group = "debug" },
       { "<leader>e",  group = "explorer" },
       { "<leader>g",  group = "git" },
@@ -51,12 +52,14 @@ return {
       { "<leader>n",  group = "swap next" },
       { "<leader>N",  group = "notifications" },
       { "<leader>p",  group = "swap prev" },
+      { "<leader>l",  group = "lazygit" },
       { "<leader>r",  group = "refactor/rename" },
       { "<leader>s",  group = "search/snacks" },
+      { "<leader>S",  group = "sessions" },
       { "<leader>t",  group = "test" },
       { "<leader>T",  group = "tabs" },
       { "<leader>u",  group = "ui toggles" },
-      { "<leader>w",  group = "workspace/session" },
+      -- <leader>w ya no es grupo: es el save instantaneo (sesiones en <leader>S)
       { "<leader>x",  group = "trouble/diagnostics" },
     })
   end,

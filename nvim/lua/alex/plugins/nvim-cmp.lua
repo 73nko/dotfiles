@@ -14,11 +14,19 @@ return {
       ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-e>"] = { "hide" },
       ["<CR>"] = { "accept", "fallback" },
-      -- Tab: accept blink if visible + selected, else fall through to Supermaven
+      -- Tab: accept blink si visible; si no, accept NeoCodeium si hay ghost text;
+      -- si no, snippet forward; si no, Tab normal.
       ["<Tab>"] = {
         function(cmp)
           if cmp.is_visible() then
             return cmp.accept()
+          end
+        end,
+        function()
+          local ok, neocodeium = pcall(require, "neocodeium")
+          if ok and neocodeium.visible() then
+            neocodeium.accept()
+            return true
           end
         end,
         "snippet_forward",
@@ -31,7 +39,9 @@ return {
       ["<C-f>"] = { "scroll_documentation_down", "fallback" },
     },
     completion = {
-      accept = { auto_brackets = { enabled = true } },
+      -- auto_brackets OFF: nvim-autopairs es el unico dueño de los brackets.
+      -- Con ambos activos, aceptar una funcion del menu podia producir (().
+      accept = { auto_brackets = { enabled = false } },
       list = { selection = { preselect = false, auto_insert = false } },
       menu = {
         draw = {

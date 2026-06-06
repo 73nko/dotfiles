@@ -29,7 +29,11 @@ RAW="$("$ICALBUDDY" -nc -nrd -npn \
        "eventsFrom:$NOW_DT" "to:$END_DT" 2>/dev/null)"
 
 # Pick the first event with a real start/end time today or tomorrow.
-LINE="$(echo "$RAW" | grep -E "^[•*-]+[[:space:]]+[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]]+at[[:space:]]+[0-9]{2}:[0-9]{2}[[:space:]]+-[[:space:]]+[0-9]{2}:[0-9]{2}[[:space:]]+${SEP}[[:space:]]+" | head -1)"
+# El separador entre fecha y hora ("at" en ingles, "a las" en espanol, "um"
+# en aleman, etc) lo localiza icalBuddy segun el locale de macOS. Usamos
+# un patron tolerante: cualquier secuencia de palabras (no numericas) entre
+# la fecha y la primera hora.
+LINE="$(echo "$RAW" | grep -E "^[•*-]+[[:space:]]+[0-9]{4}-[0-9]{2}-[0-9]{2}[[:space:]]+[^0-9]+[[:space:]]*[0-9]{2}:[0-9]{2}[[:space:]]+-[[:space:]]+[0-9]{2}:[0-9]{2}[[:space:]]+${SEP}[[:space:]]+" | head -1)"
 
 if [ -z "$LINE" ]; then
   sketchybar --set "$NAME" icon="$GLYPH" label="—" \

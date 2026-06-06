@@ -23,7 +23,6 @@ ueberzug_offset = [0, 0, 0, 0]
 [opener]
 edit = [
     { run = 'nvim "$@"', block = true, desc = "Edit in Neovim" },
-    { run = 'code "$@"', orphan = true, desc = "Open in VS Code" },
     { run = 'zed "$@"', orphan = true, desc = "Open in Zed" },
 ]
 open = [{ run = 'open "$@"', desc = "Open" }]
@@ -32,10 +31,12 @@ extract = [
     { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
     { run = 'ya pub extract --list %*', desc = "Extract here", for = "windows" },
 ]
+# mpv/mediainfo no estan instalados (no figuran en el Brewfile): los openers
+# anteriores fallaban en seco. `open` delega en QuickTime/IINA/lo que macOS
+# tenga asociado, y ffprobe (viene con ffmpeg, instalado) da la info media.
 play = [
-    { run = 'mpv "$@"', orphan = true, for = "unix" },
-    { run = 'mpv "%1"', orphan = true, for = "windows" },
-    { run = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info", for = "unix" },
+    { run = 'open "$@"', desc = "Play (default macOS app)", for = "unix" },
+    { run = '''ffprobe -hide_banner "$1"; echo "Press enter to exit"; read''', block = true, desc = "Media info (ffprobe)", for = "unix" },
 ]
 
 [open]

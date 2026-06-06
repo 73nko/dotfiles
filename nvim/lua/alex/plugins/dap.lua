@@ -4,7 +4,8 @@ return {
     "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",
     "leoluz/nvim-dap-go",
-    "mxsdev/nvim-dap-vscode-js",
+    -- nvim-dap-vscode-js eliminado (sin mantenimiento desde 2023):
+    -- el adapter pwa-node se define nativo abajo con js-debug-adapter de mason.
     "mfussenegger/nvim-dap-python",
     "theHamsta/nvim-dap-virtual-text",
   },
@@ -26,11 +27,19 @@ return {
     dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 
     -- Node.js / TypeScript (Lambda, Express, Koa, Next.js)
-    require("dap-vscode-js").setup({
-      debugger_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter",
-      debugger_cmd = { "js-debug-adapter" },
-      adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
-    })
+    -- Adapter nativo: js-debug-adapter (mason) habla DAP directamente.
+    -- Mason pone su bin/ en el PATH, no hace falta ruta absoluta.
+    for _, adapter in ipairs({ "pwa-node", "pwa-chrome" }) do
+      dap.adapters[adapter] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = "js-debug-adapter",
+          args = { "${port}" },
+        },
+      }
+    end
 
     for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
       dap.configurations[language] = {

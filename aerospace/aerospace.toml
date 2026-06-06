@@ -2,7 +2,16 @@
 # AeroSpace — Violet Hour · Glass
 # ----------------------------------------------------------------------------
 # Tiling WM for macOS. No SIP changes needed.
-# Bindings cluster: alt = focus / launch, alt+shift = move, alt+ctrl = layout.
+#
+# CONTRATO DE MODIFICADORES del ecosistema (no romper):
+#   alt        -> ventanas macOS (AeroSpace: focus, move, workspaces). AeroSpace
+#                 captura alt-hjkl GLOBALMENTE: nada con alt+h/j/k/l puede vivir
+#                 dentro del terminal (por eso nvim/tmux usan ctrl-alt p. resize).
+#   ctrl       -> navegar panes/splits (smart-splits: tmux + nvim)
+#   ctrl-alt   -> redimensionar panes/splits (smart-splits: tmux + nvim)
+#   prefix C-a -> comandos tmux
+#   alt libres para apps de terminal: w (neocodeium word), v (ghostty scrollback),
+#                 ] (neocodeium cycle). Consultar aqui antes de asignar alt-algo.
 # ============================================================================
 
 # Start AeroSpace at login. Borders + SketchyBar are already brew services

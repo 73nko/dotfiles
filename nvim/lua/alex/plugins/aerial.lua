@@ -1,7 +1,6 @@
 return {
 	-- see the aerial view of the code
 	"stevearc/aerial.nvim",
-	opts = {},
 	-- Optional dependencies
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",

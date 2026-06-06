@@ -23,12 +23,16 @@ return {
       vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
       vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
       vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
-      vim.keymap.set("n", "<C-c>", "<C-w>c")
+      -- <C-c> -> <C-w>c eliminado (2026-06): pisaba el cancel nativo de vim
+      -- y arriesgaba cierres accidentales. <leader>sx ya cierra splits.
 
-      vim.keymap.set("n", "<A-h>", require("smart-splits").resize_left)
-      vim.keymap.set("n", "<A-j>", require("smart-splits").resize_down)
-      vim.keymap.set("n", "<A-k>", require("smart-splits").resize_up)
-      vim.keymap.set("n", "<A-l>", require("smart-splits").resize_right)
+      -- Ctrl-Alt (no Alt a secas): AeroSpace posee alt-hjkl a nivel macOS para
+      -- focus de ventanas, asi que <A-h/j/k/l> NUNCA llegaba al terminal.
+      -- Ctrl-Alt-hjkl viaja bien gracias a extended-keys (ghostty + tmux).
+      vim.keymap.set("n", "<C-A-h>", require("smart-splits").resize_left)
+      vim.keymap.set("n", "<C-A-j>", require("smart-splits").resize_down)
+      vim.keymap.set("n", "<C-A-k>", require("smart-splits").resize_up)
+      vim.keymap.set("n", "<C-A-l>", require("smart-splits").resize_right)
     end,
   },
 }

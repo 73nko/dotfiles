@@ -89,6 +89,9 @@ abbr -a we 'curl wttr.in/Madrid?1nqF'
 abbr -a bou 'brew update && brew outdated && brew upgrade && brew cleanup'
 abbr -a app-listen 'lsof -nP -iTCP -sTCP:LISTEN'
 abbr -a up-all topgrade
+# Converge la maquina al estado de los dotfiles (un solo comando para todo)
+abbr -a up-mac 'bash ~/.config/scripts/setup.sh'
+abbr -a mac-doctor 'bash ~/.config/scripts/setup.sh doctor'
 abbr -a reload-fish 'source ~/.config/fish/config.fish'
 abbr -a edit-fish 'nvim ~/.config/fish/config.fish'
 abbr -a ncheat 'glow ~/.config/nvim/cheatsheet.md'
@@ -125,13 +128,3 @@ if test -f ~/.secrets.fish
     source ~/.secrets.fish
 end
 
-# Added by Antigravity
-fish_add_path "$HOME/.antigravity/antigravity/bin"
-
-# OpenClaw Completion
-if test -f "$HOME/.openclaw/completions/openclaw.fish"
-    source "$HOME/.openclaw/completions/openclaw.fish"
-end
-
-# Added by Antigravity IDE
-fish_add_path $HOME/.antigravity-ide/antigravity-ide/bin

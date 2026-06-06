@@ -5,10 +5,8 @@ return {
     local lint = require("lint")
 
     lint.linters_by_ft = {
-      javascript = { "eslint_d" },
-      typescript = { "eslint_d" },
-      javascriptreact = { "eslint_d" },
-      typescriptreact = { "eslint_d" },
+      -- JS/TS eliminados: el LSP `eslint` (vim.lsp.enable) ya da diagnosticos
+      -- + code actions. Tener eslint_d aqui duplicaba cada warning.
       python = { "ruff" },
       go = { "golangci-lint" },
       sh = { "shellcheck" },

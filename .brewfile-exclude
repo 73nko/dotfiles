@@ -1,3 +1,16 @@
-# Packages to exclude when running brew-export.sh
+# Packages to exclude when running `setup.sh export`
 # One pattern per line (matched against Brewfile lines)
 python@3.12
+# Purgados en la auditoria 2026-06. Guard temporal: si re-exportas el Brewfile
+# antes de hacer `brew uninstall`, estos no deben volver a colarse.
+# Borrar estas lineas cuando esten desinstalados de verdad.
+gemini-cli
+antigravity
+codexbar
+visual-studio-code
+pipx
+brew "docker"
+@steipete/oracle
+clawhub
+mcporter
+openclaw

@@ -4,16 +4,29 @@ return {
     "nvim-neotest/nvim-nio",
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
-    "nvim-neotest/neotest-go",
-    "haydenmeade/neotest-jest",
+    "fredrikaverpil/neotest-golang", -- neotest-go superado: AST parsing, table tests, monorepos
+    "nvim-neotest/neotest-jest", -- repo movido desde haydenmeade
     "marilari88/neotest-vitest",
+    "mrcjkb/rustaceanvim", -- trae su propio adapter de neotest
   },
   config = function()
     require("neotest").setup({
       adapters = {
-        require("neotest-go"),
+        require("neotest-golang")({
+          runner = "gotestsum", -- ya instalado via Brewfile (go install)
+          dap_go_enabled = true, -- <leader>td debug via nvim-dap-go
+        }),
+        require("rustaceanvim.neotest"),
         require("neotest-jest")({
-          jestCommand = "npm test --",
+          -- pnpm o npm segun el lockfile del repo (Brewfile instala pnpm;
+          -- "npm test" contra un workspace de pnpm corre el lockfile equivocado)
+          jestCommand = function(file)
+            local pnpm_lock = vim.fn.findfile("pnpm-lock.yaml", vim.fn.fnamemodify(file, ":p:h") .. ";")
+            if pnpm_lock ~= "" then
+              return "pnpm test --"
+            end
+            return "npm test --"
+          end,
           -- dynamically find the jest config closest to the test file
           jestConfigFile = function(file)
             for _, name in ipairs({ "jest.config.ts", "jest.config.js", "jest.config.json", "custom.jest.config.ts" }) do

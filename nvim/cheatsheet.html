@@ -326,10 +326,11 @@ const WORKFLOWS = [
     icon: '🤖', color: 'pink',
     steps: [
       { keys: '<leader>ac', text: 'Abrir Claude Code en split lateral' },
-      { keys: '<Tab>', text: 'Aceptar sugerencia de Supermaven' },
-      { keys: '<M-l>', text: 'Aceptar solo la siguiente palabra (Alt+L, convencion Copilot)' },
+      { keys: '<Tab>', text: 'Aceptar sugerencia de NeoCodeium (ghost text)' },
+      { keys: '<M-w>', text: 'Aceptar solo la siguiente palabra (Alt+W)' },
+      { keys: '<M-]>', text: 'Ciclar a la siguiente sugerencia (Alt+])' },
       { keys: '<C-]>', text: 'Rechazar sugerencia' },
-      { keys: '<leader>ag', text: 'Abrir Gemini CLI como alternativa' },
+      { keys: '<leader>ao', text: 'Abrir opencode como alternativa' },
     ]
   },
   {
@@ -388,7 +389,7 @@ const SECTIONS = [
       ['Split horizontal', '-'],
       ['Equal splits', '<leader>se'],
       ['Close split', '<leader>sx'],
-      ['Move line down / up', '<S-A-j> / <S-A-k>'],
+      ['Move line down / up', '<C-S-j> / <C-S-k>'],
       ['Toggle line wrap', 'gw'],
       ['Last buffer', '<leader>bb'],
       ['Home (Dashboard)', '<leader>H'],
@@ -403,8 +404,8 @@ const SECTIONS = [
     items: [
       ['Move left / right', '<C-h> / <C-l>'],
       ['Move down / up', '<C-j> / <C-k>'],
-      ['Resize left / right', '<A-h> / <A-l>'],
-      ['Resize down / up', '<A-j> / <A-k>'],
+      ['Resize left / right', '<C-A-h> / <C-A-l>'],
+      ['Resize down / up', '<C-A-j> / <C-A-k>'],
       ['Def en split horizontal', '<leader>shd'],
       ['Def en split vertical', '<leader>svd'],
     ]
@@ -546,7 +547,7 @@ const SECTIONS = [
       ['Next / Prev hunk', ']h / [h'],
       ['Stage hunk', '<leader>hs'],
       ['Reset hunk', '<leader>hr'],
-      ['Undo stage hunk', '<leader>hu'],
+      ['Unstage hunk (stage toggle)', '<leader>hu'],
       ['Stage buffer', '<leader>hS'],
       ['Reset buffer', '<leader>hR'],
       ['Preview hunk', '<leader>hp'],
@@ -582,7 +583,7 @@ const SECTIONS = [
       ['Inner function', 'vam', 'visual around method'],
       ['Inner class', 'vac'],
       ['Inner block', 'vaB'],
-      ['Move line down / up', '<S-A-j> / <S-A-k>'],
+      ['Move line down / up', '<C-S-j> / <C-S-k>'],
     ]
   },
   {
@@ -607,10 +608,12 @@ const SECTIONS = [
     color: 'pink',
     items: [
       ['Toggle Claude Code', '<leader>ac'],
-      ['Toggle Gemini CLI', '<leader>ag'],
-      ['Accept AI suggestion (Tab)', '<Tab>', 'Supermaven ghost text'],
-      ['Accept next word', '<M-l>', 'Supermaven partial accept (Alt+L)'],
+      ['Toggle opencode', '<leader>ao'],
+      ['Accept AI suggestion (Tab)', '<Tab>', 'NeoCodeium ghost text'],
+      ['Accept next word', '<M-w>', 'NeoCodeium partial accept (Alt+W)'],
+      ['Cycle next suggestion', '<M-]>'],
       ['Dismiss suggestion', '<C-]>'],
+      ['First login', ':NeoCodeium auth', 'cuenta gratuita Windsurf'],
     ]
   },
   {
@@ -645,6 +648,28 @@ const SECTIONS = [
       ['Debug nearest test', '<leader>td'],
       ['Toggle summary', '<leader>ts'],
       ['Show output', '<leader>to'],
+      ['Adapters', '', 'Jest (pnpm/npm por lockfile), Vitest, Go, Rust'],
+    ]
+  },
+  {
+    id: 'rust',
+    title: 'Rust (rustaceanvim + crates)',
+    icon: '🦀',
+    color: 'orange',
+    items: [
+      ['Code action rust-analyzer', '<leader>ca', 'en ficheros .rs'],
+      ['Expandir macro', '<leader>cm'],
+      ['Diagnostico estilo cargo', '<leader>ce'],
+      ['Run/test/bench del cursor', ':RustLsp runnables'],
+      ['Debug del cursor', ':RustLsp debuggables', 'codelldb'],
+      ['Explicar error largo', ':RustLsp explainError'],
+      ['Saltar al Cargo.toml', ':RustLsp openCargo'],
+      ['Cargo.toml: toggle versiones', '<leader>Ct', 'crates.nvim'],
+      ['Cargo.toml: versiones popup', '<leader>Cv'],
+      ['Cargo.toml: features popup', '<leader>Cf'],
+      ['Cargo.toml: update / upgrade crate', '<leader>Cu / <leader>CU'],
+      ['Cargo.toml: upgrade TODOS', '<leader>CA'],
+      ['Cargo.toml: docs.rs / crates.io', '<leader>Cd / <leader>Cc'],
     ]
   },
   {
@@ -668,7 +693,7 @@ const SECTIONS = [
       ['Show completions', '<C-Space>'],
       ['Dismiss', '<C-e>'],
       ['Confirm selected', '<CR>'],
-      ['Confirm / fallback to Supermaven', '<Tab>'],
+      ['Confirm / fallback to NeoCodeium', '<Tab>'],
       ['Prev / Next item', '<C-k> / <C-j>'],
       ['Scroll docs up / down', '<C-b> / <C-f>'],
       ['Snippet next / prev placeholder', '<Tab> / <S-Tab>'],
@@ -794,8 +819,8 @@ const SECTIONS = [
     icon: '🔧',
     color: 'muted',
     items: [
-      ['Restore session', '<leader>wr'],
-      ['Save session', '<leader>ws'],
+      ['Restore session', '<leader>Sr'],
+      ['Save session', '<leader>Ss'],
       ['Trigger lint', '<leader>l'],
       ['Lazy plugin manager', ':Lazy'],
       ['Mason LSP manager', ':Mason'],

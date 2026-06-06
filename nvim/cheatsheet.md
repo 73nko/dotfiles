@@ -34,7 +34,7 @@ Referencia completa de la config de Neovim. Todos los keymaps, workflows y plugi
 
 # Staging rapido hunk a hunk
 <leader>hs           Stage hunk
-<leader>hu           Undo stage hunk
+<leader>hu           Unstage hunk (toggle de stage)
 <leader>hr           Reset hunk (descartar cambio)
 
 # Revisar todos los cambios
@@ -126,11 +126,14 @@ gra                  Code action, auto-fix si hay sugerencia
 
 ```
 <leader>ac           Abrir Claude Code en split lateral
-<Tab>                Aceptar sugerencia de Supermaven
-<M-l>                Aceptar solo la siguiente palabra (Alt+L)
+<Tab>                Aceptar sugerencia de NeoCodeium (ghost text)
+<M-w>                Aceptar solo la siguiente palabra (Alt+W)
+<M-]>                Ciclar a la siguiente sugerencia (Alt+])
 <C-]>                Rechazar sugerencia
-<leader>ag           Abrir Gemini CLI como alternativa
+<leader>ao           Abrir opencode como alternativa
 ```
+
+> Primer uso de NeoCodeium: `:NeoCodeium auth` (cuenta gratuita de Windsurf).
 
 ---
 
@@ -183,7 +186,7 @@ gra                  Code action, auto-fix si hay sugerencia
 | `-` | Split horizontal |
 | `<leader>se` | Igualar splits |
 | `<leader>sx` | Cerrar split actual |
-| `<S-A-j>` / `<S-A-k>` | Mover linea abajo / arriba |
+| `<C-S-j>` / `<C-S-k>` | Mover linea abajo / arriba |
 | `gw` | Toggle line wrap |
 | `<leader>bb` | Ultimo buffer (toggle) |
 | `<leader>+` / `<leader>-` | Incrementar / decrementar numero |
@@ -194,10 +197,12 @@ gra                  Code action, auto-fix si hay sugerencia
 | --- | --- |
 | `<C-h>` / `<C-l>` | Mover izquierda / derecha |
 | `<C-j>` / `<C-k>` | Mover abajo / arriba |
-| `<A-h>` / `<A-l>` | Redimensionar izquierda / derecha |
-| `<A-j>` / `<A-k>` | Redimensionar abajo / arriba |
+| `<C-A-h>` / `<C-A-l>` | Redimensionar izquierda / derecha |
+| `<C-A-j>` / `<C-A-k>` | Redimensionar abajo / arriba |
 | `<leader>shd` | Definicion en split horizontal |
 | `<leader>svd` | Definicion en split vertical |
+
+> Contrato de modificadores: Alt es de AeroSpace (ventanas macOS), Ctrl navega panes, Ctrl-Alt redimensiona. Funciona igual en panes de tmux y splits de nvim.
 
 ## Buscar Archivos (Snacks Picker)
 
@@ -324,13 +329,13 @@ nvim-tree eliminado el 2026-04-21. Snacks.explorer es ahora la unica via.
 | `<C-Space>` | Mostrar completions |
 | `<C-e>` | Cerrar menu |
 | `<CR>` | Confirmar seleccion |
-| `<Tab>` | Confirmar / fallback a Supermaven |
+| `<Tab>` | Confirmar / fallback a NeoCodeium |
 | `<C-k>` / `<C-j>` | Item anterior / siguiente |
 | `<C-b>` / `<C-f>` | Scroll docs arriba / abajo |
 | `<Tab>` / `<S-Tab>` | Siguiente / anterior placeholder (snippets) |
 | `<C-s>` | Signature help (insert mode) |
 
-> Tab acepta blink.cmp si el menu esta visible. Si no, acepta la sugerencia ghost de Supermaven. Si no hay ninguna, inserta tab normal.
+> Cadena de Tab: blink.cmp si el menu esta visible -> ghost text de NeoCodeium si hay sugerencia -> placeholder de snippet -> tab normal.
 
 ## Formato & Linting
 
@@ -347,11 +352,12 @@ Formateadores por tipo:
 - Rust: `rustfmt`
 
 Linters por tipo:
-- JS/TS: `eslint_d`
+- JS/TS: LSP `eslint` (diagnosticos + code actions; eslint_d eliminado por duplicar warnings)
 - Python: `ruff`
 - Go: `golangci-lint`
 - Shell: `shellcheck`
 - Dockerfile: `hadolint`
+- TOML: LSP `taplo` (schema de Cargo.toml incluido)
 
 ## Git
 
@@ -362,7 +368,7 @@ Linters por tipo:
 | `]h` / `[h` | Siguiente / anterior hunk |
 | `<leader>hs` | Stage hunk |
 | `<leader>hr` | Reset hunk |
-| `<leader>hu` | Undo stage hunk |
+| `<leader>hu` | Unstage hunk (toggle de stage) |
 | `<leader>hS` | Stage buffer completo |
 | `<leader>hR` | Reset buffer completo |
 | `<leader>hp` | Preview hunk |
@@ -398,7 +404,7 @@ Linters por tipo:
 | `gc{motion}` | Comentar con movimiento (ej: gc3j) |
 | `<C-space>` | Expandir seleccion (treesitter node) |
 | `<bs>` | Contraer seleccion |
-| `<S-A-j>` / `<S-A-k>` | Mover linea abajo / arriba |
+| `<C-S-j>` / `<C-S-k>` | Mover linea abajo / arriba |
 
 ## Surround
 
@@ -460,12 +466,13 @@ Linters por tipo:
 | Keymap | Descripcion |
 | --- | --- |
 | `<leader>ac` | Toggle Claude Code (split derecho) |
-| `<leader>ag` | Toggle Gemini CLI (split derecho) |
-| `<Tab>` | Aceptar sugerencia Supermaven |
-| `<M-l>` | Aceptar siguiente palabra (Alt+L, convencion Copilot) |
+| `<leader>ao` | Toggle opencode (split derecho) |
+| `<Tab>` | Aceptar sugerencia NeoCodeium |
+| `<M-w>` | Aceptar siguiente palabra (Alt+W; Alt+L lo captura AeroSpace) |
+| `<M-]>` | Ciclar a la siguiente sugerencia |
 | `<C-]>` | Rechazar sugerencia |
 
-> Las sugerencias aparecen como ghost text gris mientras escribes. Tab solo activa Supermaven cuando el menu de blink.cmp esta cerrado y no hay snippet activo.
+> Las sugerencias aparecen como ghost text gris mientras escribes. Tab solo acepta NeoCodeium cuando el menu de blink.cmp esta cerrado. Comandos utiles: `:NeoCodeium auth` (primer login), `:NeoCodeium toggle` (on/off).
 
 ## Debug (DAP)
 
@@ -500,6 +507,37 @@ Configuraciones DAP disponibles:
 | `<leader>td` | Debug test mas cercano |
 | `<leader>ts` | Toggle resumen |
 | `<leader>to` | Mostrar output |
+
+Adapters: Jest (detecta pnpm/npm por lockfile), Vitest, Go, Rust (via rustaceanvim).
+
+## Rust (rustaceanvim + crates.nvim)
+
+### En ficheros .rs
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>ca` | Code action de rust-analyzer (agrupadas) |
+| `<leader>cm` | Expandir macro bajo el cursor |
+| `<leader>ce` | Diagnostico renderizado como lo pinta cargo |
+
+Comandos utiles: `:RustLsp runnables` (run/test/bench del cursor), `:RustLsp debuggables` (debug via codelldb), `:RustLsp openCargo` (saltar al Cargo.toml), `:RustLsp explainError` (explicacion larga del error).
+
+> Check on save usa `clippy` con todas las features: mismos warnings que CI.
+
+### En Cargo.toml (crates.nvim)
+
+| Keymap | Descripcion |
+| --- | --- |
+| `<leader>Ct` | Toggle versiones inline |
+| `<leader>Cv` | Popup de versiones del crate |
+| `<leader>Cf` | Popup de features del crate |
+| `<leader>Cu` / `<leader>CU` | Update / upgrade crate bajo el cursor |
+| `<leader>CA` | Upgrade TODOS los crates |
+| `<leader>Cd` | Abrir docs.rs |
+| `<leader>Cc` | Abrir crates.io |
+| `<leader>Cr` | Recargar info de crates |
+
+> Completions de nombres/versiones/features salen solas via LSP in-process. En terminal: `cargo nextest run` para tests rapidos y `bacon` para feedback de compilacion continuo.
 
 ## Trouble & Diagnostics
 
@@ -566,8 +604,10 @@ Configuraciones DAP disponibles:
 
 | Keymap | Descripcion |
 | --- | --- |
-| `<leader>wr` | Restaurar sesion del cwd |
-| `<leader>ws` | Guardar sesion |
+| `<leader>Sr` | Restaurar sesion del cwd |
+| `<leader>Ss` | Guardar sesion |
+
+> Movidos de `<leader>w*` a `<leader>S*`: ahora `<leader>w` (guardar fichero) es instantaneo, sin los 300ms de espera del prefijo.
 
 ## Notifications (Snacks)
 

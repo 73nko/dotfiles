@@ -10,7 +10,10 @@ return {
 
     local keymap = vim.keymap
 
-    keymap.set("n", "<leader>wr", "<cmd>SessionRestore<CR>", { desc = "Restore session for cwd" }) -- restore last workspace session for current directory
-    keymap.set("n", "<leader>ws", "<cmd>SessionSave<CR>", { desc = "Save session for auto session root dir" }) -- save workspace session for current working directory
+    -- Movidos de <leader>w* a <leader>S* (2026-06): <leader>wr/<leader>ws hacian
+    -- de <leader>w un prefijo, y el save (el keymap mas usado del setup) pagaba
+    -- 300ms de timeoutlen en CADA guardado. Ahora <leader>w es instantaneo.
+    keymap.set("n", "<leader>Sr", "<cmd>SessionRestore<CR>", { desc = "Restore session for cwd" })
+    keymap.set("n", "<leader>Ss", "<cmd>SessionSave<CR>", { desc = "Save session for cwd" })
   end,
 }

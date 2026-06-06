@@ -28,11 +28,13 @@ keymap.set("n", "<leader>Tn", "<cmd>tabn<CR>", { desc = "Go to next tab" })
 keymap.set("n", "<leader>Tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })
 keymap.set("n", "<leader>Tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" })
 
--- Move lines: Shift+Alt (was Alt-j/k, collided with smart-splits resize)
-keymap.set("n", "<S-A-j>", ":m .+1<CR>==", { desc = "Move line down" })
-keymap.set("n", "<S-A-k>", ":m .-2<CR>==", { desc = "Move line up" })
-keymap.set("v", "<S-A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-keymap.set("v", "<S-A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
+-- Move lines: Ctrl+Shift (Shift+Alt estaba MUERTO: AeroSpace captura
+-- alt-shift-j/k a nivel macOS para mover ventanas, nunca llegaba a nvim).
+-- Ctrl-Shift-j/k requiere CSI u, que ghostty extkeys + tmux extended-keys dan.
+keymap.set("n", "<C-S-j>", ":m .+1<CR>==", { desc = "Move line down" })
+keymap.set("n", "<C-S-k>", ":m .-2<CR>==", { desc = "Move line up" })
+keymap.set("v", "<C-S-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+keymap.set("v", "<C-S-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 keymap.set("n", "<leader>w", ":w<CR>", { noremap = true, silent = true, desc = "Save the current buffer" })
 keymap.set("n", "<leader>q", ":q<CR>", { noremap = true, silent = true, desc = "Quit" })

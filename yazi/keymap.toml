@@ -73,11 +73,7 @@ run = '''
 desc = "Drag and drop"
 
 # Open with specific editors
-[[mgr.prepend_keymap]]
-on = ["g", "v"]
-run = 'shell "code \"$@\"" --orphan'
-desc = "Open in VS Code"
-
+# (g,v "Open in VS Code" eliminado 2026-06: VS Code purgado del equipo)
 [[mgr.prepend_keymap]]
 on = ["g", "z"]
 run = 'shell "zed \"$@\"" --orphan'

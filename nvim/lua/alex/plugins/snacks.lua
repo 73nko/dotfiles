@@ -45,7 +45,7 @@ return {
           { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
           -- session = false evita el self:action recursivo que crashea cuando
           -- el proyecto tiene sesion guardada (auto-session). Ver is_float()
-          -- sobre self.win = nil. Restaurar sesion queda en <leader>wr.
+          -- sobre self.win = nil. Restaurar sesion queda en <leader>Sr.
           { pane = 2, icon = " ", title = "Projects",     section = "projects",     indent = 2, padding = 1, session = false },
           {
             pane = 2,
@@ -528,13 +528,15 @@ return {
         desc = "Toggle Claude Code",
       },
       {
-        "<leader>ag",
+        -- gemini-cli purgado en la auditoria 2026-06; opencode es el
+        -- agente terminal secundario que queda instalado.
+        "<leader>ao",
         function()
-          Snacks.terminal.toggle("gemini", {
+          Snacks.terminal.toggle("opencode", {
             win = { position = "right", width = 0.4, border = "rounded" },
           })
         end,
-        desc = "Toggle Gemini CLI",
+        desc = "Toggle opencode",
       },
       {
         "<leader>sr",
@@ -544,6 +546,15 @@ return {
         desc = "[R]ecent",
       },
       -- Git
+      {
+        -- kdheepak/lazygit.nvim eliminado (2026-06): Snacks.lazygit da la misma
+        -- UX con un plugin menos y hereda el colorscheme automaticamente.
+        "<leader>lg",
+        function()
+          Snacks.lazygit()
+        end,
+        desc = "Lazygit",
+      },
       {
         "<leader>gb",
         function()
