@@ -116,7 +116,7 @@ set -x FZF_CTRL_T_OPTS "--preview 'bat -n --color=always --line-range :500 {}' -
 set -x FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # ============================================
-# Node — fnm (loaded via conf.d/fnm.fish)
+# Node — mise (loaded via conf.d/mise.fish)
 # FZF, Zoxide, Direnv, pay-respects are also in conf.d/
 # ============================================
 
