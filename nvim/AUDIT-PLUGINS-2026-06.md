@@ -86,7 +86,8 @@ Leyenda: OK = mejor versión posible hoy. FIX = corregir. EVAL = decisión de gu
 
 | Plugin | Veredicto | Notas |
 |---|---|---|
-| neocodeium | OK | Recién configurado, cadena de Tab correcta. |
+| neocodeium | ELIMINADO (2026-06) | Sustituido por sidekick.nvim + Copilot LSP (ghost text nativo 0.12). El free tier de Windsurf era el mismo patron de riesgo que supermaven. |
+| sidekick.nvim | OK | NES + CLIs (claude/opencode) con persistencia tmux. Login: :LspCopilotSignIn. |
 | package-info | OK (vigilar) | Mantenimiento lento upstream pero función única y sin reemplazo. |
 
 ## Hallazgos de keymaps

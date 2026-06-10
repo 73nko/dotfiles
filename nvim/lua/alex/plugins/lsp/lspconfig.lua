@@ -117,7 +117,14 @@ return {
       "gopls",
       "pyright",
       "taplo", -- TOML: Cargo.toml, pyproject.toml, etc.
+      -- Copilot LSP (config lsp/copilot.lua la aporta sidekick.nvim).
+      -- Da ghost text nativo (inline_completion) + NES. Login: :LspCopilotSignIn
+      "copilot",
     })
+
+    -- Ghost text nativo de Neovim 0.12, servido por el Copilot LSP.
+    -- Sustituye al render de neocodeium (eliminado 2026-06).
+    vim.lsp.inline_completion.enable()
 
     -----------------------------------------------------------------
     -- 4. Keymaps (LspAttach) - only custom ones, defaults handled by Neovim 0.12

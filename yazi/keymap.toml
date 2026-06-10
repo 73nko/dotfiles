@@ -64,13 +64,9 @@ on = ["g", "s"]
 run = "shell 'lazygit' --block --confirm"
 desc = "Lazygit"
 
-# Drag and drop (requires compatible terminal)
-[[mgr.prepend_keymap]]
-on = ["<C-n>"]
-run = '''
-	shell 'dragon -x -i -T "$1"' --confirm
-'''
-desc = "Drag and drop"
+# <C-n> drag-and-drop eliminado (2026-06): `dragon` es una herramienta
+# Linux/X11, no existe en macOS ni estaba en el Brewfile. Keybind muerto
+# desde el dia uno. Alternativa real: `R` (reveal) y arrastrar desde Finder.
 
 # Open with specific editors
 # (g,v "Open in VS Code" eliminado 2026-06: VS Code purgado del equipo)

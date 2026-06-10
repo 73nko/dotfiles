@@ -15,7 +15,9 @@ return {
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
-    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+    -- InsertLeave eliminado (2026-06): re-lintar en cada escape de insert era
+    -- ruido y procesos extra en ficheros grandes. BufEnter + write bastan.
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
       group = lint_augroup,
       callback = function()
         lint.try_lint()

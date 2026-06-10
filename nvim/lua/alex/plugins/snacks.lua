@@ -517,27 +517,9 @@ return {
         end,
         desc = "Reveal file in explorer",
       },
-      -- AI terminals (migrated from claude.lua and gemini.lua on 2026-04-21)
-      {
-        "<leader>ac",
-        function()
-          Snacks.terminal.toggle("claude", {
-            win = { position = "right", width = 0.4, border = "rounded" },
-          })
-        end,
-        desc = "Toggle Claude Code",
-      },
-      {
-        -- gemini-cli purgado en la auditoria 2026-06; opencode es el
-        -- agente terminal secundario que queda instalado.
-        "<leader>ao",
-        function()
-          Snacks.terminal.toggle("opencode", {
-            win = { position = "right", width = 0.4, border = "rounded" },
-          })
-        end,
-        desc = "Toggle opencode",
-      },
+      -- AI terminals: migrados a sidekick.nvim (2026-06). <leader>ac y
+      -- <leader>ao viven ahora en sidekick.lua con persistencia tmux y
+      -- auto-reload de ficheros editados por el CLI.
       {
         "<leader>sr",
         function()

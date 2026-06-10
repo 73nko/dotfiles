@@ -122,18 +122,21 @@ gra                  Code action, auto-fix si hay sugerencia
 
 ---
 
-### AI Pair Programming
+### AI Pair Programming (sidekick.nvim, 2026-06)
 
 ```
-<leader>ac           Abrir Claude Code en split lateral
-<Tab>                Aceptar sugerencia de NeoCodeium (ghost text)
-<M-w>                Aceptar solo la siguiente palabra (Alt+W)
-<M-]>                Ciclar a la siguiente sugerencia (Alt+])
-<C-]>                Rechazar sugerencia
-<leader>ao           Abrir opencode como alternativa
+<leader>ac           Claude (sesion persistente via tmux)
+<leader>ao           opencode (sesion persistente via tmux)
+<leader>aa           Toggle del ultimo CLI usado
+<leader>ap           Seleccionar prompt predefinido
+<leader>av           Enviar seleccion visual al CLI
+<Tab> (normal)       Saltar/aplicar Next Edit Suggestion (NES)
+<Tab> (insert)       Aceptar ghost text (vim.lsp.inline_completion)
 ```
 
-> Primer uso de NeoCodeium: `:NeoCodeium auth` (cuenta gratuita de Windsurf).
+> Primer uso: `:LspCopilotSignIn` (cuenta GitHub; Copilot Free vale).
+> El ghost text lo sirve el Copilot LSP nativo; NES aplica refactors
+> multi-linea. Los CLIs sobreviven al cierre de nvim (mux tmux).
 
 ---
 
@@ -329,13 +332,13 @@ nvim-tree eliminado el 2026-04-21. Snacks.explorer es ahora la unica via.
 | `<C-Space>` | Mostrar completions |
 | `<C-e>` | Cerrar menu |
 | `<CR>` | Confirmar seleccion |
-| `<Tab>` | Confirmar / fallback a NeoCodeium |
+| `<Tab>` | Confirmar / NES / ghost text (ver cadena abajo) |
 | `<C-k>` / `<C-j>` | Item anterior / siguiente |
 | `<C-b>` / `<C-f>` | Scroll docs arriba / abajo |
 | `<Tab>` / `<S-Tab>` | Siguiente / anterior placeholder (snippets) |
 | `<C-s>` | Signature help (insert mode) |
 
-> Cadena de Tab: blink.cmp si el menu esta visible -> ghost text de NeoCodeium si hay sugerencia -> placeholder de snippet -> tab normal.
+> Cadena de Tab: blink.cmp si el menu esta visible -> NES de sidekick (saltar/aplicar) -> ghost text nativo (Copilot LSP) -> placeholder de snippet -> tab normal.
 
 ## Formato & Linting
 
@@ -461,18 +464,19 @@ Linters por tipo:
 | `<leader>n:` / `<leader>p:` | Swap propiedad siguiente / anterior |
 | `<leader>nm` / `<leader>pm` | Swap funcion siguiente / anterior |
 
-## AI Tools
+## AI Tools (sidekick.nvim)
 
 | Keymap | Descripcion |
 | --- | --- |
-| `<leader>ac` | Toggle Claude Code (split derecho) |
-| `<leader>ao` | Toggle opencode (split derecho) |
-| `<Tab>` | Aceptar sugerencia NeoCodeium |
-| `<M-w>` | Aceptar siguiente palabra (Alt+W; Alt+L lo captura AeroSpace) |
-| `<M-]>` | Ciclar a la siguiente sugerencia |
-| `<C-]>` | Rechazar sugerencia |
+| `<leader>ac` | Toggle Claude (persistente via tmux) |
+| `<leader>ao` | Toggle opencode (persistente via tmux) |
+| `<leader>aa` | Toggle del ultimo CLI |
+| `<leader>ap` | Seleccionar prompt (normal/visual) |
+| `<leader>av` | Enviar seleccion visual al CLI |
+| `<Tab>` (normal) | Saltar/aplicar Next Edit Suggestion |
+| `<Tab>` (insert) | Aceptar ghost text si no hay menu/NES |
 
-> Las sugerencias aparecen como ghost text gris mientras escribes. Tab solo acepta NeoCodeium cuando el menu de blink.cmp esta cerrado. Comandos utiles: `:NeoCodeium auth` (primer login), `:NeoCodeium toggle` (on/off).
+> Ghost text: `vim.lsp.inline_completion` nativo (Neovim 0.12) servido por el Copilot LSP. NES: refactors multi-linea con diff resaltado. Login: `:LspCopilotSignIn`. Los ficheros editados por el CLI se recargan solos.
 
 ## Debug (DAP)
 

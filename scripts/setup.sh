@@ -89,14 +89,29 @@ preflight() {
 legacy_cleanup() {
   phase "Limpieza de herramientas deprecadas"
   local found=false
-  for pkg in thefuck neofetch bash-completion skhd fnm; do
+  # deno/pnpm/python@3.13/openjdk migrados a mise (2026-06, ver mise/config.toml):
+  # si brew los tiene, sobran. mise_toolchains los repone via mise install.
+  for pkg in thefuck neofetch bash-completion skhd fnm deno pnpm python@3.13 openjdk; do
     if brew list --formula "$pkg" >/dev/null 2>&1; then
       found=true
       run "uninstall $pkg" brew uninstall --force "$pkg"
     fi
   done
+  # Taps muertos (sin ningun paquete del Brewfile detras, auditoria 2026-06).
+  for tap in oven-sh/bun crissnb/dynamicisland manaflow-ai/cmux jesseduffield/lazygit nikitabobko/aerospace; do
+    if brew tap | grep -qx "$tap" 2>/dev/null; then
+      found=true
+      run "untap $tap" brew untap "$tap"
+    fi
+  done
   command -v omf >/dev/null 2>&1 && { found=true; run "OMF destroy" fish -c "omf destroy --force"; }
   rm -rf "$DOTS/omf" "$DOTS/neofetch" "$DOTS/skhd" 2>/dev/null || true
+  # tmux: resurrect/continuum/vim-tmux-navigator fuera del tmux.conf (2026-06);
+  # en maquinas viejas los dirs clonados por TPM siguen ahi. Purga directa
+  # (ademas del clean_plugins de la fase tmux, por si TPM aun no existe).
+  for dir in tmux-resurrect tmux-continuum vim-tmux-navigator; do
+    [[ -d "$DOTS/tmux/plugins/$dir" ]] && { found=true; rm -rf "$DOTS/tmux/plugins/$dir"; ok "purgado tmux/plugins/$dir"; }
+  done
   [[ -d "/Applications/Magnet.app" ]] && warn "Magnet instalado: conflicto con AeroSpace, quitalo a mano"
   $found || skip "nada que limpiar"
 }
@@ -158,20 +173,14 @@ fish_plugins() {
   fi
 }
 
-mise_node() {
-  phase "mise (Node y versiones por proyecto)"
+mise_toolchains() {
+  phase "mise (toolchains: node/go/python/java/deno + go/cargo/pipx tools)"
   command -v mise >/dev/null 2>&1 || { fail "mise no instalado (deberia venir del Brewfile)"; return; }
-  # Sin esto mise ignora .nvmrc/.node-version de los repos.
-  if mise settings get idiomatic_version_file_enable_tools 2>/dev/null | grep -q node; then
-    skip "idiomatic version files (node) ya habilitado"
-  else
-    run "habilitar .nvmrc/.node-version" mise settings add idiomatic_version_file_enable_tools node
-  fi
-  if mise which node >/dev/null 2>&1; then
-    skip "node global ya configurado ($(mise exec -- node -v 2>/dev/null))"
-  else
-    run "node LTS global" mise use -g node@lts
-  fi
+  # 2026-06: mise es el unico gestor de toolchains. La lista completa vive en
+  # mise/config.toml (este script NUNCA duplica esos valores; converge contra
+  # el fichero, igual que brew bundle contra el Brewfile).
+  # idiomatic_version_file_enable_tools tambien vive ya en config.toml.
+  run "mise install (converger toolchains)" mise install --yes
 }
 
 tmux_plugins() {
@@ -184,6 +193,10 @@ tmux_plugins() {
   fi
   if [[ -x "$tpm/bin/install_plugins" ]]; then
     run "instalar plugins tmux" "$tpm/bin/install_plugins"
+  fi
+  # Purga plugins que ya no estan en tmux.conf (convergencia tambien al quitar)
+  if [[ -x "$tpm/bin/clean_plugins" ]]; then
+    run "limpiar plugins tmux retirados" "$tpm/bin/clean_plugins"
   fi
 }
 
@@ -283,12 +296,25 @@ doctor() {
       errors=$((errors + 1))
     fi
   }
+  # Toolchains de mise: NO usar command -v. Los shims solo estan en el PATH
+  # con mise activado (fish); desde bash/zsh darian MISSING falsos en una
+  # maquina recien instalada. mise which pregunta a la fuente de verdad.
+  check_mise() {
+    if mise which "$1" >/dev/null 2>&1; then
+      printf "  ${GREEN}OK${NC}      %-14s %s\n" "$1" "$(mise which "$1" 2>/dev/null)"
+    else
+      printf "  ${RED}MISSING${NC} %-14s (mise install pendiente?)\n" "$1"
+      errors=$((errors + 1))
+    fi
+  }
   echo "  Core:"
   for c in fish nvim tmux git brew ghostty; do check "$c"; done
   echo "  Shell:"
   for c in fzf fd bat eza zoxide atuin yazi direnv mise fastfetch pay-respects; do check "$c"; done
-  echo "  Dev:"
-  for c in node go rustc cargo cargo-nextest bacon deno gh lazygit delta just; do check "$c"; done
+  echo "  Dev (brew/rustup):"
+  for c in rustc cargo cargo-nextest bacon gh lazygit delta just; do check "$c"; done
+  echo "  Toolchains (mise):"
+  for c in node go python java deno pnpm gopls dlv; do check_mise "$c"; done
   echo "  Servicios:"
   for svc in borders sketchybar; do
     if brew services list 2>/dev/null | awk -v s="$svc" '$1==s{print $2}' | grep -q "^started$"; then
@@ -371,7 +397,7 @@ case "$cmd" in
     rust_toolchain
     fish_shell
     fish_plugins
-    mise_node
+    mise_toolchains
     tmux_plugins
     yazi_plugins
     theming

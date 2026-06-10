@@ -61,6 +61,8 @@ return {
         "js-debug-adapter",
         "codelldb",
         "delve",
+        -- AI: Copilot LSP para sidekick.nvim (NES + inline_completion nativa)
+        "copilot-language-server",
       },
     })
   end,

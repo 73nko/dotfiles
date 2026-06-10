@@ -14,8 +14,10 @@ return {
       ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-e>"] = { "hide" },
       ["<CR>"] = { "accept", "fallback" },
-      -- Tab: accept blink si visible; si no, accept NeoCodeium si hay ghost text;
+      -- Tab: accept blink si visible; si no, NES de sidekick (saltar/aplicar);
+      -- si no, ghost text nativo (vim.lsp.inline_completion via Copilot LSP);
       -- si no, snippet forward; si no, Tab normal.
+      -- (neocodeium eliminado 2026-06, ver sidekick.lua)
       ["<Tab>"] = {
         function(cmp)
           if cmp.is_visible() then
@@ -23,11 +25,10 @@ return {
           end
         end,
         function()
-          local ok, neocodeium = pcall(require, "neocodeium")
-          if ok and neocodeium.visible() then
-            neocodeium.accept()
-            return true
-          end
+          return require("sidekick").nes_jump_or_apply()
+        end,
+        function()
+          return vim.lsp.inline_completion.get()
         end,
         "snippet_forward",
         "fallback",
