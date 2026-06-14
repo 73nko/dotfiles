@@ -341,7 +341,12 @@ export_brewfile() {
     local pattern=""
     while IFS= read -r kw || [[ -n "$kw" ]]; do
       [[ -z "$kw" || "$kw" =~ ^[[:space:]]*# ]] && continue
-      kw="$(echo "$kw" | xargs)"
+      # Trim en bash puro. NUNCA xargs aqui: interpreta las comillas de
+      # patrones como `tap "x/y"` (las quita) o `^brew "` (revienta), y un
+      # patron vacio en la alternancia borraria el Brewfile entero (2026-06).
+      kw="${kw#"${kw%%[![:space:]]*}"}"
+      kw="${kw%"${kw##*[![:space:]]}"}"
+      [[ -z "$kw" ]] && continue
       pattern="${pattern:+$pattern|}$kw"
     done <"$exclude"
     if [[ -n "$pattern" ]]; then

@@ -95,6 +95,7 @@ abbr -a mac-doctor 'bash ~/.config/scripts/setup.sh doctor'
 abbr -a reload-fish 'source ~/.config/fish/config.fish'
 abbr -a edit-fish 'nvim ~/.config/fish/config.fish'
 abbr -a ncheat 'glow ~/.config/nvim/cheatsheet.md'
+abbr -a ncheatw 'open ~/.config/nvim/cheatsheet.html'
 abbr -a awt 'cd ~/YOUR-ORG'
 
 # 'ssh' and 'dy' are full functions (see functions/) to handle env vars and complex args

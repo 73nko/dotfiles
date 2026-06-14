@@ -1,150 +1,68 @@
-# dotfiles/nvim
+# dotfiles
 
-<a href="https://dotfyle.com/YOUR-USER/dotfiles-nvim"><img src="https://dotfyle.com/YOUR-USER/dotfiles-nvim/badges/plugins?style=flat" /></a>
-<a href="https://dotfyle.com/YOUR-USER/dotfiles-nvim"><img src="https://dotfyle.com/YOUR-USER/dotfiles-nvim/badges/leaderkey?style=flat" /></a>
-<a href="https://dotfyle.com/YOUR-USER/dotfiles-nvim"><img src="https://dotfyle.com/YOUR-USER/dotfiles-nvim/badges/plugin-manager?style=flat" /></a>
+Configuracion completa de mi Mac: fish, nvim, tmux, ghostty, yazi, AeroSpace,
+sketchybar y la capa visual Violet Hour Glass. Todo converge con UN comando.
 
-## Install Instructions
+(README reescrito 2026-06: el anterior era el auto-generado de dotfyle, solo
+cubria nvim y describia plugins que ya no existen.)
 
-> Install requires Neovim 0.9+. Always review the code before installing a configuration.
-
-Clone the repository and install the plugins:
+## Replicar en un Mac nuevo
 
 ```sh
-git clone git@github.com:YOUR-USER/dotfiles ~/.config/YOUR-USER/dotfiles
+# 1. Clonar EN ~/.config (el repo ES el XDG config dir)
+git clone git@github.com:YOUR-USER/dotfiles.git ~/.config
+
+# 2. Converger la maquina (instala Xcode CLT, brew, todo el Brewfile,
+#    rustup, fish como shell, fisher, mise, plugins de tmux/yazi, tema,
+#    defaults de macOS, servicios). Idempotente: re-correrlo = todo SKIP.
+bash ~/.config/scripts/setup.sh
 ```
 
-Open Neovim with this config:
+`setup.sh` es la unica fuente de orquestacion. Subcomandos:
 
 ```sh
-NVIM_APPNAME=YOUR-USER/dotfiles/nvim nvim
+setup.sh            # converger (= sync)
+setup.sh doctor     # health check, no toca nada
+setup.sh export     # re-exporta el Brewfile (filtra .brewfile-exclude)
+setup.sh --upgrade  # sync + upgrade de paquetes existentes
 ```
 
-## Plugins
+Desde fish, los atajos son `up-mac` (sync) y `mac-doctor`.
 
-### color
+## Pasos manuales (una vez por maquina)
 
-- [NvChad/nvim-colorizer.lua](https://dotfyle.com/plugins/NvChad/nvim-colorizer.lua)
+Cosas que requieren login o permisos que macOS no deja automatizar:
 
-### colorscheme
+1. `gh auth login` y re-correr setup.sh (instala las gh extensions).
+2. nvim: abrir, dejar que lazy/mason instalen, y `:LspCopilotSignIn`
+   (ghost text + NES via sidekick.nvim, cuenta GitHub).
+3. 1Password: iniciar sesion. Secrets de shell: `~/.secrets.fish`
+   (NO versionado; pendiente de migrar a `op run`).
+4. Permisos macOS: Screen Recording para sketchybar, Accessibility para
+   AeroSpace, Calendar para icalBuddy. macOS los resetea tras algunos updates;
+   `setup.sh doctor` lo recuerda.
+5. `atuin login` si quieres sync de historial entre maquinas.
 
-- [folke/tokyonight.nvim](https://dotfyle.com/plugins/folke/tokyonight.nvim)
+## Donde vive cada cosa
 
-### comment
+| Capa | Fichero(s) |
+| --- | --- |
+| Paquetes (brew/cask/mas) | `.Brewfile` (+ `.brewfile-exclude` para el export) |
+| Toolchains (node/go/python/java/deno/pnpm + go/cargo/pipx tools) | `mise/config.toml` |
+| Rust | rustup (deliberadamente fuera de mise) |
+| Shell | `fish/` (plugins en `fish_plugins`, fuente de verdad de fisher) |
+| Editor | `nvim/` (lazy.nvim; cheatsheet en `nvim/cheatsheet.md`, `ncheat`) |
+| Multiplexor | `tmux/tmux.conf` (TPM; tpm/smart-splits/sessionx, nada mas) |
+| Terminal | `ghostty/config` |
+| File manager | `yazi/` |
+| Window manager | `aerospace/`, `borders/`, `sketchybar/` |
+| Defaults macOS | `scripts/macos-tweaks.sh` (reversible con `-revert`) |
+| Capa visual | `scripts/macos-violet-hour.sh`, `wallpapers/`, `Styles/` |
 
-- [JoosepAlviste/nvim-ts-context-commentstring](https://dotfyle.com/plugins/JoosepAlviste/nvim-ts-context-commentstring)
-- [numToStr/Comment.nvim](https://dotfyle.com/plugins/numToStr/Comment.nvim)
-- [folke/todo-comments.nvim](https://dotfyle.com/plugins/folke/todo-comments.nvim)
+Principio del repo: cada valor vive en UN sitio. setup.sh nunca duplica
+config, solo converge contra estos ficheros.
 
-### completion
+## Auditorias
 
-- [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
-
-### diagnostics
-
-- [folke/trouble.nvim](https://dotfyle.com/plugins/folke/trouble.nvim)
-
-### editing-support
-
-- [gbprod/substitute.nvim](https://dotfyle.com/plugins/gbprod/substitute.nvim)
-- [windwp/nvim-autopairs](https://dotfyle.com/plugins/windwp/nvim-autopairs)
-- [windwp/nvim-ts-autotag](https://dotfyle.com/plugins/windwp/nvim-ts-autotag)
-
-### file-explorer
-
-- [nvim-tree/nvim-tree.lua](https://dotfyle.com/plugins/nvim-tree/nvim-tree.lua)
-
-### formatting
-
-- [stevearc/conform.nvim](https://dotfyle.com/plugins/stevearc/conform.nvim)
-
-### fuzzy-finder
-
-- [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
-
-### git
-
-- [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
-- [kdheepak/lazygit.nvim](https://dotfyle.com/plugins/kdheepak/lazygit.nvim)
-
-### icon
-
-- [nvim-tree/nvim-web-devicons](https://dotfyle.com/plugins/nvim-tree/nvim-web-devicons)
-
-### indent
-
-- [lukas-reineke/indent-blankline.nvim](https://dotfyle.com/plugins/lukas-reineke/indent-blankline.nvim)
-
-### keybinding
-
-- [folke/which-key.nvim](https://dotfyle.com/plugins/folke/which-key.nvim)
-
-### lsp
-
-- [smjonas/inc-rename.nvim](https://dotfyle.com/plugins/smjonas/inc-rename.nvim)
-- [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
-- [ray-x/lsp_signature.nvim](https://dotfyle.com/plugins/ray-x/lsp_signature.nvim)
-- [stevearc/aerial.nvim](https://dotfyle.com/plugins/stevearc/aerial.nvim)
-- [onsails/lspkind.nvim](https://dotfyle.com/plugins/onsails/lspkind.nvim)
-- [mfussenegger/nvim-lint](https://dotfyle.com/plugins/mfussenegger/nvim-lint)
-
-### lsp-installer
-
-- [williamboman/mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim)
-
-### nvim-dev
-
-- [folke/neodev.nvim](https://dotfyle.com/plugins/folke/neodev.nvim)
-- [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
-
-### plugin-manager
-
-- [folke/lazy.nvim](https://dotfyle.com/plugins/folke/lazy.nvim)
-
-### session
-
-- [rmagatti/auto-session](https://dotfyle.com/plugins/rmagatti/auto-session)
-
-### snippet
-
-- [L3MON4D3/LuaSnip](https://dotfyle.com/plugins/L3MON4D3/LuaSnip)
-- [rafamadriz/friendly-snippets](https://dotfyle.com/plugins/rafamadriz/friendly-snippets)
-
-### split-and-window
-
-- [mrjones2014/smart-splits.nvim](https://dotfyle.com/plugins/mrjones2014/smart-splits.nvim)
-
-### startup
-
-- [goolord/alpha-nvim](https://dotfyle.com/plugins/goolord/alpha-nvim)
-
-### statusline
-
-- [nvim-lualine/lualine.nvim](https://dotfyle.com/plugins/nvim-lualine/lualine.nvim)
-
-### syntax
-
-- [nvim-treesitter/nvim-treesitter-textobjects](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-textobjects)
-- [nvim-treesitter/nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)
-- [kylechui/nvim-surround](https://dotfyle.com/plugins/kylechui/nvim-surround)
-
-### tabline
-
-- [akinsho/bufferline.nvim](https://dotfyle.com/plugins/akinsho/bufferline.nvim)
-
-### utility
-
-- [stevearc/dressing.nvim](https://dotfyle.com/plugins/stevearc/dressing.nvim)
-- [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
-
-## Language Servers
-
-- cssls
-- eslint
-- graphql
-- html
-- lua_ls
-- prismals
-- pyright
-- rust_analyzer
-- tsserver
+El estado y las decisiones recientes estan documentados en
+`CONFIG-AUDIT-2026-06.md` y `nvim/AUDIT-PLUGINS-2026-06.md`.

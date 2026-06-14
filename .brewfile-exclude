@@ -14,17 +14,18 @@ brew "docker"
 clawhub
 mcporter
 openclaw
-# Toolchains migrados a mise (2026-06, ver mise/config.toml). Guard hasta
-# hacer `brew uninstall deno pnpm python@3.13 openjdk`; sin esto, un export
-# los re-importaria al Brewfile mientras sigan instalados.
-brew "deno"
-brew "pnpm"
-python@3.13
-brew "openjdk"
-go "
-cargo "
-uv "
-npm "
+# Toolchains migrados a mise (2026-06, ver mise/config.toml). Guard hasta que
+# legacy_cleanup desinstale deno/pnpm/python@3.13/openjdk en todas las
+# maquinas; sin esto, un export los re-importaria mientras sigan instalados.
+# Patrones ANCLADOS (^tipo ): `go ` a secas matcheaba cask "google-chrome".
+^brew "deno"
+^brew "pnpm"
+^brew "python@3.13"
+^brew "openjdk"
+^go .
+^cargo .
+^uv .
+^npm .
 # Taps muertos (2026-06): guard hasta que legacy_cleanup haga untap en todas
 # las maquinas; mientras esten tapeados, el dump los re-exportaria.
 tap "oven-sh/bun"
