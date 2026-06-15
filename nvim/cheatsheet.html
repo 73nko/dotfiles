@@ -613,7 +613,8 @@ const SECTIONS = [
       ['Seleccionar prompt', '<leader>ap', 'normal/visual'],
       ['Enviar seleccion al CLI', '<leader>av', 'visual'],
       ['Saltar/aplicar NES', '<Tab>', 'normal: Next Edit Suggestion'],
-      ['Aceptar ghost text', '<Tab>', 'insert: vim.lsp.inline_completion'],
+      ['Aceptar ghost text (dedicada)', '<C-y>', 'insert: SIEMPRE, predecible'],
+      ['Aceptar ghost text (cadena)', '<Tab>', 'insert: si no hay menu/NES'],
       ['First login', ':LspCopilotSignIn', 'cuenta GitHub (Copilot Free vale)'],
     ]
   },

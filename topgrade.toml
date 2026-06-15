@@ -3,7 +3,14 @@
 assume_yes = true
 
 # Disable specific steps - same options as the command line flag
-disable = ["pnpm", "node", "gem", "ruby_gems"]
+# fisher: deshabilitado 2026-06. Causaba 403 de rate-limit de la GitHub API
+# (fisher pega 3 curl SIN auth a api.github.com en cada run de topgrade, y junto
+# al resto de pasos que tocan GitHub se agota el limite de 60/h sin autenticar).
+# Tus plugins de fish (fisher, plugin-git, tide) cambian una vez al año: no tiene
+# sentido pegarle a la API en cada topgrade. setup.sh (up-mac) ya corre
+# `fisher update` en cada convergencia, que es donde toca. Misma logica que
+# pnpm/node aqui: lo posee otra herramienta, no topgrade.
+disable = ["pnpm", "node", "gem", "ruby_gems", "fisher"]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]

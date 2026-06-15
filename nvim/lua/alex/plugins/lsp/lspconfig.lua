@@ -126,6 +126,18 @@ return {
     -- Sustituye al render de neocodeium (eliminado 2026-06).
     vim.lsp.inline_completion.enable()
 
+    -- Tecla DEDICADA y predecible para aceptar el ghost text de Copilot.
+    -- Tab tambien lo acepta (via la cadena de blink), pero Tab hace 5 cosas
+    -- segun el contexto; <C-y> hace SIEMPRE una sola: aceptar la sugerencia IA.
+    -- Convencion vim clasica (C-y = "yes, accept"). En insert mode no choca con
+    -- smart-splits (normal mode) ni con AeroSpace (que solo posee Alt).
+    -- LIMITES upstream del inline_completion nativo (no arreglables en config):
+    --   - sin accept por palabra (neovim#35485): acepta la sugerencia entera.
+    --   - bug de chars extra al aceptar muy rapido (neovim#36529).
+    vim.keymap.set("i", "<C-y>", function()
+      vim.lsp.inline_completion.get()
+    end, { desc = "Aceptar sugerencia inline (Copilot)" })
+
     -----------------------------------------------------------------
     -- 4. Keymaps (LspAttach) - only custom ones, defaults handled by Neovim 0.12
     -----------------------------------------------------------------

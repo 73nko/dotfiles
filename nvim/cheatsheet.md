@@ -131,12 +131,16 @@ gra                  Code action, auto-fix si hay sugerencia
 <leader>ap           Seleccionar prompt predefinido
 <leader>av           Enviar seleccion visual al CLI
 <Tab> (normal)       Saltar/aplicar Next Edit Suggestion (NES)
-<Tab> (insert)       Aceptar ghost text (vim.lsp.inline_completion)
+<C-y> (insert)       Aceptar ghost text SIEMPRE (tecla dedicada, predecible)
+<Tab> (insert)       Aceptar ghost text si no hay menu blink/NES (cadena)
 ```
 
 > Primer uso: `:LspCopilotSignIn` (cuenta GitHub; Copilot Free vale).
 > El ghost text lo sirve el Copilot LSP nativo; NES aplica refactors
 > multi-linea. Los CLIs sobreviven al cierre de nvim (mux tmux).
+> Usa `<C-y>` cuando quieras aceptar sin pensar que hace Tab en ese contexto.
+> Limites del inline nativo 0.12: no acepta por palabra (neovim#35485) y
+> puede meter chars extra si aceptas muy rapido (neovim#36529). Upstream.
 
 ---
 
@@ -474,7 +478,8 @@ Linters por tipo:
 | `<leader>ap` | Seleccionar prompt (normal/visual) |
 | `<leader>av` | Enviar seleccion visual al CLI |
 | `<Tab>` (normal) | Saltar/aplicar Next Edit Suggestion |
-| `<Tab>` (insert) | Aceptar ghost text si no hay menu/NES |
+| `<C-y>` (insert) | Aceptar ghost text SIEMPRE (tecla dedicada) |
+| `<Tab>` (insert) | Aceptar ghost text si no hay menu/NES (cadena) |
 
 > Ghost text: `vim.lsp.inline_completion` nativo (Neovim 0.12) servido por el Copilot LSP. NES: refactors multi-linea con diff resaltado. Login: `:LspCopilotSignIn`. Los ficheros editados por el CLI se recargan solos.
 
