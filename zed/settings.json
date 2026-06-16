@@ -1,5 +1,13 @@
 {
   // ─── Session ───────────────────────────────────────────────
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
+    "codex-acp": {
+      "type": "registry"
+    }
+  },
   "collaboration_panel": {
     "dock": "right"
   },
@@ -7,6 +15,7 @@
     "dock": "right"
   },
   "edit_predictions": {
+    "allow_data_collection": "yes",
     "provider": "zed"
   },
   "session": {
@@ -80,9 +89,10 @@
       "model": "claude-sonnet-4"
     },
     "default_model": {
+      "effort": "high",
       "enable_thinking": true,
-      "provider": "google",
-      "model": "gemini-3.1-pro-preview"
+      "provider": "openai-subscribed",
+      "model": "gpt-5.5"
     }
   },
 
