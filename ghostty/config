@@ -77,40 +77,36 @@ selection-foreground = #ECE6FF
 background = #0D0D2C
 foreground = #ECE6FF
 
-# Normal (0-7) — §07 ANSI mapping
-# 0 black  = Abyss
-# 1 red    = Rose Mist (gentler than real red, still distinct)
-# 2 green  = Ice (cool axis, collapsed onto "green" slot)
-# 3 yellow = Bloom
-# 4 blue   = Periwinkle
-# 5 magenta= Orchid (identity)
-# 6 cyan   = Cyan Mist
-# 7 white  = Silver
+# Normal (0-7) — ANSI con verde/rojo/amarillo REALES (rediseno 2026-06).
+# Antes el slot verde era azul y el rojo era rosa: ls/git/fish salian
+# monocromos. Ahora cada slot lleva su color de verdad, igual que el bloque
+# terminal_color_* del tema de nvim.
+# 0 black  = Abyss      4 blue    = Azure
+# 1 red    = Coral      5 magenta = Orchid (identidad)
+# 2 green  = Green      6 cyan    = Teal
+# 3 yellow = Gold       7 white   = Silver
 palette = 0=#06061A
-palette = 1=#E2BCFF
-palette = 2=#A8C9FF
-palette = 3=#F0D2FF
-palette = 4=#8DA7FF
+palette = 1=#FF9E9E
+palette = 2=#9EE87F
+palette = 3=#FFCF7A
+palette = 4=#7FB0FF
 palette = 5=#B39DFF
-palette = 6=#B9E0FF
+palette = 6=#5FE0C8
 palette = 7=#C4BEE0
 
 # Bright (8-15)
-# 8  bright black  = Indigo
-# 9  bright red    = Bloom
-# 10 bright green  = Cyan Mist
-# 11 bright yellow = Lilac
-# 12 bright blue   = Ice
-# 13 bright mag    = Lilac
-# 14 bright cyan   = Ice
-# 15 bright white  = Star
-palette = 8=#1A1745
-palette = 9=#F0D2FF
-palette = 10=#B9E0FF
-palette = 11=#D6C8FF
-palette = 12=#A8C9FF
+# 8  bright black  = Pane Active (lifted, visible)
+# 9  bright red    = Coral        12 bright blue  = Azure
+# 10 bright green  = Green        13 bright mag   = Lilac
+# 11 bright yellow = Gold         14 bright cyan  = Teal
+#                                 15 bright white = Star
+palette = 8=#434F76
+palette = 9=#FFB8B8
+palette = 10=#B6F0A0
+palette = 11=#FFD99A
+palette = 12=#7FB0FF
 palette = 13=#D6C8FF
-palette = 14=#A8C9FF
+palette = 14=#8FF0DD
 palette = 15=#ECE6FF
 
 # ============================================

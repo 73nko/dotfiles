@@ -34,13 +34,24 @@ M.palette = {
   star   = "#ece6ff",  -- default fg
   silver = "#c4bee0",  -- muted fg base
 
+  -- Espectro de alta legibilidad (rediseno 2026-06). Sobre el lienzo dusk:
+  -- los fondos siguen siendo Violet Hour, el TEXTO gana rango cromatico.
+  -- Tokens NUEVOS; no pisan los de chrome (orchid/ice/etc.) que leen
+  -- lualine/bufferline/tmux, asi que la barra de estado no cambia.
+  gold   = "#ffcf7a",  -- functions / methods
+  teal   = "#5fe0c8",  -- types / namespaces / classes
+  green  = "#9ee87f",  -- strings
+  orange = "#ffb86b",  -- numbers / constants
+  coral  = "#ff9e9e",  -- booleans / git delete
+  azure  = "#7fb0ff",  -- properties / fields
+
   -- blended (rgba aproximado sobre night #0d0d2c)
   panel       = "#1a1745", -- raised surface (floats, menus) = indigo
   cursorline  = "#161839", -- rgba(ice,.06)
   selection   = "#322d5a", -- rgba(orchid,.22)
   indent      = "#1c2041", -- rgba(ice,.10)
   linenr      = "#3c456b", -- rgba(ice,.30)  gutter
-  comment     = "#5b6b96", -- rgba(ice,.50)  italic
+  comment     = "#717fa6", -- lifted 2026-06: era #5b6b96 (50%), poco legible
   punct       = "#67618b", -- rgba(silver,.45)
   muted       = "#777494", -- rgba(silver,.58)
   pane_border = "#211e45", -- rgba(orchid,.12)
@@ -135,15 +146,15 @@ function M.apply()
   -- Syntax (legacy vim groups) - tree-sitter hace el resto
   -- ========================================================================
   hl("Comment",   { fg = c.comment, italic = true })
-  hl("Constant",  { fg = c.bloom })
-  hl("String",    { fg = c.ice })
-  hl("Character", { fg = c.ice })
-  hl("Number",    { fg = c.bloom })
-  hl("Boolean",   { fg = c.bloom })
-  hl("Float",     { fg = c.bloom })
+  hl("Constant",  { fg = c.orange })
+  hl("String",    { fg = c.green })
+  hl("Character", { fg = c.green })
+  hl("Number",    { fg = c.orange })
+  hl("Boolean",   { fg = c.coral })
+  hl("Float",     { fg = c.orange })
 
   hl("Identifier", { fg = c.star })
-  hl("Function",   { fg = c.rose_mist })
+  hl("Function",   { fg = c.gold })
 
   hl("Statement",   { fg = c.orchid })
   hl("Conditional", { fg = c.orchid })
@@ -159,10 +170,10 @@ function M.apply()
   hl("Macro",     { fg = c.lilac })
   hl("PreCondit", { fg = c.orchid })
 
-  hl("Type",         { fg = c.cyan_mist })
+  hl("Type",         { fg = c.teal })
   hl("StorageClass", { fg = c.orchid })
-  hl("Structure",    { fg = c.cyan_mist })
-  hl("Typedef",      { fg = c.cyan_mist })
+  hl("Structure",    { fg = c.teal })
+  hl("Typedef",      { fg = c.teal })
 
   hl("Special",        { fg = c.rose_mist })
   hl("SpecialChar",    { fg = c.rose_mist })
@@ -199,8 +210,8 @@ function M.apply()
   hl("@exception",           kw)
   hl("@include",             kw)
 
-  -- Functions / constructors -> Rose Mist
-  local fn = { fg = c.rose_mist }
+  -- Functions / constructors -> Gold (acento calido, alto contraste)
+  local fn = { fg = c.gold }
   hl("@function",             fn)
   hl("@function.call",        fn)
   hl("@function.builtin",     fn)
@@ -211,47 +222,55 @@ function M.apply()
   hl("@method",               fn)
   hl("@method.call",          fn)
 
-  -- Strings -> Ice
-  hl("@string",         { fg = c.ice })
-  hl("@string.regex",   { fg = c.ice })
-  hl("@string.regexp",  { fg = c.ice })
-  hl("@string.escape",  { fg = c.rose_mist })
-  hl("@string.special", { fg = c.cyan_mist })
+  -- Strings -> Green
+  hl("@string",         { fg = c.green })
+  hl("@string.regex",   { fg = c.green })
+  hl("@string.regexp",  { fg = c.green })
+  hl("@string.escape",  { fg = c.coral })
+  hl("@string.special", { fg = c.teal })
 
-  -- Types / namespaces -> Cyan Mist
-  hl("@type",            { fg = c.cyan_mist })
-  hl("@type.builtin",    { fg = c.cyan_mist, italic = true })
-  hl("@type.definition", { fg = c.cyan_mist, bold = true })
-  hl("@namespace",       { fg = c.cyan_mist })
-  hl("@module",          { fg = c.cyan_mist })
-  hl("@class",           { fg = c.cyan_mist })
+  -- Types / namespaces -> Teal
+  hl("@type",            { fg = c.teal })
+  hl("@type.builtin",    { fg = c.teal, italic = true })
+  hl("@type.definition", { fg = c.teal, bold = true })
+  hl("@namespace",       { fg = c.teal })
+  hl("@module",          { fg = c.teal })
+  hl("@class",           { fg = c.teal })
 
-  -- Numbers / booleans / constants -> Bloom
-  hl("@number",           { fg = c.bloom })
-  hl("@float",            { fg = c.bloom })
-  hl("@boolean",          { fg = c.bloom })
-  hl("@constant",         { fg = c.bloom })
-  hl("@constant.builtin", { fg = c.bloom, italic = true })
-  hl("@constant.macro",   { fg = c.bloom })
+  -- Numbers / constants -> Orange ; booleans -> Coral
+  hl("@number",           { fg = c.orange })
+  hl("@float",            { fg = c.orange })
+  hl("@boolean",          { fg = c.coral })
+  hl("@constant",         { fg = c.orange })
+  hl("@constant.builtin", { fg = c.orange, italic = true })
+  hl("@constant.macro",   { fg = c.orange })
 
-  -- Properties / fields / tags -> Orchid (intencional per §05)
-  hl("@property",      { fg = c.orchid })
-  hl("@field",         { fg = c.orchid })
+  -- Properties / fields -> Azure (azul, distinto de keywords y variables)
+  hl("@property",      { fg = c.azure })
+  hl("@field",         { fg = c.azure })
   hl("@tag",           { fg = c.orchid })
   hl("@tag.builtin",   { fg = c.lilac })
-  hl("@tag.attribute", { fg = c.rose_mist })
   hl("@tag.delimiter", { fg = c.punct })
+
+  -- Atributos JSX/HTML -> Rose Mist + italic. Color RESERVADO solo para esto
+  -- (ningun otro token lo usa tras mover funciones a dorado), para que el
+  -- nombre de la prop nunca se confunda con su valor (var blanco / fn dorado /
+  -- string verde). La cursiva es una segunda señal ademas del hue.
+  -- Se cubren todos los captures plausibles segun version del parser tsx.
+  local attr = { fg = c.rose_mist, italic = true }
+  hl("@tag.attribute", attr)
+  hl("@attribute",     attr)
 
   -- Variables / parameters -> Star (default fg, la base calmada)
   hl("@variable",           { fg = c.star })
   hl("@variable.builtin",   { fg = c.star, italic = true })
   hl("@variable.parameter", { fg = c.star })
-  hl("@variable.member",    { fg = c.orchid })
+  hl("@variable.member",    { fg = c.azure })
   hl("@parameter",          { fg = c.star })
 
   -- Comments -> Ice 50%, italic
   hl("@comment",               { fg = c.comment, italic = true })
-  hl("@comment.documentation", { fg = c.cyan_mist, italic = true })
+  hl("@comment.documentation", { fg = c.teal, italic = true })
   hl("@comment.todo",          { fg = c.bloom, bold = true })
   hl("@comment.note",          { fg = c.ice, bold = true })
   hl("@comment.warning",       { fg = c.bloom, bold = true })
@@ -285,12 +304,14 @@ function M.apply()
   -- JSX / HTML / CSS
   hl("@tag.tsx",           { fg = c.orchid })
   hl("@tag.jsx",           { fg = c.orchid })
-  hl("@tag.attribute.tsx", { fg = c.rose_mist })
-  hl("@tag.attribute.jsx", { fg = c.rose_mist })
-  hl("@property.css",      { fg = c.orchid })
-  hl("@type.css",          { fg = c.cyan_mist })
-  hl("@number.css",        { fg = c.bloom })
-  hl("@string.css",        { fg = c.ice })
+  hl("@tag.attribute.tsx", attr)
+  hl("@tag.attribute.jsx", attr)
+  hl("@attribute.tsx",     attr)
+  hl("@attribute.jsx",     attr)
+  hl("@property.css",      { fg = c.azure })
+  hl("@type.css",          { fg = c.teal })
+  hl("@number.css",        { fg = c.orange })
+  hl("@string.css",        { fg = c.green })
 
   -- ========================================================================
   -- LSP semantic tokens
@@ -311,7 +332,7 @@ function M.apply()
   link("@lsp.type.type",          "@type")
   link("@lsp.type.typeParameter", "@type")
   link("@lsp.type.variable",      "@variable")
-  hl("@lsp.mod.readonly",   { fg = c.bloom })
+  hl("@lsp.mod.readonly",   { fg = c.orange })
   hl("@lsp.mod.deprecated", { strikethrough = true, fg = c.muted })
 
   -- ========================================================================
@@ -350,20 +371,20 @@ function M.apply()
   -- ========================================================================
   -- Diff / git - add Ice / del Orchid / change Bloom (§05)
   -- ========================================================================
-  hl("DiffAdd",    { fg = c.ice, bg = c.none })
-  hl("DiffChange", { fg = c.bloom, bg = c.none })
-  hl("DiffDelete", { fg = c.orchid, bg = c.none })
-  hl("DiffText",   { fg = c.bloom, bg = c.panel, bold = true })
-  hl("diffAdded",   { fg = c.ice })
-  hl("diffRemoved", { fg = c.orchid })
-  hl("diffChanged", { fg = c.bloom })
+  hl("DiffAdd",    { fg = c.green, bg = c.none })
+  hl("DiffChange", { fg = c.orange, bg = c.none })
+  hl("DiffDelete", { fg = c.coral, bg = c.none })
+  hl("DiffText",   { fg = c.orange, bg = c.panel, bold = true })
+  hl("diffAdded",   { fg = c.green })
+  hl("diffRemoved", { fg = c.coral })
+  hl("diffChanged", { fg = c.orange })
   hl("diffFile",    { fg = c.lilac, bold = true })
-  hl("diffNewFile", { fg = c.ice, bold = true })
-  hl("diffLine",    { fg = c.cyan_mist })
+  hl("diffNewFile", { fg = c.green, bold = true })
+  hl("diffLine",    { fg = c.teal })
 
-  hl("GitSignsAdd",    { fg = c.ice })
-  hl("GitSignsChange", { fg = c.bloom })
-  hl("GitSignsDelete", { fg = c.orchid })
+  hl("GitSignsAdd",    { fg = c.green })
+  hl("GitSignsChange", { fg = c.orange })
+  hl("GitSignsDelete", { fg = c.coral })
   hl("GitSignsCurrentLineBlame", { fg = c.comment, italic = true })
 
   -- ========================================================================
@@ -495,13 +516,13 @@ function M.apply()
   hl("AerialLine",         { bg = c.cursorline })
   hl("AerialLineNC",       { fg = c.comment })
   hl("AerialGuide",        { fg = c.indent })
-  hl("AerialClassIcon",    { fg = c.cyan_mist })
-  hl("AerialFunctionIcon", { fg = c.rose_mist })
-  hl("AerialMethodIcon",   { fg = c.rose_mist })
+  hl("AerialClassIcon",    { fg = c.teal })
+  hl("AerialFunctionIcon", { fg = c.gold })
+  hl("AerialMethodIcon",   { fg = c.gold })
   hl("AerialVariableIcon", { fg = c.star })
-  hl("AerialConstantIcon", { fg = c.bloom })
-  hl("AerialStringIcon",   { fg = c.ice })
-  hl("AerialPropertyIcon", { fg = c.orchid })
+  hl("AerialConstantIcon", { fg = c.orange })
+  hl("AerialStringIcon",   { fg = c.green })
+  hl("AerialPropertyIcon", { fg = c.azure })
 
   -- ========================================================================
   -- Render-markdown
@@ -534,21 +555,23 @@ function M.apply()
   -- ========================================================================
   -- Terminal 16 colors (for :terminal) - match ghostty §07
   -- ========================================================================
+  -- ANSI con verde/rojo/amarillo REALES (antes el slot verde era azul y el
+  -- rojo era rosa: ls, git, fish se veian monocromos). Mismo mapeo en ghostty.
   vim.g.terminal_color_0  = c.abyss
-  vim.g.terminal_color_1  = c.rose_mist
-  vim.g.terminal_color_2  = c.ice
-  vim.g.terminal_color_3  = c.bloom
-  vim.g.terminal_color_4  = c.periwinkle
-  vim.g.terminal_color_5  = c.orchid
-  vim.g.terminal_color_6  = c.cyan_mist
+  vim.g.terminal_color_1  = c.coral   -- red
+  vim.g.terminal_color_2  = c.green   -- green
+  vim.g.terminal_color_3  = c.gold    -- yellow
+  vim.g.terminal_color_4  = c.azure   -- blue
+  vim.g.terminal_color_5  = c.orchid  -- magenta (identidad)
+  vim.g.terminal_color_6  = c.teal    -- cyan
   vim.g.terminal_color_7  = c.silver
-  vim.g.terminal_color_8  = c.indigo
-  vim.g.terminal_color_9  = c.bloom
-  vim.g.terminal_color_10 = c.cyan_mist
-  vim.g.terminal_color_11 = c.lilac
-  vim.g.terminal_color_12 = c.ice
+  vim.g.terminal_color_8  = c.pane_active
+  vim.g.terminal_color_9  = c.coral
+  vim.g.terminal_color_10 = c.green
+  vim.g.terminal_color_11 = c.gold
+  vim.g.terminal_color_12 = c.azure
   vim.g.terminal_color_13 = c.lilac
-  vim.g.terminal_color_14 = c.ice
+  vim.g.terminal_color_14 = c.teal
   vim.g.terminal_color_15 = c.star
 end
 

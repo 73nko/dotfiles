@@ -91,22 +91,26 @@ footer = { fg = "#0d0d2c", bg = "#ece6ff" }
 
 [filetype]
 # Yazi 25+ requires `url` (or `mime`/`is`) on every rule. `name` was removed.
+# Categorias por color del espectro nuevo (2026-06): el listado se lee de un
+# vistazo en vez de ser todo violeta. Imagen=teal, video=azure, audio=orange,
+# archivo=coral, markup=azure, codigo=gold, exec=green, dir=ice.
 rules = [
   # Image
-  { mime = "image/*", fg = "#a8c9ff" },
+  { mime = "image/*", fg = "#5fe0c8" },
   # Video
-  { mime = "video/*", fg = "#b9e0ff" },
+  { mime = "video/*", fg = "#7fb0ff" },
   # Audio
-  { mime = "audio/*", fg = "#f0d2ff" },
+  { mime = "audio/*", fg = "#ffb86b" },
   # Archive
-  { mime = "application/{zip,rar,7z,tar,gzip,xz,zstd,bzip*}", fg = "#b39dff" },
-  # Code / text
-  { url = "*.{md,markdown,html,xml,yaml,toml,json,csv}", fg = "#ece6ff" },
-  { url = "*.{ts,tsx,js,jsx,py,rs,go,c,cpp,h,sh,fish,lua}", fg = "#ece6ff" },
+  { mime = "application/{zip,rar,7z,tar,gzip,xz,zstd,bzip*}", fg = "#ff9e9e" },
+  # Markup / data
+  { url = "*.{md,markdown,html,xml,yaml,toml,json,csv}", fg = "#7fb0ff" },
+  # Code
+  { url = "*.{ts,tsx,js,jsx,py,rs,go,c,cpp,h,sh,fish,lua}", fg = "#ffcf7a" },
   # Hidden
   { url = ".*", fg = "#777494" },
   # Executable
-  { url = "*", is = "exec", fg = "#e2bcff" },
+  { url = "*", is = "exec", fg = "#9ee87f" },
   # Directories — ice
   { url = "*/", fg = "#a8c9ff" },
   # Fallback (everything else)
