@@ -23,3 +23,7 @@ export ICON_VOL_LOW=""
 export ICON_VOL_MUTE=""
 
 export ICON_DOT="●"   # bullet
+
+# Claude Code indicator (spinner braille va inline en plugins/claude.sh)
+export ICON_CLAUDE="✦"        # idle / rest
+export ICON_CLAUDE_WAIT="●"   # awaiting permission (paused dot)

@@ -21,6 +21,7 @@ source "$CONFIG_DIR/icons.sh"
 ##### Custom events (registered before items subscribe) #####
 sketchybar --add event aerospace_workspace_change
 sketchybar --add event aerospace_mode_change
+sketchybar --add event claude_status
 
 ##### Bar appearance #####
 # Floating, rounded, glassy. Sits above the native menu bar (which we auto-hide
@@ -76,6 +77,7 @@ source "$ITEM_DIR/volume.sh"
 source "$ITEM_DIR/pomodoro.sh"
 source "$ITEM_DIR/amphetamine.sh"
 source "$ITEM_DIR/github.sh"
+source "$ITEM_DIR/claude.sh"
 
 ##### Hot-reload listener #####
 sketchybar --hotload on
