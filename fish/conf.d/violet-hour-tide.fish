@@ -9,10 +9,10 @@ if not status is-interactive
     exit
 end
 
-# ---- Layout: items en cada lado del prompt ---------------------------------
-# Universales (-U) para sobrevivir reinicios. Solo se siembran si NO existen
-# (primera instalacion en maquina nueva). Asi un `tide configure` posterior
-# puede customizarlos sin que este conf.d los pise en cada shell.
+# ---- Layout: items on each side of the prompt ------------------------------
+# Universal (-U) so they survive restarts. Only seeded if they do NOT exist
+# yet (first install on a new machine). This way a later `tide configure` can
+# customize them without this conf.d overwriting on every shell.
 if not set -q _tide_left_items
     set -U _tide_left_items os pwd git newline character
 end

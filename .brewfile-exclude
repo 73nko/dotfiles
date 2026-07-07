@@ -4,16 +4,10 @@ python@3.12
 # Purgados en la auditoria 2026-06. Guard temporal: si re-exportas el Brewfile
 # antes de hacer `brew uninstall`, estos no deben volver a colarse.
 # Borrar estas lineas cuando esten desinstalados de verdad.
-gemini-cli
-antigravity
 codexbar
-visual-studio-code
 pipx
 brew "docker"
 @steipete/oracle
-clawhub
-mcporter
-openclaw
 # Toolchains migrados a mise (2026-06, ver mise/config.toml). Guard hasta que
 # legacy_cleanup desinstale deno/pnpm/python@3.13/openjdk en todas las
 # maquinas; sin esto, un export los re-importaria mientras sigan instalados.

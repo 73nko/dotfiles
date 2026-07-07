@@ -1,68 +1,121 @@
 # dotfiles
 
-Configuracion completa de mi Mac: fish, nvim, tmux, ghostty, yazi, AeroSpace,
-sketchybar y la capa visual Violet Hour Glass. Todo converge con UN comando.
+Full macOS config: fish, nvim, tmux, ghostty, yazi, AeroSpace, sketchybar, and
+the Violet Hour Glass visual layer. Everything converges with ONE command.
 
-(README reescrito 2026-06: el anterior era el auto-generado de dotfyle, solo
-cubria nvim y describia plugins que ya no existen.)
+(README rewritten 2026-06: the previous one was the auto-generated dotfyle
+version, only covered nvim and described plugins that no longer exist.)
 
-## Replicar en un Mac nuevo
+## Replicating on a fresh Mac
 
 ```sh
-# 1. Clonar EN ~/.config (el repo ES el XDG config dir)
+# 1. Clone INTO ~/.config (the repo IS the XDG config dir)
 git clone git@github.com:YOUR-USER/dotfiles.git ~/.config
 
-# 2. Converger la maquina (instala Xcode CLT, brew, todo el Brewfile,
-#    rustup, fish como shell, fisher, mise, plugins de tmux/yazi, tema,
-#    defaults de macOS, servicios). Idempotente: re-correrlo = todo SKIP.
+# 2. Converge the machine (installs Xcode CLT, brew, the full Brewfile,
+#    rustup, fish as shell, fisher, mise, tmux/yazi plugins, theme,
+#    macOS defaults, services). Idempotent: re-running = everything SKIPs.
 bash ~/.config/scripts/setup.sh
 ```
 
-`setup.sh` es la unica fuente de orquestacion. Subcomandos:
+`setup.sh` is the single orchestration entry point. Subcommands:
 
 ```sh
-setup.sh            # converger (= sync)
-setup.sh doctor     # health check, no toca nada
-setup.sh export     # re-exporta el Brewfile (filtra .brewfile-exclude)
-setup.sh --upgrade  # sync + upgrade de paquetes existentes
+setup.sh            # converge (= sync)
+setup.sh doctor     # health check, touches nothing
+setup.sh export     # re-export the Brewfile (filters .brewfile-exclude)
+setup.sh --upgrade  # sync + upgrade of existing packages
 ```
 
-Desde fish, los atajos son `up-mac` (sync) y `mac-doctor`.
+From fish, shortcuts are `up-mac` (sync) and `mac-doctor`.
 
-## Pasos manuales (una vez por maquina)
+## Manual steps (once per machine)
 
-Cosas que requieren login o permisos que macOS no deja automatizar:
+Things that require login or permissions macOS won't automate:
 
-1. `gh auth login` y re-correr setup.sh (instala las gh extensions).
-2. nvim: abrir, dejar que lazy/mason instalen, y `:LspCopilotSignIn`
-   (ghost text + NES via sidekick.nvim, cuenta GitHub).
-3. 1Password: iniciar sesion. Secrets de shell: `~/.secrets.fish`
-   (NO versionado; pendiente de migrar a `op run`).
-4. Permisos macOS: Screen Recording para sketchybar, Accessibility para
-   AeroSpace, Calendar para icalBuddy. macOS los resetea tras algunos updates;
-   `setup.sh doctor` lo recuerda.
-5. `atuin login` si quieres sync de historial entre maquinas.
+1. `gh auth login` and re-run setup.sh (installs the gh extensions).
+2. nvim: open, let lazy/mason install, and `:LspCopilotSignIn`
+   (ghost text + NES via sidekick.nvim, GitHub account).
+3. 1Password: sign in. Shell secrets: `~/.secrets.fish`
+   (NOT versioned; migration to `op run` pending).
+4. macOS permissions: Screen Recording for sketchybar, Accessibility for
+   AeroSpace, Calendar for icalBuddy. macOS resets these after some updates;
+   `setup.sh doctor` reminds you.
+5. `atuin login` if you want history sync across machines.
 
-## Donde vive cada cosa
+## Where each thing lives
 
-| Capa | Fichero(s) |
+| Layer | File(s) |
 | --- | --- |
-| Paquetes (brew/cask/mas) | `.Brewfile` (+ `.brewfile-exclude` para el export) |
+| Packages (brew/cask/mas) | `.Brewfile` (+ `.brewfile-exclude` for the export) |
 | Toolchains (node/go/python/java/deno/pnpm + go/cargo/pipx tools) | `mise/config.toml` |
-| Rust | rustup (deliberadamente fuera de mise) |
-| Shell | `fish/` (plugins en `fish_plugins`, fuente de verdad de fisher) |
-| Editor | `nvim/` (lazy.nvim; cheatsheet en `nvim/cheatsheet.md`, `ncheat`) |
-| Multiplexor | `tmux/tmux.conf` (TPM; tpm/smart-splits/sessionx, nada mas) |
+| Rust | rustup (deliberately outside mise) |
+| Shell | `fish/` (plugins in `fish_plugins`, fisher's source of truth) |
+| Editor | `nvim/` (lazy.nvim; cheatsheet at `nvim/cheatsheet.md`, `ncheat`) |
+| Multiplexer | `tmux/tmux.conf` (TPM; tpm/smart-splits/sessionx, nothing else) |
 | Terminal | `ghostty/config` |
 | File manager | `yazi/` |
 | Window manager | `aerospace/`, `borders/`, `sketchybar/` |
-| Defaults macOS | `scripts/macos-tweaks.sh` (reversible con `-revert`) |
-| Capa visual | `scripts/macos-violet-hour.sh`, `wallpapers/`, `Styles/` |
+| macOS defaults | `scripts/macos-tweaks.sh` (reversible with `-revert`) |
+| Visual layer | `scripts/macos-violet-hour.sh`, `wallpapers/`, `Styles/` |
 
-Principio del repo: cada valor vive en UN sitio. setup.sh nunca duplica
-config, solo converge contra estos ficheros.
+Repo principle: each value lives in ONE place. setup.sh never duplicates
+config, it only converges against these files.
 
-## Auditorias
+## Audits
 
-El estado y las decisiones recientes estan documentados en
-`CONFIG-AUDIT-2026-06.md` y `nvim/AUDIT-PLUGINS-2026-06.md`.
+Recent state and decisions are documented in `CONFIG-AUDIT-2026-06.md` and
+`nvim/AUDIT-PLUGINS-2026-06.md`.
+
+## Personal layer (`personal/`)
+
+The `personal/` directory is gitignored except for its README. It contains
+what should not be published: tmux session-specific abbrs, bindings for
+private GitHub orgs, internal tools, work monorepo paths.
+
+Public files perform conditional `source` over this layer:
+
+- `fish/config.fish` loads `personal/fish/*.fish` if the directory exists
+- `tmux/tmux.conf` loads `personal/tmux/*.conf` the same way
+- `gh-dash/config.yml` uses `YOUR-ORG` placeholders you replace in your own
+  copy (or in a private fork you use locally)
+
+To replicate the mechanism in your fork, create the `personal/` tree with
+your own files. See `personal/README.md` for details.
+
+## Themes
+
+The custom themes (Sunset Pool Splash and Violet Hour) are documented in
+`docs/themes.md`, with hex palette, visual philosophy, and files where
+they are applied.
+
+## Credits
+
+This dotfiles integrates the following projects. Each has its own license;
+check the corresponding repo if you derive from it.
+
+- [Neovim](https://neovim.io) + lazy.nvim and snacks.nvim ecosystem
+  (folke), blink.cmp (saghen), gitsigns (lewis6991), treesitter, LSP,
+  nvim-dap, neotest, harpoon, auto-session.
+- [fish shell](https://fishshell.com) + fisher (jorgebucaran),
+  tide (IlanCosman), plugin-git (jhillyerd).
+- [tmux](https://github.com/tmux/tmux) + TPM, resurrect, continuum,
+  sessionx, smart-splits.
+- [Ghostty](https://ghostty.org).
+- [yazi](https://github.com/sxyazi/yazi) + full-border, git, chmod,
+  max-preview, smart-enter, smart-filter, bookmarks.
+- [sketchybar](https://github.com/FelixKratz/SketchyBar) + [borders](https://github.com/FelixKratz/JankyBorders).
+- [AeroSpace](https://github.com/nikitabobko/AeroSpace).
+- [charmbracelet/glow](https://github.com/charmbracelet/glow),
+  [lazygit](https://github.com/jesseduffield/lazygit),
+  [gh-dash](https://github.com/dlvhdr/gh-dash),
+  [delta](https://github.com/dandavison/delta),
+  [atuin](https://atuin.sh),
+  [zoxide](https://github.com/ajeetdsouza/zoxide),
+  [fzf](https://github.com/junegunn/fzf),
+  [mise](https://mise.jdx.dev).
+
+## License
+
+MIT. See `LICENSE`. Fork freely, adapt whatever you need. A star on the
+repo is appreciated but not required.

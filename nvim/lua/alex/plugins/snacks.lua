@@ -52,10 +52,10 @@ return {
             icon = " ",
             title = "Git Status",
             section = "terminal",
-            -- Check estricto: solo mostramos el pane cuando el cwd es raiz
-            -- de repo (.git/ directamente dentro). En ~/YOUR-ORG (root con
-            -- muchos repos dentro pero sin .git propio), el pane NO aparece.
-            -- Entras a un repo concreto -> aparece.
+            -- Strict check: only show the pane when the cwd is a repo root
+            -- (.git/ directly inside). If cwd is a parent folder containing
+            -- multiple repos but no .git of its own, the pane does NOT
+            -- appear. Enter a specific repo -> it appears.
             enabled = function()
               local cwd = vim.loop.cwd()
               if not cwd then return false end

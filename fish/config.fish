@@ -131,3 +131,14 @@ if test -f ~/.secrets.fish
     source ~/.secrets.fish
 end
 
+# ============================================
+# Personal layer (gitignored in the public repo).
+# User-specific abbrs, functions and bindings.
+# See ~/.config/personal/README.md for the structure.
+# ============================================
+if test -d ~/.config/personal/fish
+    for f in ~/.config/personal/fish/*.fish
+        source $f
+    end
+end
+

@@ -1,0 +1,34 @@
+# glow config. Ver: https://github.com/charmbracelet/glow
+#
+# `style` acepta un builtin ("dark", "light", "notty", "ascii", "pink",
+# "dracula", "tokyo-night") o la ruta absoluta a un JSON de estilo.
+# Mantenemos Violet Hour custom que espeja el theme de nvim/tmux.
+# (Ignoro el `style: "light"` que venia en tu template pegado; te dejaria
+#  el prompt de glow blanco sobre wallpaper y perderias todo el trabajo del
+#  JSON. Si algun dia quieres light por defecto, cambias esta linea.)
+style: "~/.config/glow/violet-hour.json"
+
+# Mouse wheel support (TUI-mode only).
+mouse: true
+
+# Use pager to display markdown. Con true, `glow FILE` abre en pager interno.
+pager: true
+
+# At which column should we word wrap. 80 es lo pegado; ajusta si tienes
+# monitor amplio y prefieres wrap mas largo.
+width: 80
+
+# Show all files, including hidden and ignored (relevante en TUI mode).
+all: false
+
+# Show line numbers (TUI-mode only).
+showLineNumbers: false
+
+# Preserve newlines in the output.
+preserveNewLines: false
+
+# Local mode: sin acceso a red. Off = permite URLs.
+local: false
+
+# Editor por defecto para `glow -e`.
+editor: nvim

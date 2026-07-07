@@ -1,7 +1,11 @@
 {
+  // The actual logo (work, personal, whatever) lives in the personal layer.
+  // If you fork this repo and don't have one, either drop your own ASCII art
+  // at ~/.config/personal/fastfetch/logo.txt or change "type" to "auto" for
+  // the default OS logo.
   "logo": {
     "type": "file-raw",
-    "source": "~/.config/fastfetch/YOUR-ORG.txt",
+    "source": "~/.config/personal/fastfetch/logo.txt",
     "padding": {
       "top": 1,
       "left": 2,

@@ -64,9 +64,9 @@ assume_yes = true
 
 # Custom commands
 [commands]
-# Trunca el log de operaciones de mole a las ultimas 500 lineas si existe.
-# Sin esto, cada limpieza con mole anade a operations.log indefinidamente.
-# El || true evita que falle topgrade si mole nunca se ha ejecutado.
+# Truncate the mole operations log to the last 500 lines if it exists.
+# Without this, each mole cleanup keeps appending to operations.log forever.
+# The || true prevents topgrade from failing if mole has never run.
 "Trim mole logs" = "bash -c 'if [ -f ~/.config/mole/operations.log ]; then tail -n 500 ~/.config/mole/operations.log > /tmp/mole-trim.log && mv /tmp/mole-trim.log ~/.config/mole/operations.log; fi'"
 
 [brew]

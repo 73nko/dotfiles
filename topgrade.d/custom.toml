@@ -1,22 +1,22 @@
 # ============================================================================
-# Custom topgrade steps que NO estan auto-detectados por topgrade.
-# - fisher, TPM (tmux), lazy.nvim, gh extensions: ya auto-detecta (no duplicar).
-# - atuin sync, bat cache rebuild: aqui.
+# Custom topgrade steps that topgrade does NOT auto-detect.
+# - fisher, TPM (tmux), lazy.nvim, gh extensions: already auto-detected (skip).
+# - atuin sync, bat cache rebuild: here.
 # ============================================================================
 
 [commands]
-# Sincroniza el history de atuin con el server. Sin esto, las sesiones de
-# distintos equipos divergen. Falla silencioso si no hay conexion.
+# Sync atuin history with the server. Without this, sessions on different
+# machines drift apart. Fails silently if there is no connection.
 "Atuin history sync" = "atuin sync 2>/dev/null || true"
 
-# Rebuild del cache de bat para que temas custom (Violet Hour) se
-# registren tras updates. Idempotente.
+# Rebuild the bat theme cache so custom themes (Violet Hour) are registered
+# after updates. Idempotent.
 "Bat themes cache" = "command -v bat >/dev/null && bat cache --build >/dev/null 2>&1 || true"
 
-# Update explicito de extensions de gh (por si la auto-deteccion de topgrade
-# falla en alguna version). gh extension upgrade es idempotente.
+# Explicit update of gh extensions (in case topgrade's auto-detection fails
+# on some version). gh extension upgrade is idempotent.
 "GitHub CLI extensions" = "command -v gh >/dev/null && gh extension upgrade --all 2>/dev/null || true"
 
-# Update plugins de Neovim en headless. Lazy.nvim suele ser auto-detectado
-# pero esto es seguro en caso contrario.
+# Update Neovim plugins in headless. Lazy.nvim is usually auto-detected,
+# but this is safe if it isn't.
 "Neovim plugins" = "command -v nvim >/dev/null && nvim --headless '+Lazy! sync' +qa 2>/dev/null || true"

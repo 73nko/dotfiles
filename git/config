@@ -1,21 +1,21 @@
-# Git config global versionado en ~/.config (XDG).
+# Global git config versioned under ~/.config (XDG).
 #
-# Importante sobre prioridades:
-# - ~/.gitconfig (si existe) tiene prioridad sobre este fichero.
-# - Mantener identidad (user.name, user.email) y signing en ~/.gitconfig
-#   para no exponer correos en el repo publico de dotfiles.
-# - Aqui solo van defaults razonables y portables entre maquinas.
+# Priority notes:
+# - ~/.gitconfig (if present) takes precedence over this file.
+# - Keep identity (user.name, user.email) and signing in ~/.gitconfig
+#   so emails don't get exposed in the public dotfiles repo.
+# - This file only holds reasonable defaults portable across machines.
 #
-# Pre-requisitos: delta (git-delta brew) para el pager. Si no lo tienes:
+# Prerequisites: delta (git-delta via brew) for the pager. If you don't have it:
 #   brew install git-delta
 
 [core]
   editor = nvim
   pager = delta
-  # fsmonitor activa el daemon de macOS para detectar cambios sin escanear.
-  # Mejora dramatica en repos grandes (YOUR-ORG-brain, monorepos).
+  # fsmonitor enables the macOS daemon to detect changes without scanning.
+  # Dramatic improvement on large repos (monorepos).
   fsmonitor = true
-  # Cache de archivos no rastreados para que git status no relea todo siempre.
+  # Untracked-cache so git status doesn't re-scan everything on every call.
   untrackedCache = true
 
 [interactive]
@@ -26,85 +26,85 @@
   light = false
   side-by-side = false
   line-numbers = true
-  # Tema custom que registras via `bat cache --build` en migrate-terminal-setup.
-  # Si delta no lo encuentra (ej. en maquina antes del primer bat cache), cae
-  # a default. No rompe.
+  # Custom theme registered via `bat cache --build` in migrate-terminal-setup.
+  # If delta can't find it (e.g. on a fresh machine before the first bat cache
+  # rebuild), it falls back to default. Nothing breaks.
   syntax-theme = Violet Hour
-  # Paths clicables en terminales que soporten OSC 8 (ghostty, iterm2, kitty).
+  # Clickable paths on terminals that support OSC 8 (ghostty, iterm2, kitty).
   hyperlinks = true
 
 [diff]
-  # colorMoved colorea bloques movidos distinto a anadidos/borrados puros.
+  # colorMoved colors moved blocks distinctly from pure additions/deletions.
   colorMoved = default
-  # Algoritmo histogram detecta refactors mejor que el Myers default.
+  # The histogram algorithm detects refactors better than the default Myers.
   algorithm = histogram
 
 [merge]
-  # zdiff3 muestra el ancestro comun en los conflict markers. Ayuda a entender
-  # que cambio cada lado, no solo que esta en conflicto.
+  # zdiff3 shows the common ancestor in conflict markers. Helps understand
+  # what each side changed, not just what's in conflict.
   conflictstyle = zdiff3
 
 [rerere]
-  # rerere = "reuse recorded resolution". Recuerda como resolviste un conflicto
-  # y lo aplica automaticamente la siguiente vez. Util en rebases largos.
+  # rerere = "reuse recorded resolution". Remembers how you resolved a
+  # conflict and reapplies it next time. Useful in long rebases.
   enabled = true
   autoUpdate = true
 
 [branch]
-  # Lista branches por fecha del ultimo commit, mas reciente primero.
+  # List branches by last commit date, most recent first.
   sort = -committerdate
 
 [tag]
-  # Tags ordenados por version semantica, no alfabeticamente.
+  # Tags sorted by semver, not alphabetically.
   sort = -version:refname
 
 [fetch]
-  # Borra refs locales de branches que ya no existen en remote.
+  # Delete local refs for branches that no longer exist on the remote.
   prune = true
   pruneTags = true
-  # Paraleliza fetch en multiples remotes.
+  # Parallelize fetches across multiple remotes.
   parallel = 0
 
 [rebase]
-  # Auto-stash de cambios pendientes antes de rebase, restaura despues.
+  # Auto-stash pending changes before rebase, restore them afterwards.
   autoStash = true
-  # Auto-squash respeta commits con prefijo fixup! / squash!.
+  # autoSquash respects commits prefixed with fixup! / squash!.
   autoSquash = true
-  # Actualiza refs de branches encima del rebase.
+  # Update branch refs stacked on top of the rebase.
   updateRefs = true
 
 [pull]
-  # ff = only previene merge commits accidentales. Si no avanza fast-forward,
-  # falla y te obliga a rebase explicitamente.
+  # ff = only prevents accidental merge commits. If a fast-forward is not
+  # possible, it fails and forces you to rebase explicitly.
   ff = only
 
 [push]
-  # autoSetupRemote evita el "git push --set-upstream origin branch" eterno.
+  # autoSetupRemote avoids the eternal "git push --set-upstream origin branch".
   autoSetupRemote = true
-  # Push solo de la branch actual a su upstream.
+  # Push only the current branch to its upstream.
   default = simple
-  # Verifica refs remotos antes de pushear (proteccion contra force-push roto).
+  # Verify remote refs before pushing (protection against broken force-push).
   followTags = true
 
 [init]
   defaultBranch = main
 
 [help]
-  # Si escribes mal un comando, sugerencias en vez de error seco.
+  # If you mistype a command, get suggestions instead of a hard error.
   autocorrect = prompt
 
 [column]
-  # git branch / git status en columnas si la terminal es ancha.
+  # git branch / git status in columns if the terminal is wide.
   ui = auto
 
 [commit]
   verbose = true
 
 [log]
-  # Tema de fechas relativo (hace 2 horas) en logs.
+  # Relative date format (2 hours ago) in logs.
   date = relative
 
 [status]
-  # Muestra branch tracking info en git status.
+  # Show branch tracking info in git status.
   branch = true
   showStash = true
