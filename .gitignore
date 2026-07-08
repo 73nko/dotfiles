@@ -99,7 +99,10 @@ id_ed25519*
 credentials.json
 service-account*.json
 
-# gh-dash local overrides (private orgs). Public config.yml uses YOUR-ORG.
+# gh-dash: the real config.yml holds your actual org filters. Public template
+# lives at config.yml.example. On a fresh machine: `cp config.yml.example config.yml`
+# and edit YOUR-ORG in place.
+gh-dash/config.yml
 gh-dash/config.yml.local
 
 # ============================================================================

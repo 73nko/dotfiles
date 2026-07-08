@@ -8,7 +8,7 @@ show_preview = true         # preview the selected command
 show_help = false
 
 # Search behaviour
-search_mode = "fuzzy"
+search_mode = "daemon-fuzzy"
 filter_mode = "global"      # search across all dirs by default
 filter_mode_shell_up_key_binding = "session"   # ↑ = current shell only, Ctrl-R = global
 
@@ -22,3 +22,10 @@ history_filter = [
 update_check = false
 sync_frequency = "5m"
 auto_sync = true            # only matters if you've registered an account
+
+[ai]
+enabled = true
+
+[daemon]
+enabled = true
+autostart = true
