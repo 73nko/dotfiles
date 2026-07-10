@@ -13,7 +13,6 @@
 configstore/
 
 # Runtime state (not config)
-# Generated package/application state
 uv/uv-receipt.json
 yarn/global/node_modules/
 zed/prompts/

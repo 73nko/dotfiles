@@ -13,14 +13,14 @@ runtime_paths=(
 )
 
 for path in "${runtime_paths[@]}"; do
-  if grep -Fqx "$path" <<<"$TRACKED"; then
+  if rg -Fqx "$path" <<<"$TRACKED"; then
     echo "tracked runtime state: $path" >&2
     exit 1
   fi
   git -C "$ROOT" check-ignore -q "$path"
 done
 
-if grep -Eq '^yazi/plugins/|^yazi/flavors/(neon-nocturne|tokyo-night)\.yazi/' <<<"$TRACKED"; then
+if rg -q '^yazi/plugins/|^yazi/flavors/(neon-nocturne|tokyo-night)\.yazi/' <<<"$TRACKED"; then
   echo "tracked generated or inactive Yazi content" >&2
   exit 1
 fi
