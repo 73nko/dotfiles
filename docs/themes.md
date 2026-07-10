@@ -9,9 +9,13 @@ semantic color drift.
 
 | Name | Hex | Role |
 | --- | --- | --- |
+| abyss | `#06061A` | deepest terminal surface |
 | night | `#0D0D2C` | primary background |
 | indigo | `#1A1745` | raised surfaces |
+| panel | `#211E45` | elevated panels and borders |
 | branch | `#2F365A` | active surfaces and borders |
+| selection | `#322D5A` | selected search surface |
+| muted | `#777494` | comments and inactive text |
 | star | `#ECE6FF` | primary text |
 | orchid | `#B39DFF` | primary identity accent |
 | lilac | `#D6C8FF` | secondary violet accent |

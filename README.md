@@ -17,7 +17,8 @@ bash ~/.config/scripts/setup.sh
 
 The default sync installs missing declared dependencies and applies tracked
 configuration. It is safe to rerun: existing Homebrew packages are not upgraded
-unless requested, and ignored personal or runtime data is not replaced.
+unless requested. It preserves unrelated user tools plus private, application,
+and account state.
 
 The four setup commands are:
 
@@ -66,10 +67,12 @@ Complete the steps that require a login, consent, or an application UI:
 | Violet Hour | `themes/violet-hour.json`, tool configs, and GUI theme files |
 | Static verification | `tests/*.sh`, `scripts/check-config.sh`, and `scripts/check-theme.sh` |
 
-Lazygit uses its native XDG path at `~/.config/lazygit/config.yml`. Package
-manifests own generated dependencies: Fish completions and universal variables,
-tmux and Yazi plugin directories, editor caches, Raycast application data,
-authentication state, and logs are runtime data and are not tracked.
+Lazygit uses its native XDG path at `~/.config/lazygit/config.yml`.
+Manifest-owned generated dependencies are reconciled and may be installed,
+updated, or purged: Fisher follows `fish/fish_plugins`, TPM follows
+`tmux/tmux.conf`, and Yazi follows `yazi/package.toml`. Application data,
+authentication state, caches, logs, Fish universal variables, and generated
+completions are not tracked or treated as dependency manifests.
 
 ## personal/ is optional and manually managed
 
