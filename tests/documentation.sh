@@ -24,6 +24,10 @@ if rg -qi 'CONFIG-AUDIT-2026-06|AUDIT-PLUGINS-2026-06|Sunset Pool Splash|glow/vi
   exit 1
 fi
 rg -q 'toggle-pane' "$ROOT/README.md"
+rg -Fq 'use = "yazi-rs/plugins:toggle-pane"' "$ROOT/yazi/package.toml"
+if rg -Fq 'use = "yazi-rs/plugins:max-preview"' "$ROOT/yazi/package.toml"; then
+  exit 1
+fi
 
 rg -q 'personal/.*optional' "$ROOT/README.md"
 rg -Fq 'personal/fish/*.fish' "$ROOT/README.md"
