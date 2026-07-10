@@ -97,6 +97,27 @@ if [[ -e "$doctor_fixture/git-invoked" ]]; then
   exit 1
 fi
 [[ ! -e "$doctor_fixture/data/nvim/lazy/lazy.nvim" ]]
+
+mason_command=$(
+  sed -n '/^check_mason_packages()/,/^}/p' "$ROOT/scripts/setup.sh" |
+    sed -n "s/^[[:space:]]*'\\(.*\\)'[[:space:]]*\\\\$/\\1/p"
+)
+[[ -n "$mason_command" ]] || { echo "Mason doctor command is missing" >&2; exit 1; }
+registry_stub='+lua package.preload["mason-registry"]=function() return {is_installed=function(package) return package ~= "prettier" end} end'
+if mason_output=$(
+  XDG_CACHE_HOME="$doctor_fixture/cache" \
+    XDG_DATA_HOME="$doctor_fixture/data" \
+    XDG_STATE_HOME="$doctor_fixture/state" \
+    nvim --headless -u NONE -i NONE --cmd "$registry_stub" "$mason_command" +qa 2>&1
+); then
+  printf 'missing Mason package false-passed (exit 0):\n%s\n' "$mason_output" >&2
+  exit 1
+fi
+if ! grep -Fq 'missing Mason packages: prettier' <<<"$mason_output"; then
+  printf 'missing Mason diagnostic did not name prettier:\n%s\n' "$mason_output" >&2
+  exit 1
+fi
+
 rg -q 'DOTFILES_DOCTOR=1' "$ROOT/scripts/setup.sh"
 rg -q -- '-i NONE' "$ROOT/scripts/setup.sh"
 if ! grep -Fq "run_nvim_doctor '+checkhealth vim.deprecated' '+qa!'" "$ROOT/scripts/setup.sh"; then

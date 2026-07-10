@@ -316,7 +316,7 @@ check_tpm_plugins() {
 
 check_mason_packages() {
   run_nvim_doctor \
-    '+lua local r=require("mason-registry"); for _,p in ipairs({"lua-language-server","vtsls","prettier"}) do assert(r.is_installed(p), p) end' \
+    '+lua local r=require("mason-registry"); local packages={"lua-language-server","vtsls","prettier"}; local missing=vim.tbl_filter(function(p) return not r.is_installed(p) end, packages); if #missing > 0 then vim.api.nvim_err_writeln("missing Mason packages: "..table.concat(missing, ", ")); vim.cmd("cquit 1") end' \
     +qa
 }
 
