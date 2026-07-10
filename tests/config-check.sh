@@ -7,14 +7,34 @@ ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 output=$("$ROOT/scripts/check-config.sh")
 grep -Fq "config: OK" <<<"$output"
 
+declared_python=$(MISE_CONFIG_FILE="$ROOT/mise/config.toml" mise which python)
+runtime_fixture=$(mktemp -d)
+trap 'rm -rf "$runtime_fixture"' EXIT
+mkdir -p "$runtime_fixture/bin"
+printf '#!/usr/bin/env bash\nprintf "stock python3 must not run\\n" >&2\nexit 86\n' \
+  >"$runtime_fixture/bin/python3"
+# shellcheck disable=SC2016
+printf '#!/usr/bin/env bash\n[[ "$1" == exec && "$2" == -- && "$3" == python3 ]] || exit 87\nshift 3\nexec "$DECLARED_PYTHON" "$@"\n' \
+  >"$runtime_fixture/bin/mise"
+chmod +x "$runtime_fixture/bin/mise" "$runtime_fixture/bin/python3"
+if ! runtime_output=$(
+  DECLARED_PYTHON="$declared_python" \
+    PATH="$runtime_fixture/bin:$PATH" \
+    "$ROOT/scripts/check-config.sh" 2>&1
+); then
+  printf 'repo TOML check did not use mise Python:\n%s\n' "$runtime_output" >&2
+  exit 1
+fi
+
 fixture=$(mktemp -d)
-trap 'rm -rf "$fixture"' EXIT
+trap 'rm -rf "$runtime_fixture" "$fixture"' EXIT
 mkdir -p "$fixture/bin" "$fixture/fish" "$fixture/scripts" "$fixture/themes"
 cp "$ROOT/scripts/check-theme.sh" "$fixture/scripts/check-theme.sh"
 printf '#!/usr/bin/env bash\nexit 0\n' >"$fixture/bin/shellcheck"
 printf 'set -g fixture true\n' >"$fixture/fish/config.fish"
 printf '{"broken": }\n' >"$fixture/invalid.json"
 printf 'fixture = true\n' >"$fixture/valid.toml"
+printf 'fixture: true\n' >"$fixture/valid.yml"
 printf '{"colors":{},"required":{},"references":{},"legacy":[]}\n' \
   >"$fixture/themes/violet-hour.json"
 chmod +x "$fixture/bin/shellcheck" "$fixture/scripts/check-theme.sh"
@@ -44,6 +64,28 @@ if ! grep -Fq "$fixture/valid.toml" <<<"$fixture_output" ||
   exit 1
 fi
 printf 'fixture = true\n' >"$fixture/valid.toml"
+
+printf 'fixture: [\n' >"$fixture/valid.yml"
+git -C "$fixture" add valid.yml
+yaml_tmp=$(mktemp -d)
+if fixture_output=$(
+  TMPDIR="$yaml_tmp" PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" \
+    "$ROOT/scripts/check-config.sh" 2>&1
+); then
+  echo "invalid YAML fixture unexpectedly passed" >&2
+  exit 1
+fi
+if ! grep -Fq "$fixture/valid.yml" <<<"$fixture_output" ||
+  ! grep -Fq 'invalid yaml' <<<"$fixture_output"; then
+  printf 'invalid YAML diagnostic was not preserved:\n%s\n' "$fixture_output" >&2
+  exit 1
+fi
+if find "$yaml_tmp" -mindepth 1 -print -quit | grep -q .; then
+  echo "YAML parser temporary state was not cleaned" >&2
+  exit 1
+fi
+rm -rf "$yaml_tmp"
+printf 'fixture: true\n' >"$fixture/valid.yml"
 
 git -C "$fixture" rm -q --cached invalid.json themes/violet-hour.json
 if fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/scripts/check-config.sh" 2>&1); then
@@ -98,6 +140,32 @@ if [[ -e "$doctor_fixture/git-invoked" ]]; then
 fi
 [[ ! -e "$doctor_fixture/data/nvim/lazy/lazy.nvim" ]]
 
+health_runtime="set runtimepath^=$ROOT/nvim"
+warning_report='+lua vim.api.nvim_buf_set_lines(0, 0, -1, false, {"health report", "- WARNING injected deprecation"})'
+if warning_output=$(
+  XDG_CACHE_HOME="$doctor_fixture/cache" \
+    XDG_STATE_HOME="$doctor_fixture/state" \
+    nvim --headless -u NONE -i NONE --cmd "$health_runtime" \
+    "$warning_report" '+lua require("alex.doctor").assert_health()' '+qa!' 2>&1
+); then
+  echo "injected Neovim health warning unexpectedly passed" >&2
+  exit 1
+fi
+if ! grep -Fq 'WARNING injected deprecation' <<<"$warning_output"; then
+  printf 'Neovim health failure did not print the warning report:\n%s\n' "$warning_output" >&2
+  exit 1
+fi
+ok_report='+lua vim.api.nvim_buf_set_lines(0, 0, -1, false, {"health report", "- OK no deprecated functions"})'
+if ! ok_output=$(
+  XDG_CACHE_HOME="$doctor_fixture/cache" \
+    XDG_STATE_HOME="$doctor_fixture/state" \
+    nvim --headless -u NONE -i NONE --cmd "$health_runtime" \
+    "$ok_report" '+lua require("alex.doctor").assert_health()' '+qa!' 2>&1
+); then
+  printf 'clean Neovim health report unexpectedly failed:\n%s\n' "$ok_output" >&2
+  exit 1
+fi
+
 mason_command=$(
   sed -n '/^check_mason_packages()/,/^}/p' "$ROOT/scripts/setup.sh" |
     sed -n "s/^[[:space:]]*'\\(.*\\)'[[:space:]]*\\\\$/\\1/p"
@@ -120,7 +188,11 @@ fi
 
 rg -q 'DOTFILES_DOCTOR=1' "$ROOT/scripts/setup.sh"
 rg -q -- '-i NONE' "$ROOT/scripts/setup.sh"
-if ! grep -Fq "run_nvim_doctor '+checkhealth vim.deprecated' '+qa!'" "$ROOT/scripts/setup.sh"; then
+if ! grep -Fq "'+lua require(\"alex.doctor\").assert_health()'" "$ROOT/scripts/setup.sh"; then
+  echo "Neovim health check does not assert the health report" >&2
+  exit 1
+fi
+if ! grep -Fq "'+qa!'" "$ROOT/scripts/setup.sh"; then
   echo "Neovim health check does not force a headless exit" >&2
   exit 1
 fi

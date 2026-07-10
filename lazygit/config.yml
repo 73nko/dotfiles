@@ -27,6 +27,6 @@ gui:
     unstagedChangesColor:
       - "#ff9e9e"
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never

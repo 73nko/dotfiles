@@ -73,14 +73,42 @@ check_json() {
   done
 }
 
-check_toml() {
-  local file tracked files=()
+check_yaml() {
+  local file output temp tracked result=0
   require_command git || return 1
-  require_command python3 || return 1
+  require_command gh || return 1
+  tracked=$(tracked_files '*.yml' '*.yaml') || return 1
+  [[ -n "$tracked" ]] || { echo "no tracked YAML files" >&2; return 1; }
+  temp=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-yaml.XXXXXX") || return 1
+  while IFS= read -r file; do
+    if ! cp "$ROOT/$file" "$temp/config.yml"; then
+      result=1
+      break
+    fi
+    if ! output=$(GH_CONFIG_DIR="$temp" gh config list 2>&1); then
+      printf '%s: %s\n' "$ROOT/$file" "$output" >&2
+      result=1
+      break
+    fi
+  done <<<"$tracked"
+  rm -rf "$temp"
+  return "$result"
+}
+
+check_toml() {
+  local file tracked files=() python_command=()
+  require_command git || return 1
+  if [[ -f "$ROOT/mise/config.toml" ]]; then
+    require_command mise || return 1
+    python_command=(mise exec -- python3)
+  else
+    require_command python3 || return 1
+    python_command=(python3)
+  fi
   tracked=$(tracked_files '*.toml') || return 1
   [[ -n "$tracked" ]] || { echo "no tracked TOML files" >&2; return 1; }
   while IFS= read -r file; do files+=("$file"); done <<<"$tracked"
-  python3 - "$ROOT" "${files[@]}" <<'PY'
+  MISE_CONFIG_FILE="$ROOT/mise/config.toml" "${python_command[@]}" - "$ROOT" "${files[@]}" <<'PY'
 import pathlib
 import sys
 import tomllib
@@ -128,6 +156,7 @@ run_check "Bash syntax" check_bash
 run_check "ShellCheck" check_shellcheck
 run_check "Fish syntax" check_fish
 run_check "JSON syntax" check_json
+run_check "YAML syntax" check_yaml
 run_check "TOML syntax" check_toml
 run_check "Violet Hour theme" "$ROOT/scripts/check-theme.sh" "$ROOT"
 run_check "No tracked runtime state" check_runtime_state

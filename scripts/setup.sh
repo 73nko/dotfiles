@@ -289,7 +289,10 @@ run_nvim_doctor() {
 }
 
 check_nvim_config() {
-  run_nvim_doctor '+checkhealth vim.deprecated' '+qa!'
+  run_nvim_doctor \
+    '+checkhealth vim.deprecated' \
+    '+lua require("alex.doctor").assert_health()' \
+    '+qa!'
 }
 
 check_yazi_config() {

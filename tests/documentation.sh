@@ -44,6 +44,8 @@ fi
 rg -qi 'Lazygit uses its native XDG path' "$ROOT/README.md"
 rg -Fq '.config/lazygit/config.yml' "$ROOT/README.md"
 [[ -f "$ROOT/lazygit/config.yml" ]]
+rg -Uqi 'default sync.*may prompt.*Git name.*email' "$ROOT/README.md"
+rg -Uqi 'writes only Git\s+identity keys to `~/.gitconfig`' "$ROOT/README.md"
 
 while IFS=$'\t' read -r name value; do
   rg -Fqi "| $name | \`$value\` |" "$ROOT/docs/themes.md"

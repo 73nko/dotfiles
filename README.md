@@ -20,6 +20,10 @@ configuration. It is safe to rerun: existing Homebrew packages are not upgraded
 unless requested. It preserves unrelated user tools plus private, application,
 and account state.
 
+The default sync may prompt for a missing Git name or email. It writes only Git
+identity keys to `~/.gitconfig`; all other Git defaults remain in the tracked
+XDG configuration.
+
 The four setup commands are:
 
 ```sh

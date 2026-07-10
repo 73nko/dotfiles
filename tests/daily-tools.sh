@@ -16,5 +16,38 @@ rg -q 'popup-border-style.*#b39dff' "$ROOT/tmux/tmux.conf"
 rg -q 'personal/tmux/\*\.conf' "$ROOT/tmux/tmux.conf"
 [[ -f "$ROOT/lazygit/config.yml" ]]
 lazygit --use-config-file "$ROOT/lazygit/config.yml" --config >/dev/null
-rg -Fq '(?i)(api[_-]?key' "$ROOT/atuin/config.toml"
+rg -q '^  pagers:$' "$ROOT/lazygit/config.yml"
+if rg -q '^  paging:$' "$ROOT/lazygit/config.yml"; then
+    echo "deprecated lazygit git.paging remains" >&2
+    exit 1
+fi
+
+history_patterns=()
+while IFS= read -r pattern; do
+    history_patterns+=(-e "$pattern")
+done < <(
+    sed -n '/^history_filter = \[/,/^\]/p' "$ROOT/atuin/config.toml" |
+        sed -n 's/^[[:space:]]*"\(.*\)",[[:space:]]*$/\1/p'
+)
+[[ ${#history_patterns[@]} -gt 0 ]]
+secret_commands=(
+    'GITHUB_TOKEN=github-secret'
+    'export GITHUB_TOKEN=github-secret'
+    'env GH_TOKEN=cli-secret'
+    'Api-Key=api-secret'
+    'export ACCESS_TOKEN=access-secret'
+    'env auth_token=auth-secret'
+    'CLIENT_SECRET=client-secret'
+    'Password=password-secret'
+)
+for command in "${secret_commands[@]}"; do
+    if ! rg -q "${history_patterns[@]}" <<<"$command"; then
+        printf 'Atuin history filters missed: %s\n' "$command" >&2
+        exit 1
+    fi
+done
+if rg -q "${history_patterns[@]}" <<<'git status'; then
+    echo "Atuin history filters matched a benign command" >&2
+    exit 1
+fi
 echo "daily tools: OK"
