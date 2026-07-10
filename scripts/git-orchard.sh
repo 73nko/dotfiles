@@ -194,8 +194,8 @@ render() {
 
   # cap de columnas
   local NW=10 BW=8 CW=7 SW=9
-  local -a R_PRIO R_PATH R_LINE
-  local rec prio name repo branch detached isdefault staged unstaged untracked
+  local -a render_lines=()
+  local prio name repo branch detached isdefault staged unstaged untracked
   local ahead behind hasup age stash
 
   # --- pasada 1: medir ------------------------------------------------------
@@ -268,14 +268,14 @@ render() {
       "$stashcell"
 
     if [[ "$withpath" == "1" ]]; then
-      R_LINE+=("$repo"$'\t'"$line")
+      render_lines+=("$repo"$'\t'"$line")
     else
-      R_LINE+=("$line")
+      render_lines+=("$line")
     fi
   done <<<"$data"
 
   RENDER_NW=$NW RENDER_BW=$BW RENDER_CW=$CW RENDER_SW=$SW
-  RENDER_LINES=("${R_LINE[@]}")
+  RENDER_LINES=("${render_lines[@]}")
 }
 
 # emite las líneas de render por stdout (para fzf / _rows)
@@ -352,6 +352,7 @@ cmd_preview() {
 # ============================================================================
 cmd_fetchall() {
   local root="$1"
+  # shellcheck disable=SC2016
   find -L "$root" -maxdepth "$MAXDEPTH" -type d \
        \( -name node_modules -o -name .Trash -o -name Library \
           -o -name vendor -o -name .cache -o -name .venv \) -prune \

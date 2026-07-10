@@ -55,7 +55,7 @@ head "Puntero — relleno violeta, contorno claro"
 # Las claves reales son cursorFill / cursorOutline (diccionarios r/g/b/alpha).
 # macOS 26 protege el dominio com.apple.universalaccess: el `defaults write`
 # devuelve "Could not write domain" salvo que el proceso tenga Full Disk Access.
-# Lo intentamos; si falla, abrimos el panel y damos el hex exacto.
+# Lo intentamos; si falla, damos el paso manual y el hex exacto.
 #   fill    = orchid  #b39dff -> R168 G158 B255
 #   outline = star    #ece6ff -> R236 G230 B255
 if defaults write com.apple.universalaccess cursorFill \
@@ -70,7 +70,6 @@ else
   warn "Ponlo a mano en Ajustes del Sistema > Accesibilidad > Puntero:"
   warn "  relleno de puntero   -> hex B39DFF"
   warn "  contorno de puntero  -> hex ECE6FF"
-  open "x-apple.systempreferences:com.apple.Accessibility-Settings.extension" 2>/dev/null
 fi
 
 # ----------------------------------------------------------------------------

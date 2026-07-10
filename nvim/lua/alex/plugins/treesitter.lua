@@ -39,7 +39,7 @@ return {
       end)
       :totable()
 
-    if #to_install > 0 then
+    if vim.env.DOTFILES_DOCTOR ~= "1" and #to_install > 0 then
       require("nvim-treesitter").install(to_install)
     end
 

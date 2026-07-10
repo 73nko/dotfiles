@@ -75,8 +75,11 @@ preflight() {
     skip "Homebrew"
   else
     echo "  Instalando Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" >>"$LOG_FILE" 2>&1 \
-      && ok "Homebrew" || fail "Homebrew install"
+    if /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" >>"$LOG_FILE" 2>&1; then
+      ok "Homebrew"
+    else
+      fail "Homebrew install"
+    fi
   fi
   # PATH para el resto del script (shell nueva o vieja)
   if [[ -x /opt/homebrew/bin/brew ]]; then
@@ -84,36 +87,6 @@ preflight() {
   elif [[ -x /usr/local/bin/brew ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
   fi
-}
-
-legacy_cleanup() {
-  phase "Limpieza de herramientas deprecadas"
-  local found=false
-  # deno/pnpm/python@3.13/openjdk migrados a mise (2026-06, ver mise/config.toml):
-  # si brew los tiene, sobran. mise_toolchains los repone via mise install.
-  for pkg in thefuck neofetch bash-completion skhd fnm deno pnpm python@3.13 openjdk; do
-    if brew list --formula "$pkg" >/dev/null 2>&1; then
-      found=true
-      run "uninstall $pkg" brew uninstall --force "$pkg"
-    fi
-  done
-  # Taps muertos (sin ningun paquete del Brewfile detras, auditoria 2026-06).
-  for tap in oven-sh/bun crissnb/dynamicisland manaflow-ai/cmux jesseduffield/lazygit nikitabobko/aerospace; do
-    if brew tap | grep -qx "$tap" 2>/dev/null; then
-      found=true
-      run "untap $tap" brew untap "$tap"
-    fi
-  done
-  command -v omf >/dev/null 2>&1 && { found=true; run "OMF destroy" fish -c "omf destroy --force"; }
-  rm -rf "$DOTS/omf" "$DOTS/neofetch" "$DOTS/skhd" 2>/dev/null || true
-  # tmux: resurrect/continuum/vim-tmux-navigator fuera del tmux.conf (2026-06);
-  # en maquinas viejas los dirs clonados por TPM siguen ahi. Purga directa
-  # (ademas del clean_plugins de la fase tmux, por si TPM aun no existe).
-  for dir in tmux-resurrect tmux-continuum vim-tmux-navigator; do
-    [[ -d "$DOTS/tmux/plugins/$dir" ]] && { found=true; rm -rf "$DOTS/tmux/plugins/$dir"; ok "purgado tmux/plugins/$dir"; }
-  done
-  [[ -d "/Applications/Magnet.app" ]] && warn "Magnet instalado: conflicto con AeroSpace, quitalo a mano"
-  $found || skip "nada que limpiar"
 }
 
 brew_bundle() {
@@ -213,8 +186,11 @@ theming() {
   phase "Tema Violet Hour (bat, wallpaper, capa visual macOS)"
   # bat cache registra el tmTheme que usa delta en los diffs.
   command -v bat >/dev/null 2>&1 && run "bat cache --build" bat cache --build
-  if [[ -f "$DOTS/scripts/generate_wallpaper.py" ]]; then
-    run "variantes de wallpaper" python3 "$DOTS/scripts/generate_wallpaper.py"
+  local wallpaper="$DOTS/wallpapers/violet-hour-aurora-5120x3200.png"
+  if [[ -f "$wallpaper" ]]; then
+    skip "wallpaper assets already present"
+  elif [[ -f "$DOTS/scripts/generate_wallpaper.py" ]]; then
+    run "generate wallpaper assets" python3 "$DOTS/scripts/generate_wallpaper.py"
   fi
   if [[ -f "$DOTS/scripts/macos-violet-hour.sh" ]]; then
     run "capa visual (wallpaper, accent, puntero)" bash "$DOTS/scripts/macos-violet-hour.sh"
@@ -262,7 +238,12 @@ services() {
     fi
   done
   if [[ -d "/Applications/AeroSpace.app" ]]; then
-    pgrep -xq AeroSpace && skip "AeroSpace ya corriendo" || { open -gj -a /Applications/AeroSpace.app; ok "AeroSpace lanzado"; }
+    if pgrep -xq AeroSpace; then
+      skip "AeroSpace ya corriendo"
+    else
+      open -gj -a /Applications/AeroSpace.app
+      ok "AeroSpace lanzado"
+    fi
   else
     warn "AeroSpace.app no instalado"
   fi
@@ -285,8 +266,67 @@ git_identity() {
   fi
 }
 
+check_tmux_config() {
+  local temp socket=dotfiles-doctor
+  temp=$(mktemp -d)
+  TMUX_TMPDIR="$temp" tmux -L "$socket" -f "$DOTS/tmux/tmux.conf" new-session -d -s doctor || {
+    rm -rf "$temp"
+    return 1
+  }
+  TMUX_TMPDIR="$temp" tmux -L "$socket" kill-server >/dev/null 2>&1 || true
+  rm -rf "$temp"
+}
+
+run_nvim_doctor() {
+  local state cache result
+  state=$(mktemp -d)
+  cache=$(mktemp -d)
+  DOTFILES_DOCTOR=1 XDG_STATE_HOME="$state" XDG_CACHE_HOME="$cache" \
+    nvim --headless -i NONE "$@"
+  result=$?
+  rm -rf "$state" "$cache"
+  return "$result"
+}
+
+check_nvim_config() {
+  run_nvim_doctor '+checkhealth vim.deprecated' '+qa!'
+}
+
+check_yazi_config() {
+  yazi --debug 2>&1 | grep -Fq 'violet-hour'
+}
+
+check_fisher_plugins() {
+  # shellcheck disable=SC2016
+  fish -c '
+    set installed (fisher list)
+    while read -l plugin
+      string match -qr "^#|^$" -- $plugin; and continue
+      contains -- $plugin $installed; or exit 1
+    end < ~/.config/fish/fish_plugins
+  '
+}
+
+check_tpm_plugins() {
+  local plugin
+  for plugin in tpm smart-splits.nvim tmux-sessionx; do
+    [[ -d "$DOTS/tmux/plugins/$plugin" ]] || return 1
+  done
+}
+
+check_mason_packages() {
+  run_nvim_doctor \
+    '+lua local r=require("mason-registry"); for _,p in ipairs({"lua-language-server","vtsls","prettier"}) do assert(r.is_installed(p), p) end' \
+    +qa
+}
+
 doctor() {
   phase "Doctor"
+  if [[ -x "$DOTS/scripts/check-config.sh" ]]; then
+    run "static dotfiles checks" "$DOTS/scripts/check-config.sh"
+  else
+    fail "scripts/check-config.sh missing"
+  fi
   local errors=0
   check() {
     if command -v "$1" >/dev/null 2>&1; then
@@ -315,6 +355,19 @@ doctor() {
   for c in rustc cargo cargo-nextest bacon gh lazygit delta just; do check "$c"; done
   echo "  Toolchains (mise):"
   for c in node go python java deno pnpm gopls dlv; do check_mise "$c"; done
+  if command -v brew >/dev/null 2>&1; then
+    if HOMEBREW_NO_AUTO_UPDATE=1 brew bundle check --file="$DOTS/.Brewfile" >/dev/null 2>&1; then
+      ok "Brewfile dependencies satisfied"
+    else
+      warn "Brewfile drift: run setup.sh sync"
+    fi
+  fi
+  run "tmux config loads" check_tmux_config
+  run "Neovim starts without deprecated APIs" check_nvim_config
+  run "Yazi loads Violet Hour" check_yazi_config
+  run "Fisher plugins match fish_plugins" check_fisher_plugins
+  run "TPM plugins installed" check_tpm_plugins
+  run "representative Mason packages installed" check_mason_packages
   echo "  Servicios:"
   for svc in borders sketchybar; do
     if brew services list 2>/dev/null | awk -v s="$svc" '$1==s{print $2}' | grep -q "^started$"; then
@@ -360,7 +413,7 @@ export_brewfile() {
 summary() {
   echo ""
   if [[ ${#FAILURES[@]} -eq 0 ]]; then
-    printf "${GREEN}=== Convergencia completa, sin errores ===${NC}\n"
+    printf '%b\n' "${GREEN}=== Convergencia completa, sin errores ===${NC}"
   else
     printf "${RED}=== Terminado con %d error(es) ===${NC}\n" "${#FAILURES[@]}"
     for f in "${FAILURES[@]}"; do printf "  ${RED}*${NC} %s\n" "$f"; done
@@ -397,7 +450,6 @@ case "$cmd" in
     ;;
   sync)
     preflight
-    legacy_cleanup
     brew_bundle
     rust_toolchain
     fish_shell
