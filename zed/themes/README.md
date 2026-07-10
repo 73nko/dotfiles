@@ -1,43 +1,31 @@
-# Zed - Violet Hour · Glass
+# Zed — Violet Hour · Glass
 
-This file lives where Zed expects it by default: `~/.config/zed/themes/`. Zed
-detects it at startup, nothing extra needed.
+The theme file is already in Zed's XDG theme directory at
+`~/.config/zed/themes/violet-hour.json`. Zed discovers the file, but selecting
+the theme is a manual GUI step. The repository checker validates the tracked
+JSON and active reference; it cannot inspect Zed's live state.
 
 ## Activate
 
 1. Launch Zed.
-2. `Cmd+Shift+P` → "theme selector: toggle".
-3. Type "Violet Hour" → Enter.
-4. Persisted in your `settings.json` as `"theme": "Violet Hour"`.
+2. Open the command palette with `Cmd+Shift+P`.
+3. Run **theme selector: toggle**.
+4. Select **Violet Hour**.
 
-Alternative via settings:
-```json
-{
-  "theme": {
-    "mode": "dark",
-    "dark": "Violet Hour"
-  }
-}
-```
+The tracked `zed/settings.json` also activates it as `"theme": "Violet Hour"`.
 
-## Palette decisions (in case you want to tweak)
+## Semantic mapping
 
-- Keywords orchid, functions rose-mist, strings ice, numbers bloom, types
-  cyan-mist. Same mapping as the nvim theme (violet-hour.lua): your brain
-  doesn't context-switch when jumping between Zed and Neovim.
-- Active tab uses `#2f365a` (branch_bg, ice @ 22%) instead of indigo. The
-  cool tint marks the active pane focus the same way tmux does.
-- `players` 1-8 (multi-cursor / multiplayer): orchid, ice, bloom, rose-mist,
-  periwinkle, cyan-mist, lilac, horizon.
-- Comments use `#5b6b96` (ice @ 50%) italic. Readable but they don't steal
-  focus.
-- ANSI terminal identical to the ghostty config (§07): red+magenta on the
-  violet axis, blue+cyan on the cool blue axis. Intentional: Zed's
-  integrated terminal should look like Ghostty.
+- Editor and terminal background: night `#0D0D2C`.
+- Raised elements: indigo `#1A1745`; active tabs and elements: branch
+  `#2F365A`.
+- Primary text: star `#ECE6FF`; focus and links: ice `#A8C9FF`.
+- Keywords: orchid `#B39DFF`; titles: lilac `#D6C8FF`; functions: rose
+  `#E2BCFF`; constants and numbers: bloom `#F0D2FF`.
+- Errors and deletions: coral `#FF9E9E`; warnings and modifications: gold
+  `#FFCF7A`; success and additions: green `#9EE87F`.
+- Information uses teal `#5FE0C8`; hints and blue terminal slots use azure
+  `#7FB0FF`.
 
-## Real pitfall
-
-Zed validates the schema on every load. If you edit the JSON and parsing
-fails, Zed silently falls back to One Dark with no visual warning. If one
-day you open Zed and the theme "disappeared", run `zed --log` in a terminal
-and check stderr for the parse error.
+If Zed rejects an edited theme, run `zed --log` and inspect the JSON parse or
+schema error; Zed may otherwise fall back to its default theme.

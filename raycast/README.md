@@ -1,32 +1,24 @@
-# Raycast - Violet Hour · Glass
+# Raycast — Violet Hour · Glass
 
-## Instalacion
+Raycast theme activation is a manual import. The repository checker validates
+the tracked JSON colors but cannot inspect Raycast's selected live theme.
 
-1. Abre Raycast (`Cmd+Space` si es tu hotkey).
-2. Escribe `Import Theme` y dale Enter.
-3. Selecciona `~/.config/raycast/violet-hour.json`.
-4. Raycast cambia al theme automaticamente. Si no: Settings → Appearance → Theme → Violet Hour.
+## Import
 
-## Mapeo de slots (por si quieres ajustar)
+1. Open Raycast.
+2. Run **Import Theme**.
+3. Select `~/.config/raycast/violet-hour.json`.
+4. In **Settings → Appearance → Theme**, confirm **Violet Hour** is selected.
 
-- background: Dusk `#1A0A28` - el fondo principal de la ventana.
-- backgroundSecondary: Plum `#3A1550` - hover + sub-paneles.
-- text: Rosegold `#FFC6A0` - cuerpo del texto.
-- selection: Magenta `#FF3D8A` - row highlight cuando navegas con flechas.
-- loader: Turquoise Hi `#7FE0EB` - barra de progreso / spinner.
-- red: Magenta `#FF3D8A` - errores y criticos.
-- orange: Tangerine `#FF8A3D` - warnings.
-- yellow: Gold `#FFD67A` - pendientes.
-- green: Turquoise Hi `#7FE0EB` - success (intencional: el "ok" en este guide es cool, no verde).
-- blue: Turquoise `#4EC9D7` - info.
-- purple: Sunburn `#C95A4A` - variedad calida para tags.
-- magenta: Magenta Hi `#FFB8D5` - acento suave.
+## Semantic slots
 
-## Tweaks comunes
-
-Si el contraste te molesta al iniciar (el fondo Dusk es muy oscuro para un snippet manager):
-- Cambia `background` a `#1E0A2E` (version ligeramente mas clara).
-- Sube `text` a `#FFD4B8` si sientes el rosegold apagado.
-
-Si Raycast usa el `green` slot para iconos de comandos marcados "enabled" y quieres el verde clasico:
-- Cambia `green` a `#8FE3AA` (aqua tirando a verde). Rompe un pelin el guide pero a veces es util.
+- `background`: night `#0D0D2C`
+- `backgroundSecondary`: indigo `#1A1745`
+- `text`: star `#ECE6FF`
+- `selection` and `purple`: orchid `#B39DFF`
+- `loader`: ice `#A8C9FF`
+- `red`: coral `#FF9E9E`
+- `orange` and `yellow`: gold `#FFCF7A`
+- `green`: green `#9EE87F`
+- `blue`: azure `#7FB0FF`
+- `magenta`: teal `#5FE0C8`

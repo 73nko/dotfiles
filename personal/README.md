@@ -1,40 +1,41 @@
-# personal/ — gitignored private layer
+# personal/ — optional private layer
 
-This folder holds everything that does NOT get published in the public
-dotfiles repo: company identifiers, internal tooling, abbrs and bindings
-specific to the personal workflow.
+Public setup does not require this directory. It is an optional, manually
+managed home for machine- or organization-specific configuration that must not
+be published. Everything below `personal/` is ignored except this README.
 
-The whole folder is gitignored except for this README, which acts as a
-scaffold so a fork knows this layer exists.
+## Suggested structure
 
-## Structure
-
-```
+```text
 personal/
-├── work/                  company or side-project tooling
-├── fastfetch/             custom logo ASCII art
-│   └── logo.txt           referenced from fastfetch/config.jsonc
-├── fish/                  specific abbrs and functions
-│   └── work.fish          auto-sourced by fish/config.fish
-├── tmux/                  specific bindings
-│   └── work.conf          auto-sourced by tmux/tmux.conf
-└── gh-dash/               overrides with private orgs
+├── fish/                  private abbreviations and functions
+│   └── work.fish          loaded by fish/config.fish when present
+├── tmux/                  private bindings
+│   └── work.conf          loaded by tmux/tmux.conf when present
+├── fastfetch/
+│   └── logo.txt           optional private ASCII logo
+└── work/                  private helper files, if needed
 ```
 
-## How it plugs in
+Organization-specific Fish abbreviations and internal command wrappers are
+intentionally private and deferred from the public setup. Add them under
+`personal/fish/`; do not add them to the public `fish/config.fish`.
 
-The public dotfiles conditionally `source` this layer:
+## Manual copy semantics
 
-- `fish/config.fish` sources `personal/fish/*.fish` at the end if it exists
-- `tmux/tmux.conf` runs `source-file personal/tmux/*.conf` if it exists
-- `gh-dash/config.yml` references orgs as a `YOUR-ORG` placeholder that
-  you can replace in your own `config.yml.local` (also gitignored)
-- `fastfetch/config.jsonc` points to `personal/fastfetch/logo.txt`; if
-  missing, change the `type` to `auto` for the default OS logo
+`scripts/setup.sh` does not create, download, back up, or synchronize this
+layer. On another Mac, either create an empty scaffold or manually copy your
+private `personal/` directory from a trusted source after cloning the public
+repository.
 
-## How to replicate in your fork
+Fish and tmux safely skip their personal globs when no matching files exist.
+Fastfetch is different: its tracked config points to
+`personal/fastfetch/logo.txt`; add that optional file or change the logo `type`
+in `fastfetch/config.jsonc` to `auto`.
 
-1. Clone the public repo
-2. `mkdir -p personal/{fish,tmux,gh-dash,fastfetch}` at the root of your clone
-3. Add your own private abbrs / bindings / orgs / logo here
-4. Never commit the content: `.gitignore` covers `personal/*`
+gh-dash organization filters are also local, but use the separate ignored
+`gh-dash/config.yml`: copy `gh-dash/config.yml.example`, then replace
+`YOUR-ORG`. They are not loaded from `personal/`.
+
+Before publishing changes, confirm private files remain absent from
+`git status`.

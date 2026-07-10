@@ -1,121 +1,115 @@
 # dotfiles
 
-Full macOS config: fish, nvim, tmux, ghostty, yazi, AeroSpace, sketchybar, and
-the Violet Hour Glass visual layer. Everything converges with ONE command.
+Public, reusable macOS configuration for Fish, Neovim, tmux, Ghostty, Yazi,
+AeroSpace, SketchyBar, daily developer tools, and the Violet Hour visual layer.
+The convergence script manages the reusable stack; account logins, macOS
+permissions, and GUI theme activation remain manual.
 
-(README rewritten 2026-06: the previous one was the auto-generated dotfyle
-version, only covered nvim and described plugins that no longer exist.)
+## Replicate on a fresh Mac
 
-## Replicating on a fresh Mac
+Clone the repository as the XDG configuration directory, then converge the
+machine:
 
 ```sh
-# 1. Clone INTO ~/.config (the repo IS the XDG config dir)
-git clone git@github.com:YOUR-USER/dotfiles.git ~/.config
-
-# 2. Converge the machine (installs Xcode CLT, brew, the full Brewfile,
-#    rustup, fish as shell, fisher, mise, tmux/yazi plugins, theme,
-#    macOS defaults, services). Idempotent: re-running = everything SKIPs.
+git clone https://github.com/73nko/dotfiles.git ~/.config
 bash ~/.config/scripts/setup.sh
 ```
 
-`setup.sh` is the single orchestration entry point. Subcommands:
+The default sync installs missing declared dependencies and applies tracked
+configuration. It is safe to rerun: existing Homebrew packages are not upgraded
+unless requested, and ignored personal or runtime data is not replaced.
+
+The four setup commands are:
 
 ```sh
-setup.sh            # converge (= sync)
-setup.sh doctor     # health check, touches nothing
-setup.sh export     # re-export the Brewfile (filters .brewfile-exclude)
-setup.sh --upgrade  # sync + upgrade of existing packages
+bash ~/.config/scripts/setup.sh            # sync the declared machine state
+bash ~/.config/scripts/setup.sh doctor     # inspect health without changing config
+bash ~/.config/scripts/setup.sh export     # regenerate .Brewfile; review its diff
+bash ~/.config/scripts/setup.sh --upgrade  # sync and upgrade existing packages
 ```
 
-From fish, shortcuts are `up-mac` (sync) and `mac-doctor`.
+From Fish, `up-mac` runs the default sync and `mac-doctor` runs the doctor.
 
-## Manual steps (once per machine)
+## Manual checklist
 
-Things that require login or permissions macOS won't automate:
+Complete the steps that require a login, consent, or an application UI:
 
-1. `gh auth login` and re-run setup.sh (installs the gh extensions).
-2. nvim: open, let lazy/mason install, and `:LspCopilotSignIn`
-   (ghost text + NES via sidekick.nvim, GitHub account).
-3. 1Password: sign in. Shell secrets: `~/.secrets.fish`
-   (NOT versioned; migration to `op run` pending).
-4. macOS permissions: Screen Recording for sketchybar, Accessibility for
-   AeroSpace, Calendar for icalBuddy. macOS resets these after some updates;
-   `setup.sh doctor` reminds you.
-5. `atuin login` if you want history sync across machines.
+1. Run `gh auth login`, then rerun setup so GitHub CLI extensions can install.
+2. Open Neovim, let lazy.nvim and Mason finish, then run
+   `:LspCopilotSignIn` if you use GitHub Copilot.
+3. Sign in to 1Password and create `~/.secrets.fish` for any shell secrets; the
+   file is intentionally not tracked.
+4. Run `atuin login` only if you want cross-machine history sync.
+5. Grant Screen Recording to SketchyBar, Accessibility to AeroSpace, and
+   Calendar access to icalBuddy.
+6. Load the Chrome theme, import the Raycast theme, and select the Zed theme
+   using the instructions in their README files. Static checks validate the
+   tracked theme files; they cannot apply settings inside GUI applications.
+7. For gh-dash, copy `gh-dash/config.yml.example` to the ignored
+   `gh-dash/config.yml` and replace `YOUR-ORG` locally.
+8. For Fastfetch, add an optional private logo as described in
+   `personal/README.md`, or change its logo type to `auto`.
 
-## Where each thing lives
+## Reproducible boundary
 
-| Layer | File(s) |
+| Layer | Tracked source of truth |
 | --- | --- |
-| Packages (brew/cask/mas) | `.Brewfile` (+ `.brewfile-exclude` for the export) |
-| Toolchains (node/go/python/java/deno/pnpm + go/cargo/pipx tools) | `mise/config.toml` |
-| Rust | rustup (deliberately outside mise) |
-| Shell | `fish/` (plugins in `fish_plugins`, fisher's source of truth) |
-| Editor | `nvim/` (lazy.nvim; cheatsheet at `nvim/cheatsheet.md`, `ncheat`) |
-| Multiplexer | `tmux/tmux.conf` (TPM; tpm/smart-splits/sessionx, nothing else) |
-| Terminal | `ghostty/config` |
-| File manager | `yazi/` |
-| Window manager | `aerospace/`, `borders/`, `sketchybar/` |
-| macOS defaults | `scripts/macos-tweaks.sh` (reversible with `-revert`) |
-| Visual layer | `scripts/macos-violet-hour.sh`, `wallpapers/`, `Styles/` |
+| Homebrew packages and applications | `.Brewfile` and `.brewfile-exclude` |
+| Toolchains and language tools | `mise/config.toml`; Rust uses rustup |
+| Shell | `fish/` and `fish/fish_plugins` |
+| Editor | `nvim/` |
+| Multiplexer | `tmux/tmux.conf` |
+| Terminal and file manager | `ghostty/` and `yazi/` |
+| Git interfaces | `git/config`, `lazygit/config.yml`, `gh-dash/config.yml.example` |
+| Window and status bar | `aerospace/`, `borders/`, and `sketchybar/` |
+| macOS defaults | `scripts/macos-tweaks.sh` |
+| Violet Hour | `themes/violet-hour.json`, tool configs, and GUI theme files |
+| Static verification | `tests/*.sh`, `scripts/check-config.sh`, and `scripts/check-theme.sh` |
 
-Repo principle: each value lives in ONE place. setup.sh never duplicates
-config, it only converges against these files.
+Lazygit uses its native XDG path at `~/.config/lazygit/config.yml`. Package
+manifests own generated dependencies: Fish completions and universal variables,
+tmux and Yazi plugin directories, editor caches, Raycast application data,
+authentication state, and logs are runtime data and are not tracked.
 
-## Audits
+## personal/ is optional and manually managed
 
-Recent state and decisions are documented in `CONFIG-AUDIT-2026-06.md` and
-`nvim/AUDIT-PLUGINS-2026-06.md`.
+Public setup does not require private files. Fish and tmux expose generic
+extension points that load `personal/fish/*.fish` and `personal/tmux/*.conf`
+only when those files exist; Fastfetch's optional logo choice is covered in the
+manual checklist. Setup does not download, generate, or require the personal
+layer.
 
-## Personal layer (`personal/`)
-
-The `personal/` directory is gitignored except for its README. It contains
-what should not be published: tmux session-specific abbrs, bindings for
-private GitHub orgs, internal tools, work monorepo paths.
-
-Public files perform conditional `source` over this layer:
-
-- `fish/config.fish` loads `personal/fish/*.fish` if the directory exists
-- `tmux/tmux.conf` loads `personal/tmux/*.conf` the same way
-- `gh-dash/config.yml` uses `YOUR-ORG` placeholders you replace in your own
-  copy (or in a private fork you use locally)
-
-To replicate the mechanism in your fork, create the `personal/` tree with
-your own files. See `personal/README.md` for details.
+To carry private settings to another Mac, copy `personal/` manually from a
+trusted private source after cloning. Organization-specific Fish abbreviations,
+private repository paths, and internal tools belong there and are deliberately
+deferred from the public setup. See `personal/README.md` for the scaffold.
 
 ## Themes
 
-The custom themes (Sunset Pool Splash and Violet Hour) are documented in
-`docs/themes.md`, with hex palette, visual philosophy, and files where
-they are applied.
+Violet Hour is the active theme. Its canonical semantic palette, tracked
+consumers, checker, and manual GUI activation steps are documented in
+`docs/themes.md`.
 
 ## Credits
 
-This dotfiles integrates the following projects. Each has its own license;
-check the corresponding repo if you derive from it.
+This repository integrates projects including:
 
-- [Neovim](https://neovim.io) + lazy.nvim and snacks.nvim ecosystem
-  (folke), blink.cmp (saghen), gitsigns (lewis6991), treesitter, LSP,
-  nvim-dap, neotest, harpoon, auto-session.
-- [fish shell](https://fishshell.com) + fisher (jorgebucaran),
-  tide (IlanCosman), plugin-git (jhillyerd).
-- [tmux](https://github.com/tmux/tmux) + TPM, resurrect, continuum,
-  sessionx, smart-splits.
+- [Neovim](https://neovim.io) with lazy.nvim, Snacks, blink.cmp, Treesitter,
+  LSP, DAP, Neotest, Harpoon, and auto-session.
+- [Fish](https://fishshell.com) with Fisher, Tide, and plugin-git.
+- [tmux](https://github.com/tmux/tmux) with TPM, smart-splits, and sessionx.
 - [Ghostty](https://ghostty.org).
-- [yazi](https://github.com/sxyazi/yazi) + full-border, git, chmod,
-  max-preview, smart-enter, smart-filter, bookmarks.
-- [sketchybar](https://github.com/FelixKratz/SketchyBar) + [borders](https://github.com/FelixKratz/JankyBorders).
-- [AeroSpace](https://github.com/nikitabobko/AeroSpace).
-- [charmbracelet/glow](https://github.com/charmbracelet/glow),
-  [lazygit](https://github.com/jesseduffield/lazygit),
+- [Yazi](https://yazi-rs.github.io) with full-border, git, chmod, toggle-pane,
+  smart-enter, smart-filter, and bookmarks.
+- [AeroSpace](https://github.com/nikitabobko/AeroSpace),
+  [SketchyBar](https://github.com/FelixKratz/SketchyBar), and
+  [JankyBorders](https://github.com/FelixKratz/JankyBorders).
+- [lazygit](https://github.com/jesseduffield/lazygit),
   [gh-dash](https://github.com/dlvhdr/gh-dash),
   [delta](https://github.com/dandavison/delta),
-  [atuin](https://atuin.sh),
-  [zoxide](https://github.com/ajeetdsouza/zoxide),
-  [fzf](https://github.com/junegunn/fzf),
-  [mise](https://mise.jdx.dev).
+  [Atuin](https://atuin.sh), [zoxide](https://github.com/ajeetdsouza/zoxide),
+  [fzf](https://github.com/junegunn/fzf), and [mise](https://mise.jdx.dev).
 
 ## License
 
-MIT. See `LICENSE`. Fork freely, adapt whatever you need. A star on the
-repo is appreciated but not required.
+MIT. See `LICENSE`.
