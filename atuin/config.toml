@@ -16,6 +16,7 @@ filter_mode_shell_up_key_binding = "session"   # ↑ = current shell only, Ctrl-
 history_filter = [
     "^secret-",
     "^GITHUB_TOKEN=",
+    "(?i)(api[_-]?key|access[_-]?token|auth[_-]?token|client[_-]?secret|password)=",
 ]
 
 # Privacy

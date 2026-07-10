@@ -67,7 +67,7 @@ abbr -a cat 'bat --paging=never'
 # Dynamic aliases are in functions/ (gcm, gpsup, ggpull, ggpush, grbm, gswm)
 # ============================================
 # NOTE: 'g', 'gcount', 'gignore', 'gunignore' are now handled by plugin-git
-abbr -a del-branches 'git branch | grep -v main | xargs git branch -D'
+abbr -a prune-branches 'gh poi'
 
 # ============================================
 # Tmux Abbreviations
@@ -96,7 +96,7 @@ abbr -a up-mac 'bash ~/.config/scripts/setup.sh'
 abbr -a mac-doctor 'bash ~/.config/scripts/setup.sh doctor'
 abbr -a reload-fish 'source ~/.config/fish/config.fish'
 abbr -a edit-fish 'nvim ~/.config/fish/config.fish'
-abbr -a ncheat 'glow ~/.config/nvim/cheatsheet.md'
+abbr -a ncheat 'nvim ~/.config/nvim/cheatsheet.md'
 abbr -a ncheatw 'open ~/.config/nvim/cheatsheet.html'
 abbr -a awt 'cd ~/YOUR-ORG'
 
@@ -136,9 +136,6 @@ end
 # User-specific abbrs, functions and bindings.
 # See ~/.config/personal/README.md for the structure.
 # ============================================
-if test -d ~/.config/personal/fish
-    for f in ~/.config/personal/fish/*.fish
-        source $f
-    end
+for file in ~/.config/personal/fish/*.fish
+    test -f "$file"; and source "$file"
 end
-

@@ -31,7 +31,8 @@
     "btop/themes/violet-hour.theme": ["night", "indigo", "muted", "star", "orchid", "lilac", "rose", "bloom", "periwinkle", "ice"],
     "sketchybar/colors.sh": ["night", "indigo", "muted", "star", "orchid", "lilac", "rose", "bloom", "periwinkle", "ice"],
     "raycast/violet-hour.json": ["night", "indigo", "star", "orchid", "coral", "gold", "green", "teal", "azure"],
-    "zed/themes/violet-hour.json": ["night", "indigo", "branch", "muted", "star", "orchid", "lilac", "rose", "bloom", "ice", "coral", "gold", "green", "teal", "azure"]
+    "zed/themes/violet-hour.json": ["night", "indigo", "branch", "muted", "star", "orchid", "lilac", "rose", "bloom", "ice", "coral", "gold", "green", "teal", "azure"],
+    "lazygit/config.yml": ["indigo", "branch", "selection", "muted", "orchid", "lilac", "rose", "ice", "coral", "gold"]
   },
   "references": {
     "bat/config": "Violet Hour",
