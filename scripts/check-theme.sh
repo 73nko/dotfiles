@@ -6,6 +6,10 @@ PALETTE="$ROOT/themes/violet-hour.json"
 failures=()
 
 fail() {
+  local failure
+  for failure in "${failures[@]}"; do
+    [[ "$failure" == "$1" ]] && return
+  done
   failures+=("$1")
 }
 

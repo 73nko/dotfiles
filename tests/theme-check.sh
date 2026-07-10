@@ -13,12 +13,12 @@ fixture=$(mktemp -d)
 trap 'rm -rf "$fixture"' EXIT
 mkdir -p "$fixture/themes" "$fixture/tool"
 cp "$ROOT/themes/violet-hour.json" "$fixture/themes/violet-hour.json"
-printf '#0D0D2C\n' >"$fixture/tool/hash.conf"
+printf '#0D0D2C\n#1A1745\n' >"$fixture/tool/hash.conf"
 printf '0D0D2C\n' >"$fixture/tool/bare.conf"
 printf '0xff0D0D2C\n' >"$fixture/tool/argb.conf"
 
 jq '.required = {
-      "tool/hash.conf": ["night"],
+      "tool/hash.conf": ["night", "indigo"],
       "tool/bare.conf": ["night"],
       "tool/argb.conf": ["night"]
     } | .references = {}' \
@@ -28,7 +28,7 @@ mv "$fixture/themes/palette.tmp" "$fixture/themes/violet-hour.json"
 "$CHECKER" "$fixture"
 
 for legacy in '#1A0A28' '1A0A28' '0xff1A0A28'; do
-  printf '#0D0D2C\n%s\n' "$legacy" >"$fixture/tool/hash.conf"
+  printf '#0D0D2C\n#1A1745\n%s\n' "$legacy" >"$fixture/tool/hash.conf"
   if output=$("$CHECKER" "$fixture" 2>&1); then
     echo "legacy fixture unexpectedly passed: $legacy" >&2
     exit 1
