@@ -79,9 +79,6 @@ abbr -a ta 'tmux attach-session'
 abbr -a trw 'tmux rename-window'
 abbr -a trs 'tmux rename-session'
 abbr -a tns 'tmux new -s'
-abbr -a tna 'tmux new -s YOUR-ORG'
-abbr -a taw 'tmux attach -t YOUR-ORG'
-abbr -a tbs 'tmux attach -t bundle-shopify'
 abbr -a tconf 'nvim ~/.config/tmux/tmux.conf'
 
 # ============================================
@@ -98,7 +95,6 @@ abbr -a reload-fish 'source ~/.config/fish/config.fish'
 abbr -a edit-fish 'nvim ~/.config/fish/config.fish'
 abbr -a ncheat 'nvim ~/.config/nvim/cheatsheet.md'
 abbr -a ncheatw 'open ~/.config/nvim/cheatsheet.html'
-abbr -a awt 'cd ~/YOUR-ORG'
 
 # 'ssh' and 'dy' are full functions (see functions/) to handle env vars and complex args
 

@@ -8,6 +8,9 @@ rg -q "abbr -a prune-branches 'gh poi'" "$ROOT/fish/config.fish"
 if rg -q 'del-branches|glow .*cheatsheet' "$ROOT/fish/config.fish"; then
     exit 1
 fi
+if rg -q 'YOUR-ORG|bundle-shopify|abbr[[:space:]]+-a[[:space:]]+awt([[:space:]]|$)' "$ROOT/fish/config.fish"; then
+    exit 1
+fi
 rg -q 'mode-keys vi' "$ROOT/tmux/tmux.conf"
 rg -q 'popup-border-style.*#b39dff' "$ROOT/tmux/tmux.conf"
 rg -q 'personal/tmux/\*\.conf' "$ROOT/tmux/tmux.conf"
