@@ -39,5 +39,5 @@ export BG_PILL_TANG=0x33e2bcff       # rose_mist @ 20% — diagnósticos
 
 # default fg
 export WHITE=$ROSEGOLD               # star
-export MUTED=0x94c4bee0              # silver @ 58%
+export MUTED=0x94777494              # muted @ 58%
 export FAINT=0x59c4bee0              # silver @ 35%

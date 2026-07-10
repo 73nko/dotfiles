@@ -19,7 +19,7 @@ theme[selected_bg]="#1a1745"
 theme[selected_fg]="#d6c8ff"
 
 # Inactive elements — muted ice
-theme[inactive_fg]="#5b6b96"
+theme[inactive_fg]="#777494"
 
 # Text inside graphs/meters
 theme[graph_text]="#ece6ff"

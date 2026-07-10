@@ -62,7 +62,7 @@ selected = { reversed = true }
 
 [completion]
 border = { fg = "#a8c9ff" }
-active = { bg = "#1a1745" }
+active = { bg = "#2f365a" }
 inactive = {}
 
 icon_file = { fg = "#ece6ff" }

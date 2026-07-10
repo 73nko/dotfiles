@@ -11,12 +11,12 @@
     "text": "#ECE6FF",
     "selection": "#B39DFF",
     "loader": "#A8C9FF",
-    "red": "#E2BCFF",
-    "orange": "#F0D2FF",
-    "yellow": "#D6C8FF",
-    "green": "#A8C9FF",
-    "blue": "#8DA7FF",
+    "red": "#FF9E9E",
+    "orange": "#FFCF7A",
+    "yellow": "#FFCF7A",
+    "green": "#9EE87F",
+    "blue": "#7FB0FF",
     "purple": "#B39DFF",
-    "magenta": "#B9E0FF"
+    "magenta": "#5FE0C8"
   }
 }

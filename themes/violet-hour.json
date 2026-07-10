@@ -1,0 +1,44 @@
+{
+  "colors": {
+    "abyss": "#06061a",
+    "night": "#0d0d2c",
+    "indigo": "#1a1745",
+    "panel": "#211e45",
+    "branch": "#2f365a",
+    "selection": "#322d5a",
+    "muted": "#777494",
+    "star": "#ece6ff",
+    "orchid": "#b39dff",
+    "lilac": "#d6c8ff",
+    "rose": "#e2bcff",
+    "bloom": "#f0d2ff",
+    "periwinkle": "#8da7ff",
+    "ice": "#a8c9ff",
+    "coral": "#ff9e9e",
+    "gold": "#ffcf7a",
+    "green": "#9ee87f",
+    "teal": "#5fe0c8",
+    "azure": "#7fb0ff"
+  },
+  "legacy": ["#1a0a28", "#3a1550", "#ff3d8a", "#ffc6a0", "#4ec9d7", "#7fe0eb"],
+  "required": {
+    "ghostty/config": ["night", "star", "coral", "gold", "green", "azure", "orchid", "teal"],
+    "nvim/lua/alex/themes/violet-hour.lua": ["night", "indigo", "branch", "muted", "star", "orchid", "lilac", "rose", "bloom", "ice", "coral", "gold", "green", "teal", "azure"],
+    "tmux/tmux.conf": ["night", "indigo", "branch", "muted", "star", "orchid", "lilac", "rose", "bloom", "ice"],
+    "fish/config.fish": ["night", "selection", "star", "orchid", "coral", "gold", "green", "teal", "azure"],
+    "fish/conf.d/violet-hour-tide.fish": ["indigo", "muted", "star", "orchid", "lilac", "rose", "bloom", "periwinkle", "ice"],
+    "yazi/flavors/violet-hour.yazi/flavor.toml": ["night", "indigo", "branch", "muted", "star", "orchid", "lilac", "rose", "bloom", "ice", "coral", "gold", "green", "teal", "azure"],
+    "btop/themes/violet-hour.theme": ["night", "indigo", "muted", "star", "orchid", "lilac", "rose", "bloom", "periwinkle", "ice"],
+    "sketchybar/colors.sh": ["night", "indigo", "muted", "star", "orchid", "lilac", "rose", "bloom", "periwinkle", "ice"],
+    "raycast/violet-hour.json": ["night", "indigo", "star", "orchid", "coral", "gold", "green", "teal", "azure"],
+    "zed/themes/violet-hour.json": ["night", "indigo", "branch", "muted", "star", "orchid", "lilac", "rose", "bloom", "ice", "coral", "gold", "green", "teal", "azure"]
+  },
+  "references": {
+    "bat/config": "Violet Hour",
+    "git/config": "syntax-theme = Violet Hour",
+    "yazi/theme.toml": "violet-hour",
+    "btop/btop.conf": "color_theme = \"violet-hour\"",
+    "zed/settings.json": "\"theme\": \"Violet Hour\"",
+    "chrome-theme/manifest.json": "Violet Hour"
+  }
+}
