@@ -11,9 +11,14 @@
 
 # Auto-generated caches
 configstore/
-uv/uv-receipt.json
 
 # Runtime state (not config)
+# Generated package/application state
+uv/uv-receipt.json
+yarn/global/node_modules/
+zed/prompts/
+zed/settings_backup.json
+yazi/plugins/
 wezterm/wezterm-session-manager/wezterm_state_YOUR-ORG.json
 thefuck/__pycache__/
 

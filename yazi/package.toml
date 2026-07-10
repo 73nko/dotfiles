@@ -14,9 +14,9 @@ rev = "8cd50c6"
 hash = "5b1c276b75cae91cbbdbe7863f39a540"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:max-preview"
+use = "yazi-rs/plugins:toggle-pane"
 rev = "8cd50c6"
-hash = "99aa06d3014798d86001c324468d497f"
+hash = "15e5b67a241172cbb86b8fbf9e63692"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
