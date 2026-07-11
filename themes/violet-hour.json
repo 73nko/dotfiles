@@ -30,9 +30,54 @@
     "yazi/flavors/violet-hour.yazi/flavor.toml": ["night", "indigo", "branch", "muted", "star", "orchid", "lilac", "rose", "bloom", "ice", "coral", "gold", "green", "teal", "azure"],
     "btop/themes/violet-hour.theme": ["night", "indigo", "muted", "star", "orchid", "lilac", "rose", "bloom", "periwinkle", "ice"],
     "sketchybar/colors.sh": ["night", "indigo", "muted", "star", "orchid", "lilac", "rose", "bloom", "periwinkle", "ice"],
+    "borders/bordersrc": ["ice", "orchid"],
+    "bat/themes/Violet Hour.tmTheme": ["night", "muted", "star", "orchid", "lilac", "rose", "bloom", "ice", "coral", "gold", "green", "teal", "azure"],
+    "Styles/violet-hour-slack-theme.txt": ["indigo", "selection", "orchid", "night", "star", "ice", "rose"],
     "raycast/violet-hour.json": ["night", "indigo", "star", "orchid", "coral", "gold", "green", "teal", "azure"],
     "zed/themes/violet-hour.json": ["night", "indigo", "branch", "muted", "star", "orchid", "lilac", "rose", "bloom", "ice", "coral", "gold", "green", "teal", "azure"],
     "lazygit/config.yml": ["indigo", "branch", "selection", "muted", "orchid", "lilac", "rose", "ice", "coral", "gold"]
+  },
+  "semantic": {
+    "raycast/violet-hour.json": {
+      "colors.background": "night",
+      "colors.backgroundSecondary": "indigo",
+      "colors.text": "star",
+      "colors.selection": "orchid",
+      "colors.loader": "ice",
+      "colors.red": "coral",
+      "colors.orange": "gold",
+      "colors.yellow": "gold",
+      "colors.green": "green",
+      "colors.blue": "azure",
+      "colors.purple": "orchid",
+      "colors.magenta": "teal"
+    },
+    "zed/themes/violet-hour.json": {
+      "themes.0.style.error": "coral",
+      "themes.0.style.warning": "gold",
+      "themes.0.style.success": "green",
+      "themes.0.style.info": "teal",
+      "themes.0.style.conflict": "coral",
+      "themes.0.style.created": "green",
+      "themes.0.style.modified": "gold",
+      "themes.0.style.deleted": "coral",
+      "themes.0.style.renamed": "rose"
+    },
+    "chrome-theme/manifest.json": {
+      "theme.colors.frame": "night",
+      "theme.colors.frame_incognito": "indigo",
+      "theme.colors.toolbar": "indigo",
+      "theme.colors.omnibox_background": "indigo",
+      "theme.colors.toolbar_text": "star",
+      "theme.colors.tab_text": "star",
+      "theme.colors.bookmark_text": "star",
+      "theme.colors.ntp_text": "star",
+      "theme.colors.omnibox_text": "star",
+      "theme.colors.ntp_background": "night",
+      "theme.colors.ntp_link": "ice",
+      "theme.colors.ntp_header": "orchid",
+      "theme.colors.button_background": "orchid"
+    }
   },
   "references": {
     "bat/config": "Violet Hour",

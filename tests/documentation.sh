@@ -50,6 +50,11 @@ rg -Uqi 'writes only Git\s+identity keys to `~/.gitconfig`' "$ROOT/README.md"
 while IFS=$'\t' read -r name value; do
   rg -Fqi "| $name | \`$value\` |" "$ROOT/docs/themes.md"
 done < <(jq -r '.colors | to_entries[] | [.key, .value] | @tsv' "$ROOT/themes/violet-hour.json")
+rg -Fq 'borders/bordersrc' "$ROOT/docs/themes.md"
+rg -Fq 'Styles/violet-hour-slack-theme.txt' "$ROOT/docs/themes.md"
+rg -Uqi 'structured JSON.*exact semantic' "$ROOT/docs/themes.md"
+rg -Uqi 'presence checks.*do not prove' "$ROOT/docs/themes.md"
+rg -Uqi 'Slack.*manual' "$ROOT/docs/themes.md"
 
 required_paths=(
   "scripts/setup.sh"
@@ -60,7 +65,9 @@ required_paths=(
   "fastfetch/config.jsonc"
   "lazygit/config.yml"
   "themes/violet-hour.json"
+  "borders/bordersrc"
   "bat/themes/Violet Hour.tmTheme"
+  "Styles/violet-hour-slack-theme.txt"
   "chrome-theme/manifest.json"
   "raycast/violet-hour.json"
   "zed/themes/violet-hour.json"

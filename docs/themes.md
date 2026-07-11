@@ -5,6 +5,12 @@ canonical contract lives in `themes/violet-hour.json`; `scripts/check-theme.sh`
 uses it to detect missing consumers, inactive references, legacy colors, and
 semantic color drift.
 
+For structured JSON consumers, the `semantic` contract performs exact semantic
+checks: each dotted field path must resolve to its assigned palette color. It
+supports numeric array indices, `#RRGGBB` strings with optional alpha, and RGB
+arrays. The `required` contract performs presence checks for unstructured
+consumers; presence checks do not prove which setting uses each color.
+
 ## Canonical semantic palette
 
 | Name | Hex | Role |
@@ -40,6 +46,8 @@ semantic color drift.
 - bat and delta: `bat/themes/Violet Hour.tmTheme`, `bat/config`, and `git/config`
 - btop, SketchyBar, and lazygit: `btop/`, `sketchybar/`, and
   `lazygit/config.yml`
+- JankyBorders: `borders/bordersrc`
+- Slack: `Styles/violet-hour-slack-theme.txt`
 - Chrome, Raycast, and Zed: `chrome-theme/`, `raycast/violet-hour.json`, and
   `zed/themes/violet-hour.json`
 
@@ -49,9 +57,11 @@ duplication explicit and catch drift.
 
 ## Apply and verify
 
-Chrome and Raycast require manual import, and Zed requires manual theme
-selection. Follow each directory's README. The checker validates the tracked
-files and active references only; it cannot inspect or change live GUI state.
+Chrome and Raycast require manual import, Zed requires manual theme selection,
+and Slack requires manual application using the paste string or slot values in
+`Styles/violet-hour-slack-theme.txt`. Follow each consumer's tracked
+instructions. The checker validates repository files and configured references
+only; it cannot inspect or change live GUI state.
 
 Run the static theme check from the repository root:
 

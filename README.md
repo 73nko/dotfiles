@@ -47,9 +47,10 @@ Complete the steps that require a login, consent, or an application UI:
 4. Run `atuin login` only if you want cross-machine history sync.
 5. Grant Screen Recording to SketchyBar, Accessibility to AeroSpace, and
    Calendar access to icalBuddy.
-6. Load the Chrome theme, import the Raycast theme, and select the Zed theme
-   using the instructions in their README files. Static checks validate the
-   tracked theme files; they cannot apply settings inside GUI applications.
+6. Load the Chrome theme, import the Raycast theme, select the Zed theme, and
+   apply the Slack colors from `Styles/violet-hour-slack-theme.txt` using the
+   tracked instructions. Static checks validate the theme files; they cannot
+   apply settings inside GUI applications.
 7. For gh-dash, copy `gh-dash/config.yml.example` to the ignored
    `gh-dash/config.yml` and replace `YOUR-ORG` locally.
 8. For Fastfetch, add an optional private logo as described in
