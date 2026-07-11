@@ -168,7 +168,7 @@ if ! grep -Fq 'YAML config is empty' <<<"$fixture_output"; then
   exit 1
 fi
 
-printf 'message: |\n  ---\n  ...\n' >"$fixture/valid.yml"
+printf 'message: |\n  ---\n  ...\n  {}\n' >"$fixture/valid.yml"
 git -C "$fixture" add valid.yml
 if ! fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/scripts/check-config.sh" 2>&1); then
   printf 'valid YAML block scalar unexpectedly failed:\n%s\n' "$fixture_output" >&2

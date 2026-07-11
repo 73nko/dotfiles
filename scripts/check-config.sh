@@ -74,15 +74,18 @@ check_json() {
 }
 
 check_yaml() {
-  local file marker output temp tracked result=0
+  local content file marker output temp tracked result=0
   require_command git || return 1
   require_command gh || return 1
   tracked=$(tracked_files '*.yml' '*.yaml') || return 1
   [[ -n "$tracked" ]] || { echo "no tracked YAML files" >&2; return 1; }
   temp=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-yaml.XXXXXX") || return 1
   while IFS= read -r file; do
-    if ! grep -Eq '^[[:space:]]*[^#[:space:]]' "$ROOT/$file" ||
-      grep -Eq '^[[:space:]]*\{\}[[:space:]]*(#.*)?$' "$ROOT/$file"; then
+    content=$(grep -Ev '^[[:space:]]*(#|$)' "$ROOT/$file" || true)
+    if [[ -z "$content" ]] || {
+      [[ $(wc -l <<<"$content" | tr -d '[:space:]') == 1 ]] &&
+        grep -Eq '^[[:space:]]*\{\}[[:space:]]*(#.*)?$' <<<"$content"
+    }; then
       printf '%s: single mapping is required; YAML config is empty\n' "$ROOT/$file" >&2
       result=1
       break
