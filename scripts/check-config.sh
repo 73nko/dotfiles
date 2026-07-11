@@ -74,7 +74,7 @@ check_json() {
 }
 
 check_yaml() {
-  local content file marker output temp tracked result=0
+  local compact content file marker output temp tracked result=0
   require_command git || return 1
   require_command gh || return 1
   tracked=$(tracked_files '*.yml' '*.yaml') || return 1
@@ -82,10 +82,8 @@ check_yaml() {
   temp=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-yaml.XXXXXX") || return 1
   while IFS= read -r file; do
     content=$(grep -Ev '^[[:space:]]*(#|$)' "$ROOT/$file" || true)
-    if [[ -z "$content" ]] || {
-      [[ $(wc -l <<<"$content" | tr -d '[:space:]') == 1 ]] &&
-        grep -Eq '^[[:space:]]*\{\}[[:space:]]*(#.*)?$' <<<"$content"
-    }; then
+    compact=$(sed -E 's/[[:space:]]+#.*$//' <<<"$content" | tr -d '[:space:]')
+    if [[ -z "$compact" || "$compact" == '{}' ]]; then
       printf '%s: single mapping is required; YAML config is empty\n' "$ROOT/$file" >&2
       result=1
       break

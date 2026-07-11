@@ -52,6 +52,17 @@ mv "$fixture/themes/palette.tmp" "$fixture/themes/violet-hour.json"
 
 "$CHECKER" "$fixture"
 
+cp "$fixture/themes/violet-hour.json" "$fixture/themes/palette.valid"
+jq '.required = {"tool/hash.conf": ["does-not-exist"]}' \
+  "$fixture/themes/palette.valid" >"$fixture/themes/violet-hour.json"
+if output=$("$CHECKER" "$fixture" 2>&1); then
+  echo "unknown palette color unexpectedly passed" >&2
+  exit 1
+fi
+grep -Fq 'theme: invalid required palette data:' <<<"$output"
+grep -Fq 'invalid or missing palette color: does-not-exist' <<<"$output"
+mv "$fixture/themes/palette.valid" "$fixture/themes/violet-hour.json"
+
 for legacy in '#1A0A28' '1A0A28' '0xff1A0A28'; do
   printf '#0D0D2C\n#1A1745\n%s\n' "$legacy" >"$fixture/tool/hash.conf"
   if output=$("$CHECKER" "$fixture" 2>&1); then

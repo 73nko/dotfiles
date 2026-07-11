@@ -59,9 +59,13 @@ if ! palette_error=$(jq empty "$PALETTE" 2>&1); then
 fi
 
 if ! required_rows=$(jq -r '
+  def valid_color: type == "string" and test("^#[0-9A-Fa-f]{6}$");
   .colors as $colors |
   .required | to_entries[] | .key as $file | .value[] as $color |
-  [$file, $color, $colors[$color]] | @tsv
+  $colors[$color] as $hex |
+  if ($hex | valid_color) then [$file, $color, $hex] | @tsv
+  else error("invalid or missing palette color: \($color)")
+  end
 ' "$PALETTE" 2>&1); then
   printf 'theme: invalid required palette data: %s\n' "$required_rows" >&2
   exit 1
@@ -91,10 +95,14 @@ if [[ -n "$reference_rows" ]]; then
 fi
 
 if ! semantic_rows=$(jq -r '
+  def valid_color: type == "string" and test("^#[0-9A-Fa-f]{6}$");
   .colors as $colors |
   (.semantic // {}) | to_entries[] | .key as $file |
   .value | to_entries[] |
-  [$file, .key, .value, $colors[.value]] | @tsv
+  .key as $field | .value as $color | $colors[$color] as $hex |
+  if ($hex | valid_color) then [$file, $field, $color, $hex] | @tsv
+  else error("invalid or missing palette color: \($color)")
+  end
 ' "$PALETTE" 2>&1); then
   printf 'theme: invalid semantic palette data: %s\n' "$semantic_rows" >&2
   exit 1
@@ -130,7 +138,11 @@ if ! required_files=$(jq -r '.required | keys[]' "$PALETTE" 2>&1); then
   printf 'theme: invalid required file data: %s\n' "$required_files" >&2
   exit 1
 fi
-if ! legacy_values=$(jq -r '.legacy[]' "$PALETTE" 2>&1); then
+if ! legacy_values=$(jq -r '
+  def valid_color: type == "string" and test("^#[0-9A-Fa-f]{6}$");
+  .legacy[] |
+  if valid_color then . else error("invalid legacy palette color") end
+' "$PALETTE" 2>&1); then
   printf 'theme: invalid legacy palette data: %s\n' "$legacy_values" >&2
   exit 1
 fi

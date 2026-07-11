@@ -168,6 +168,19 @@ if ! grep -Fq 'YAML config is empty' <<<"$fixture_output"; then
   exit 1
 fi
 
+for empty_mapping in '{ }' $'{ # comment\n}'; do
+  printf '%s\n' "$empty_mapping" >"$fixture/valid.yml"
+  git -C "$fixture" add valid.yml
+  if fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/scripts/check-config.sh" 2>&1); then
+    echo "alternate empty YAML mapping unexpectedly passed" >&2
+    exit 1
+  fi
+  if ! grep -Fq 'YAML config is empty' <<<"$fixture_output"; then
+    printf 'alternate empty YAML mapping diagnostic was not actionable:\n%s\n' "$fixture_output" >&2
+    exit 1
+  fi
+done
+
 printf 'message: |\n  ---\n  ...\n  {}\n' >"$fixture/valid.yml"
 git -C "$fixture" add valid.yml
 if ! fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/scripts/check-config.sh" 2>&1); then
