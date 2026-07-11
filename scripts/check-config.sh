@@ -81,7 +81,8 @@ check_yaml() {
   [[ -n "$tracked" ]] || { echo "no tracked YAML files" >&2; return 1; }
   temp=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-yaml.XXXXXX") || return 1
   while IFS= read -r file; do
-    if ! grep -Eq '^[[:space:]]*[^#[:space:]]' "$ROOT/$file"; then
+    if ! grep -Eq '^[[:space:]]*[^#[:space:]]' "$ROOT/$file" ||
+      grep -Eq '^[[:space:]]*\{\}[[:space:]]*(#.*)?$' "$ROOT/$file"; then
       printf '%s: single mapping is required; YAML config is empty\n' "$ROOT/$file" >&2
       result=1
       break
