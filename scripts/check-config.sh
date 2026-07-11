@@ -74,18 +74,25 @@ check_json() {
 }
 
 check_yaml() {
-  local file output temp tracked result=0
+  local file marker output temp tracked result=0
   require_command git || return 1
   require_command gh || return 1
   tracked=$(tracked_files '*.yml' '*.yaml') || return 1
   [[ -n "$tracked" ]] || { echo "no tracked YAML files" >&2; return 1; }
   temp=$(mktemp -d "${TMPDIR:-/tmp}/dotfiles-yaml.XXXXXX") || return 1
   while IFS= read -r file; do
+    if marker=$(grep -En '^[[:space:]]*(---|\.\.\.)[[:space:]]*(#.*)?$' "$ROOT/$file"); then
+      printf '%s: single mapping is required; YAML document markers are not allowed: %s\n' \
+        "$ROOT/$file" "$marker" >&2
+      result=1
+      break
+    fi
     if ! cp "$ROOT/$file" "$temp/config.yml"; then
       result=1
       break
     fi
     if ! output=$(GH_CONFIG_DIR="$temp" gh config list 2>&1); then
+      printf '%s: single mapping is required for tracked YAML config\n' "$ROOT/$file" >&2
       printf '%s: %s\n' "$ROOT/$file" "$output" >&2
       result=1
       break
