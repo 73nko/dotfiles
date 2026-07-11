@@ -133,6 +133,36 @@ if ! grep -Fq "$fixture/valid.yml" <<<"$fixture_output" ||
   printf 'non-mapping YAML diagnostic was not actionable:\n%s\n' "$fixture_output" >&2
   exit 1
 fi
+
+: >"$fixture/valid.yml"
+git -C "$fixture" add valid.yml
+if fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/scripts/check-config.sh" 2>&1); then
+  echo "empty YAML fixture unexpectedly passed" >&2
+  exit 1
+fi
+if ! grep -Fq "$fixture/valid.yml" <<<"$fixture_output" ||
+  ! grep -Fq 'YAML config is empty' <<<"$fixture_output"; then
+  printf 'empty YAML diagnostic was not actionable:\n%s\n' "$fixture_output" >&2
+  exit 1
+fi
+
+printf '# comment only\n  # still a comment\n' >"$fixture/valid.yml"
+git -C "$fixture" add valid.yml
+if fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/scripts/check-config.sh" 2>&1); then
+  echo "comments-only YAML fixture unexpectedly passed" >&2
+  exit 1
+fi
+if ! grep -Fq 'YAML config is empty' <<<"$fixture_output"; then
+  printf 'comments-only YAML diagnostic was not actionable:\n%s\n' "$fixture_output" >&2
+  exit 1
+fi
+
+printf 'message: |\n  ---\n  ...\n' >"$fixture/valid.yml"
+git -C "$fixture" add valid.yml
+if ! fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/scripts/check-config.sh" 2>&1); then
+  printf 'valid YAML block scalar unexpectedly failed:\n%s\n' "$fixture_output" >&2
+  exit 1
+fi
 printf 'fixture: true\n' >"$fixture/valid.yml"
 
 git -C "$fixture" rm -q --cached invalid.json themes/violet-hour.json
