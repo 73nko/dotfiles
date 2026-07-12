@@ -113,3 +113,5 @@ gh-dash/config.yml.local
 # jira-cli: contiene email de login, server corporativo, board/project IDs.
 # ============================================================================
 .jira/
+nvim/lazy-lock.json
+yazi/package.toml$
