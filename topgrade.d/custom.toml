@@ -1,0 +1,22 @@
+# ============================================================================
+# Custom topgrade steps that topgrade does NOT auto-detect.
+# - fisher, TPM (tmux), lazy.nvim, gh extensions: already auto-detected (skip).
+# - atuin sync, bat cache rebuild: here.
+# ============================================================================
+
+[commands]
+# Sync atuin history with the server. Without this, sessions on different
+# machines drift apart. Fails silently if there is no connection.
+"Atuin history sync" = "atuin sync 2>/dev/null || true"
+
+# Rebuild the bat theme cache so custom themes (Violet Hour) are registered
+# after updates. Idempotent.
+"Bat themes cache" = "command -v bat >/dev/null && bat cache --build >/dev/null 2>&1 || true"
+
+# Explicit update of gh extensions (in case topgrade's auto-detection fails
+# on some version). gh extension upgrade is idempotent.
+"GitHub CLI extensions" = "command -v gh >/dev/null && gh extension upgrade --all 2>/dev/null || true"
+
+# Update Neovim plugins in headless. Lazy.nvim is usually auto-detected,
+# but this is safe if it isn't.
+"Neovim plugins" = "command -v nvim >/dev/null && nvim --headless '+Lazy! sync' +qa 2>/dev/null || true"
