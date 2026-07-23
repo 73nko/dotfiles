@@ -14,6 +14,9 @@ fi
 rg -q 'mode-keys vi' "$ROOT/tmux/tmux.conf"
 rg -q 'popup-border-style.*#b39dff' "$ROOT/tmux/tmux.conf"
 rg -q 'personal/tmux/\*\.conf' "$ROOT/tmux/tmux.conf"
+rg -q "tmux-plugins/tmux-resurrect" "$ROOT/tmux/tmux.conf"
+rg -q "tmux-plugins/tmux-continuum" "$ROOT/tmux/tmux.conf"
+rg -q '@continuum-restore.*on' "$ROOT/tmux/tmux.conf"
 [[ -f "$ROOT/lazygit/config.yml" ]]
 lazygit --use-config-file "$ROOT/lazygit/config.yml" --config >/dev/null
 rg -q '^  pagers:$' "$ROOT/lazygit/config.yml"

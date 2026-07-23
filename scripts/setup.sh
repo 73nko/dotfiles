@@ -156,6 +156,20 @@ mise_toolchains() {
   run "mise install (converger toolchains)" mise install --yes
 }
 
+go_bin_directory() {
+  local gobin
+  gobin="$(mise exec go -- go env GOBIN)" || { fail "leer GOBIN de Go"; return; }
+  if [[ -z "$gobin" ]]; then
+    gobin="$HOME/go/bin"
+    run "configurar GOBIN" mise exec go -- go env -w "GOBIN=$gobin"
+  fi
+  if [[ -d "$gobin" ]]; then
+    skip "directorio de binarios Go"
+  else
+    run "crear directorio de binarios Go" mkdir -p "$gobin"
+  fi
+}
+
 tmux_plugins() {
   phase "tmux: TPM + plugins"
   local tpm="$DOTS/tmux/plugins/tpm"
@@ -312,7 +326,7 @@ check_fisher_plugins() {
 
 check_tpm_plugins() {
   local plugin
-  for plugin in tpm smart-splits.nvim tmux-sessionx; do
+  for plugin in tpm smart-splits.nvim tmux-resurrect tmux-continuum tmux-sessionx; do
     [[ -d "$DOTS/tmux/plugins/$plugin" ]] || return 1
   done
 }
@@ -458,6 +472,7 @@ case "$cmd" in
     fish_shell
     fish_plugins
     mise_toolchains
+    go_bin_directory
     tmux_plugins
     yazi_plugins
     theming
