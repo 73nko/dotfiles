@@ -9,7 +9,6 @@ fish_add_path /usr/local/bin
 fish_add_path /usr/local/sbin
 fish_add_path ~/.local/bin
 fish_add_path ~/.cargo/bin
-fish_add_path /Applications/Docker.app/Contents/Resources/bin
 
 # Disable greeting
 set -g fish_greeting ""
@@ -133,3 +132,7 @@ end
 for file in ~/.config/personal/fish/*.fish
     test -f "$file"; and source "$file"
 end
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :

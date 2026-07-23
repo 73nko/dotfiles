@@ -171,8 +171,6 @@ cask "font-monaspice-nerd-font"
 cask "ghostty"
 # Web browser
 cask "google-chrome"
-# HTTP and GraphQL Client
-cask "insomnia"
 # Software for Logitech devices
 cask "logi-options+"
 # Reverse proxy, secure introspectable tunnels to localhost
