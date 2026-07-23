@@ -118,3 +118,6 @@ yazi/package.toml$
 
 # 1Password app state (telemetry flag), not config
 1Password/
+
+# Homebrew: estado runtime de confianza de casks, no config
+homebrew/trust.json*
