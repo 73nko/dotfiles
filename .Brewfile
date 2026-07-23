@@ -77,10 +77,6 @@ brew "ical-buddy"
 brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Handy way to save and run project-specific commands
-brew "just"
-# AI coding agent for your terminal
-brew "kimi-code"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Simple terminal UI for git commands
@@ -156,6 +152,8 @@ cask "1password"
 cask "nikitabobko/tap/aerospace"
 # Application uninstaller
 cask "appcleaner"
+# Open-source IDE for exploring and testing APIs
+cask "bruno"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Terminal-based AI coding assistant
@@ -164,8 +162,6 @@ cask "claude-code"
 cask "cleanshot"
 # OpenAI's Codex desktop app for managing coding agents
 cask "codex-app"
-# App to build and share containerised applications and microservices
-cask "docker-desktop"
 # Collaborative team software
 cask "figma"
 cask "font-jetbrains-mono"
@@ -179,8 +175,6 @@ cask "google-chrome"
 cask "insomnia"
 # Software for Logitech devices
 cask "logi-options+"
-# Markdown editor
-cask "mark-text"
 # Reverse proxy, secure introspectable tunnels to localhost
 cask "ngrok"
 # VPN client for secure internet access and private browsing
@@ -191,6 +185,8 @@ cask "nosql-workbench"
 cask "numi"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Fast, light Docker Desktop replacement for macOS
+cask "orbstack"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Team communication and collaboration software

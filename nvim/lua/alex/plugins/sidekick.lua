@@ -16,6 +16,10 @@ return {
   "folke/sidekick.nvim",
   event = "VeryLazy",
   opts = {
+    -- NES off (2026-07): queremos autocompletar lineas, no que genere codigo.
+    -- El ghost text inline (vim.lsp.inline_completion + Copilot LSP) se queda;
+    -- las ediciones multi-linea propuestas por NES, fuera.
+    nes = { enabled = false },
     cli = {
       mux = {
         backend = "tmux", -- las sesiones CLI sobreviven al cierre de nvim

@@ -85,6 +85,9 @@
   default = simple
   # Verify remote refs before pushing (protection against broken force-push).
   followTags = true
+  # useForceIfIncludes hace --force-with-lease seguro de verdad: aborta si el
+  # remote avanzo desde el ultimo fetch en background.
+  useForceIfIncludes = true
 
 [init]
   defaultBranch = main
@@ -108,3 +111,14 @@
   # Show branch tracking info in git status.
   branch = true
   showStash = true
+
+# Firma de commits via 1Password (SSH). Los VALORES viven en ~/.gitconfig
+# (identidad y firma no se versionan; ver cabecera de este fichero).
+# Setup una vez por maquina:
+#   1. 1Password -> Settings -> Developer: habilitar SSH agent y crear clave
+#   2. git config --file ~/.gitconfig gpg.format ssh
+#   3. git config --file ~/.gitconfig user.signingkey 'ssh-ed25519 AAAA...'
+#   4. git config --file ~/.gitconfig gpg.ssh.program \
+#        "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+#   5. git config --file ~/.gitconfig commit.gpgsign true
+#   6. GitHub -> Settings -> SSH and GPG keys -> New SSH key (tipo: Signing Key)

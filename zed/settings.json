@@ -58,7 +58,7 @@
     "enabled": true,
     "coloring": "indent_aware"
   },
-  "auto_update": true,
+  "auto_update": false,
   "toolbar": {
     "quick_actions": false
   },
@@ -67,14 +67,14 @@
     "git_status": true
   },
 
-  // ─── Inline Completions (Supermaven) ───────────────────────
+  // ─── Inline Completions (Zed) ───────────────────────
   "show_edit_predictions": true,
 
-  // ─── AI Agent (Claude via Copilot Chat) ────────────────────
+  // ─── AI Agent ────────────────────
   "agent": {
     "dock": "left",
     "tool_permissions": {
-      "default": "allow"
+      "default": "confirm"
     },
     "profiles": {
       "alex": {

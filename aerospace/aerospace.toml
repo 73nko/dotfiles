@@ -45,7 +45,7 @@ outer.left = 8
 outer.bottom = 8
 outer.right = 8
 # Top gap reserves space for SketchyBar.
-# bar height 32 + y_offset 4 + bar shadow ~8 + breathing 6 = 50
+# bar height 32 + y_offset 4 + breathing 9 = 45 (shadow=off in sketchybarrc)
 outer.top = 45
 
 # ----------------------------------------------------------------------------

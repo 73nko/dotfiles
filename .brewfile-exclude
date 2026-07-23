@@ -27,3 +27,9 @@ tap "crissnb/dynamicisland"
 tap "manaflow-ai/cmux"
 tap "jesseduffield/lazygit"
 tap "nikitabobko/aerospace"
+# Purgados en la auditoria 2026-07. Guard hasta desinstalar en todas las
+# maquinas; mientras esten instalados, un export los re-importaria.
+^brew "kimi-code"
+^cask "mark-text"
+^cask "docker-desktop"
+^brew "just"

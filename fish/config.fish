@@ -49,8 +49,6 @@ fish_vi_key_bindings
 abbr -a -- .. 'cd ..'
 abbr -a cc clear
 abbr -a n nvim
-abbr -a python python3
-abbr -a pip pip3
 
 # ============================================
 # File Navigation & Listing
