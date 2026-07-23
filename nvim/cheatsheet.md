@@ -126,7 +126,7 @@ gra                  Code action, auto-fix if a suggestion exists
 
 ```
 <leader>ac           Claude (persistent session via tmux)
-<leader>ao           opencode (persistent session via tmux)
+<leader>af           send current file to the CLI (claude)
 <leader>aa           Toggle the last used CLI
 <leader>ap           Pick a preset prompt
 <leader>av           Send visual selection to the CLI
@@ -474,7 +474,7 @@ Linters per type:
 | Keymap | Description |
 | --- | --- |
 | `<leader>ac` | Toggle Claude (persistent via tmux) |
-| `<leader>ao` | Toggle opencode (persistent via tmux) |
+| `<leader>af` | Send current file to the CLI |
 | `<leader>aa` | Toggle the last CLI |
 | `<leader>ap` | Pick a prompt (normal/visual) |
 | `<leader>av` | Send visual selection to CLI |

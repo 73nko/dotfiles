@@ -97,8 +97,6 @@ brew "neovim"
 brew "nowplaying-cli"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# AI coding agent, built for the terminal
-brew "opencode"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Protocol buffers (Google's data interchange format)

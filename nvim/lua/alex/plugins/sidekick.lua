@@ -7,7 +7,7 @@
 --   - Ghost text inline: nativo de Neovim 0.12 (vim.lsp.inline_completion),
 --     servido por el Copilot LSP (vim.lsp.enable("copilot") en lspconfig.lua).
 --   - NES: sidekick aplica/salta ediciones multi-linea sugeridas (Tab).
---   - CLIs (claude/opencode): sesiones persistentes via tmux (mux), con
+--   - CLI (claude): sesiones persistentes via tmux (mux), con
 --     auto-reload de ficheros editados por el CLI. Sustituye a los toggles
 --     de Snacks.terminal que vivian en snacks.lua.
 --
@@ -55,12 +55,13 @@ return {
       desc = "Sidekick: Claude",
     },
     {
-      -- Mismo binding que tenia el toggle de Snacks.terminal("opencode")
-      "<leader>ao",
+      -- opencode eliminado (2026-07): claude-code es el unico CLI. Su hueco
+      -- lo ocupa "enviar fichero actual" en normal mode (av solo cubre visual).
+      "<leader>af",
       function()
-        require("sidekick.cli").toggle({ name = "opencode", focus = true })
+        require("sidekick.cli").send({ msg = "{file}" })
       end,
-      desc = "Sidekick: opencode",
+      desc = "Sidekick: enviar fichero actual",
     },
     {
       "<leader>ap",
