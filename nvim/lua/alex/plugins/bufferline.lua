@@ -1,4 +1,4 @@
--- Bufferline - pill tabs, Violet Hour . Glass (guide v2 sec.05)
+-- Bufferline - pill tabs, Violet Hour · Glass (guia §05, maqueta "Preview target")
 -- Active: ice pill (bg branch_bg, fg ice), inset ring
 -- Inactive: silver 58% (muted)
 -- Modified dot: orchid
@@ -24,11 +24,11 @@ return {
     return {
       options = {
         mode = "buffers",
-        diagnostics = "nvim_lsp",
+        diagnostics = false, -- la maqueta (§05) no lleva contadores en tabs; viven en statusline/gutter
         always_show_bufferline = false,
         show_close_icon = false,
         show_buffer_close_icons = false,
-        separator_style = { "", "" }, -- sin barras, los backgrounds hacen de pill
+        separator_style = { "", "" }, -- medias lunas: pill con caps redondos
         indicator = { style = "none" },
         offsets = {
           {
@@ -40,10 +40,6 @@ return {
           },
         },
         modified_icon = "●",
-        diagnostics_indicator = function(count, level, _, _)
-          local sym = level:match("error") and "" or (level:match("warn") and "" or "")
-          return " " .. sym .. count
-        end,
       },
       highlights = {
         -- Barra completa
@@ -70,9 +66,9 @@ return {
         hint_selected    = { fg = c.periwinkle, bg = c.branch_bg, bold = true },
 
         -- Separators - transparent, pill shape comes from bg only
-        separator          = { fg = c.none, bg = c.none },
-        separator_selected = { fg = c.none, bg = c.none },
-        separator_visible  = { fg = c.none, bg = c.none },
+        separator          = { fg = c.night, bg = c.none },
+        separator_selected = { fg = c.branch_bg, bg = c.none },
+        separator_visible  = { fg = c.night, bg = c.none },
 
         -- Indicator / close
         indicator_selected    = { fg = c.ice,    bg = c.branch_bg },
