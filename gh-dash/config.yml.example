@@ -82,19 +82,19 @@ theme:
       compact: false
   colors:
     text:
-      primary:   "#ECE6FF"   # star
-      secondary: "#A8C9FF"   # ice
-      inverted:  "#0D0D2C"   # night
-      faint:     "#777494"   # silver @ 58% pre-mixed over night
-      warning:   "#F0D2FF"   # bloom
-      success:   "#A8C9FF"   # ice
-      error:     "#E2BCFF"   # rose mist
+      primary:   "#f3faf7"   # star
+      secondary: "#7fe0ff"   # ice
+      inverted:  "#062230"   # night
+      faint:     "#839b9e"   # silver @ 58% pre-mixed over night
+      warning:   "#e0fbff"   # bloom
+      success:   "#7fe0ff"   # ice
+      error:     "#5ff2cf"   # rose mist
     background:
-      selected:  "#1A1745"   # indigo
+      selected:  "#0d3547"   # indigo
     border:
-      primary:   "#A8C9FF"   # ice
-      secondary: "#1A1745"   # indigo
-      faint:     "#211E45"   # orchid @ 12% pre-mixed over night
+      primary:   "#7fe0ff"   # ice
+      secondary: "#0d3547"   # indigo
+      faint:     "#113e51"   # orchid @ 12% pre-mixed over night
 
 keybindings:
   prs:

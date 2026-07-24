@@ -14,28 +14,28 @@ fish_add_path ~/.cargo/bin
 set -g fish_greeting ""
 
 # ============================================
-# Violet Hour · alta legibilidad — fish syntax highlighting (rediseno 2026-06)
+# Violet Hour · Glacier Signal — fish syntax highlighting (repaleta 2026-07)
 # Antes "Neon Nocturne" (paleta distinta de nvim). Unificado al espectro nuevo:
 # command=gold, builtin=teal, keyword=orchid, string=green, type=azure...
 # ============================================
-set -g fish_color_command        ffcf7a    # gold   — commands (@function)
-set -g fish_color_builtin        5fe0c8    # teal   — builtins (@function.builtin)
-set -g fish_color_keyword        b39dff    # orchid — keywords (@keyword)
-set -g fish_color_param          ece6ff    # star   — arguments (@variable)
-set -g fish_color_quote          9ee87f    # green  — strings (@string)
-set -g fish_color_redirection    7fb0ff    # azure  — redirections (@type)
-set -g fish_color_end            b39dff    # orchid — semicolons, &&
-set -g fish_color_error          ff9e9e    # coral  — errors
-set -g fish_color_comment        717fa6    # comment lifted — comments (@comment)
-set -g fish_color_operator       b39dff    # orchid — operators (@operator)
-set -g fish_color_escape         ffb86b    # orange — escape sequences (@constant)
-set -g fish_color_autosuggestion 5b6b96    # dim    — ghost text (subtil a proposito)
-set -g fish_color_cancel         ff9e9e    # coral  — Ctrl+C
-set -g fish_color_search_match   --background=322d5a
-set -g fish_pager_color_prefix        ffcf7a --bold --underline
-set -g fish_pager_color_completion    ece6ff
-set -g fish_pager_color_description  717fa6
-set -g fish_pager_color_progress     ffcf7a --background=0d0d2c
+set -g fish_color_command        ffd873    # amber  — commands (@function)
+set -g fish_color_builtin        5ff2cf    # mint   — builtins (@function.builtin)
+set -g fish_color_keyword        22b8f5    # orchid — keywords (@keyword)
+set -g fish_color_param          f3faf7    # star   — arguments (@variable)
+set -g fish_color_quote          8fdc8f    # jade  — strings (@string)
+set -g fish_color_redirection    b8f1ff    # cyan-mist  — redirections (@type)
+set -g fish_color_end            22b8f5    # orchid — semicolons, &&
+set -g fish_color_error          ff7a6e    # coral  — errors
+set -g fish_color_comment        559eb7    # comment lifted — comments (@comment)
+set -g fish_color_operator       22b8f5    # orchid — operators (@operator)
+set -g fish_color_escape         ffd873    # amber  — escape sequences (@constant)
+set -g fish_color_autosuggestion 438198    # dim    — ghost text (subtil a proposito)
+set -g fish_color_cancel         ff7a6e    # coral  — Ctrl+C
+set -g fish_color_search_match   --background=0f526f
+set -g fish_pager_color_prefix        ffd873 --bold --underline
+set -g fish_pager_color_completion    f3faf7
+set -g fish_pager_color_description  559eb7
+set -g fish_pager_color_progress     ffd873 --background=062230
 
 # ============================================
 # Vi Mode
@@ -103,10 +103,10 @@ set -x FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
 set -x FZF_ALT_C_COMMAND "fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
 set -x FZF_DEFAULT_OPTS "\
-  --color=fg:#ece6ff,bg:#0d0d2c,hl:#ffcf7a \
-  --color=fg+:#9ee87f,bg+:#322d5a,hl+:#ffcf7a \
-  --color=info:#5fe0c8,prompt:#b39dff,pointer:#ff9e9e \
-  --color=marker:#9ee87f,spinner:#5fe0c8,header:#7fb0ff"
+  --color=fg:#f3faf7,bg:#062230,hl:#ffd873 \
+  --color=fg+:#8fdc8f,bg+:#0f526f,hl+:#ffd873 \
+  --color=info:#5ff2cf,prompt:#22b8f5,pointer:#ff7a6e \
+  --color=marker:#8fdc8f,spinner:#5ff2cf,header:#b8f1ff"
 
 set -x FZF_CTRL_T_OPTS "--preview 'bat -n --color=always --line-range :500 {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 set -x FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200' --bind 'ctrl-/:change-preview-window(down|hidden|)'"

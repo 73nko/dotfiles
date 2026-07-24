@@ -6,17 +6,17 @@
   "authorUsername": "apramos89",
   "description": "Twilight violeta: identidad orchid/lilac/rose-mist sobre night/indigo, ice para estados activos.",
   "colors": {
-    "background": "#0D0D2C",
-    "backgroundSecondary": "#1A1745",
-    "text": "#ECE6FF",
-    "selection": "#B39DFF",
-    "loader": "#A8C9FF",
-    "red": "#FF9E9E",
-    "orange": "#FFCF7A",
-    "yellow": "#FFCF7A",
-    "green": "#9EE87F",
-    "blue": "#7FB0FF",
-    "purple": "#B39DFF",
-    "magenta": "#5FE0C8"
+    "background": "#062230",
+    "backgroundSecondary": "#0d3547",
+    "text": "#f3faf7",
+    "selection": "#22b8f5",
+    "loader": "#7fe0ff",
+    "red": "#ff7a6e",
+    "orange": "#ffd873",
+    "yellow": "#ffd873",
+    "green": "#8fdc8f",
+    "blue": "#b8f1ff",
+    "purple": "#22b8f5",
+    "magenta": "#5ff2cf"
   }
 }

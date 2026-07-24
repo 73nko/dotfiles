@@ -1,81 +1,81 @@
 #  Btop theme  ·  Violet Hour · Glass
 #  Aligned with ~/.config/Styles/Violet Hour · Glass.html — cool sets the tone.
 #  -------------------------------------------------------------------
-#  Identity        orchid #B39DFF · lilac #D6C8FF · rose-mist #E2BCFF · bloom #F0D2FF
-#  Structure       periwinkle #8DA7FF · ice #A8C9FF · cyan-mist #B9E0FF
-#  Ground          night #0D0D2C · indigo #1A1745 · star #ECE6FF
+#  Identity        orchid #22b8f5 · lilac #a8ecff · rose-mist #5ff2cf · bloom #e0fbff
+#  Structure       periwinkle #5f9bd8 · ice #7fe0ff · cyan-mist #B9E0FF
+#  Ground          night #062230 · indigo #0d3547 · star #f3faf7
 #  -------------------------------------------------------------------
 
 # Main area — night base, star foreground (transparent if theme_background=false)
-theme[main_bg]="#0d0d2c"
-theme[main_fg]="#ece6ff"
+theme[main_bg]="#062230"
+theme[main_fg]="#f3faf7"
 
 # Title and major highlight
-theme[title]="#ece6ff"
-theme[hi_fg]="#b39dff"
+theme[title]="#f3faf7"
+theme[hi_fg]="#22b8f5"
 
 # Selected background/foreground
-theme[selected_bg]="#1a1745"
-theme[selected_fg]="#d6c8ff"
+theme[selected_bg]="#0d3547"
+theme[selected_fg]="#a8ecff"
 
 # Inactive elements — muted ice
-theme[inactive_fg]="#777494"
+theme[inactive_fg]="#839b9e"
 
 # Text inside graphs/meters
-theme[graph_text]="#ece6ff"
+theme[graph_text]="#f3faf7"
 
 # Misc element coloring (process state, mem available, etc.)
-theme[meter_bg]="#1a1745"
-theme[proc_misc]="#a8c9ff"
+theme[meter_bg]="#0d3547"
+theme[proc_misc]="#7fe0ff"
 
 # CPU box — orchid border (identity)
-theme[cpu_box]="#b39dff"
+theme[cpu_box]="#22b8f5"
 
 # Memory box — ice (cool/structural)
-theme[mem_box]="#a8c9ff"
+theme[mem_box]="#7fe0ff"
 
 # Network box — cyan mist
 theme[net_box]="#b9e0ff"
 
 # Processes box — lilac
-theme[proc_box]="#d6c8ff"
+theme[proc_box]="#a8ecff"
 
 # Single-bar dividers between boxes
-theme[div_line]="#211e45"
+theme[div_line]="#113e51"
 
 # CPU temperature gradient: cool → identity → loud
-theme[temp_start]="#a8c9ff"
-theme[temp_mid]="#b39dff"
-theme[temp_end]="#e2bcff"
+theme[temp_start]="#7fe0ff"
+theme[temp_mid]="#22b8f5"
+theme[temp_end]="#5ff2cf"
 
 # CPU usage gradient: cyan-mist (idle) → periwinkle (busy) → orchid (max)
 theme[cpu_start]="#b9e0ff"
-theme[cpu_mid]="#8da7ff"
-theme[cpu_end]="#b39dff"
+theme[cpu_mid]="#5f9bd8"
+theme[cpu_end]="#22b8f5"
 
 # Memory: free → available → cached → used (ice → cyan-mist → periwinkle → orchid)
-theme[free_start]="#a8c9ff"
+theme[free_start]="#7fe0ff"
 theme[free_mid]=""
 theme[free_end]=""
 theme[available_start]="#b9e0ff"
 theme[available_mid]=""
 theme[available_end]=""
-theme[cached_start]="#8da7ff"
+theme[cached_start]="#5f9bd8"
 theme[cached_mid]=""
 theme[cached_end]=""
-theme[used_start]="#b39dff"
-theme[used_mid]="#e2bcff"
-theme[used_end]="#e2bcff"
+theme[used_start]="#22b8f5"
+theme[used_mid]="#5ff2cf"
+theme[used_end]="#5ff2cf"
 
 # Disk I/O gradient
 theme[download_start]="#b9e0ff"
-theme[download_mid]="#a8c9ff"
-theme[download_end]="#8da7ff"
-theme[upload_start]="#8da7ff"
-theme[upload_mid]="#b39dff"
-theme[upload_end]="#e2bcff"
+theme[download_mid]="#7fe0ff"
+theme[download_end]="#5f9bd8"
+theme[upload_start]="#5f9bd8"
+theme[upload_mid]="#22b8f5"
+theme[upload_end]="#5ff2cf"
 
 # Process activity gradient: idle → active → hot
-theme[process_start]="#a8c9ff"
-theme[process_mid]="#b39dff"
-theme[process_end]="#e2bcff"
+theme[process_start]="#7fe0ff"
+theme[process_mid]="#22b8f5"
+theme[process_end]="#5ff2cf"

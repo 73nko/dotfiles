@@ -6,17 +6,17 @@ de 8 colores para pegarla y que quede versionada aquí.
 
 CADENA (pégala tal cual):
 
-  #1A1745,#322D5A,#B39DFF,#0D0D2C,#322D5A,#ECE6FF,#A8C9FF,#E2BCFF
+  #0d3547,#0f526f,#22b8f5,#062230,#0f526f,#f3faf7,#7fe0ff,#5ff2cf
 
 Las 8 ranuras:
-  1  Column BG          #1A1745  indigo      — fondo de la barra lateral
-  2  Menu BG Hover      #322D5A  selection   — hover del menú
-  3  Active Item        #B39DFF  orchid      — canal seleccionado (pill)
-  4  Active Item Text   #0D0D2C  night       — texto sobre el pill orchid
-  5  Hover Item         #322D5A  selection   — hover de canal
-  6  Text Color         #ECE6FF  star        — texto de la barra lateral
-  7  Active Presence    #A8C9FF  ice         — punto de "en línea"
-  8  Mention Badge      #E2BCFF  rose mist   — badge de menciones
+  1  Column BG          #0d3547  indigo      — fondo de la barra lateral
+  2  Menu BG Hover      #0f526f  selection   — hover del menú
+  3  Active Item        #22b8f5  orchid      — canal seleccionado (pill)
+  4  Active Item Text   #062230  night       — texto sobre el pill orchid
+  5  Hover Item         #0f526f  selection   — hover de canal
+  6  Text Color         #f3faf7  star        — texto de la barra lateral
+  7  Active Presence    #7fe0ff  ice         — punto de "en línea"
+  8  Mention Badge      #5ff2cf  rose mist   — badge de menciones
 
 Cómo aplicarlo:
   Opción rápida — pega la cadena en cualquier mensaje de Slack (un DM

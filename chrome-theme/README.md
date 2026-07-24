@@ -15,14 +15,14 @@ theme reference, but Chrome installation is manual.
 
 ## Active color mapping
 
-- Frame and new-tab background: night `#0D0D2C` (`[13, 13, 44]`).
-- Toolbar and omnibox background: indigo `#1A1745` (`[26, 23, 69]`).
-- Toolbar, tab, bookmark, new-tab, and omnibox text: star `#ECE6FF`
+- Frame and new-tab background: night `#062230` (`[13, 13, 44]`).
+- Toolbar and omnibox background: indigo `#0d3547` (`[26, 23, 69]`).
+- Toolbar, tab, bookmark, new-tab, and omnibox text: star `#f3faf7`
   (`[236, 230, 255]`).
-- Inactive tab text: the palette's muted UI value `#777494`
+- Inactive tab text: the palette's muted UI value `#839b9e`
   (`[119, 116, 148]`).
-- New-tab links: ice `#A8C9FF` (`[168, 201, 255]`).
-- New-tab headers and buttons: orchid `#B39DFF` (`[179, 157, 255]`).
+- New-tab links: ice `#7fe0ff` (`[168, 201, 255]`).
+- New-tab headers and buttons: orchid `#22b8f5` (`[179, 157, 255]`).
 
 `images/ntp-bg.png` supplies the new-tab artwork and
 `images/toolbar-bg.png` keeps the toolbar on the indigo surface.

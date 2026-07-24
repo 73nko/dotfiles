@@ -14,7 +14,7 @@ trap 'rm -rf "$fixture"' EXIT
 mkdir -p "$fixture/themes" "$fixture/tool"
 cp "$ROOT/themes/violet-hour.json" "$fixture/themes/violet-hour.json"
 
-printf '{"status":{"error":"#9EE87FFF","success":"#FF9E9EFF"},"surface":[13,13,44]}\n' \
+printf '{"status":{"error":"#8fdc8fFF","success":"#ff7a6eFF"},"surface":[6,34,48]}\n' \
   >"$fixture/tool/semantic.json"
 jq '.required = {} |
     .references = {} |
@@ -30,17 +30,17 @@ if output=$("$CHECKER" "$fixture" 2>&1); then
   echo "swapped semantic colors unexpectedly passed" >&2
   exit 1
 fi
-grep -Fq 'tool/semantic.json field status.error should be coral (#ff9e9e)' <<<"$output"
-grep -Fq 'tool/semantic.json field status.success should be green (#9ee87f)' <<<"$output"
+grep -Fq 'tool/semantic.json field status.error should be coral (#ff7a6e)' <<<"$output"
+grep -Fq 'tool/semantic.json field status.success should be green (#8fdc8f)' <<<"$output"
 
-printf '{"status":{"error":"#FF9E9EFF","success":"#9EE87FFF"},"surface":[13,13,44]}\n' \
+printf '{"status":{"error":"#ff7a6eFF","success":"#8fdc8fFF"},"surface":[6,34,48]}\n' \
   >"$fixture/tool/semantic.json"
 "$CHECKER" "$fixture"
 
 cp "$ROOT/themes/violet-hour.json" "$fixture/themes/violet-hour.json"
-printf '#0D0D2C\n#1A1745\n' >"$fixture/tool/hash.conf"
-printf '0D0D2C\n' >"$fixture/tool/bare.conf"
-printf '0xff0D0D2C\n' >"$fixture/tool/argb.conf"
+printf '#062230\n#0d3547\n' >"$fixture/tool/hash.conf"
+printf '062230\n' >"$fixture/tool/bare.conf"
+printf '0xff062230\n' >"$fixture/tool/argb.conf"
 
 jq '.required = {
       "tool/hash.conf": ["night", "indigo"],
@@ -64,7 +64,7 @@ grep -Fq 'invalid or missing palette color: does-not-exist' <<<"$output"
 mv "$fixture/themes/palette.valid" "$fixture/themes/violet-hour.json"
 
 for legacy in '#1A0A28' '1A0A28' '0xff1A0A28'; do
-  printf '#0D0D2C\n#1A1745\n%s\n' "$legacy" >"$fixture/tool/hash.conf"
+  printf '#062230\n#0d3547\n%s\n' "$legacy" >"$fixture/tool/hash.conf"
   if output=$("$CHECKER" "$fixture" 2>&1); then
     echo "legacy fixture unexpectedly passed: $legacy" >&2
     exit 1
@@ -148,7 +148,7 @@ jq -e '
     "theme.colors.button_background": "orchid"
   }
 ' "$ROOT/themes/violet-hour.json" >/dev/null
-if rg -Fq '#2C2766' "$ROOT/Styles/violet-hour-slack-theme.txt"; then
+if rg -Fq '#174b60' "$ROOT/Styles/violet-hour-slack-theme.txt"; then
   echo "Slack theme still contains its noncanonical hover color" >&2
   exit 1
 fi

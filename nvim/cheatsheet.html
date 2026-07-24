@@ -10,22 +10,22 @@
      Nombres viejos (purple/cyan/pink/green/yellow/orange) se mantienen
      para no tocar el JS: cada workflow y seccion elige su acento
      por nombre legacy pero los valores son del palette Violet Hour. */
-  --bg:       #0D0D2C;  /* Dusk */
-  --bg2:      #14123A;  /* bg_alt */
-  --card:     #14123A;  /* bg_alt */
-  --card-h:   #1A1745;  /* plum elevated */
-  --border:   #211E45;  /* pane_border warm */
-  --purple:   #D6C8FF;  /* magenta_hi - accent primario */
-  --cyan:     #A8C9FF;  /* turquoise_hi - active/focus */
-  --pink:     #B39DFF;  /* magenta - high emphasis */
+  --bg:       #062230;  /* Dusk */
+  --bg2:      #0a2c3c;  /* bg_alt */
+  --card:     #0a2c3c;  /* bg_alt */
+  --card-h:   #0d3547;  /* plum elevated */
+  --border:   #113e51;  /* pane_border warm */
+  --purple:   #a8ecff;  /* magenta_hi - accent primario */
+  --cyan:     #7fe0ff;  /* turquoise_hi - active/focus */
+  --pink:     #22b8f5;  /* magenta - high emphasis */
   --green:    #B9E0FF;  /* aqua - success cool (no verde, per guide) */
-  --yellow:   #F0D2FF;  /* gold */
-  --orange:   #E2BCFF;  /* tangerine */
-  --text:     #ECE6FF;  /* rosegold */
-  --muted:    #777494;  /* rosegold muted */
-  --muted2:   #67618B;  /* punct brown */
-  --kbd:      #2F365A;  /* branch_bg - pool cool */
-  --kbd-b:    #434F76;  /* pane_active */
+  --yellow:   #e0fbff;  /* gold */
+  --orange:   #5ff2cf;  /* tangerine */
+  --text:     #f3faf7;  /* rosegold */
+  --muted:    #839b9e;  /* rosegold muted */
+  --muted2:   #5b747b;  /* punct brown */
+  --kbd:      #214c5e;  /* branch_bg - pool cool */
+  --kbd-b:    #498aa2;  /* pane_active */
   --r:        10px;
   --r-sm:     6px;
 }
@@ -113,7 +113,7 @@ kbd {
   transition: background .15s, border-color .15s, color .15s;
   box-shadow: 0 1px 2px rgba(0,0,0,.35);
 }
-.card:hover kbd { background: #434F76; border-color: #A8C9FF; color: #D4F0FF; }
+.card:hover kbd { background: #498aa2; border-color: #7fe0ff; color: #d6f6ff; }
 
 /* ─── SHORTCUT CARDS ────────────────────────── */
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: .5rem; }
@@ -161,7 +161,7 @@ kbd {
 /* ─── COPY TOAST ─────────────────────────────── */
 #toast {
   position: fixed; bottom: 2rem; left: 50%; z-index: 999;
-  background: linear-gradient(135deg, var(--pink), var(--orange)); color: #0D0D2C;
+  background: linear-gradient(135deg, var(--pink), var(--orange)); color: #062230;
   padding: .5rem 1.2rem; border-radius: 20px;
   font-size: .75rem; font-weight: 700;
   box-shadow: 0 8px 32px rgba(179,157,255,.35), 0 0 0 1px rgba(226,188,255,.2);

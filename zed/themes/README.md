@@ -16,16 +16,16 @@ The tracked `zed/settings.json` also activates it as `"theme": "Violet Hour"`.
 
 ## Semantic mapping
 
-- Editor and terminal background: night `#0D0D2C`.
-- Raised elements: indigo `#1A1745`; active tabs and elements: branch
-  `#2F365A`.
-- Primary text: star `#ECE6FF`; focus and links: ice `#A8C9FF`.
-- Keywords: orchid `#B39DFF`; titles: lilac `#D6C8FF`; functions: rose
-  `#E2BCFF`; constants and numbers: bloom `#F0D2FF`.
-- Errors and deletions: coral `#FF9E9E`; warnings and modifications: gold
-  `#FFCF7A`; success and additions: green `#9EE87F`.
-- Information uses teal `#5FE0C8`; hints and blue terminal slots use azure
-  `#7FB0FF`.
+- Editor and terminal background: night `#062230`.
+- Raised elements: indigo `#0d3547`; active tabs and elements: branch
+  `#214c5e`.
+- Primary text: star `#f3faf7`; focus and links: ice `#7fe0ff`.
+- Keywords: orchid `#22b8f5`; titles: lilac `#a8ecff`; functions: rose
+  `#5ff2cf`; constants and numbers: bloom `#e0fbff`.
+- Errors and deletions: coral `#ff7a6e`; warnings and modifications: gold
+  `#ffd873`; success and additions: green `#8fdc8f`.
+- Information uses teal `#5ff2cf`; hints and blue terminal slots use azure
+  `#b8f1ff`.
 
 If Zed rejects an edited theme, run `zed --log` and inspect the JSON parse or
 schema error; Zed may otherwise fall back to its default theme.

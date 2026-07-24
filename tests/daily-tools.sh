@@ -12,7 +12,7 @@ if rg -q 'YOUR-ORG|bundle-shopify|abbr[[:space:]]+-a[[:space:]]+awt([[:space:]]|
     exit 1
 fi
 rg -q 'mode-keys vi' "$ROOT/tmux/tmux.conf"
-rg -q 'popup-border-style.*#b39dff' "$ROOT/tmux/tmux.conf"
+rg -q 'popup-border-style.*#22b8f5' "$ROOT/tmux/tmux.conf"
 rg -q 'personal/tmux/\*\.conf' "$ROOT/tmux/tmux.conf"
 rg -q "tmux-plugins/tmux-resurrect" "$ROOT/tmux/tmux.conf"
 rg -q "tmux-plugins/tmux-continuum" "$ROOT/tmux/tmux.conf"

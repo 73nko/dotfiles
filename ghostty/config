@@ -54,8 +54,8 @@ font-style-italic = Italic
 # ============================================
 cursor-style = block
 cursor-style-blink = false
-cursor-color = #E2BCFF
-cursor-text = #0D0D2C
+cursor-color = #5ff2cf
+cursor-text = #062230
 
 # ============================================
 # Scrollback
@@ -66,16 +66,16 @@ scrollback-limit = 100000
 # Selection / Copy - Orchid wash (§07)
 # ============================================
 copy-on-select = true
-selection-background = #322d5a
-selection-foreground = #ECE6FF
+selection-background = #0f526f
+selection-foreground = #f3faf7
 
 # ============================================
 # Violet Hour · Glass palette
-# background = Night #0D0D2C @55% con blur 40 sobre wallpaper aurora
-# foreground = Star #ECE6FF
+# background = Night #062230 @55% con blur 40 sobre wallpaper aurora
+# foreground = Star #f3faf7
 # ============================================
-background = #0D0D2C
-foreground = #ECE6FF
+background = #062230
+foreground = #f3faf7
 
 # Normal (0-7) — ANSI con verde/rojo/amarillo REALES (rediseno 2026-06).
 # Antes el slot verde era azul y el rojo era rosa: ls/git/fish salian
@@ -85,14 +85,14 @@ foreground = #ECE6FF
 # 1 red    = Coral      5 magenta = Orchid (identidad)
 # 2 green  = Green      6 cyan    = Teal
 # 3 yellow = Gold       7 white   = Silver
-palette = 0=#06061A
-palette = 1=#FF9E9E
-palette = 2=#9EE87F
-palette = 3=#FFCF7A
-palette = 4=#7FB0FF
-palette = 5=#B39DFF
-palette = 6=#5FE0C8
-palette = 7=#C4BEE0
+palette = 0=#04141C
+palette = 1=#FF7A6E
+palette = 2=#8FDC8F
+palette = 3=#FFD873
+palette = 4=#5F9BD8
+palette = 5=#22B8F5
+palette = 6=#B8F1FF
+palette = 7=#C3D9D6
 
 # Bright (8-15)
 # 8  bright black  = Pane Active (lifted, visible)
@@ -100,14 +100,14 @@ palette = 7=#C4BEE0
 # 10 bright green  = Green        13 bright mag   = Lilac
 # 11 bright yellow = Gold         14 bright cyan  = Teal
 #                                 15 bright white = Star
-palette = 8=#434F76
-palette = 9=#FFB8B8
-palette = 10=#B6F0A0
-palette = 11=#FFD99A
-palette = 12=#7FB0FF
-palette = 13=#D6C8FF
-palette = 14=#8FF0DD
-palette = 15=#ECE6FF
+palette = 8=#0D3547
+palette = 9=#FF7A6E
+palette = 10=#8FDC8F
+palette = 11=#FFD873
+palette = 12=#7FE0FF
+palette = 13=#A8ECFF
+palette = 14=#7FE0FF
+palette = 15=#F3FAF7
 
 # ============================================
 # Keybindings (sin cambios)

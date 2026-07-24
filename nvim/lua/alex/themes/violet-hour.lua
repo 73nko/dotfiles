@@ -10,55 +10,55 @@ local M = {}
 -- Palette tokens (match --* del style guide v2, data-palette="violet") --------
 M.palette = {
   -- identity (orchid -> bloom)
-  orchid     = "#b39dff",  -- primary: keywords, mode, prompt
-  lilac      = "#d6c8ff",  -- active tab, titles, glow
-  rose_mist  = "#e2bcff",  -- cursor, functions, diagnostics
-  bloom      = "#f0d2ff",  -- numbers, highlight
+  orchid     = "#22b8f5",  -- primary: keywords, mode, prompt
+  lilac      = "#a8ecff",  -- active tab, titles, glow
+  rose_mist  = "#5ff2cf",  -- cursor, functions, diagnostics
+  bloom      = "#e0fbff",  -- numbers, highlight
 
   -- structure (periwinkle -> cyan_mist)
-  periwinkle = "#8da7ff",  -- branch, session, position
-  ice        = "#a8c9ff",  -- active window, strings
+  periwinkle = "#5f9bd8",  -- branch, session, position
+  ice        = "#7fe0ff",  -- active window, strings
   cyan_mist  = "#b9e0ff",  -- types, namespaces, keys
-  skyline    = "#3c54a3",  -- on-ice text, shadow hint
+  skyline    = "#0a3e57",  -- on-ice text, shadow hint
 
   -- ground (sky behind glass)
-  abyss   = "#06061a",
-  night   = "#0d0d2c",
-  indigo  = "#1a1745",
-  violet  = "#2c2766",
-  mauve   = "#4a3d95",
-  dawn    = "#6e5ec4",
-  horizon = "#a78dff",
+  abyss   = "#04141c",
+  night   = "#062230",
+  indigo  = "#0d3547",
+  violet  = "#174b60",
+  mauve   = "#2e6b83",
+  dawn    = "#7fb5c4",
+  horizon = "#cfe6e4",
 
   -- foreground
-  star   = "#ece6ff",  -- default fg
-  silver = "#c4bee0",  -- muted fg base
+  star   = "#f3faf7",  -- default fg
+  silver = "#c3d9d6",  -- muted fg base
 
   -- Espectro de alta legibilidad (rediseno 2026-06). Sobre el lienzo dusk:
   -- los fondos siguen siendo Violet Hour, el TEXTO gana rango cromatico.
   -- Tokens NUEVOS; no pisan los de chrome (orchid/ice/etc.) que leen
   -- lualine/bufferline/tmux, asi que la barra de estado no cambia.
-  gold   = "#ffcf7a",  -- functions / methods
-  teal   = "#5fe0c8",  -- types / namespaces / classes
-  green  = "#9ee87f",  -- strings
-  orange = "#ffb86b",  -- numbers / constants
-  coral  = "#ff9e9e",  -- booleans / git delete
-  azure  = "#7fb0ff",  -- properties / fields
+  gold   = "#ffd873",  -- functions / methods
+  teal   = "#5ff2cf",  -- types / namespaces / classes
+  green  = "#8fdc8f",  -- strings
+  orange = "#ffd873",  -- numbers / constants
+  coral  = "#ff7a6e",  -- booleans / git delete
+  azure  = "#b8f1ff",  -- properties / fields
 
-  -- blended (rgba aproximado sobre night #0d0d2c)
-  panel       = "#1a1745", -- raised surface (floats, menus) = indigo
-  cursorline  = "#161839", -- rgba(ice,.06)
-  selection   = "#322d5a", -- rgba(orchid,.22)
-  indent      = "#1c2041", -- rgba(ice,.10)
-  linenr      = "#3c456b", -- rgba(ice,.30)  gutter
-  comment     = "#717fa6", -- lifted 2026-06: era #5b6b96 (50%), poco legible
-  punct       = "#67618b", -- rgba(silver,.45)
-  muted       = "#777494", -- rgba(silver,.58)
-  pane_border = "#211e45", -- rgba(orchid,.12)
-  pane_active = "#434f76", -- rgba(ice,.35)
-  branch_bg   = "#2f365a", -- rgba(ice,.22)
-  diag_bg     = "#332d52", -- rgba(rose_mist,.18)
-  search_bg   = "#2d294a", -- rgba(bloom,.14)
+  -- blended (rgba aproximado sobre night #062230)
+  panel       = "#0d3547", -- raised surface (floats, menus) = indigo
+  cursorline  = "#0b2d3d", -- rgba(ice,.06)
+  selection   = "#0f526f", -- rgba(orchid,.22)
+  indent      = "#0e3244", -- rgba(ice,.10)
+  linenr      = "#1d5064", -- rgba(ice,.30)  gutter
+  comment     = "#559eb7", -- lifted 2026-06: era #438198 (50%), poco legible
+  punct       = "#5b747b", -- rgba(silver,.45)
+  muted       = "#839b9e", -- rgba(silver,.58)
+  pane_border = "#113e51", -- rgba(orchid,.12)
+  pane_active = "#498aa2", -- rgba(ice,.35)
+  branch_bg   = "#214c5e", -- rgba(ice,.22)
+  diag_bg     = "#15455a", -- rgba(rose_mist,.18)
+  search_bg   = "#143f4f", -- rgba(bloom,.14)
 
   none = "NONE",
 }

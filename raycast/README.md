@@ -12,13 +12,13 @@ the tracked JSON colors but cannot inspect Raycast's selected live theme.
 
 ## Semantic slots
 
-- `background`: night `#0D0D2C`
-- `backgroundSecondary`: indigo `#1A1745`
-- `text`: star `#ECE6FF`
-- `selection` and `purple`: orchid `#B39DFF`
-- `loader`: ice `#A8C9FF`
-- `red`: coral `#FF9E9E`
-- `orange` and `yellow`: gold `#FFCF7A`
-- `green`: green `#9EE87F`
-- `blue`: azure `#7FB0FF`
-- `magenta`: teal `#5FE0C8`
+- `background`: night `#062230`
+- `backgroundSecondary`: indigo `#0d3547`
+- `text`: star `#f3faf7`
+- `selection` and `purple`: orchid `#22b8f5`
+- `loader`: ice `#7fe0ff`
+- `red`: coral `#ff7a6e`
+- `orange` and `yellow`: gold `#ffd873`
+- `green`: green `#8fdc8f`
+- `blue`: azure `#b8f1ff`
+- `magenta`: teal `#5ff2cf`

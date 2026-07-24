@@ -7,87 +7,87 @@
 # (symlinked to ~/.config/bat/themes/Violet Hour.tmTheme).
 
 [manager]
-cwd = { fg = "#a8c9ff", bold = true }
-hovered = { fg = "#0d0d2c", bg = "#a8c9ff", bold = true }
+cwd = { fg = "#7fe0ff", bold = true }
+hovered = { fg = "#062230", bg = "#7fe0ff", bold = true }
 preview_hovered = { underline = true }
-find_keyword = { fg = "#f0d2ff", bold = true, italic = true }
-find_position = { fg = "#e2bcff", bg = "reset", bold = true, italic = true }
+find_keyword = { fg = "#e0fbff", bold = true, italic = true }
+find_position = { fg = "#5ff2cf", bg = "reset", bold = true, italic = true }
 
-marker_copied = { fg = "#f0d2ff", bg = "#f0d2ff" }
-marker_cut = { fg = "#e2bcff", bg = "#e2bcff" }
-marker_marked = { fg = "#a8c9ff", bg = "#a8c9ff" }
-marker_selected = { fg = "#d6c8ff", bg = "#d6c8ff" }
+marker_copied = { fg = "#e0fbff", bg = "#e0fbff" }
+marker_cut = { fg = "#5ff2cf", bg = "#5ff2cf" }
+marker_marked = { fg = "#7fe0ff", bg = "#7fe0ff" }
+marker_selected = { fg = "#a8ecff", bg = "#a8ecff" }
 
-tab_active = { fg = "#0d0d2c", bg = "#a8c9ff", bold = true }
-tab_inactive = { fg = "#ece6ff", bg = "#1a1745" }
+tab_active = { fg = "#062230", bg = "#7fe0ff", bold = true }
+tab_inactive = { fg = "#f3faf7", bg = "#0d3547" }
 
-count_copied = { fg = "#0d0d2c", bg = "#f0d2ff" }
-count_cut = { fg = "#0d0d2c", bg = "#e2bcff" }
-count_selected = { fg = "#0d0d2c", bg = "#a8c9ff" }
+count_copied = { fg = "#062230", bg = "#e0fbff" }
+count_cut = { fg = "#062230", bg = "#5ff2cf" }
+count_selected = { fg = "#062230", bg = "#7fe0ff" }
 
 border_symbol = "│"
-border_style = { fg = "#a8c9ff" }
+border_style = { fg = "#7fe0ff" }
 
 syntect_theme = "tmtheme.xml"
 
 [status]
 separator_open = ""
 separator_close = ""
-separator_style = { fg = "#1a1745", bg = "#1a1745" }
+separator_style = { fg = "#0d3547", bg = "#0d3547" }
 
-mode_normal = { fg = "#0d0d2c", bg = "#a8c9ff", bold = true }
-mode_select = { fg = "#0d0d2c", bg = "#b39dff", bold = true }
-mode_unset = { fg = "#0d0d2c", bg = "#f0d2ff", bold = true }
+mode_normal = { fg = "#062230", bg = "#7fe0ff", bold = true }
+mode_select = { fg = "#062230", bg = "#22b8f5", bold = true }
+mode_unset = { fg = "#062230", bg = "#e0fbff", bold = true }
 
-progress_label = { fg = "#ece6ff", bold = true }
-progress_normal = { fg = "#a8c9ff", bg = "#1a1745" }
-progress_error = { fg = "#e2bcff", bg = "#1a1745" }
+progress_label = { fg = "#f3faf7", bold = true }
+progress_normal = { fg = "#7fe0ff", bg = "#0d3547" }
+progress_error = { fg = "#5ff2cf", bg = "#0d3547" }
 
-permissions_t = { fg = "#a8c9ff" }
-permissions_r = { fg = "#f0d2ff" }
-permissions_w = { fg = "#b39dff" }
+permissions_t = { fg = "#7fe0ff" }
+permissions_r = { fg = "#e0fbff" }
+permissions_w = { fg = "#22b8f5" }
 permissions_x = { fg = "#b9e0ff" }
-permissions_s = { fg = "#ece6ff" }
+permissions_s = { fg = "#f3faf7" }
 
 [select]
-border = { fg = "#a8c9ff" }
-active = { fg = "#b39dff", bold = true }
+border = { fg = "#7fe0ff" }
+active = { fg = "#22b8f5", bold = true }
 inactive = {}
 
 [input]
-border = { fg = "#a8c9ff" }
+border = { fg = "#7fe0ff" }
 title = {}
 value = {}
 selected = { reversed = true }
 
 [completion]
-border = { fg = "#a8c9ff" }
-active = { bg = "#2f365a" }
+border = { fg = "#7fe0ff" }
+active = { bg = "#214c5e" }
 inactive = {}
 
-icon_file = { fg = "#ece6ff" }
-icon_folder = { fg = "#a8c9ff" }
-icon_command = { fg = "#b39dff" }
+icon_file = { fg = "#f3faf7" }
+icon_folder = { fg = "#7fe0ff" }
+icon_command = { fg = "#22b8f5" }
 
 [tasks]
-border = { fg = "#a8c9ff" }
+border = { fg = "#7fe0ff" }
 title = {}
 hovered = { underline = true }
 
 [which]
-mask = { bg = "#0d0d2c" }
-cand = { fg = "#a8c9ff" }
-rest = { fg = "#ece6ff" }
-desc = { fg = "#b39dff" }
+mask = { bg = "#062230" }
+cand = { fg = "#7fe0ff" }
+rest = { fg = "#f3faf7" }
+desc = { fg = "#22b8f5" }
 separator = "  "
-separator_style = { fg = "#777494" }
+separator_style = { fg = "#839b9e" }
 
 [help]
-on = { fg = "#a8c9ff" }
-exec = { fg = "#b39dff" }
-desc = { fg = "#ece6ff" }
-hovered = { bg = "#1a1745", bold = true }
-footer = { fg = "#0d0d2c", bg = "#ece6ff" }
+on = { fg = "#7fe0ff" }
+exec = { fg = "#22b8f5" }
+desc = { fg = "#f3faf7" }
+hovered = { bg = "#0d3547", bold = true }
+footer = { fg = "#062230", bg = "#f3faf7" }
 
 [filetype]
 # Yazi 25+ requires `url` (or `mime`/`is`) on every rule. `name` was removed.
@@ -96,23 +96,23 @@ footer = { fg = "#0d0d2c", bg = "#ece6ff" }
 # archivo=coral, markup=azure, codigo=gold, exec=green, dir=ice.
 rules = [
   # Image
-  { mime = "image/*", fg = "#5fe0c8" },
+  { mime = "image/*", fg = "#5ff2cf" },
   # Video
-  { mime = "video/*", fg = "#7fb0ff" },
+  { mime = "video/*", fg = "#b8f1ff" },
   # Audio
-  { mime = "audio/*", fg = "#ffb86b" },
+  { mime = "audio/*", fg = "#ffd873" },
   # Archive
-  { mime = "application/{zip,rar,7z,tar,gzip,xz,zstd,bzip*}", fg = "#ff9e9e" },
+  { mime = "application/{zip,rar,7z,tar,gzip,xz,zstd,bzip*}", fg = "#ff7a6e" },
   # Markup / data
-  { url = "*.{md,markdown,html,xml,yaml,toml,json,csv}", fg = "#7fb0ff" },
+  { url = "*.{md,markdown,html,xml,yaml,toml,json,csv}", fg = "#b8f1ff" },
   # Code
-  { url = "*.{ts,tsx,js,jsx,py,rs,go,c,cpp,h,sh,fish,lua}", fg = "#ffcf7a" },
+  { url = "*.{ts,tsx,js,jsx,py,rs,go,c,cpp,h,sh,fish,lua}", fg = "#ffd873" },
   # Hidden
-  { url = ".*", fg = "#777494" },
+  { url = ".*", fg = "#839b9e" },
   # Executable
-  { url = "*", is = "exec", fg = "#9ee87f" },
+  { url = "*", is = "exec", fg = "#8fdc8f" },
   # Directories — ice
-  { url = "*/", fg = "#a8c9ff" },
+  { url = "*/", fg = "#7fe0ff" },
   # Fallback (everything else)
-  { url = "*", fg = "#ece6ff" },
+  { url = "*", fg = "#f3faf7" },
 ]

@@ -376,9 +376,9 @@ cmd_pick() {
   fi
 
   local fzf_color="\
-fg:#ece6ff,bg:-1,hl:#b39dff,fg+:#ece6ff,bg+:#2f365a,hl+:#d6c8ff,\
-info:#8da7ff,prompt:#b39dff,pointer:#f0d2ff,marker:#e2bcff,\
-border:#2f365a,header:#8da7ff,spinner:#b39dff,gutter:-1,label:#b39dff"
+fg:#f3faf7,bg:-1,hl:#22b8f5,fg+:#f3faf7,bg+:#214c5e,hl+:#a8ecff,\
+info:#5f9bd8,prompt:#22b8f5,pointer:#e0fbff,marker:#5ff2cf,\
+border:#214c5e,header:#5f9bd8,spinner:#22b8f5,gutter:-1,label:#22b8f5"
 
   local hdr="enter lazygit · ctrl-f fetch repo · ctrl-a fetch all · ctrl-o shell · ctrl-r reload · ctrl-/ preview"
 

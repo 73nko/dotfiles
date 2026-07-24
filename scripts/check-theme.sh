@@ -7,7 +7,7 @@ failures=()
 
 fail() {
   local failure
-  for failure in "${failures[@]}"; do
+  for failure in ${failures[@]+"${failures[@]}"}; do
     [[ "$failure" == "$1" ]] && return
   done
   failures+=("$1")

@@ -7,37 +7,37 @@
 # Hour; el comentario de cada línea indica el color real que contiene ahora.
 
 # identity (orchid -> bloom)
-export MAGENTA=0xffb39dff            # orchid     — identidad primaria
-export MAGENTA_HI=0xffd6c8ff         # lilac      — identidad brillante
-export TANGERINE=0xffe2bcff          # rose_mist  — funciones / diagnósticos
+export MAGENTA=0xff22b8f5            # orchid     — identidad primaria
+export MAGENTA_HI=0xffa8ecff         # lilac      — identidad brillante
+export TANGERINE=0xff5ff2cf          # rose_mist  — funciones / diagnósticos
 export PEACH=0xffb9e0ff              # cyan_mist  — acento estructural suave
-export GOLD=0xfff0d2ff               # bloom      — valores / batería alta
+export GOLD=0xffe0fbff               # bloom      — valores / batería alta
 
 # structure (periwinkle -> cyan_mist)
-export TURQUOISE=0xff8da7ff          # periwinkle — estructura base / clock
-export TURQUOISE_HI=0xffa8c9ff       # ice        — foco / activo
+export TURQUOISE=0xff5f9bd8          # periwinkle — estructura base / clock
+export TURQUOISE_HI=0xff7fe0ff       # ice        — foco / activo
 export AQUA=0xffb9e0ff               # cyan_mist  — estructura secundaria
-export DEEP_POOL=0xff3c54a3          # skyline    — texto sobre ice
+export DEEP_POOL=0xff0a3e57          # skyline    — texto sobre ice
 
 # ground
-export DUSK=0xff0d0d2c               # night      — base ventana
-export PLUM=0xff1a1745               # indigo     — superficie elevada
-export WINE=0xff2c2766               # violet     — cielo wallpaper
-export SUNBURN=0xff4a3d95            # mauve      — cielo wallpaper
-export SUNSOFT=0xff6e5ec4            # dawn       — horizonte
-export ROSEGOLD=0xffece6ff           # star       — foreground por defecto
-export CREAM=0xffece6ff              # star
+export DUSK=0xff062230               # night      — base ventana
+export PLUM=0xff0d3547               # indigo     — superficie elevada
+export WINE=0xff174b60               # violet     — cielo wallpaper
+export SUNBURN=0xff2e6b83            # mauve      — cielo wallpaper
+export SUNSOFT=0xff7fb5c4            # dawn       — horizonte
+export ROSEGOLD=0xfff3faf7           # star       — foreground por defecto
+export CREAM=0xfff3faf7              # star
 
 # transparent surfaces
 export TRANSPARENT=0x00000000
-export BAR_COLOR=0x990d0d2c          # night @ 60% — barra glassy translúcida
-export BG_PILL=0x66c4bee0            # silver @ 40% — pill neutra
-export BG_PILL_QUIET=0x1ac4bee0      # silver @ 10% — apenas visible
-export BG_PILL_COOL=0x33a8c9ff       # ice @ 20% — branch / clock
-export BG_PILL_WARM=0x33b39dff       # orchid @ 20% — mode / identidad
-export BG_PILL_TANG=0x33e2bcff       # rose_mist @ 20% — diagnósticos
+export BAR_COLOR=0x99062230          # night @ 60% — barra glassy translúcida
+export BG_PILL=0x66c3d9d6            # silver @ 40% — pill neutra
+export BG_PILL_QUIET=0x1ac3d9d6      # silver @ 10% — apenas visible
+export BG_PILL_COOL=0x337fe0ff       # ice @ 20% — branch / clock
+export BG_PILL_WARM=0x3322b8f5       # orchid @ 20% — mode / identidad
+export BG_PILL_TANG=0x335ff2cf       # rose_mist @ 20% — diagnósticos
 
 # default fg
 export WHITE=$ROSEGOLD               # star
-export MUTED=0x94777494              # muted @ 58%
-export FAINT=0x59c4bee0              # silver @ 35%
+export MUTED=0x94839b9e              # muted @ 58%
+export FAINT=0x59c3d9d6              # silver @ 35%

@@ -47,7 +47,7 @@ head "Accent + color de selección"
 # familia Violet Hour. El highlight (selección de texto) SÍ acepta hex propio.
 defaults write NSGlobalDomain AppleAccentColor -int 5
 defaults write NSGlobalDomain AppleHighlightColor -string "0.702 0.616 1.000 Violet Hour"
-say "accent = Purple, selección de texto = orchid #b39dff"
+say "accent = Purple, selección de texto = orchid #22b8f5"
 
 # ----------------------------------------------------------------------------
 head "Puntero — relleno violeta, contorno claro"
@@ -56,8 +56,8 @@ head "Puntero — relleno violeta, contorno claro"
 # macOS 26 protege el dominio com.apple.universalaccess: el `defaults write`
 # devuelve "Could not write domain" salvo que el proceso tenga Full Disk Access.
 # Lo intentamos; si falla, damos el paso manual y el hex exacto.
-#   fill    = orchid  #b39dff -> R168 G158 B255
-#   outline = star    #ece6ff -> R236 G230 B255
+#   fill    = orchid  #22b8f5 -> R168 G158 B255
+#   outline = star    #f3faf7 -> R236 G230 B255
 if defaults write com.apple.universalaccess cursorFill \
      '{alpha=1;red=0.70196;green=0.61569;blue=1.0;}' 2>/dev/null \
    && defaults write com.apple.universalaccess cursorOutline \
@@ -68,7 +68,7 @@ if defaults write com.apple.universalaccess cursorFill \
 else
   warn "macOS bloquea escribir el color del puntero por script (dominio protegido)."
   warn "Ponlo a mano en Ajustes del Sistema > Accesibilidad > Puntero:"
-  warn "  relleno de puntero   -> hex B39DFF"
+  warn "  relleno de puntero   -> hex 22B8F5"
   warn "  contorno de puntero  -> hex ECE6FF"
 fi
 

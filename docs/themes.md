@@ -1,6 +1,6 @@
 # Violet Hour
 
-Violet Hour is the active palette across the public configuration. The
+Violet Hour, in its Glacier Signal variant (2026-07), is the active palette across the public configuration. The
 canonical contract lives in `themes/violet-hour.json`; `scripts/check-theme.sh`
 uses it to detect missing consumers, inactive references, legacy colors, and
 semantic color drift.
@@ -15,25 +15,25 @@ consumers; presence checks do not prove which setting uses each color.
 
 | Name | Hex | Role |
 | --- | --- | --- |
-| abyss | `#06061A` | deepest terminal surface |
-| night | `#0D0D2C` | primary background |
-| indigo | `#1A1745` | raised surfaces |
-| panel | `#211E45` | elevated panels and borders |
-| branch | `#2F365A` | active surfaces and borders |
-| selection | `#322D5A` | selected search surface |
-| muted | `#777494` | comments and inactive text |
-| star | `#ECE6FF` | primary text |
-| orchid | `#B39DFF` | primary identity accent |
-| lilac | `#D6C8FF` | secondary violet accent |
-| rose | `#E2BCFF` | warm violet accent |
-| bloom | `#F0D2FF` | strongest highlight |
-| periwinkle | `#8DA7FF` | cool accent |
-| ice | `#A8C9FF` | focus and active state |
-| coral | `#FF9E9E` | errors and destructive state |
-| gold | `#FFCF7A` | warnings and attention |
-| green | `#9EE87F` | success and added state |
-| teal | `#5FE0C8` | information and cyan state |
-| azure | `#7FB0FF` | links and blue state |
+| abyss | `#04141c` | deepest terminal surface |
+| night | `#062230` | primary background |
+| indigo | `#0d3547` | raised surfaces |
+| panel | `#113e51` | elevated panels and borders |
+| branch | `#214c5e` | active surfaces and borders |
+| selection | `#0f526f` | selected search surface |
+| muted | `#839b9e` | comments and inactive text |
+| star | `#f3faf7` | primary text |
+| orchid | `#22b8f5` | primary identity accent |
+| lilac | `#a8ecff` | secondary violet accent |
+| rose | `#5ff2cf` | warm violet accent |
+| bloom | `#e0fbff` | strongest highlight |
+| periwinkle | `#5f9bd8` | cool accent |
+| ice | `#7fe0ff` | focus and active state |
+| coral | `#ff7a6e` | errors and destructive state |
+| gold | `#ffd873` | warnings and attention |
+| green | `#8fdc8f` | success and added state |
+| teal | `#5ff2cf` | information and cyan state |
+| azure | `#b8f1ff` | links and blue state |
 
 ## Tracked consumers
 
