@@ -121,3 +121,6 @@ yazi/package.toml$
 
 # Homebrew: estado runtime de confianza de casks, no config
 homebrew/trust.json*
+
+# Swift Package Manager: estado runtime (collections), no config
+swiftpm/
