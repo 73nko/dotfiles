@@ -19,7 +19,7 @@ rg -q "tmux-plugins/tmux-continuum" "$ROOT/tmux/tmux.conf"
 rg -q '@continuum-restore.*on' "$ROOT/tmux/tmux.conf"
 [[ -f "$ROOT/lazygit/config.yml" ]]
 lazygit --use-config-file "$ROOT/lazygit/config.yml" --config >/dev/null
-rg -q '^  pagers:$' "$ROOT/lazygit/config.yml"
+rg -q '^  diffRenderers:$' "$ROOT/lazygit/config.yml"
 if rg -q '^  paging:$' "$ROOT/lazygit/config.yml"; then
     echo "deprecated lazygit git.paging remains" >&2
     exit 1
