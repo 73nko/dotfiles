@@ -198,6 +198,18 @@
       "ice",
       "coral",
       "gold"
+    ],
+    "hunk/config.toml": [
+      "night",
+      "indigo",
+      "orchid",
+      "star",
+      "green",
+      "coral",
+      "gold",
+      "selection",
+      "muted",
+      "ice"
     ]
   },
   "semantic": {

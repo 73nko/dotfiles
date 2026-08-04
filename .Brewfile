@@ -2,6 +2,7 @@ tap "ankitpokhrel/jira-cli"
 tap "anomalyco/tap", "https://github.com/anomalyco/homebrew-tap.git"
 tap "aws/tap"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
+tap "modem-dev/tap"
 tap "nikitabobko/tap"
 tap "nikolaeu/numi"
 tap "nkzw-tech/tap"
@@ -135,6 +136,8 @@ brew "ankitpokhrel/jira-cli/jira-cli"
 brew "felixkratz/formulae/borders"
 # Custom macOS statusbar with shell plugin, interaction and graph support
 brew "felixkratz/formulae/sketchybar"
+# Review-first terminal diff viewer for agentic coders
+brew "modem-dev/tap/hunk"
 # Smart calculator
 brew "nikolaeu/numi/numi-cli"
 # Fast CLI for Apple Reminders

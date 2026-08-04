@@ -1,0 +1,69 @@
+# Hunk - review-first diff viewer (brew: modem-dev/tap/hunk).
+# Tema Glacier Signal: mismos roles que el resto del stack (contrato en
+# themes/violet-hour.json). transparent_background deja pasar la glass de
+# Ghostty, como el resto de TUIs.
+theme = "glacier"
+mode = "auto"
+line_numbers = true
+transparent_background = true
+
+[themes.glacier]
+base = "github-dark-default"
+label = "Glacier Signal"
+background = "#062230"          # night
+panel = "#0d3547"               # indigo - superficies elevadas
+panelAlt = "#113e51"            # panel
+border = "#0b3d53"              # pane-border aplanado (orchid 18% sobre night)
+accent = "#22b8f5"              # orchid - primario
+accentMuted = "#1d95c7"
+text = "#f3faf7"                # star
+muted = "#839b9e"               # silver-58 aplanado
+addedBg = "#244a45"             # jade 22% sobre night
+addedContentBg = "#16383b"      # jade 12%
+removedBg = "#3c353d"           # coral 22%
+removedContentBg = "#242c37"    # coral 12%
+movedAddedBg = "#16374e"        # periwinkle 18% - bloques movidos
+movedRemovedBg = "#1d3141"
+contextBg = "#062230"
+contextContentBg = "#062230"
+addedSignColor = "#8fdc8f"      # jade
+removedSignColor = "#ff7a6e"    # coral
+lineNumberBg = "#062230"
+lineNumberFg = "#2a5b6e"        # ice 30% (guia: gutter)
+selectedHunk = "#0f526f"        # selection aplanada
+badgeAdded = "#8fdc8f"
+badgeRemoved = "#ff7a6e"
+badgeNeutral = "#839b9e"
+fileNew = "#8fdc8f"             # jade
+fileDeleted = "#ff7a6e"         # coral
+fileRenamed = "#b8f1ff"         # cyan-mist
+fileModified = "#ffd873"        # amber (dirty, como tide)
+fileUntracked = "#7fe0ff"       # ice
+noteBorder = "#5ff2cf"          # mint - las notas de agente hablan como tools
+noteBackground = "#0d3547"
+noteTitleBackground = "#174b60"
+noteTitleText = "#e0fbff"       # bloom
+
+# Scopes TextMate segun la tabla de tokens de la guia (§05)
+[themes.glacier.syntax_scopes]
+"keyword" = "#22b8f5"
+"storage" = "#22b8f5"
+"keyword.operator" = "#22b8f5"
+"entity.name.function" = "#5ff2cf"
+"support.function" = "#5ff2cf"
+"string" = "#8fdc8f"
+"string.regexp" = "#8fdc8f"
+"entity.name.type" = "#b8f1ff"
+"support.type" = "#b8f1ff"
+"entity.name.namespace" = "#b8f1ff"
+"constant.numeric" = "#ffd873"
+"constant.language" = "#ffd873"
+"constant.other" = "#ffd873"
+"variable" = "#f3faf7"
+"variable.parameter" = "#f3faf7"
+"support.type.property-name" = "#22b8f5"
+"entity.name.tag" = "#22b8f5"
+"entity.other.attribute-name" = "#5ff2cf"
+"comment" = "#438198"
+"punctuation.definition.comment" = "#438198"
+"punctuation" = "#5b747b"
