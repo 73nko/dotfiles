@@ -55,6 +55,7 @@ opt.swapfile = false
 
 -- persistent undo
 opt.undofile = true
+opt.sessionoptions:append("localoptions")
 
 -- reread file when modified externally (needed for Claude/Gemini CLI edits)
 opt.autoread = true
@@ -104,9 +105,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
   group = vim.api.nvim_create_augroup("alex_dir_hijack", { clear = true }),
   callback = function(args)
     local bufname = vim.api.nvim_buf_get_name(args.buf)
-    if bufname == "" then return end
+    if bufname == "" then
+      return
+    end
     local stat = vim.uv.fs_stat(bufname)
-    if not (stat and stat.type == "directory") then return end
+    if not (stat and stat.type == "directory") then
+      return
+    end
 
     vim.api.nvim_buf_delete(args.buf, { force = true })
     vim.cmd.cd(bufname)

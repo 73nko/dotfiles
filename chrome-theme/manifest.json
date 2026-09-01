@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
   "version": "1.1.0",
-  "name": "Violet Hour \u00b7 Glass",
-  "description": "Twilight violeta + aurora. Gradiente aurora en new tab, night/indigo chrome con acentos orchid y star text.",
+  "name": "Glacier Signal \u00b7 Glass",
+  "description": "Cian glacial y coral sobre el paisaje de montaña de Glacier Signal.",
   "theme": {
     "images": {
-      "theme_ntp_background": "images/ntp-bg.png",
+      "theme_ntp_background": "images/generated-ntp-bg.jpg",
       "theme_toolbar": "images/toolbar-bg.png"
     },
     "colors": {
@@ -15,9 +15,9 @@
         48
       ],
       "frame_inactive": [
-        10,
-        10,
-        34
+        4,
+        20,
+        28
       ],
       "frame_incognito": [
         13,
@@ -25,9 +25,9 @@
         71
       ],
       "frame_incognito_inactive": [
-        20,
-        18,
-        55
+        17,
+        62,
+        81
       ],
       "toolbar": [
         13,
@@ -45,14 +45,14 @@
         247
       ],
       "tab_background_text": [
-        119,
-        116,
-        148
+        131,
+        155,
+        158
       ],
       "tab_background_text_inactive": [
-        90,
-        88,
-        116
+        97,
+        122,
+        126
       ],
       "bookmark_text": [
         243,
@@ -97,9 +97,9 @@
     },
     "tints": {
       "buttons": [
-        0.71,
-        0.45,
-        0.8
+        0.53,
+        0.55,
+        0.75
       ],
       "frame": [
         -1,

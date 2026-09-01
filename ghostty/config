@@ -1,6 +1,6 @@
 # ============================================
-# Ghostty Config - Violet Hour · Glass
-# Ten minutes after sunset: deep indigo, glass, aurora
+# Ghostty Config - Glacier Signal
+# Ten minutes after sunset: deep fjord, glass, aurora
 # ============================================
 
 # ============================================
@@ -50,7 +50,7 @@ adjust-cell-height = 8%
 font-style-italic = Italic
 
 # ============================================
-# Cursor - Rose Mist block, sin blink (§07: visible pero no insistente)
+# Cursor - Mint Mist block, sin blink (§07: visible pero no insistente)
 # ============================================
 cursor-style = block
 cursor-style-blink = false
@@ -63,16 +63,16 @@ cursor-text = #062230
 scrollback-limit = 100000
 
 # ============================================
-# Selection / Copy - Orchid wash (§07)
+# Selection / Copy - Signal wash (§07)
 # ============================================
 copy-on-select = true
 selection-background = #0f526f
 selection-foreground = #f3faf7
 
 # ============================================
-# Violet Hour · Glass palette
+# Glacier Signal palette
 # background = Night #062230 @55% con blur 40 sobre wallpaper aurora
-# foreground = Star #f3faf7
+# foreground = Snow #f3faf7
 # ============================================
 background = #062230
 foreground = #f3faf7
@@ -82,32 +82,32 @@ foreground = #f3faf7
 # monocromos. Ahora cada slot lleva su color de verdad, igual que el bloque
 # terminal_color_* del tema de nvim.
 # 0 black  = Abyss      4 blue    = Azure
-# 1 red    = Coral      5 magenta = Orchid (identidad)
+# 1 red    = Coral      5 magenta = Signal (identidad)
 # 2 green  = Green      6 cyan    = Teal
 # 3 yellow = Gold       7 white   = Silver
-palette = 0=#04141C
+palette = 0=#04141c
 palette = 1=#FF7A6E
 palette = 2=#8FDC8F
 palette = 3=#FFD873
-palette = 4=#5F9BD8
-palette = 5=#22B8F5
-palette = 6=#B8F1FF
+palette = 4=#5f9bd8
+palette = 5=#22b8f5
+palette = 6=#5ff2cf
 palette = 7=#C3D9D6
 
 # Bright (8-15)
 # 8  bright black  = Pane Active (lifted, visible)
 # 9  bright red    = Coral        12 bright blue  = Azure
-# 10 bright green  = Green        13 bright mag   = Lilac
+# 10 bright green  = Green        13 bright mag   = Glow
 # 11 bright yellow = Gold         14 bright cyan  = Teal
-#                                 15 bright white = Star
-palette = 8=#0D3547
+#                                 15 bright white = Snow
+palette = 8=#0d3547
 palette = 9=#FF7A6E
 palette = 10=#8FDC8F
 palette = 11=#FFD873
-palette = 12=#7FE0FF
-palette = 13=#A8ECFF
-palette = 14=#7FE0FF
-palette = 15=#F3FAF7
+palette = 12=#7fe0ff
+palette = 13=#a8ecff
+palette = 14=#b8f1ff
+palette = 15=#f3faf7
 
 # ============================================
 # Keybindings (sin cambios)

@@ -23,13 +23,17 @@ thefuck/__pycache__/
 
 # Sensitive tool dirs
 github-copilot
+code-server/
+gcloud/
+gws/
+gws-*/
 
 # Raycast: binary app data (extensions, AI history, settings) is NOT versioned.
 # We only let the theme and README through so they travel across machines.
 raycast/*
 raycast/extensions/
 !raycast/README.md
-!raycast/violet-hour.json
+!raycast/glacier-signal.json
 
 # Claude local settings
 **/.claude/settings.local.json
@@ -63,7 +67,7 @@ fish/conf.d/*
 !fish/conf.d/navi.fish
 !fish/conf.d/pay-respects.fish
 !fish/conf.d/rustup.fish
-!fish/conf.d/violet-hour-tide.fish
+!fish/conf.d/glacier-signal-tide.fish
 !fish/conf.d/zoxide.fish
 # zz- forces load AFTER fzf.fish so atuin keeps Ctrl-R.
 !fish/conf.d/zz-atuin.fish
@@ -78,6 +82,12 @@ fish/completions/*
 # ============================================================================
 personal/*
 !personal/README.md
+
+# Glacier Signal artwork is licensed/user-owned and travels in the private
+# personal repository. Publicly tracked scripts derive these local assets.
+wallpapers/glacier-signal-*.jpg
+chrome-theme/images/generated-ntp-bg.jpg
+chrome-theme/Cached Theme.pak
 
 # ============================================================================
 # GitHub CLI: auth state and per-machine config. Never version.
@@ -113,8 +123,6 @@ gh-dash/config.yml.local
 # jira-cli: contiene email de login, server corporativo, board/project IDs.
 # ============================================================================
 .jira/
-nvim/lazy-lock.json
-yazi/package.toml$
 
 # 1Password app state (telemetry flag), not config
 1Password/

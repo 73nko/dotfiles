@@ -1,5 +1,5 @@
 # ============================================================================
-# Violet Hour · Glass - Tide color override
+# Glacier Signal - Tide color override
 # Retinta el prompt de tide al palette del style guide v2 (§08).
 # Tide guarda vars como -U (universal). Este conf.d las re-fuerza en cada
 # shell interactiva para que cualquier "tide configure" accidental se revierta.
@@ -25,7 +25,7 @@ set -g tide_character_color            22b8f5   # orchid - prompt normal
 set -g tide_character_color_failure    5ff2cf   # rose_mist - en fallo
 
 # ---- PWD (linea 1) ----------------------------------------------------------
-set -g tide_pwd_color_anchors          b9e0ff   # cyan_mist - dirs importantes
+set -g tide_pwd_color_anchors          b8f1ff   # cyan_mist - dirs importantes
 set -g tide_pwd_color_dirs             7fe0ff   # ice - dirs normales
 set -g tide_pwd_color_truncated_dirs   839b9e   # silver muted - segmentos omitidos
 
@@ -36,11 +36,11 @@ set -g tide_git_color_conflicted       5ff2cf   # rose_mist
 set -g tide_git_color_operation        22b8f5   # orchid
 set -g tide_git_color_staged           e0fbff   # bloom
 set -g tide_git_color_stash            a8ecff   # lilac
-set -g tide_git_color_untracked        b9e0ff   # cyan_mist
+set -g tide_git_color_untracked        b8f1ff   # cyan_mist
 set -g tide_git_color_upstream         7fe0ff   # ice
 
 # ---- Status icon (success / failure) ---------------------------------------
-set -g tide_status_color               b9e0ff   # cyan_mist - clean
+set -g tide_status_color               b8f1ff   # cyan_mist - clean
 set -g tide_status_color_failure       5ff2cf   # rose_mist
 
 # ---- Cmd duration (>2s per guide §08) --------------------------------------

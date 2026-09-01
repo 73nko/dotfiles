@@ -1,10 +1,10 @@
 {
   "appearance": "dark",
   "version": "1",
-  "name": "Violet Hour",
+  "name": "Glacier Signal",
   "author": "Alex Ramos",
   "authorUsername": "apramos89",
-  "description": "Twilight violeta: identidad orchid/lilac/rose-mist sobre night/indigo, ice para estados activos.",
+  "description": "Cian glacial sobre superficies azul petróleo, con coral reservado para alertas.",
   "colors": {
     "background": "#062230",
     "backgroundSecondary": "#0d3547",

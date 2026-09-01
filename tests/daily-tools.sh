@@ -12,6 +12,9 @@ if rg -q 'YOUR-ORG|bundle-shopify|abbr[[:space:]]+-a[[:space:]]+awt([[:space:]]|
     exit 1
 fi
 rg -q 'mode-keys vi' "$ROOT/tmux/tmux.conf"
+rg -q '^set -g scroll-on-clear on$' "$ROOT/tmux/tmux.conf"
+rg -q '^set -g copy-mode-line-numbers default$' "$ROOT/tmux/tmux.conf"
+rg -q 'status-right .*#H' "$ROOT/tmux/tmux.conf"
 rg -q 'popup-border-style.*#22b8f5' "$ROOT/tmux/tmux.conf"
 rg -q 'personal/tmux/\*\.conf' "$ROOT/tmux/tmux.conf"
 rg -q "tmux-plugins/tmux-resurrect" "$ROOT/tmux/tmux.conf"
@@ -19,6 +22,7 @@ rg -q "tmux-plugins/tmux-continuum" "$ROOT/tmux/tmux.conf"
 rg -q '@continuum-restore.*on' "$ROOT/tmux/tmux.conf"
 [[ -f "$ROOT/lazygit/config.yml" ]]
 lazygit --use-config-file "$ROOT/lazygit/config.yml" --config >/dev/null
+rg -q '^  filterMode: fuzzy$' "$ROOT/lazygit/config.yml"
 rg -q '^  diffRenderers:$' "$ROOT/lazygit/config.yml"
 if rg -q '^  paging:$' "$ROOT/lazygit/config.yml"; then
     echo "deprecated lazygit git.paging remains" >&2

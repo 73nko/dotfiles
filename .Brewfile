@@ -78,6 +78,8 @@ brew "ical-buddy"
 brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Handy command runner for project-local recipes
+brew "just"
 # Kubernetes command-line interface
 brew "kubernetes-cli"
 # Simple terminal UI for git commands

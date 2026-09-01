@@ -9,8 +9,8 @@
 # --- Runtimes (antes en brew) ---
 node = "lts"
 go = "latest"
-python = "3.13"
-java = "openjdk" # fuzzy: resuelve el ultimo openjdk; pinear si un proyecto lo exige
+python = "3.14"
+java = "26" # fuzzy: resuelve el ultimo openjdk; pinear si un proyecto lo exige
 deno = "latest"
 pnpm = "latest"
 # corepack NO migrado: viene incluido con node.

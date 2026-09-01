@@ -33,7 +33,9 @@ rg -q 'personal/.*optional' "$ROOT/README.md"
 rg -Fq 'personal/fish/*.fish' "$ROOT/README.md"
 rg -Fq 'personal/fish/*.fish' "$ROOT/fish/config.fish"
 rg -qi 'public setup does not require' "$ROOT/personal/README.md"
-rg -qi 'manually copy' "$ROOT/personal/README.md"
+rg -qi 'separate private Git repository' "$ROOT/personal/README.md"
+rg -qi 'sync-dotfiles' "$ROOT/personal/README.md"
+rg -Fq 'personal/assets/wallpapers/glacier-signal-source.jpg' "$ROOT/docs/themes.md"
 if rg -q 'YOUR-ORG|bundle-shopify|abbr[[:space:]]+-a[[:space:]]+awt([[:space:]]|$)' "$ROOT/fish/config.fish"; then
   exit 1
 fi
@@ -49,28 +51,29 @@ rg -Uqi 'writes only Git\s+identity keys to `~/.gitconfig`' "$ROOT/README.md"
 
 while IFS=$'\t' read -r name value; do
   rg -Fqi "| $name | \`$value\` |" "$ROOT/docs/themes.md"
-done < <(jq -r '.colors | to_entries[] | [.key, .value] | @tsv' "$ROOT/themes/violet-hour.json")
+done < <(jq -r '.colors | to_entries[] | [.key, .value] | @tsv' "$ROOT/themes/glacier-signal.json")
 rg -Fq 'borders/bordersrc' "$ROOT/docs/themes.md"
-rg -Fq 'Styles/violet-hour-slack-theme.txt' "$ROOT/docs/themes.md"
+rg -Fq 'Styles/glacier-signal-slack-theme.txt' "$ROOT/docs/themes.md"
 rg -Uqi 'structured JSON.*exact semantic' "$ROOT/docs/themes.md"
 rg -Uqi 'presence checks.*do not prove' "$ROOT/docs/themes.md"
 rg -Uqi 'Slack.*manual' "$ROOT/docs/themes.md"
 
 required_paths=(
   "scripts/setup.sh"
+  "scripts/sync-dotfiles.sh"
   "scripts/check-config.sh"
   "scripts/check-theme.sh"
   "personal/README.md"
   "gh-dash/config.yml.example"
   "fastfetch/config.jsonc"
   "lazygit/config.yml"
-  "themes/violet-hour.json"
+  "themes/glacier-signal.json"
   "borders/bordersrc"
-  "bat/themes/Violet Hour.tmTheme"
-  "Styles/violet-hour-slack-theme.txt"
+  "bat/themes/Glacier Signal.tmTheme"
+  "Styles/glacier-signal-slack-theme.txt"
   "chrome-theme/manifest.json"
-  "raycast/violet-hour.json"
-  "zed/themes/violet-hour.json"
+  "raycast/glacier-signal.json"
+  "zed/themes/glacier-signal.json"
 )
 for path in "${required_paths[@]}"; do
   [[ -e "$ROOT/$path" ]]

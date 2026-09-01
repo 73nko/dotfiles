@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-ROOT=${DOTFILES_ROOT:-"$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"}
+SCRIPT_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+ROOT=${DOTFILES_ROOT:-"$SCRIPT_ROOT"}
 failures=()
 
 run_check() {
@@ -28,7 +29,13 @@ require_command() {
 }
 
 tracked_files() {
-  git -C "$ROOT" ls-files "$@"
+  local file listed
+  listed=$(git -C "$ROOT" ls-files --cached --others --exclude-standard "$@") || return 1
+  while IFS= read -r file; do
+    if [[ -f "$ROOT/$file" || -L "$ROOT/$file" ]]; then
+      printf '%s\n' "$file"
+    fi
+  done <<<"$listed"
 }
 
 check_bash() {
@@ -112,7 +119,7 @@ check_yaml() {
 check_toml() {
   local file tracked files=() python_command=()
   require_command git || return 1
-  if [[ -f "$ROOT/mise/config.toml" ]]; then
+  if [[ -f "$SCRIPT_ROOT/mise/config.toml" ]]; then
     require_command mise || return 1
     python_command=(mise exec -- python3)
   else
@@ -122,7 +129,7 @@ check_toml() {
   tracked=$(tracked_files '*.toml') || return 1
   [[ -n "$tracked" ]] || { echo "no tracked TOML files" >&2; return 1; }
   while IFS= read -r file; do files+=("$file"); done <<<"$tracked"
-  MISE_CONFIG_FILE="$ROOT/mise/config.toml" "${python_command[@]}" - "$ROOT" "${files[@]}" <<'PY'
+  MISE_CONFIG_FILE="$SCRIPT_ROOT/mise/config.toml" "${python_command[@]}" - "$ROOT" "${files[@]}" <<'PY'
 import pathlib
 import sys
 import tomllib
@@ -172,7 +179,7 @@ run_check "Fish syntax" check_fish
 run_check "JSON syntax" check_json
 run_check "YAML syntax" check_yaml
 run_check "TOML syntax" check_toml
-run_check "Violet Hour theme" "$ROOT/scripts/check-theme.sh" "$ROOT"
+run_check "Glacier Signal theme" "$ROOT/scripts/check-theme.sh" "$ROOT"
 run_check "No tracked runtime state" check_runtime_state
 
 if [[ ${#failures[@]} -gt 0 ]]; then

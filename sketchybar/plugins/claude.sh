@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================================
-# Plugin del indicador de Claude Code (Violet Hour).
+# Plugin del indicador de Claude Code (Glacier Signal).
 # Se ejecuta en cada evento 'claude_status' y cada update_freq (1s) para el
 # timer en vivo y el avance del spinner. Lee el estado que escribe el
 # dispatcher helpers/claude_hook.sh.

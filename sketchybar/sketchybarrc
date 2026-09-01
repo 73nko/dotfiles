@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # ============================================================================
-# SketchyBar — Violet Hour · Glass
+# SketchyBar — Glacier Signal
 # ============================================================================
-# Floating top bar inspired by ~/.config/Styles/Violet Hour · Glass.html.
+# Floating top bar inspired by ~/.config/Styles/Glacier Signal.html.
 # Layout: [apple] [front_app]  ...  [volume] [wifi] [battery] [calendar] [clock]
 # Mode without tiling WM: shows only system info, no workspace pills.
 # ============================================================================
@@ -85,4 +85,4 @@ sketchybar --hotload on
 ##### Force initial update #####
 sketchybar --update
 
-echo "sketchybar configured: Violet Hour · Glass"
+echo "sketchybar configured: Glacier Signal"

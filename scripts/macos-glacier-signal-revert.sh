@@ -1,27 +1,18 @@
 #!/usr/bin/env bash
 # ============================================================================
-# Revierte la capa visual aplicada por macos-violet-hour.sh
-# (accent, color de selección, puntero, iconos de carpeta).
+# Revierte la capa visual aplicada por macos-glacier-signal.sh
+# (accent e iconos de carpeta).
 # El wallpaper NO se revierte automáticamente: elige otro en Ajustes > Fondo.
 # ============================================================================
 set -uo pipefail
 
 CFG="$HOME/.config"
 
-# Accent + highlight -> default macOS (azul / multicolor)
+# Accent -> default macOS (multicolor)
 defaults delete NSGlobalDomain AppleAccentColor 2>/dev/null
-defaults delete NSGlobalDomain AppleHighlightColor 2>/dev/null
-
-# Puntero -> default macOS (blanco / negro).
-# El dominio com.apple.universalaccess esta protegido en macOS 26: el delete
-# puede fallar. Si falla, resetea el color en Ajustes > Accesibilidad > Puntero.
-defaults delete com.apple.universalaccess cursorFill 2>/dev/null
-defaults delete com.apple.universalaccess cursorOutline 2>/dev/null
-defaults delete com.apple.universalaccess cursorIsCustomized 2>/dev/null
-killall universalaccessd 2>/dev/null
 
 # Iconos de carpeta -> limpiar los custom icons ya aplicados.
-# La capa de "aplicar" se quitó de macos-violet-hour.sh; este bloque se queda
+# La capa de "aplicar" se quitó de macos-glacier-signal.sh; este bloque se queda
 # solo para borrar el legado de carpetas que sí se llegaron a tintar.
 if command -v fileicon >/dev/null 2>&1; then
   for d in Desktop Documents Downloads Developer Projects Movies Music Pictures Public Sites; do

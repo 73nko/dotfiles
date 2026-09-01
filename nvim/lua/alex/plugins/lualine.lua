@@ -1,4 +1,4 @@
--- Lualine - Violet Hour . Glass (guide v2 §05)
+-- Lualine - Glacier Signal (guide v2 §05)
 -- mode -> branch -> file -> diagnostics -> filetype -> position
 -- Flat segments: sin powerline arrows. Mismo color de modo en todos los modos.
 return {
@@ -8,21 +8,21 @@ return {
   config = function()
     local lualine = require("lualine")
     local lazy_status = require("lazy.status")
-    local c = require("alex.themes.violet-hour").palette
+    local c = require("alex.themes.glacier-signal").palette
 
     -- Segmentos compartidos - no per-mode switching (§05)
-    local mode_seg   = { bg = c.orchid,     fg = c.night, gui = "bold" }
-    local branch_seg = { bg = c.branch_bg,  fg = c.ice }
-    local mid_seg    = { bg = c.none,       fg = c.muted }
-    local diag_seg   = { bg = c.diag_bg,    fg = c.rose_mist }
-    local pos_seg    = { bg = c.periwinkle, fg = c.night, gui = "bold" }
+    local mode_seg = { bg = c.signal, fg = c.night, gui = "bold" }
+    local branch_seg = { bg = c.branch_bg, fg = c.ice }
+    local mid_seg = { bg = c.none, fg = c.muted }
+    local diag_seg = { bg = c.diag_bg, fg = c.mint }
+    local pos_seg = { bg = c.steel, fg = c.night, gui = "bold" }
 
     local theme = {
-      normal   = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
-      insert   = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
-      visual   = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
-      replace  = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
-      command  = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
+      normal = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
+      insert = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
+      visual = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
+      replace = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
+      command = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
       terminal = { a = mode_seg, b = branch_seg, c = mid_seg, x = diag_seg, y = mid_seg, z = pos_seg },
       inactive = {
         a = { bg = c.none, fg = c.muted, gui = "bold" },
@@ -47,7 +47,9 @@ return {
         lualine_a = {
           {
             "mode",
-            fmt = function(m) return m end,
+            fmt = function(m)
+              return m
+            end,
             padding = { left = 1, right = 1 },
           },
         },
@@ -70,17 +72,17 @@ return {
           {
             lazy_status.updates,
             cond = lazy_status.has_updates,
-            color = { fg = c.bloom, bg = c.none },
+            color = { fg = c.frost, bg = c.none },
           },
           {
             "diagnostics",
             sources = { "nvim_diagnostic" },
             symbols = { error = " ", warn = " ", info = " ", hint = " " },
             diagnostics_color = {
-              error = { fg = c.rose_mist },
-              warn  = { fg = c.bloom },
-              info  = { fg = c.cyan_mist },
-              hint  = { fg = c.periwinkle },
+              error = { fg = c.mint },
+              warn = { fg = c.frost },
+              info = { fg = c.azure },
+              hint = { fg = c.steel },
             },
             padding = { left = 1, right = 1 },
           },

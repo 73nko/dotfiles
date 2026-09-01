@@ -1,7 +1,7 @@
 # dotfiles
 
 Public, reusable macOS configuration for Fish, Neovim, tmux, Ghostty, Yazi,
-AeroSpace, SketchyBar, daily developer tools, and the Violet Hour visual layer.
+AeroSpace, SketchyBar, daily developer tools, and the Glacier Signal visual layer.
 The convergence script manages the reusable stack; account logins, macOS
 permissions, and GUI theme activation remain manual.
 
@@ -33,7 +33,16 @@ bash ~/.config/scripts/setup.sh export     # regenerate .Brewfile; review its di
 bash ~/.config/scripts/setup.sh --upgrade  # sync and upgrade existing packages
 ```
 
-From Fish, `up-mac` runs the default sync and `mac-doctor` runs the doctor.
+For day-to-day cross-Mac updates, use:
+
+```sh
+bash ~/.config/scripts/sync-dotfiles.sh            # fast-forward pull + converge
+bash ~/.config/scripts/sync-dotfiles.sh --upgrade  # pull + upgrade declared packages
+```
+
+The wrapper refuses to pull over local changes, updates an optional private
+Git repository at `~/.config/personal`, and then runs the convergent setup.
+From Fish, `up-mac` runs this full update and `mac-doctor` runs the doctor.
 
 ## Manual checklist
 
@@ -48,13 +57,17 @@ Complete the steps that require a login, consent, or an application UI:
 5. Grant Screen Recording to SketchyBar, Accessibility to AeroSpace, and
    Calendar access to icalBuddy.
 6. Load the Chrome theme, import the Raycast theme, select the Zed theme, and
-   apply the Slack colors from `Styles/violet-hour-slack-theme.txt` using the
+   apply the Slack colors from `Styles/glacier-signal-slack-theme.txt` using the
    tracked instructions. Static checks validate the theme files; they cannot
    apply settings inside GUI applications.
 7. For gh-dash, copy `gh-dash/config.yml.example` to the ignored
    `gh-dash/config.yml` and replace `YOUR-ORG` locally.
 8. For Fastfetch, add an optional private logo as described in
    `personal/README.md`, or change its logo type to `auto`.
+9. Set the Glacier Signal pointer colors in System Settings > Accessibility >
+   Display > Pointer: fill `22B8F5`, outline `F3FAF7`. Setup applies the rest of
+   the macOS visual layer, but deliberately never writes protected pointer
+   preferences.
 
 ## Reproducible boundary
 
@@ -69,7 +82,7 @@ Complete the steps that require a login, consent, or an application UI:
 | Git interfaces | `git/config`, `lazygit/config.yml`, `gh-dash/config.yml.example` |
 | Window and status bar | `aerospace/`, `borders/`, and `sketchybar/` |
 | macOS defaults | `scripts/macos-tweaks.sh` |
-| Violet Hour | `themes/violet-hour.json`, tool configs, and GUI theme files |
+| Glacier Signal | `themes/glacier-signal.json`, tool configs, and GUI theme files |
 | Static verification | `tests/*.sh`, `scripts/check-config.sh`, and `scripts/check-theme.sh` |
 
 Lazygit uses its native XDG path at `~/.config/lazygit/config.yml`.
@@ -79,7 +92,7 @@ updated, or purged: Fisher follows `fish/fish_plugins`, TPM follows
 authentication state, caches, logs, Fish universal variables, and generated
 completions are not tracked or treated as dependency manifests.
 
-## personal/ is optional and manually managed
+## personal/ is optional and privately managed
 
 Public setup does not require private files. Fish and tmux expose generic
 extension points that load `personal/fish/*.fish` and `personal/tmux/*.conf`
@@ -87,14 +100,16 @@ only when those files exist; Fastfetch's optional logo choice is covered in the
 manual checklist. Setup does not download, generate, or require the personal
 layer.
 
-To carry private settings to another Mac, copy `personal/` manually from a
-trusted private source after cloning. Organization-specific Fish abbreviations,
-private repository paths, and internal tools belong there and are deliberately
-deferred from the public setup. See `personal/README.md` for the scaffold.
+The recommended cross-Mac setup is a second, private Git repository cloned at
+`~/.config/personal`. The public repository ignores that nested checkout, while
+`sync-dotfiles.sh` updates it when present. Organization-specific Fish
+abbreviations, private repository paths, internal tools, and the licensed
+Glacier Signal source wallpaper belong there. See `personal/README.md` for the
+one-time setup and manual-copy fallback.
 
 ## Themes
 
-Violet Hour is the active theme. Its canonical semantic palette, tracked
+Glacier Signal is the active theme. Its canonical semantic palette, tracked
 consumers, checker, and manual GUI activation steps are documented in
 `docs/themes.md`.
 

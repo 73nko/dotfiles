@@ -9,10 +9,10 @@
     }
   },
   "collaboration_panel": {
-    "dock": "right"
+    "dock": "left"
   },
   "git_panel": {
-    "dock": "right"
+    "dock": "left"
   },
   "edit_predictions": {
     "allow_data_collection": "yes",
@@ -23,7 +23,7 @@
   },
 
   // ─── Theme & Appearance ────────────────────────────────────
-  "theme": "Violet Hour",
+  "theme": "Glacier Signal",
   "icon_theme": "Catppuccin Mocha",
   "ui_font_size": 13,
   "buffer_font_size": 13,
@@ -72,7 +72,7 @@
 
   // ─── AI Agent ────────────────────
   "agent": {
-    "dock": "left",
+    "dock": "right",
     "tool_permissions": {
       "default": "confirm"
     },
@@ -106,7 +106,7 @@
 
   // ─── Project Panel ─────────────────────────────────────────
   "project_panel": {
-    "dock": "right",
+    "dock": "left",
     "default_width": 260,
     "indent_size": 16,
     "entry_spacing": "comfortable",
@@ -127,7 +127,7 @@
 
   // ─── Outline Panel ─────────────────────────────────────────
   "outline_panel": {
-    "dock": "right"
+    "dock": "left"
   },
 
   // ─── Terminal ──────────────────────────────────────────────

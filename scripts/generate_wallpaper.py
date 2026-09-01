@@ -1,61 +1,83 @@
 #!/usr/bin/env python3
-"""Violet Hour · Aurora — wallpaper variant generator.
+"""Glacier Signal wallpaper variant generator.
 
-The master render (5120x3200, 16:10) ships committed in the repo at
-  ~/.config/wallpapers/violet-hour-aurora-5120x3200.png
+The original ultrawide image lives in the private personal layer at
+  ~/.config/personal/assets/wallpapers/glacier-signal-source.jpg
 
-This script derives the per-display crops from that master with Pillow:
-  - 5120x1440  ultrawide (32:9) — biased up so the aurora band shows
-  - 3456x2234  laptop retina (16:10)
+This script derives the per-display crops from that master with ImageMagick:
+  - 5120x1440 ultrawide
+  - 3456x2234 laptop Retina
+  - desktop, iPhone, and iPad crops focused on the wolf
 
 Re-run safely; it overwrites the derived files. Pillow is the only dependency.
 """
 import os
+import shutil
+import subprocess
 import sys
 
-try:
-    from PIL import Image
-except ImportError:
-    sys.exit("Pillow no instalado:  pip3 install --break-system-packages Pillow")
+ROOT = os.path.expanduser("~/.config")
+WALLDIR = os.path.join(ROOT, "wallpapers")
+MASTER = os.path.join(
+    ROOT, "personal", "assets", "wallpapers", "glacier-signal-source.jpg"
+)
+CHROME_NTP = os.path.join(ROOT, "chrome-theme", "images", "generated-ntp-bg.jpg")
 
-WALLDIR = os.path.expanduser("~/.config/wallpapers")
-MASTER = os.path.join(WALLDIR, "violet-hour-aurora-5120x3200.png")
-
-# (filename, width, height, top_bias)  top_bias: 0=crop from top, 1=from bottom
+# (filename, width, height, x_bias); 0 crops from the left, 1 from the right.
 VARIANTS = [
-    # Pantallas Mac
-    ("violet-hour-aurora-5120x1440.png", 5120, 1440, 0.30),
-    ("violet-hour-aurora-3456x2234.png", 3456, 2234, 0.50),
-    # iPhone (todos los modelos modernos comparten ~2.17:1; escala perfecto)
-    ("violet-hour-aurora-iphone-1320x2868.png", 1320, 2868, 0.50),
-    # iPad Pro 13" / familia 4:3
-    ("violet-hour-aurora-ipad-2064x2752.png", 2064, 2752, 0.50),
-    # iPad Pro 11" / Air
-    ("violet-hour-aurora-ipad11-1668x2388.png", 1668, 2388, 0.50),
+    ("glacier-signal-ultrawide-5120x1440.jpg", 5120, 1440, 0.50),
+    ("glacier-signal-macbook-3456x2234.jpg", 3456, 2234, 0.30),
+    ("glacier-signal-desktop-5120x3200.jpg", 5120, 3200, 0.34),
+    ("glacier-signal-iphone-1320x2868.jpg", 1320, 2868, 0.42),
+    ("glacier-signal-ipad-2064x2752.jpg", 2064, 2752, 0.38),
+    ("glacier-signal-ipad11-1668x2388.jpg", 1668, 2388, 0.40),
 ]
 
 
-def derive(img, w, h, top_bias):
-    """Resize to *cover* w x h, then crop, biased vertically by top_bias."""
-    src_w, src_h = img.size
+def derive(source, output, source_size, w, h, x_bias):
+    """Resize to cover w x h, then crop horizontally around the subject."""
+    src_w, src_h = source_size
     scale = max(w / src_w, h / src_h)
-    nw, nh = round(src_w * scale), round(src_h * scale)
-    im = img.resize((nw, nh), Image.LANCZOS)
-    x = (nw - w) // 2
-    y = round((nh - h) * top_bias)
-    return im.crop((x, y, x + w, y + h))
+    nw = round(src_w * scale)
+    nh = round(src_h * scale)
+    x = round((nw - w) * x_bias)
+    y = (nh - h) // 2
+    subprocess.run(
+        [
+            "magick",
+            source,
+            "-resize",
+            f"{nw}x{nh}!",
+            "-crop",
+            f"{w}x{h}+{x}+{y}",
+            "+repage",
+            "-quality",
+            "92",
+            output,
+        ],
+        check=True,
+    )
 
 
 def main():
     if not os.path.isfile(MASTER):
         sys.exit(f"master no encontrado: {MASTER}\n"
-                 "Renderiza el SVG de Styles/ a 5120x3200 y guardalo ahi.")
-    master = Image.open(MASTER).convert("RGB")
-    for name, w, h, bias in VARIANTS:
+                 "Copia la imagen original en esa ruta.")
+    if shutil.which("magick") is None:
+        sys.exit("ImageMagick no instalado: brew install imagemagick")
+    dimensions = subprocess.check_output(
+        ["magick", "identify", "-format", "%w %h", MASTER], text=True
+    )
+    source_size = tuple(map(int, dimensions.split()))
+    os.makedirs(WALLDIR, exist_ok=True)
+    os.makedirs(os.path.dirname(CHROME_NTP), exist_ok=True)
+    for name, w, h, x_bias in VARIANTS:
         out = os.path.join(WALLDIR, name)
-        derive(master, w, h, bias).save(out)
+        derive(MASTER, out, source_size, w, h, x_bias)
         print(f"  generado  {name}  ({w}x{h})")
-    print(f"variantes Violet Hour · Aurora en {WALLDIR}")
+    derive(MASTER, CHROME_NTP, source_size, 2560, 1440, 0.50)
+    print("  generado  chrome-theme/images/generated-ntp-bg.jpg  (2560x1440)")
+    print(f"variantes Glacier Signal en {WALLDIR}")
 
 
 if __name__ == "__main__":

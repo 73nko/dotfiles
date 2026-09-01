@@ -29,7 +29,7 @@
   # Custom theme registered via `bat cache --build` in migrate-terminal-setup.
   # If delta can't find it (e.g. on a fresh machine before the first bat cache
   # rebuild), it falls back to default. Nothing breaks.
-  syntax-theme = Violet Hour
+  syntax-theme = Glacier Signal
   # Clickable paths on terminals that support OSC 8 (ghostty, iterm2, kitty).
   hyperlinks = true
 

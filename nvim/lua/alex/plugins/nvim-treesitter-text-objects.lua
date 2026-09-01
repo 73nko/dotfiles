@@ -1,5 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter-textobjects",
+  event = { "BufReadPost", "BufNewFile" },
   branch = "main",
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()
@@ -65,14 +66,26 @@ return {
     sel("iB", "@block.inner", "Select inner code block")
 
     -- Swap next
-    vim.keymap.set("n", "<leader>na", function() swap.swap_next("@parameter.inner") end, { desc = "Swap next parameter" })
-    vim.keymap.set("n", "<leader>n:", function() swap.swap_next("@property.outer") end, { desc = "Swap next property" })
-    vim.keymap.set("n", "<leader>nm", function() swap.swap_next("@function.outer") end, { desc = "Swap next function" })
+    vim.keymap.set("n", "<leader>na", function()
+      swap.swap_next("@parameter.inner")
+    end, { desc = "Swap next parameter" })
+    vim.keymap.set("n", "<leader>n:", function()
+      swap.swap_next("@property.outer")
+    end, { desc = "Swap next property" })
+    vim.keymap.set("n", "<leader>nm", function()
+      swap.swap_next("@function.outer")
+    end, { desc = "Swap next function" })
 
     -- Swap previous
-    vim.keymap.set("n", "<leader>pa", function() swap.swap_previous("@parameter.inner") end, { desc = "Swap prev parameter" })
-    vim.keymap.set("n", "<leader>p:", function() swap.swap_previous("@property.outer") end, { desc = "Swap prev property" })
-    vim.keymap.set("n", "<leader>pm", function() swap.swap_previous("@function.outer") end, { desc = "Swap prev function" })
+    vim.keymap.set("n", "<leader>pa", function()
+      swap.swap_previous("@parameter.inner")
+    end, { desc = "Swap prev parameter" })
+    vim.keymap.set("n", "<leader>p:", function()
+      swap.swap_previous("@property.outer")
+    end, { desc = "Swap prev property" })
+    vim.keymap.set("n", "<leader>pm", function()
+      swap.swap_previous("@function.outer")
+    end, { desc = "Swap prev function" })
 
     -- Move: goto next start
     local function move_map(lhs, fn, query, desc, query_group)

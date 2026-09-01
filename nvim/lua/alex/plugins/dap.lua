@@ -9,6 +9,87 @@ return {
     "mfussenegger/nvim-dap-python",
     "theHamsta/nvim-dap-virtual-text",
   },
+  keys = {
+    {
+      "<leader>db",
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      desc = "Toggle Breakpoint",
+    },
+    {
+      "<leader>dB",
+      function()
+        require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+      end,
+      desc = "Conditional Breakpoint",
+    },
+    {
+      "<leader>dc",
+      function()
+        local dap = require("dap")
+        if dap.session() then
+          dap.continue()
+          return
+        end
+        local ft = vim.bo.filetype
+        if ft == "" or dap.configurations[ft] == nil then
+          vim.notify(
+            ("DAP: no hay configuración para filetype '%s'. Muévete a un buffer de código o usa <leader>dl."):format(
+              ft ~= "" and ft or "none"
+            ),
+            vim.log.levels.WARN,
+            { title = "DAP" }
+          )
+          return
+        end
+        dap.continue()
+      end,
+      desc = "Continue (safe)",
+    },
+    {
+      "<leader>di",
+      function()
+        require("dap").step_into()
+      end,
+      desc = "Step Into",
+    },
+    {
+      "<leader>do",
+      function()
+        require("dap").step_over()
+      end,
+      desc = "Step Over",
+    },
+    {
+      "<leader>dO",
+      function()
+        require("dap").step_out()
+      end,
+      desc = "Step Out",
+    },
+    {
+      "<leader>dr",
+      function()
+        require("dap").repl.open()
+      end,
+      desc = "Open REPL",
+    },
+    {
+      "<leader>dt",
+      function()
+        require("dapui").toggle()
+      end,
+      desc = "Toggle DAP UI",
+    },
+    {
+      "<leader>dl",
+      function()
+        require("dap").run_last()
+      end,
+      desc = "Run Last",
+    },
+  },
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
@@ -21,10 +102,18 @@ return {
     require("dap-python").setup("python3")
 
     -- auto open/close dapui
-    dap.listeners.before.attach.dapui_config = function() dapui.open() end
-    dap.listeners.before.launch.dapui_config = function() dapui.open() end
-    dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
-    dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+    dap.listeners.before.attach.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+    end
 
     -- Node.js / TypeScript (Lambda, Express, Koa, Next.js)
     -- Adapter nativo: js-debug-adapter (mason) habla DAP directamente.
@@ -96,38 +185,5 @@ return {
         },
       }
     end
-
-    -- Keymaps
-    vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-    vim.keymap.set("n", "<leader>dB", function()
-      dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-    end, { desc = "Conditional Breakpoint" })
-
-    -- Continue defensivo: si hay sesion activa, sigue; si no, valida que el buffer
-    -- actual tenga configuracion de DAP antes de llamar continue().
-    -- Filetypes no-codigo (snacks explorer, dashboard, terminal, aerial, trouble, etc.)
-    -- daban un traceback de Lua en vez de un mensaje claro.
-    vim.keymap.set("n", "<leader>dc", function()
-      if dap.session() then
-        dap.continue()
-        return
-      end
-      local ft = vim.bo.filetype
-      if ft == "" or dap.configurations[ft] == nil then
-        vim.notify(
-          ("DAP: no hay configuracion para filetype '%s'. Muevete a un buffer de codigo (ts/js/py/go) o usa <leader>dl para 'Run Last'."):format(ft ~= "" and ft or "none"),
-          vim.log.levels.WARN,
-          { title = "DAP" }
-        )
-        return
-      end
-      dap.continue()
-    end, { desc = "Continue (safe)" })
-    vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step Into" })
-    vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step Over" })
-    vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Step Out" })
-    vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "Open REPL" })
-    vim.keymap.set("n", "<leader>dt", dapui.toggle, { desc = "Toggle DAP UI" })
-    vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "Run Last" })
   end,
 }

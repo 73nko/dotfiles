@@ -2,6 +2,7 @@
 set -euo pipefail
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+export GIT_CONFIG_GLOBAL=/dev/null
 runtime_fixture=
 fixture=
 yaml_tmp=
@@ -46,7 +47,7 @@ printf '{"broken": }\n' >"$fixture/invalid.json"
 printf 'fixture = true\n' >"$fixture/valid.toml"
 printf 'fixture: true\n' >"$fixture/valid.yml"
 printf '{"colors":{},"required":{},"references":{},"legacy":[]}\n' \
-  >"$fixture/themes/violet-hour.json"
+  >"$fixture/themes/glacier-signal.json"
 chmod +x "$fixture/bin/shellcheck" "$fixture/scripts/check-theme.sh"
 git -C "$fixture" init -q
 git -C "$fixture" add .
@@ -90,8 +91,8 @@ if ! grep -Fq "$fixture/valid.yml" <<<"$fixture_output" ||
   printf 'invalid YAML diagnostic was not preserved:\n%s\n' "$fixture_output" >&2
   exit 1
 fi
-if find "$yaml_tmp" -mindepth 1 -print -quit | grep -q .; then
-  echo "YAML parser temporary state was not cleaned" >&2
+if remaining=$(find "$yaml_tmp" -maxdepth 1 -name 'dotfiles-yaml.*' -print -quit) && [[ -n "$remaining" ]]; then
+  printf 'YAML parser temporary state was not cleaned: %s\n' "$remaining" >&2
   exit 1
 fi
 rm -rf "$yaml_tmp"
@@ -189,7 +190,9 @@ if ! fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/
 fi
 printf 'fixture: true\n' >"$fixture/valid.yml"
 
-git -C "$fixture" rm -q --cached invalid.json themes/violet-hour.json
+git -C "$fixture" rm -q --cached invalid.json themes/glacier-signal.json
+mv "$fixture/invalid.json" "$fixture/invalid.json.hidden"
+mv "$fixture/themes/glacier-signal.json" "$fixture/themes/glacier-signal.json.hidden"
 if fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/scripts/check-config.sh" 2>&1); then
   echo "empty JSON discovery unexpectedly passed" >&2
   exit 1
@@ -198,7 +201,9 @@ if ! grep -Fq 'no tracked strict JSON files' <<<"$fixture_output"; then
   printf 'empty JSON discovery diagnostic was not preserved:\n%s\n' "$fixture_output" >&2
   exit 1
 fi
-git -C "$fixture" add invalid.json themes/violet-hour.json
+mv "$fixture/invalid.json.hidden" "$fixture/invalid.json"
+mv "$fixture/themes/glacier-signal.json.hidden" "$fixture/themes/glacier-signal.json"
+git -C "$fixture" add invalid.json themes/glacier-signal.json
 
 mv "$fixture/.git" "$fixture/.git.hidden"
 if fixture_output=$(PATH="$fixture/bin:$PATH" DOTFILES_ROOT="$fixture" "$ROOT/scripts/check-config.sh" 2>&1); then

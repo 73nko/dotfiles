@@ -2,85 +2,81 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Violet Hour · Glass — Style Guide</title>
+<title>Glacier Signal — Style Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Monaspace+Neon:wght@400;500;600&display=swap" rel="stylesheet">
-
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
 <style>
   /* ============================================================
      PALETTE — two variations, swapped via [data-palette] on <body>
      ============================================================ */
 
-  /* Violet Hour — primary identity: orchid / lavender */
-  body[data-palette="violet"] {
-    --abyss:      #06061a;
-    --night:      #0d0d2c;
-    --indigo:     #1a1745;
-    --violet:     #2c2766;
-    --mauve:      #4a3d95;
-    --dawn:       #6e5ec4;
-    --horizon:    #a78dff;
+  /* Glacier Signal — cyan identity with coral semantic contrast */
+  body[data-palette="glacier"] {
+    --abyss:      #04141c;
+    --night:      #062230;
+    --fjord:     #0d3547;
+    --ridge:      #174b60;
+    --mauve:      #2e6b83;
+    --dawn:       #7fb5c4;
+    --horizon:    #cfe6e4;
 
     /* Identity (warm-ish lean, but still cool) */
-    --orchid:     #b39dff;   /* primary — keywords, mode, prompt */
-    --lilac:      #d6c8ff;   /* active tab, titles, glow */
-    --rose-mist:  #e2bcff;   /* cursor, functions, diagnostics */
-    --bloom:      #f0d2ff;   /* highlight glow */
+    --signal:     #22b8f5;   /* primary — keywords, mode, prompt */
+    --glow:      #a8ecff;   /* active tab, titles, glow */
+    --mint:  #5ff2cf;   /* cursor, functions, diagnostics */
+    --frost:      #e0fbff;   /* highlight glow */
 
     /* Structure (cool) */
-    --periwinkle: #8da7ff;   /* branch, structural */
-    --ice:        #a8c9ff;   /* active tmux window, strings */
-    --cyan-mist:  #b9e0ff;   /* types, secondary */
+    --steel: #5f9bd8;   /* branch, structural */
+    --ice:        #7fe0ff;   /* active tmux window, strings */
+    --azure:  #b8f1ff;   /* types, secondary */
     --skyline:    #3c54a3;   /* on-ice text */
 
     /* Foreground / muted */
-    --star:       #ece6ff;
-    --silver:     #c4bee0;
-    --silver-58:  rgba(196,190,224,0.58);
-    --silver-32:  rgba(196,190,224,0.32);
+    --snow:       #f3faf7;
+    --silver:     #c3d9d6;
+    --silver-58:  rgba(195,217,214,0.58);
+    --silver-32:  rgba(195,217,214,0.32);
 
     /* Surfaces / glass */
-    --glass-bg:     rgba(14,12,38,0.55);
-    --glass-bg-hi:  rgba(28,23,69,0.62);
-    --glass-stroke: rgba(214,200,255,0.10);
-    --glass-stroke-hi: rgba(168,201,255,0.22);
-    --glass-tint:   rgba(141,167,255,0.04);
+    --glass-bg:     rgba(6,34,48,0.55);
+    --glass-bg-hi:  rgba(13,53,71,0.62);
+    --glass-stroke: rgba(184,241,255,0.10);
+    --glass-stroke-hi: rgba(127,224,255,0.22);
+    --glass-tint:   rgba(95,155,216,0.04);
 
-    --selection:    rgba(179,157,255,0.22);
-    --cursorline:   rgba(168,201,255,0.06);
-    --indent:       rgba(168,201,255,0.10);
-    --comment:      rgba(168,201,255,0.50);
-    --punct:        rgba(214,200,255,0.45);
-    --pane-border:  rgba(179,157,255,0.12);
-    --pane-active:  rgba(168,201,255,0.35);
+    --selection:    rgba(34,184,245,0.22);
+    --cursorline:   rgba(127,224,255,0.06);
+    --indent:       rgba(127,224,255,0.10);
+    --comment:      rgba(127,224,255,0.50);
+    --punct:        rgba(184,241,255,0.45);
+    --pane-border:  rgba(34,184,245,0.12);
+    --pane-active:  rgba(127,224,255,0.35);
   }
 
-  /* Star Lake — primary identity: periwinkle / ice (more blue) */
+  /* Snow Lake — lower-saturation alternative */
   body[data-palette="lake"] {
     --abyss:      #03081e;
     --night:      #0a1233;
-    --indigo:     #122153;
-    --violet:     #1e3382;
+    --fjord:     #122153;
+    --ridge:     #1e3382;
     --mauve:      #3a5ab4;
     --dawn:       #6c8be0;
     --horizon:    #9abaff;
 
-    --orchid:     #9eb7ff;
-    --lilac:      #c9d8ff;
-    --rose-mist:  #b8c8ff;
-    --bloom:      #d6e3ff;
+    --signal:     #9eb7ff;
+    --glow:      #c9d8ff;
+    --mint:  #b8c8ff;
+    --frost:      #d6e3ff;
 
-    --periwinkle: #88a8ff;
+    --steel: #88a8ff;
     --ice:        #b6d6ff;
-    --cyan-mist:  #c9f0ff;
+    --azure:  #c9f0ff;
     --skyline:    #2c4a9d;
 
-    --star:       #e6efff;
+    --snow:       #e6efff;
     --silver:     #bcc8e4;
     --silver-58:  rgba(188,200,228,0.58);
     --silver-32:  rgba(188,200,228,0.32);
@@ -104,15 +100,15 @@
      BASE
      ============================================================ */
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; min-height: 100%; color: var(--star);
+  html, body { margin: 0; padding: 0; min-height: 100%; color: var(--snow);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
   body {
     background: var(--abyss);
     background-image:
       radial-gradient(ellipse 90% 60% at 50% 0%, color-mix(in oklab, var(--mauve), transparent 55%) 0%, transparent 65%),
-      radial-gradient(ellipse 60% 40% at 100% 30%, color-mix(in oklab, var(--periwinkle), transparent 80%) 0%, transparent 70%),
-      radial-gradient(ellipse 70% 50% at 0% 80%, color-mix(in oklab, var(--orchid), transparent 82%) 0%, transparent 70%);
+      radial-gradient(ellipse 60% 40% at 100% 30%, color-mix(in oklab, var(--steel), transparent 80%) 0%, transparent 70%),
+      radial-gradient(ellipse 70% 50% at 0% 80%, color-mix(in oklab, var(--signal), transparent 82%) 0%, transparent 70%);
     background-attachment: fixed;
   }
 
@@ -132,19 +128,19 @@
     border: 1px solid var(--glass-stroke-hi);
     border-radius: 999px;
   }
-  .eyebrow::before { content: '✦'; color: var(--orchid); font-size: 13px; }
+  .eyebrow::before { content: '✦'; color: var(--signal); font-size: 13px; }
 
   h1.title {
     font-size: 84px; font-weight: 800; letter-spacing: -2.5px; line-height: 1; margin: 28px 0 22px;
-    background: linear-gradient(105deg, var(--bloom) 0%, var(--lilac) 25%, var(--periwinkle) 60%, var(--cyan-mist) 95%);
+    background: linear-gradient(105deg, var(--frost) 0%, var(--glow) 25%, var(--steel) 60%, var(--azure) 95%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   h1.title em { font-style: normal;
-    background: linear-gradient(105deg, var(--rose-mist), var(--lilac));
+    background: linear-gradient(105deg, var(--mint), var(--glow));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-  .lede { font-size: 20px; line-height: 1.6; max-width: 820px; color: var(--star); opacity: .82; }
-  .lede em { font-style: normal; color: var(--lilac); font-weight: 500; }
+  .lede { font-size: 20px; line-height: 1.6; max-width: 820px; color: var(--snow); opacity: .82; }
+  .lede em { font-style: normal; color: var(--glow); font-weight: 500; }
   .meta { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 36px; font-size: 13px; color: var(--silver-58);
     font-family: 'JetBrains Mono', monospace; }
   .meta span strong { color: var(--ice); font-weight: 500; }
@@ -153,22 +149,22 @@
   section { margin-bottom: 96px; }
   .sec-head { display: flex; align-items: baseline; gap: 20px; margin-bottom: 36px;
     padding-bottom: 18px; border-bottom: 1px solid var(--glass-stroke); }
-  .sec-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--orchid);
+  .sec-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--signal);
     letter-spacing: 2.5px; font-weight: 500; }
-  h2 { font-size: 38px; font-weight: 700; letter-spacing: -.7px; margin: 0; color: var(--star); }
+  h2 { font-size: 38px; font-weight: 700; letter-spacing: -.7px; margin: 0; color: var(--snow); }
   h2 .accent { color: var(--ice); }
-  h3 { font-size: 20px; font-weight: 600; letter-spacing: -.3px; margin: 32px 0 14px; color: var(--star); }
-  h4 { font-size: 11px; font-weight: 600; margin: 22px 0 10px; color: var(--lilac);
+  h3 { font-size: 20px; font-weight: 600; letter-spacing: -.3px; margin: 32px 0 14px; color: var(--snow); }
+  h4 { font-size: 11px; font-weight: 600; margin: 22px 0 10px; color: var(--glow);
     font-family: 'JetBrains Mono', monospace; letter-spacing: 2px; text-transform: uppercase; }
 
-  p { margin: 0 0 14px; color: var(--star); opacity: .82; }
+  p { margin: 0 0 14px; color: var(--snow); opacity: .82; }
   ul { padding-left: 0; list-style: none; margin: 12px 0; }
-  ul li { position: relative; padding-left: 24px; margin-bottom: 10px; color: var(--star); opacity: .85; }
+  ul li { position: relative; padding-left: 24px; margin-bottom: 10px; color: var(--snow); opacity: .85; }
   ul li::before { content: '◦'; position: absolute; left: 4px; top: 0; color: var(--ice); font-size: 14px; }
-  strong { color: var(--lilac); font-weight: 600; }
+  strong { color: var(--glow); font-weight: 600; }
 
   code, .mono { font-family: 'Monaspace Neon', 'JetBrains Mono', monospace; font-size: 13px; }
-  p code, li code, td code { background: var(--glass-tint); color: var(--cyan-mist); padding: 1.5px 7px; border-radius: 4px;
+  p code, li code, td code { background: var(--glass-tint); color: var(--azure); padding: 1.5px 7px; border-radius: 4px;
     border: 1px solid var(--glass-stroke); font-size: 12.5px; }
 
   /* Glass card primitive */
@@ -187,10 +183,10 @@
   .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 20px; }
   .principle { padding: 26px 26px 22px; position: relative; overflow: hidden; }
   .principle::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--orchid), var(--ice), transparent); opacity: .85; }
-  .principle .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--orchid);
+    background: linear-gradient(90deg, transparent, var(--signal), var(--ice), transparent); opacity: .85; }
+  .principle .num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--signal);
     letter-spacing: 2.5px; font-weight: 500; margin-bottom: 8px; display: block; }
-  .principle h4 { margin: 0 0 10px; color: var(--star); font-size: 17px; text-transform: none; letter-spacing: -.2px;
+  .principle h4 { margin: 0 0 10px; color: var(--snow); font-size: 17px; text-transform: none; letter-spacing: -.2px;
     font-family: 'Inter', sans-serif; font-weight: 600; }
   .principle p { font-size: 14px; margin: 0; color: var(--silver); opacity: .82; line-height: 1.55; }
 
@@ -209,7 +205,7 @@
   .swatch .hex { font-size: 10.5px; margin-top: 2px; opacity: .75; }
   .swatch .role { font-size: 10px; margin-top: 8px; opacity: .65; line-height: 1.35;
     text-transform: uppercase; letter-spacing: .9px; }
-  .swatch.dark { color: var(--star); }
+  .swatch.dark { color: var(--snow); }
   .swatch.light { color: var(--abyss); }
 
   /* Mapping table */
@@ -232,18 +228,18 @@
   .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 18px 0; }
   .do, .dont { padding: 22px 24px; border-radius: 14px; border: 1px solid; }
   .do { background: color-mix(in oklab, var(--ice), transparent 95%); border-color: color-mix(in oklab, var(--ice), transparent 75%); }
-  .dont { background: color-mix(in oklab, var(--orchid), transparent 95%); border-color: color-mix(in oklab, var(--orchid), transparent 75%); }
+  .dont { background: color-mix(in oklab, var(--signal), transparent 95%); border-color: color-mix(in oklab, var(--signal), transparent 75%); }
   .do h4, .dont h4 { margin-top: 0; font-family: 'JetBrains Mono', monospace; font-size: 11px;
     letter-spacing: 2px; text-transform: uppercase; }
   .do h4 { color: var(--ice); }
-  .dont h4 { color: var(--lilac); }
+  .dont h4 { color: var(--glow); }
   .do ul li::before { content: '✓'; color: var(--ice); font-size: 12px; top: 1px; }
-  .dont ul li::before { content: '✕'; color: var(--rose-mist); font-size: 12px; top: 1px; }
+  .dont ul li::before { content: '✕'; color: var(--mint); font-size: 12px; top: 1px; }
 
   /* Tokens block */
   .tokens { padding: 26px 28px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.75;
     overflow-x: auto; }
-  .tokens .k { color: var(--orchid); }
+  .tokens .k { color: var(--signal); }
   .tokens .v { color: var(--ice); }
   .tokens .c { color: var(--comment); font-style: italic; }
   .tokens .g { color: var(--silver-58); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase;
@@ -265,7 +261,7 @@
   .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--glass-stroke), transparent); margin: 48px 0; }
 
   /* Gradient text utility */
-  .g-text { background: linear-gradient(105deg, var(--lilac), var(--ice), var(--cyan-mist));
+  .g-text { background: linear-gradient(105deg, var(--glow), var(--ice), var(--azure));
     -webkit-background-clip: text; background-clip: text; color: transparent; }
 
   /* ============================================================
@@ -276,15 +272,17 @@
   .wp-thumb {
     aspect-ratio: 16/10; border-radius: 10px; overflow: hidden; position: relative;
     box-shadow: 0 12px 30px -12px rgba(0,0,0,.6);
+    background: url('../wallpapers/glacier-signal-macbook-3456x2234.jpg') center/cover;
   }
   .wp-thumb svg { width: 100%; height: 100%; display: block; }
   .wp-meta { display: flex; justify-content: space-between; align-items: baseline;
     margin-top: 12px; padding: 0 4px; font-family: 'JetBrains Mono', monospace; }
-  .wp-meta .name { font-size: 13px; font-weight: 600; color: var(--lilac); letter-spacing: .3px; }
+  .wp-meta .name { font-size: 13px; font-weight: 600; color: var(--glow); letter-spacing: .3px; }
   .wp-meta .desc { font-size: 10.5px; color: var(--silver-58); text-transform: uppercase; letter-spacing: 1.2px; }
   .wp-hero { margin: 20px 0 12px; padding: 16px; border-radius: 20px; }
   .wp-hero-thumb { aspect-ratio: 21/9; border-radius: 14px; overflow: hidden;
-    box-shadow: 0 30px 70px -30px rgba(0,0,0,.7); }
+    box-shadow: 0 30px 70px -30px rgba(0,0,0,.7);
+    background: url('../wallpapers/glacier-signal-source-7680x2159.jpg') center/cover; }
   .wp-hero-thumb svg { width: 100%; height: 100%; display: block; }
   .wp-pick { display: inline-flex; gap: 8px; padding: 4px;
     background: var(--glass-bg); border: 1px solid var(--glass-stroke); border-radius: 999px;
@@ -292,9 +290,9 @@
   .wp-pick button { background: transparent; border: 0; color: var(--silver-58);
     font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
     padding: 8px 14px; border-radius: 999px; cursor: pointer; transition: all .2s; }
-  .wp-pick button.on { background: var(--glass-bg-hi); color: var(--lilac);
+  .wp-pick button.on { background: var(--glass-bg-hi); color: var(--glow);
     box-shadow: inset 0 0 0 1px var(--glass-stroke-hi); }
-  .wp-pick button:hover:not(.on) { color: var(--star); }
+  .wp-pick button:hover:not(.on) { color: var(--snow); }
 
   /* ============================================================
      TERMINAL / DESKTOP MOCK
@@ -305,9 +303,7 @@
     content: ''; position: absolute; inset: 0; z-index: -1;
     background-size: cover; background-position: center;
   }
-  .stage[data-wp="peaks"]::before { background-image: var(--wp-peaks-url); }
-  .stage[data-wp="aurora"]::before { background-image: var(--wp-aurora-url); }
-  .stage[data-wp="city"]::before { background-image: var(--wp-city-url); }
+  .stage::before { background-image: url('../wallpapers/glacier-signal-source-7680x2159.jpg'); }
 
   .ghostty {
     background: var(--glass-bg);
@@ -317,7 +313,7 @@
     border-radius: 14px; overflow: hidden;
     font-family: 'Monaspace Neon', 'JetBrains Mono', monospace;
     font-size: 12.5px; line-height: 1.65;
-    color: var(--star);
+    color: var(--snow);
     box-shadow:
       0 1px 0 inset var(--glass-stroke-hi),
       0 30px 60px -20px rgba(0,0,0,.55);
@@ -338,61 +334,61 @@
     font-family: 'Monaspace Neon', 'JetBrains Mono', monospace; }
   .buftab.on { background: color-mix(in oklab, var(--ice), transparent 78%); color: var(--ice);
     box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--ice), transparent 70%); }
-  .buftab .mod { color: var(--orchid); margin-left: 6px; font-size: 10px; vertical-align: 1px; }
+  .buftab .mod { color: var(--signal); margin-left: 6px; font-size: 10px; vertical-align: 1px; }
 
   /* code lines */
   .code .line { display: flex; gap: 12px; min-height: 1.65em; }
   .code .ln { color: color-mix(in oklab, var(--ice), transparent 70%); width: 28px; text-align: right; flex-shrink: 0;
     font-variant-numeric: tabular-nums; }
-  .code .ln.cur { color: var(--rose-mist); font-weight: 600; }
+  .code .ln.cur { color: var(--mint); font-weight: 600; }
   .code .cur-row { background: var(--cursorline); margin: 0 -20px; padding: 0 20px; }
-  .kw { color: var(--orchid); } .st { color: var(--ice); } .nm { color: var(--bloom); }
-  .fn { color: var(--rose-mist); } .tp { color: var(--cyan-mist); } .cm { color: var(--comment); font-style: italic; }
-  .pn { color: var(--punct); } .pr { color: var(--orchid); } .va { color: var(--star); }
+  .kw { color: var(--signal); } .st { color: var(--ice); } .nm { color: var(--frost); }
+  .fn { color: var(--mint); } .tp { color: var(--azure); } .cm { color: var(--comment); font-style: italic; }
+  .pn { color: var(--punct); } .pr { color: var(--signal); } .va { color: var(--snow); }
 
   /* statusline */
   .bar { display: flex; height: 26px; font-family: 'Monaspace Neon', 'JetBrains Mono', monospace;
     font-size: 11px; align-items: stretch; }
   .bar > div { padding: 0 14px; display: flex; align-items: center; gap: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .bar .flex { flex: 1; min-width: 0; }
-  .bar .mode { background: var(--orchid); color: var(--night); font-weight: 700; letter-spacing: 1.5px; }
+  .bar .mode { background: var(--signal); color: var(--night); font-weight: 700; letter-spacing: 1.5px; }
   .bar .branch { background: color-mix(in oklab, var(--ice), transparent 80%); color: var(--ice); }
   .bar .file { background: rgba(0,0,0,.18); color: var(--silver); }
-  .bar .diag { background: color-mix(in oklab, var(--rose-mist), transparent 82%); color: var(--rose-mist); }
-  .bar .pos { background: var(--periwinkle); color: var(--night); font-weight: 600; }
+  .bar .diag { background: color-mix(in oklab, var(--mint), transparent 82%); color: var(--mint); }
+  .bar .pos { background: var(--steel); color: var(--night); font-weight: 600; }
 
   /* tmux status */
   .tmux { display: flex; height: 24px; font-family: 'Monaspace Neon', 'JetBrains Mono', monospace;
     font-size: 11px; align-items: stretch; background: rgba(0,0,0,.22); }
   .tmux > div { padding: 0 12px; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-  .tmux .ses { background: var(--orchid); color: var(--night); font-weight: 700; }
+  .tmux .ses { background: var(--signal); color: var(--night); font-weight: 700; }
   .tmux .win { color: var(--silver-58); }
   .tmux .win.a { background: color-mix(in oklab, var(--ice), transparent 78%); color: var(--ice); font-weight: 600; }
-  .tmux .win .dot { color: var(--bloom); }
+  .tmux .win .dot { color: var(--frost); }
   .tmux .flex { flex: 1; }
-  .tmux .bat { color: var(--lilac); }
-  .tmux .clk { background: var(--periwinkle); color: var(--night); font-weight: 600; }
+  .tmux .bat { color: var(--glow); }
+  .tmux .clk { background: var(--steel); color: var(--night); font-weight: 600; }
 
   /* shell prompt mini-preview */
   .shell { padding: 14px 18px; font-family: 'Monaspace Neon', 'JetBrains Mono', monospace;
-    font-size: 12.5px; line-height: 1.7; color: var(--star); }
+    font-size: 12.5px; line-height: 1.7; color: var(--snow); }
   .shell .path { color: var(--ice); }
-  .shell .branch { color: var(--rose-mist); }
-  .shell .clean { color: var(--cyan-mist); }
-  .shell .glyph { color: var(--orchid); }
-  .shell .glyph.err { color: var(--rose-mist); }
+  .shell .branch { color: var(--mint); }
+  .shell .clean { color: var(--azure); }
+  .shell .glyph { color: var(--signal); }
+  .shell .glyph.err { color: var(--mint); }
   .shell .dur { color: var(--silver-58); float: right; font-size: 11px; }
   .shell .muted { color: var(--silver-58); }
 
   /* claude code line */
   .cc-line { font-family: 'Monaspace Neon', 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.75; }
-  .cc-line .u { color: var(--orchid); font-weight: 600; }
+  .cc-line .u { color: var(--signal); font-weight: 600; }
   .cc-line .a { color: var(--ice); }
-  .cc-line .tool { color: var(--rose-mist); }
+  .cc-line .tool { color: var(--mint); }
   .cc-line .path { color: var(--silver-58); }
   .cc-line .add { color: var(--ice); }
-  .cc-line .del { color: var(--orchid); }
-  .cc-line .err { color: #ff7a9d; }
+  .cc-line .del { color: var(--signal); }
+  .cc-line .err { color: #ff7a6e; }
 
   /* Tweak handle hint */
   .tweak-hint { position: fixed; top: 20px; right: 20px; z-index: 20;
@@ -400,9 +396,9 @@
     padding: 8px 14px; border-radius: 999px;
     background: var(--glass-bg); border: 1px solid var(--glass-stroke-hi);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    color: var(--lilac); font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--glow); font-family: 'JetBrains Mono', monospace; font-size: 11px;
     letter-spacing: 1.2px; text-transform: uppercase; }
-  .tweak-hint .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orchid); animation: pulse 2.2s ease-in-out infinite; }
+  .tweak-hint .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--signal); animation: pulse 2.2s ease-in-out infinite; }
   @keyframes pulse { 0%,100% { opacity: .35; transform: scale(1); } 50% { opacity: 1; transform: scale(1.4); } }
 
   /* Responsive */
@@ -415,21 +411,18 @@
   }
 </style>
 </head>
-<body data-palette="violet" data-wp="peaks">
-
-<div class="tweak-hint"><span class="dot"></span>Tweaks · palette &amp; wallpaper</div>
+<body data-palette="glacier">
 
 <div class="page">
 
 <!-- HERO -->
 <header class="hero">
   <span class="eyebrow">Style Guide · v2.0</span>
-  <h1 class="title">Violet&nbsp;Hour <em>·</em> Glass</h1>
+  <h1 class="title">Glacier <em>·</em> Signal</h1>
   <p class="lede">
-    A <em>cool twilight</em> visual system for the terminal stack — Ghostty, tmux, Neovim, Claude Code.
-    The mood is the <em>ten minutes after sunset</em>: deep indigo sky, distant violet, the first stars,
-    soft glow from city or moon. Where Sunset · Pool Splash burned hot, Violet Hour stays <em>quiet</em>
-    — heavy glass, low saturation, accents that hum instead of shout.
+    A <em>glacial cyan</em> visual system for the terminal stack — Ghostty, tmux, Neovim, and daily tools.
+    Deep blue-green surfaces echo the mountain shadows; cyan carries focus and identity;
+    coral is reserved for warnings and destructive state. The wallpaper supplies the light.
   </p>
   <div class="meta">
     <span>Target <strong>Ghostty · tmux · Neovim · Claude Code</strong></span>
@@ -448,13 +441,13 @@
       <p>Saturation is the budget; we spend almost none. Accents are pastel-bright, not neon. If a color demands attention from across the room, it's wrong for this theme.</p></div>
     <div class="principle glass"><span class="num">02</span>
       <h4>Cool sets the tone.</h4>
-      <p>Violet, periwinkle, ice blue carry the entire system. The closest thing to a warm color is a dusty rose-mist — and even that lives in the violet end of the wheel.</p></div>
+      <p>Cyan, steel, and ice carry the system. Coral is deliberately scarce, mirroring the signal lights in the wallpaper and preserving its urgency.</p></div>
     <div class="principle glass"><span class="num">03</span>
       <h4>Glass over chrome.</h4>
-      <p>Window backgrounds are 55% opaque over heavy blur. The anime wallpaper bleeds through everywhere. No solid panels, no hard borders — 1px hairlines at 10–22% alpha.</p></div>
+      <p>Window backgrounds are 55% opaque over heavy blur. The mountain wallpaper bleeds through everywhere. No solid panels, no hard borders — 1px hairlines at 10–22% alpha.</p></div>
     <div class="principle glass"><span class="num">04</span>
       <h4>The wallpaper is the lighting rig.</h4>
-      <p>Every surface borrows color from the sky behind it. Move the window, the tint shifts. Three wallpapers are part of the system — not decoration, but the light source.</p></div>
+      <p>Every surface borrows color from the landscape behind it. The single source image and its tracked crops are part of the system, not decoration.</p></div>
   </div>
 </section>
 
@@ -462,34 +455,17 @@
 <section>
   <div class="sec-head"><span class="sec-num">02</span><h2>The <span class="accent">wallpaper</span></h2></div>
   <p style="max-width:760px">
-    Three twilight illustrations, all anchored to the same palette. Pick whichever matches your mood for the week —
-    they're designed to share tone so you can swap without rebalancing anything else.
-    Tap a thumbnail below to set it as the desktop preview behind the terminal mock further down.
+    The supplied ultrawide artwork is the source of truth. Display-specific crops keep the wolf
+    and the coral ship signal visible while preserving the misty cyan landscape.
   </p>
-
-  <div class="wp-pick" id="wp-pick">
-    <button data-wp="peaks" class="on">Peaks</button>
-    <button data-wp="aurora">Aurora</button>
-    <button data-wp="city">City</button>
-  </div>
 
   <div class="wp-hero glass">
     <div class="wp-hero-thumb" id="wp-hero"></div>
   </div>
 
-  <div class="wp-grid">
-    <div class="wp-card glass">
-      <div class="wp-thumb" data-wp-slot="peaks"></div>
-      <div class="wp-meta"><span class="name">Peaks</span><span class="desc">Quiet · 1 figure</span></div>
-    </div>
-    <div class="wp-card glass">
-      <div class="wp-thumb" data-wp-slot="aurora"></div>
-      <div class="wp-meta"><span class="name">Aurora</span><span class="desc">Lake · reflection</span></div>
-    </div>
-    <div class="wp-card glass">
-      <div class="wp-thumb" data-wp-slot="city"></div>
-      <div class="wp-meta"><span class="name">City</span><span class="desc">Rooftops · neon</span></div>
-    </div>
+  <div class="wp-card glass">
+    <div class="wp-thumb"></div>
+    <div class="wp-meta"><span class="name">Glacier Signal</span><span class="desc">Wolf · mountain mist · coral signal</span></div>
   </div>
 </section>
 
@@ -497,24 +473,24 @@
 <section>
   <div class="sec-head"><span class="sec-num">03</span><h2>Color <span class="accent">palette</span></h2></div>
   <p style="max-width:760px">
-    Three families: <strong>ground</strong> (the sky behind glass), <strong>identity</strong> (orchid → bloom — what makes Violet Hour <em>Violet Hour</em>),
-    and <strong>structure</strong> (periwinkle → cyan-mist — the cool counterweight). Two palette variations swap the same role names —
+    Three families: <strong>ground</strong> (the sky behind glass), <strong>identity</strong> (signal → frost — what makes Glacier Signal <em>Glacier Signal</em>),
+    and <strong>structure</strong> (steel → azure — the cool counterweight). Two palette variations swap the same role names —
     flip with the Tweaks panel.
   </p>
 
   <h4>Identity — keywords, mode, prompt, cursor</h4>
   <div class="palette-grid id4">
-    <div class="swatch dark" style="background:var(--orchid);color:var(--night)"><div class="name">Orchid</div><div class="hex" id="hex-orchid">—</div><div class="role">Primary · keywords · mode · prompt</div></div>
-    <div class="swatch dark" style="background:var(--lilac);color:var(--night)"><div class="name">Lilac</div><div class="hex" id="hex-lilac">—</div><div class="role">Active tab · titles · glow</div></div>
-    <div class="swatch dark" style="background:var(--rose-mist);color:var(--night)"><div class="name">Rose Mist</div><div class="hex" id="hex-rose">—</div><div class="role">Cursor · functions · diagnostics</div></div>
-    <div class="swatch dark" style="background:var(--bloom);color:var(--night)"><div class="name">Bloom</div><div class="hex" id="hex-bloom">—</div><div class="role">Numbers · highlight</div></div>
+    <div class="swatch dark" style="background:var(--signal);color:var(--night)"><div class="name">Signal</div><div class="hex" id="hex-signal">—</div><div class="role">Primary · keywords · mode · prompt</div></div>
+    <div class="swatch dark" style="background:var(--glow);color:var(--night)"><div class="name">Glow</div><div class="hex" id="hex-glow">—</div><div class="role">Active tab · titles · glow</div></div>
+    <div class="swatch dark" style="background:var(--mint);color:var(--night)"><div class="name">Mint Mist</div><div class="hex" id="hex-mint">—</div><div class="role">Cursor · functions · diagnostics</div></div>
+    <div class="swatch dark" style="background:var(--frost);color:var(--night)"><div class="name">Frost</div><div class="hex" id="hex-frost">—</div><div class="role">Numbers · highlight</div></div>
   </div>
 
   <h4>Structure — navigation, types, strings</h4>
   <div class="palette-grid id4">
-    <div class="swatch dark" style="background:var(--periwinkle);color:var(--night)"><div class="name">Periwinkle</div><div class="hex" id="hex-peri">—</div><div class="role">Branch · session · position</div></div>
+    <div class="swatch dark" style="background:var(--steel);color:var(--night)"><div class="name">Steel</div><div class="hex" id="hex-peri">—</div><div class="role">Branch · session · position</div></div>
     <div class="swatch dark" style="background:var(--ice);color:var(--night)"><div class="name">Ice</div><div class="hex" id="hex-ice">—</div><div class="role">Active tmux window · strings</div></div>
-    <div class="swatch dark" style="background:var(--cyan-mist);color:var(--night)"><div class="name">Cyan Mist</div><div class="hex" id="hex-cyan">—</div><div class="role">Types · namespaces · keys</div></div>
+    <div class="swatch dark" style="background:var(--azure);color:var(--night)"><div class="name">Azure</div><div class="hex" id="hex-cyan">—</div><div class="role">Types · namespaces · keys</div></div>
     <div class="swatch dark" style="background:var(--skyline)"><div class="name">Skyline</div><div class="hex" id="hex-sky">—</div><div class="role">On-ice text · shadow hint</div></div>
   </div>
 
@@ -522,15 +498,15 @@
   <div class="palette-grid id6">
     <div class="swatch dark" style="background:var(--abyss)"><div class="name">Abyss</div><div class="hex" id="hex-abyss">—</div><div class="role">Deepest base</div></div>
     <div class="swatch dark" style="background:var(--night)"><div class="name">Night</div><div class="hex" id="hex-night">—</div><div class="role">Window base</div></div>
-    <div class="swatch dark" style="background:var(--indigo)"><div class="name">Indigo</div><div class="hex" id="hex-indigo">—</div><div class="role">Wallpaper · sky 1</div></div>
-    <div class="swatch dark" style="background:var(--violet)"><div class="name">Violet</div><div class="hex" id="hex-violet">—</div><div class="role">Wallpaper · sky 2</div></div>
+    <div class="swatch dark" style="background:var(--fjord)"><div class="name">Fjord</div><div class="hex" id="hex-fjord">—</div><div class="role">Wallpaper · sky 1</div></div>
+    <div class="swatch dark" style="background:var(--ridge)"><div class="name">Ridge</div><div class="hex" id="hex-ridge">—</div><div class="role">Wallpaper · mountain shadow</div></div>
     <div class="swatch dark" style="background:var(--mauve)"><div class="name">Mauve</div><div class="hex" id="hex-mauve">—</div><div class="role">Wallpaper · sky 3</div></div>
     <div class="swatch dark" style="background:var(--dawn);color:var(--night)"><div class="name">Dawn</div><div class="hex" id="hex-dawn">—</div><div class="role">Wallpaper · horizon</div></div>
   </div>
 
   <h4>Foreground + glass</h4>
   <div class="palette-grid id4">
-    <div class="swatch light" style="background:var(--star);color:var(--night)"><div class="name">Star</div><div class="hex" id="hex-star">—</div><div class="role">Default foreground</div></div>
+    <div class="swatch light" style="background:var(--snow);color:var(--night)"><div class="name">Snow</div><div class="hex" id="hex-snow">—</div><div class="role">Default foreground</div></div>
     <div class="swatch dark" style="background:var(--silver);color:var(--night)"><div class="name">Silver</div><div class="hex" id="hex-silver">—</div><div class="role">Muted foreground</div></div>
     <div class="swatch dark" style="background:var(--glass-bg);border:1px solid var(--glass-stroke-hi)"><div class="name">Glass</div><div class="hex">rgba(_,_,_,0.55)</div><div class="role">Window background</div></div>
     <div class="swatch dark" style="background:var(--glass-stroke-hi)"><div class="name">Stroke</div><div class="hex">rgba(_,_,_,0.22)</div><div class="role">Hairline border</div></div>
@@ -538,16 +514,16 @@
 
   <h4>Usage ratio</h4>
   <p style="font-size:13.5px;color:var(--silver);max-width:740px">
-    Star foreground dominates the screen. Cool accents handle the structural half;
-    identity accents punctuate. Diagnostics live in rose-mist — quiet enough that an LSP error doesn't break your focus.
+    Snow foreground dominates the screen. Cool accents handle the structural half;
+    identity accents punctuate. Diagnostics live in mint — quiet enough that an LSP error doesn't break your focus.
   </p>
   <div class="ratio">
-    <div style="background:var(--star);color:var(--night);flex:60">60 · Star fg</div>
-    <div style="background:var(--periwinkle);color:var(--night);flex:14">14 · Periwinkle</div>
-    <div style="background:var(--orchid);color:var(--night);flex:12">12 · Orchid</div>
+    <div style="background:var(--snow);color:var(--night);flex:60">60 · Snow fg</div>
+    <div style="background:var(--steel);color:var(--night);flex:14">14 · Steel</div>
+    <div style="background:var(--signal);color:var(--night);flex:12">12 · Signal</div>
     <div style="background:var(--ice);color:var(--night);flex:8">8 · Ice</div>
-    <div style="background:var(--rose-mist);color:var(--night);flex:4">4 · Rose</div>
-    <div style="background:var(--silver-58);color:var(--star);flex:2">2 · Muted</div>
+    <div style="background:var(--mint);color:var(--night);flex:4">4 · Mint</div>
+    <div style="background:var(--silver-58);color:var(--snow);flex:2">2 · Muted</div>
   </div>
 </section>
 
@@ -561,7 +537,7 @@
     <li><strong>Cell padding:</strong> Ghostty <code>window-padding-x = 18</code>, <code>window-padding-y = 14</code>.</li>
     <li><strong>No bold for keywords.</strong> Color is dim enough that you'd lose the cue. Reserve bold for statusline mode + clock only.</li>
     <li><strong>Italic for comments</strong> — at 50% alpha. The comment shouldn't compete with the code.</li>
-    <li><strong>Disable cursor blink.</strong> Block cursor in Rose Mist — visible but not insistent.</li>
+    <li><strong>Disable cursor blink.</strong> Block cursor in Mint Mist — visible but not insistent.</li>
   </ul>
 </section>
 
@@ -574,16 +550,16 @@
   <table class="maptab">
     <thead><tr><th>Token</th><th>Color</th><th>Role</th></tr></thead>
     <tbody>
-      <tr><td class="tok">@keyword, @operator, @conditional</td><td><span class="chip" style="background:var(--orchid)"></span><code class="mono">orchid</code></td><td>The drumbeat — soft purple</td></tr>
-      <tr><td class="tok">@function, @function.call, @constructor</td><td><span class="chip" style="background:var(--rose-mist)"></span><code class="mono">rose-mist</code></td><td>Action verbs — dusty rose</td></tr>
+      <tr><td class="tok">@keyword, @operator, @conditional</td><td><span class="chip" style="background:var(--signal)"></span><code class="mono">signal</code></td><td>The primary cyan rhythm</td></tr>
+      <tr><td class="tok">@function, @function.call, @constructor</td><td><span class="chip" style="background:var(--mint)"></span><code class="mono">mint</code></td><td>Action verbs — dusty mint</td></tr>
       <tr><td class="tok">@string, @string.regex</td><td><span class="chip" style="background:var(--ice)"></span><code class="mono">ice</code></td><td>The cool pause in cool code</td></tr>
-      <tr><td class="tok">@type, @type.builtin, @namespace</td><td><span class="chip" style="background:var(--cyan-mist)"></span><code class="mono">cyan-mist</code></td><td>Types feel "structural"</td></tr>
-      <tr><td class="tok">@number, @boolean, @constant</td><td><span class="chip" style="background:var(--bloom)"></span><code class="mono">bloom</code></td><td>Lightest violet — values shimmer</td></tr>
-      <tr><td class="tok">@property, @field, @tag</td><td><span class="chip" style="background:var(--orchid)"></span><code class="mono">orchid</code></td><td>Same as kw — intentional</td></tr>
-      <tr><td class="tok">@variable, @parameter</td><td><span class="chip" style="background:var(--star)"></span><code class="mono">star</code></td><td>Default fg — the calm baseline</td></tr>
+      <tr><td class="tok">@type, @type.builtin, @namespace</td><td><span class="chip" style="background:var(--azure)"></span><code class="mono">azure</code></td><td>Types feel "structural"</td></tr>
+      <tr><td class="tok">@number, @boolean, @constant</td><td><span class="chip" style="background:var(--frost)"></span><code class="mono">frost</code></td><td>Lightest cyan — values shimmer</td></tr>
+      <tr><td class="tok">@property, @field, @tag</td><td><span class="chip" style="background:var(--signal)"></span><code class="mono">signal</code></td><td>Same as kw — intentional</td></tr>
+      <tr><td class="tok">@variable, @parameter</td><td><span class="chip" style="background:var(--snow)"></span><code class="mono">snow</code></td><td>Default fg — the calm baseline</td></tr>
       <tr><td class="tok">@comment</td><td><span class="chip" style="background:var(--comment)"></span><code class="mono">ice · 50% · italic</code></td><td>Quiet</td></tr>
       <tr><td class="tok">@punctuation.*</td><td><span class="chip" style="background:var(--punct)"></span><code class="mono">silver · 45%</code></td><td>Quieter still</td></tr>
-      <tr><td class="tok">@tag.attribute (JSX)</td><td><span class="chip" style="background:var(--rose-mist)"></span><code class="mono">rose-mist</code></td><td>Match function tone</td></tr>
+      <tr><td class="tok">@tag.attribute (JSX)</td><td><span class="chip" style="background:var(--mint)"></span><code class="mono">mint</code></td><td>Match function tone</td></tr>
     </tbody>
   </table>
 
@@ -592,15 +568,15 @@
     <thead><tr><th>Element</th><th>Treatment</th></tr></thead>
     <tbody>
       <tr><td class="tok">Background</td><td>Glass: <code>rgba(night, 0.55)</code> over backdrop-blur 40px on the live wallpaper</td></tr>
-      <tr><td class="tok">Cursor</td><td>Block, Rose Mist <code>--rose-mist</code>, no blink</td></tr>
+      <tr><td class="tok">Cursor</td><td>Block, Mint Mist <code>--mint</code>, no blink</td></tr>
       <tr><td class="tok">Cursor line background</td><td>Ice · 6% — a barely-there wash</td></tr>
-      <tr><td class="tok">Line numbers (gutter)</td><td>Ice · 30%; active line Rose Mist bold</td></tr>
+      <tr><td class="tok">Line numbers (gutter)</td><td>Ice · 30%; active line Mint Mist bold</td></tr>
       <tr><td class="tok">Indent guides</td><td>Ice · 10%, 1px solid</td></tr>
-      <tr><td class="tok">Visual selection</td><td>Orchid · 22%</td></tr>
-      <tr><td class="tok">Search match</td><td>Bloom fg on <code>rgba(bloom, .14)</code> bg</td></tr>
-      <tr><td class="tok">Diagnostic err / warn / info / hint</td><td>Rose Mist / Bloom / Cyan Mist / Periwinkle — underline only, no signcolumn fill</td></tr>
-      <tr><td class="tok">Diff add / del / change</td><td>Ice / Orchid / Bloom</td></tr>
-      <tr><td class="tok">Pane borders</td><td>Inactive: Orchid · 12%. Active: Ice · 35% — cool when focused, violet when idle</td></tr>
+      <tr><td class="tok">Visual selection</td><td>Signal · 22%</td></tr>
+      <tr><td class="tok">Search match</td><td>Frost fg on <code>rgba(frost, .14)</code> bg</td></tr>
+      <tr><td class="tok">Diagnostic err / warn / info / hint</td><td>Mint Mist / Frost / Azure / Steel — underline only, no signcolumn fill</td></tr>
+      <tr><td class="tok">Diff add / del / change</td><td>Ice / Signal / Frost</td></tr>
+      <tr><td class="tok">Pane borders</td><td>Inactive: Signal · 12%. Active: Ice · 35% — brighter when focused</td></tr>
     </tbody>
   </table>
 
@@ -609,7 +585,7 @@
     <li>Pill tabs, <code>border-radius: 999px</code>, transparent bar background.</li>
     <li><strong>Active:</strong> bg <code>rgba(ice, .22)</code>, fg Ice, inset 1px Ice·30% ring.</li>
     <li><strong>Inactive:</strong> bg transparent, fg Silver · 58%.</li>
-    <li><strong>Modified dot:</strong> Orchid <code>●</code>, 8px.</li>
+    <li><strong>Modified dot:</strong> Signal <code>●</code>, 8px.</li>
     <li>No close × on tabs.</li>
   </ul>
 
@@ -624,11 +600,11 @@
     </div>
   </div>
   <ul>
-    <li><strong>Mode:</strong> Orchid bg, Night fg, uppercase, bold. Same color for NORMAL/INSERT/VISUAL — your peripheral vision doesn't need a quiz.</li>
+    <li><strong>Mode:</strong> Signal bg, Night fg, uppercase, bold. Same color for NORMAL/INSERT/VISUAL — your peripheral vision doesn't need a quiz.</li>
     <li><strong>Branch:</strong> bg <code>rgba(ice, .2)</code>, fg Ice. Nerdfont branch glyph.</li>
     <li><strong>File:</strong> transparent bg, Silver fg. Relative path.</li>
-    <li><strong>Diagnostics:</strong> bg <code>rgba(rose-mist, .18)</code>, fg Rose Mist. Format <code>✓ N  ✗ N</code>.</li>
-    <li><strong>Position:</strong> Periwinkle bg, Night fg, bold. Line:col only.</li>
+    <li><strong>Diagnostics:</strong> bg <code>rgba(mint, .18)</code>, fg Mint Mist. Format <code>✓ N  ✗ N</code>.</li>
+    <li><strong>Position:</strong> Steel bg, Night fg, bold. Line:col only.</li>
     <li><strong>Separators:</strong> none — flat segments. Powerline arrows are too 2014.</li>
   </ul>
 
@@ -648,10 +624,10 @@
   <ul>
     <li><strong>Position:</strong> bottom, height 24px.</li>
     <li><strong>Background:</strong> <code>rgba(night, .55)</code>.</li>
-    <li><strong>Session:</strong> Orchid bg, Night fg. Tmux glyph <code></code>.</li>
+    <li><strong>Session:</strong> Signal bg, Night fg. Tmux glyph <code></code>.</li>
     <li><strong>Window list:</strong> inactive Silver · 58%; active <code>rgba(ice, .22)</code> bg, Ice fg.</li>
-    <li><strong>Active marker:</strong> Bloom <code>●</code>.</li>
-    <li><strong>Right:</strong> battery (Lilac glyph + %), clock in Periwinkle bg + Night fg bold.</li>
+    <li><strong>Active marker:</strong> Frost <code>●</code>.</li>
+    <li><strong>Right:</strong> battery (Glow glyph + %), clock in Steel bg + Night fg bold.</li>
   </ul>
 </section>
 
@@ -711,7 +687,7 @@
   </div>
 
   <p style="font-size:13px;color:var(--silver);max-width:740px">
-    Note the cursor row — Ice · 6% wash on a Rose-Mist block cursor. The active bufferline pill picks up Ice, the modified dot picks up Orchid. Together they form the only two "live" elements on screen. Everything else is voluntarily quiet.
+    Note the cursor row — Ice · 6% wash on a Mint-Mist block cursor. The active bufferline pill picks up Ice, the modified dot picks up Signal. Together they form the only two "live" elements on screen. Everything else is voluntarily quiet.
   </p>
 </section>
 
@@ -720,9 +696,9 @@
   <div class="sec-head"><span class="sec-num">07</span><h2>Ghostty <span class="accent">window</span></h2></div>
   <ul>
     <li><strong>Background:</strong> <code>--night</code> at <strong>55% opacity</strong>, <code>background-blur-radius = 40</code>.</li>
-    <li><strong>Foreground default:</strong> <code>--star</code> (#ECE6FF).</li>
-    <li><strong>Cursor:</strong> block, <code>--rose-mist</code>. No blink. Cursor-line tint <code>rgba(ice, .06)</code>.</li>
-    <li><strong>Selection bg:</strong> <code>rgba(orchid, .22)</code>.</li>
+    <li><strong>Foreground default:</strong> <code>--snow</code> (#f3faf7).</li>
+    <li><strong>Cursor:</strong> block, <code>--mint</code>. No blink. Cursor-line tint <code>rgba(ice, .06)</code>.</li>
+    <li><strong>Selection bg:</strong> <code>rgba(signal, .22)</code>.</li>
     <li><strong>Window padding:</strong> 18 horizontal, 14 vertical. Corner radius 14px (macOS).</li>
     <li><strong>Title bar:</strong> translucent. Title text Silver, 11px.</li>
     <li><strong>macOS wallpaper:</strong> one of the three illustrations from §02. Export at 5120×3200 (5K).</li>
@@ -732,18 +708,18 @@
   <table class="maptab">
     <thead><tr><th>#</th><th>Normal</th><th>Bright</th></tr></thead>
     <tbody>
-      <tr><td>0 · black</td><td><span class="chip" style="background:var(--abyss)"></span><code>abyss</code></td><td><span class="chip" style="background:var(--indigo)"></span><code>indigo</code></td></tr>
-      <tr><td>1 · red</td><td><span class="chip" style="background:var(--rose-mist)"></span><code>rose-mist</code></td><td><span class="chip" style="background:var(--bloom)"></span><code>bloom</code></td></tr>
-      <tr><td>2 · green</td><td><span class="chip" style="background:var(--ice)"></span><code>ice</code></td><td><span class="chip" style="background:var(--cyan-mist)"></span><code>cyan-mist</code></td></tr>
-      <tr><td>3 · yellow</td><td><span class="chip" style="background:var(--bloom)"></span><code>bloom</code></td><td><span class="chip" style="background:var(--lilac)"></span><code>lilac</code></td></tr>
-      <tr><td>4 · blue</td><td><span class="chip" style="background:var(--periwinkle)"></span><code>periwinkle</code></td><td><span class="chip" style="background:var(--ice)"></span><code>ice</code></td></tr>
-      <tr><td>5 · magenta</td><td><span class="chip" style="background:var(--orchid)"></span><code>orchid</code></td><td><span class="chip" style="background:var(--lilac)"></span><code>lilac</code></td></tr>
-      <tr><td>6 · cyan</td><td><span class="chip" style="background:var(--cyan-mist)"></span><code>cyan-mist</code></td><td><span class="chip" style="background:var(--ice)"></span><code>ice</code></td></tr>
-      <tr><td>7 · white</td><td><span class="chip" style="background:var(--silver)"></span><code>silver</code></td><td><span class="chip" style="background:var(--star)"></span><code>star</code></td></tr>
+      <tr><td>0 · black</td><td><span class="chip" style="background:var(--abyss)"></span><code>abyss</code></td><td><span class="chip" style="background:var(--fjord)"></span><code>fjord</code></td></tr>
+      <tr><td>1 · red</td><td><span class="chip" style="background:var(--mint)"></span><code>mint</code></td><td><span class="chip" style="background:var(--frost)"></span><code>frost</code></td></tr>
+      <tr><td>2 · green</td><td><span class="chip" style="background:var(--ice)"></span><code>ice</code></td><td><span class="chip" style="background:var(--azure)"></span><code>azure</code></td></tr>
+      <tr><td>3 · yellow</td><td><span class="chip" style="background:var(--frost)"></span><code>frost</code></td><td><span class="chip" style="background:var(--glow)"></span><code>glow</code></td></tr>
+      <tr><td>4 · blue</td><td><span class="chip" style="background:var(--steel)"></span><code>steel</code></td><td><span class="chip" style="background:var(--ice)"></span><code>ice</code></td></tr>
+      <tr><td>5 · magenta</td><td><span class="chip" style="background:var(--signal)"></span><code>signal</code></td><td><span class="chip" style="background:var(--glow)"></span><code>glow</code></td></tr>
+      <tr><td>6 · cyan</td><td><span class="chip" style="background:var(--azure)"></span><code>azure</code></td><td><span class="chip" style="background:var(--ice)"></span><code>ice</code></td></tr>
+      <tr><td>7 · white</td><td><span class="chip" style="background:var(--silver)"></span><code>silver</code></td><td><span class="chip" style="background:var(--snow)"></span><code>snow</code></td></tr>
     </tbody>
   </table>
   <p style="font-size:12.5px;color:var(--silver)">
-    Mapping note: ANSI red lands on Rose Mist — gentler than real red, but still distinct from violet identity tones. Green collapses onto Ice (you'll never need a literal green here).
+    Mapping note: ANSI red uses Coral and ANSI green stays genuinely green; semantic states remain distinguishable from the cyan identity colors.
   </p>
 </section>
 
@@ -758,14 +734,14 @@
       <div><span class="glyph">❯</span> <span class="muted">claude</span></div>
     </div>
     <div class="shell" style="border-top: 1px solid var(--glass-stroke)">
-      <div><span class="path">~/projects/neetcode-ts</span> <span class="branch"> main</span> <span style="color:var(--bloom)">●</span></div>
+      <div><span class="path">~/projects/neetcode-ts</span> <span class="branch"> main</span> <span style="color:var(--frost)">●</span></div>
       <div><span class="glyph err">❯</span> <span class="muted">npm test</span></div>
     </div>
   </div>
 
   <ul style="margin-top:18px">
-    <li><strong>Line 1:</strong> path Ice; branch Rose Mist with nerdfont glyph; dirty Bloom <code>●</code>, clean Cyan Mist <code>○</code>.</li>
-    <li><strong>Line 2:</strong> Orchid <code>❯</code>. On non-zero exit, swap to Rose Mist <code>❯</code>.</li>
+    <li><strong>Line 1:</strong> path Ice; branch Mint Mist with nerdfont glyph; dirty Frost <code>●</code>, clean Azure <code>○</code>.</li>
+    <li><strong>Line 2:</strong> Signal <code>❯</code>. On non-zero exit, swap to Mint Mist <code>❯</code>.</li>
     <li><strong>Duration:</strong> right-aligned on line 1 if &gt; 2s, Silver · 58%.</li>
     <li><strong>No hostname, no username, no <code>$</code>.</strong> Trust the room.</li>
   </ul>
@@ -788,10 +764,10 @@
     <div class="cc-line"><span class="err">→ Warning:</span> <span class="path">gh PR has unresolved Copilot comment</span></div>
   </div>
   <ul style="margin-top:18px">
-    <li>User <code>&gt;</code>: Orchid, bold.</li>
-    <li>Assistant <code>◉</code>: Ice. Tool name in Rose Mist. Argument paths in Silver · 58%.</li>
-    <li>Diff <code>+</code> lines: Ice. <code>-</code> lines: Orchid.</li>
-    <li>Warning / error prefix: <code>#ff7a9d</code> — the one place we go louder, and even there we stay in the pink family.</li>
+    <li>User <code>&gt;</code>: Signal, bold.</li>
+    <li>Assistant <code>◉</code>: Ice. Tool name in Mint Mist. Argument paths in Silver · 58%.</li>
+    <li>Diff <code>+</code> lines: Ice. <code>-</code> lines: Signal.</li>
+    <li>Warning / error prefix: <code>#ff7a6e</code> — the coral signal from the wallpaper, reserved for urgency.</li>
   </ul>
 </section>
 
@@ -804,8 +780,8 @@
       <ul>
         <li>Let the wallpaper bleed through at ~45% — the sky is supposed to show</li>
         <li>Keep accents in pastel range (HSL L 70–90) — no neon</li>
-        <li>Use Periwinkle for structure (branch, position, clock, indent guides)</li>
-        <li>Use Orchid for identity (keywords, mode, prompt, modified dot)</li>
+        <li>Use Steel for structure (branch, position, clock, indent guides)</li>
+        <li>Use Signal for identity (keywords, mode, prompt, modified dot)</li>
         <li>Keep comments at Ice · 50% · italic — quiet</li>
         <li>Preserve the 60/14/12/8/4/2 ratio — count visible accents on screen</li>
       </ul>
@@ -837,35 +813,26 @@
   <div class="checklist glass">
     <h3>For the agent applying this guide</h3>
     <ul>
-      <li>Export chosen wallpaper from §02 at 5120×3200 PNG. Save as <code>~/Pictures/violet-hour/{peaks,aurora,city}.png</code>.</li>
+      <li>Keep the tracked source image and regenerate display crops with <code>scripts/generate_wallpaper.py</code>.</li>
       <li>Ghostty: config with background + opacity 0.55 + blur 40 + cursor + selection + ANSI palette + padding 18/14 + radius 14.</li>
       <li>Neovim: colorscheme mapping every Treesitter capture in §05. No highlight group at default.</li>
       <li>Neovim: bufferline plugin with pill tabs, signcolumn relative-numbers, indent guides 1px @ 10%.</li>
       <li>Neovim: statusline flat (no powerline arrows), nerdfont glyphs.</li>
       <li>tmux: status bar bottom, height 1. Pane borders cool-when-active.</li>
-      <li>Claude Code: override <code>+</code> diff → Ice, tool title → Rose Mist if config supports.</li>
+      <li>Claude Code: override <code>+</code> diff → Ice, tool title → Mint Mist if config supports.</li>
       <li>Shell prompt: Starship, two-line per §08.</li>
       <li>Verify the 60/14/12/8/4/2 ratio on a real screen — if structural cool disappears, rebalance.</li>
       <li>Nerdfont set in Ghostty (Monaspace Neon NF preferred, JetBrains Mono NF fallback).</li>
-      <li>Test in both palette variations (Violet Hour + Star Lake). Wallpaper should still work with both.</li>
+      <li>Test both palette variations (Glacier Signal + Snow Lake) against the tracked wallpaper.</li>
     </ul>
   </div>
 </section>
 
 <footer>
-  Violet Hour · Glass — Style Guide v2.0 · May 2026 · Successor to Sunset · Pool Splash
+  Glacier Signal — Style Guide v2.0 · May 2026 · Successor to Sunset · Pool Splash
 </footer>
 
 </div>
-
-<!-- (Wallpaper SVG defs now live inside each wallpaper component) -->
-
-<!-- Mount targets -->
-<div id="tweaks-mount"></div>
-
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel" src="wallpapers.jsx"></script>
-<script type="text/babel" src="app.jsx"></script>
 
 </body>
 </html>

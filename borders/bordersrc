@@ -1,12 +1,12 @@
 #!/bin/bash
 # ============================================================================
-# JankyBorders — Violet Hour · Glass
+# JankyBorders — Glacier Signal
 # ----------------------------------------------------------------------------
-# Guide v2 §05: pane/window borders are "cool when focused, violet when idle".
-# Ice carries focus; orchid hums quietly in the background.
+# Guide v2 §05: pane/window borders are ice when focused, signal when idle.
+# Ice carries focus; signal hums quietly in the background.
 #
 #   Active   = Ice    #7fe0ff @ 90%   -> 0xe67fe0ff
-#   Inactive = Orchid #22b8f5 @ 22%   -> 0x3822b8f5   (hairline whisper)
+#   Inactive = Signal #22b8f5 @ 22%   -> 0x3822b8f5   (hairline whisper)
 #   Style    = round, width 4.0, hidpi on
 # ============================================================================
 

@@ -2,7 +2,7 @@
 set -uo pipefail
 
 ROOT=${1:-"${XDG_CONFIG_HOME:-$HOME/.config}"}
-PALETTE="$ROOT/themes/violet-hour.json"
+PALETTE="$ROOT/themes/glacier-signal.json"
 failures=()
 
 fail() {

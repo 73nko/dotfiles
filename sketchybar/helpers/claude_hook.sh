@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================================
-# Claude Code -> SketchyBar · dispatcher de hooks (Violet Hour)
+# Claude Code -> SketchyBar · dispatcher de hooks (Glacier Signal)
 # ----------------------------------------------------------------------------
 # Equivalente nativo de claude-status-bar (m1ckc3s) para tu barra: como tu
 # macos-tweaks.sh esconde la barra nativa, la app de menubar quedaria invisible.

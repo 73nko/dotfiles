@@ -5,6 +5,12 @@ ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 TRACKED=$(git -C "$ROOT" ls-files)
 
 runtime_paths=(
+  "code-server/config.yaml"
+  "gcloud/credentials.db"
+  "gws/token_cache.json"
+  "gws-personal/credentials.enc"
+  "gws-shared/client_secret.json"
+  "gws-work/token_cache.json"
   "uv/uv-receipt.json"
   "yarn/global/node_modules/.yarn-integrity"
   "zed/prompts/prompts-library-db.0.mdb/data.mdb"
@@ -19,6 +25,11 @@ for path in "${runtime_paths[@]}"; do
   fi
   git -C "$ROOT" check-ignore -q "$path"
 done
+
+if git -C "$ROOT" grep -IqE '(gh[opusr]_[[:alnum:]_]{20,}|github_pat_[[:alnum:]_]{20,})' -- .; then
+  echo "tracked GitHub credential" >&2
+  exit 1
+fi
 
 if rg -q '^yazi/plugins/|^yazi/flavors/(neon-nocturne|tokyo-night)\.yazi/' <<<"$TRACKED"; then
   echo "tracked generated or inactive Yazi content" >&2
@@ -36,6 +47,11 @@ rg -q '^run = "plugin toggle-pane max-preview"$' "$ROOT/yazi/keymap.toml"
 
 if rg -q '^brew "glow"' "$ROOT/.Brewfile"; then
   echo "Glow is still declared" >&2
+  exit 1
+fi
+
+if rg -n 'com\.apple\.universalaccess|cursor(Fill|Outline|IsCustomized)' "$ROOT/scripts"; then
+  echo "protected cursor preferences must never be scripted" >&2
   exit 1
 fi
 

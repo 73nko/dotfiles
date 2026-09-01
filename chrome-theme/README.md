@@ -1,6 +1,6 @@
-# Chrome — Violet Hour · Glass
+# Chrome — Glacier Signal
 
-This unpacked Chrome theme uses the Violet Hour frame, toolbar, and new-tab
+This unpacked Chrome theme uses the Glacier Signal frame, toolbar, and new-tab
 background. The repository checker validates the tracked manifest's active
 theme reference, but Chrome installation is manual.
 
@@ -10,22 +10,23 @@ theme reference, but Chrome installation is manual.
 2. Enable **Developer mode**.
 3. Click **Load unpacked**.
 4. Select `~/.config/chrome-theme/`, the directory containing `manifest.json`.
-5. Confirm **Violet Hour · Glass** under
+5. Confirm **Glacier Signal** under
    `chrome://settings/appearance`.
 
 ## Active color mapping
 
 - Frame and new-tab background: night `#062230` (`[6, 34, 48]`).
-- Toolbar and omnibox background: indigo `#0d3547` (`[13, 53, 71]`).
-- Toolbar, tab, bookmark, new-tab, and omnibox text: star `#f3faf7`
+- Toolbar and omnibox background: fjord `#0d3547` (`[13, 53, 71]`).
+- Toolbar, tab, bookmark, new-tab, and omnibox text: snow `#f3faf7`
   (`[243, 250, 247]`).
 - Inactive tab text: the palette's muted UI value `#839b9e`
   (`[131, 155, 158]`).
 - New-tab links: ice `#7fe0ff` (`[127, 224, 255]`).
-- New-tab headers and buttons: orchid `#22b8f5` (`[34, 184, 245]`).
+- New-tab headers and buttons: signal `#22b8f5` (`[34, 184, 245]`).
 
-`images/ntp-bg.png` supplies the new-tab artwork and
-`images/toolbar-bg.png` keeps the toolbar on the indigo surface.
+`images/generated-ntp-bg.jpg` is generated locally from the private Glacier Signal source
+by `scripts/generate_wallpaper.py`; it supplies the new-tab artwork.
+`images/toolbar-bg.png` keeps the toolbar on the fjord surface.
 
 ## Remove
 

@@ -64,6 +64,8 @@ assume_yes = true
 # Without this, each mole cleanup keeps appending to operations.log forever.
 # The || true prevents topgrade from failing if mole has never run.
 "Trim mole logs" = "bash -c 'if [ -f ~/.config/mole/operations.log ]; then tail -n 500 ~/.config/mole/operations.log > /tmp/mole-trim.log && mv /tmp/mole-trim.log ~/.config/mole/operations.log; fi'"
+"Atuin history sync" = "atuin sync 2>/dev/null || true"
+"Bat themes cache" = "command -v bat >/dev/null && bat cache --build >/dev/null 2>&1 || true"
 
 [brew]
 #greedy_cask = true

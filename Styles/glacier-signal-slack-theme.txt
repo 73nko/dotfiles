@@ -1,4 +1,4 @@
-Violet Hour · Glass — Slack theme
+Glacier Signal — Slack theme
 =================================
 
 Slack guarda el theme en su propia app (no es un dotfile). Esta es la cadena
@@ -9,14 +9,14 @@ CADENA (pégala tal cual):
   #0d3547,#0f526f,#22b8f5,#062230,#0f526f,#f3faf7,#7fe0ff,#5ff2cf
 
 Las 8 ranuras:
-  1  Column BG          #0d3547  indigo      — fondo de la barra lateral
+  1  Column BG          #0d3547  fjord      — fondo de la barra lateral
   2  Menu BG Hover      #0f526f  selection   — hover del menú
-  3  Active Item        #22b8f5  orchid      — canal seleccionado (pill)
-  4  Active Item Text   #062230  night       — texto sobre el pill orchid
+  3  Active Item        #22b8f5  signal      — canal seleccionado (pill)
+  4  Active Item Text   #062230  night       — texto sobre el pill signal
   5  Hover Item         #0f526f  selection   — hover de canal
-  6  Text Color         #f3faf7  star        — texto de la barra lateral
+  6  Text Color         #f3faf7  snow        — texto de la barra lateral
   7  Active Presence    #7fe0ff  ice         — punto de "en línea"
-  8  Mention Badge      #5ff2cf  rose mist   — badge de menciones
+  8  Mention Badge      #5ff2cf  mint   — badge de menciones
 
 Cómo aplicarlo:
   Opción rápida — pega la cadena en cualquier mensaje de Slack (un DM

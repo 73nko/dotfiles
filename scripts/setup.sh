@@ -43,12 +43,18 @@ fail()  { printf "  ${RED}FAIL${NC} %s\n" "$1"; FAILURES+=("$1"); }
 # Ejecuta logueando stdout/stderr al LOG_FILE. Si falla, se registra en
 # FAILURES y se ENSEÑAN las ultimas lineas del error (nada de /dev/null).
 run() {
-  local desc="$1"; shift
-  if "$@" >>"$LOG_FILE" 2>&1; then
+  local desc="$1" output
+  shift
+  output=$(mktemp)
+  if "$@" >"$output" 2>&1; then
+    cat "$output" >>"$LOG_FILE"
+    rm -f "$output"
     ok "$desc"
   else
-    fail "$desc  ${DIM}(ultimas lineas del log)${NC}"
-    tail -3 "$LOG_FILE" | sed 's/^/       /'
+    cat "$output" >>"$LOG_FILE"
+    fail "$desc"
+    tail -3 "$output" | sed 's/^/       /'
+    rm -f "$output"
   fi
 }
 
@@ -197,17 +203,20 @@ yazi_plugins() {
 }
 
 theming() {
-  phase "Tema Violet Hour (bat, wallpaper, capa visual macOS)"
+  phase "Tema Glacier Signal (bat, wallpaper, capa visual macOS)"
   # bat cache registra el tmTheme que usa delta en los diffs.
   command -v bat >/dev/null 2>&1 && run "bat cache --build" bat cache --build
-  local wallpaper="$DOTS/wallpapers/violet-hour-aurora-5120x3200.png"
+  local source="$DOTS/personal/assets/wallpapers/glacier-signal-source.jpg"
+  local wallpaper="$DOTS/wallpapers/glacier-signal-desktop-5120x3200.jpg"
   if [[ -f "$wallpaper" ]]; then
     skip "wallpaper assets already present"
-  elif [[ -f "$DOTS/scripts/generate_wallpaper.py" ]]; then
+  elif [[ -f "$source" && -f "$DOTS/scripts/generate_wallpaper.py" ]]; then
     run "generate wallpaper assets" python3 "$DOTS/scripts/generate_wallpaper.py"
+  else
+    warn "private Glacier Signal wallpaper not found; skipping derived assets"
   fi
-  if [[ -f "$DOTS/scripts/macos-violet-hour.sh" ]]; then
-    run "capa visual (wallpaper, accent, puntero)" bash "$DOTS/scripts/macos-violet-hour.sh"
+  if [[ -f "$DOTS/scripts/macos-glacier-signal.sh" ]]; then
+    run "capa visual (wallpaper y accent)" bash "$DOTS/scripts/macos-glacier-signal.sh"
   fi
 }
 
@@ -310,7 +319,9 @@ check_nvim_config() {
 }
 
 check_yazi_config() {
-  yazi --debug 2>&1 | grep -Fq 'violet-hour'
+  local environment
+  environment=$(script -q /dev/null ya env 2>&1) || return
+  grep -Eq 'Dark/light flavor:.*glacier-signal' <<<"$environment"
 }
 
 check_fisher_plugins() {
@@ -318,7 +329,8 @@ check_fisher_plugins() {
   fish -c '
     set installed (fisher list)
     while read -l plugin
-      string match -qr "^#|^$" -- $plugin; and continue
+      string match -q "#*" -- "$plugin"; and continue
+      test -z "$plugin"; and continue
       contains -- $plugin $installed; or exit 1
     end < ~/.config/fish/fish_plugins
   '
@@ -353,6 +365,15 @@ doctor() {
       errors=$((errors + 1))
     fi
   }
+  check_app() {
+    local name=$1 bundle=$2
+    if [[ -d "/Applications/$bundle.app" || -d "$HOME/Applications/$bundle.app" ]]; then
+      printf "  ${GREEN}OK${NC}      %-14s %s.app\n" "$name" "$bundle"
+    else
+      printf "  ${RED}MISSING${NC} %s.app\n" "$bundle"
+      errors=$((errors + 1))
+    fi
+  }
   # Toolchains de mise: NO usar command -v. Los shims solo estan en el PATH
   # con mise activado (fish); desde bash/zsh darian MISSING falsos en una
   # maquina recien instalada. mise which pregunta a la fuente de verdad.
@@ -365,23 +386,31 @@ doctor() {
     fi
   }
   echo "  Core:"
-  for c in fish nvim tmux git brew ghostty; do check "$c"; done
+  for c in fish nvim tmux git brew; do check "$c"; done
+  check_app ghostty Ghostty
   echo "  Shell:"
   for c in fzf fd bat eza zoxide atuin yazi direnv mise fastfetch pay-respects; do check "$c"; done
   echo "  Dev (brew/rustup):"
-  for c in rustc cargo cargo-nextest bacon gh lazygit delta just; do check "$c"; done
+  for c in rustc cargo cargo-nextest bacon gh lazygit delta just shellcheck; do check "$c"; done
   echo "  Toolchains (mise):"
   for c in node go python java deno pnpm gopls dlv; do check_mise "$c"; done
   if command -v brew >/dev/null 2>&1; then
+    if [[ ! -w "$(brew --cellar)" ]]; then
+      warn "Homebrew Cellar no es escribible: $(brew --cellar)"
+      errors=$((errors + 1))
+    fi
     if HOMEBREW_NO_AUTO_UPDATE=1 brew bundle check --file="$DOTS/.Brewfile" >/dev/null 2>&1; then
       ok "Brewfile dependencies satisfied"
     else
       warn "Brewfile drift: run setup.sh sync"
     fi
   fi
+  if git config --global --get-regexp '^delta\.' >/dev/null 2>&1; then
+    warn "$HOME/.gitconfig contiene opciones delta que pisan $HOME/.config/git/config"
+  fi
   run "tmux config loads" check_tmux_config
   run "Neovim starts without deprecated APIs" check_nvim_config
-  run "Yazi loads Violet Hour" check_yazi_config
+  run "Yazi loads Glacier Signal" check_yazi_config
   run "Fisher plugins match fish_plugins" check_fisher_plugins
   run "TPM plugins installed" check_tpm_plugins
   run "representative Mason packages installed" check_mason_packages
@@ -397,7 +426,7 @@ doctor() {
   echo "  Permisos manuales (macOS los resetea tras algunos upgrades):"
   echo "    Screen Recording > sketchybar | Accessibility > AeroSpace | Calendar > icalBuddy"
   if [[ $errors -gt 0 ]]; then
-    fail "$errors herramienta(s) faltan"
+    fail "$errors problema(s) de herramientas o gestores"
   else
     ok "todas las herramientas presentes"
   fi

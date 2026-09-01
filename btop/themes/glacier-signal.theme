@@ -1,12 +1,12 @@
-#  Btop theme  ·  Violet Hour · Glass
-#  Aligned with ~/.config/Styles/Violet Hour · Glass.html — cool sets the tone.
+#  Btop theme  ·  Glacier Signal
+#  Aligned with ~/.config/Styles/Glacier Signal.html — cool sets the tone.
 #  -------------------------------------------------------------------
-#  Identity        orchid #22b8f5 · lilac #a8ecff · rose-mist #5ff2cf · bloom #e0fbff
-#  Structure       periwinkle #5f9bd8 · ice #7fe0ff · cyan-mist #B9E0FF
-#  Ground          night #062230 · indigo #0d3547 · star #f3faf7
+#  Identity        signal #22b8f5 · glow #a8ecff · mint #5ff2cf · frost #e0fbff
+#  Structure       steel #5f9bd8 · ice #7fe0ff · azure #b8f1ff
+#  Ground          night #062230 · fjord #0d3547 · snow #f3faf7
 #  -------------------------------------------------------------------
 
-# Main area — night base, star foreground (transparent if theme_background=false)
+# Main area — night base, snow foreground (transparent if theme_background=false)
 theme[main_bg]="#062230"
 theme[main_fg]="#f3faf7"
 
@@ -28,16 +28,16 @@ theme[graph_text]="#f3faf7"
 theme[meter_bg]="#0d3547"
 theme[proc_misc]="#7fe0ff"
 
-# CPU box — orchid border (identity)
+# CPU box — signal border (identity)
 theme[cpu_box]="#22b8f5"
 
 # Memory box — ice (cool/structural)
 theme[mem_box]="#7fe0ff"
 
 # Network box — cyan mist
-theme[net_box]="#b9e0ff"
+theme[net_box]="#b8f1ff"
 
-# Processes box — lilac
+# Processes box — glow
 theme[proc_box]="#a8ecff"
 
 # Single-bar dividers between boxes
@@ -48,16 +48,16 @@ theme[temp_start]="#7fe0ff"
 theme[temp_mid]="#22b8f5"
 theme[temp_end]="#5ff2cf"
 
-# CPU usage gradient: cyan-mist (idle) → periwinkle (busy) → orchid (max)
-theme[cpu_start]="#b9e0ff"
+# CPU usage gradient: azure (idle) → steel (busy) → signal (max)
+theme[cpu_start]="#b8f1ff"
 theme[cpu_mid]="#5f9bd8"
 theme[cpu_end]="#22b8f5"
 
-# Memory: free → available → cached → used (ice → cyan-mist → periwinkle → orchid)
+# Memory: free → available → cached → used (ice → azure → steel → signal)
 theme[free_start]="#7fe0ff"
 theme[free_mid]=""
 theme[free_end]=""
-theme[available_start]="#b9e0ff"
+theme[available_start]="#b8f1ff"
 theme[available_mid]=""
 theme[available_end]=""
 theme[cached_start]="#5f9bd8"
@@ -68,7 +68,7 @@ theme[used_mid]="#5ff2cf"
 theme[used_end]="#5ff2cf"
 
 # Disk I/O gradient
-theme[download_start]="#b9e0ff"
+theme[download_start]="#b8f1ff"
 theme[download_mid]="#7fe0ff"
 theme[download_end]="#5f9bd8"
 theme[upload_start]="#5f9bd8"

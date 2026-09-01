@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================================
-# git-orchard — vista multi-repo de git · Violet Hour · Glass
+# git-orchard — vista multi-repo de git · Glacier Signal
 # ----------------------------------------------------------------------------
 # Escanea una carpeta en busca de repos git y muestra, de un vistazo, en qué
 # rama está cada uno, qué cambios tiene y si está ahead/behind del remoto.
@@ -39,7 +39,7 @@ GB="${GLYPH_BRANCH:- }"   # fallback de 1 columna -> alineación estable
 
 SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
 
-# --- paleta Violet Hour · Glass (truecolor) ---------------------------------
+# --- paleta Glacier Signal (truecolor) ---------------------------------
 _c()  { printf '\033[38;2;%s;%s;%sm' "$1" "$2" "$3"; }
 ORCHID="$(_c 179 157 255)"   # identidad primaria
 LILAC="$(_c 214 200 255)"    # identidad brillante / stash

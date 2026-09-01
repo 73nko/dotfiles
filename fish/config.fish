@@ -14,20 +14,20 @@ fish_add_path ~/.cargo/bin
 set -g fish_greeting ""
 
 # ============================================
-# Violet Hour · Glacier Signal — fish syntax highlighting (repaleta 2026-07)
+# Glacier Signal — fish syntax highlighting (repaleta 2026-07)
 # Antes "Neon Nocturne" (paleta distinta de nvim). Unificado al espectro nuevo:
-# command=gold, builtin=teal, keyword=orchid, string=green, type=azure...
+# command=gold, builtin=teal, keyword=signal, string=green, type=azure...
 # ============================================
 set -g fish_color_command        ffd873    # amber  — commands (@function)
 set -g fish_color_builtin        5ff2cf    # mint   — builtins (@function.builtin)
-set -g fish_color_keyword        22b8f5    # orchid — keywords (@keyword)
-set -g fish_color_param          f3faf7    # star   — arguments (@variable)
+set -g fish_color_keyword        22b8f5    # signal — keywords (@keyword)
+set -g fish_color_param          f3faf7    # snow   — arguments (@variable)
 set -g fish_color_quote          8fdc8f    # jade  — strings (@string)
-set -g fish_color_redirection    b8f1ff    # cyan-mist  — redirections (@type)
-set -g fish_color_end            22b8f5    # orchid — semicolons, &&
+set -g fish_color_redirection    b8f1ff    # azure     — redirections (@type)
+set -g fish_color_end            22b8f5    # signal — semicolons, &&
 set -g fish_color_error          ff7a6e    # coral  — errors
 set -g fish_color_comment        559eb7    # comment lifted — comments (@comment)
-set -g fish_color_operator       22b8f5    # orchid — operators (@operator)
+set -g fish_color_operator       22b8f5    # signal — operators (@operator)
 set -g fish_color_escape         ffd873    # amber  — escape sequences (@constant)
 set -g fish_color_autosuggestion 438198    # dim    — ghost text (subtil a proposito)
 set -g fish_color_cancel         ff7a6e    # coral  — Ctrl+C
@@ -85,8 +85,8 @@ abbr -a we 'curl wttr.in/Madrid?1nqF'
 abbr -a bou 'brew update && brew outdated && brew upgrade && brew cleanup'
 abbr -a app-listen 'lsof -nP -iTCP -sTCP:LISTEN'
 abbr -a up-all topgrade
-# Converge la maquina al estado de los dotfiles (un solo comando para todo)
-abbr -a up-mac 'bash ~/.config/scripts/setup.sh'
+# Trae los dotfiles publicos/privados y converge la maquina.
+abbr -a up-mac 'bash ~/.config/scripts/sync-dotfiles.sh'
 abbr -a mac-doctor 'bash ~/.config/scripts/setup.sh doctor'
 abbr -a reload-fish 'source ~/.config/fish/config.fish'
 abbr -a edit-fish 'nvim ~/.config/fish/config.fish'
@@ -136,3 +136,6 @@ end
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+
+# OpenClaw completion (optional, portable across Macs and usernames)
+test -f "$HOME/.openclaw/completions/openclaw.fish"; and source "$HOME/.openclaw/completions/openclaw.fish"

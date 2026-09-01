@@ -1,10 +1,10 @@
-# Yazi flavor — Violet Hour · Glass
-# Aligned with ~/.config/Styles/Violet Hour · Glass.html
-# identity  = orchid/lilac/rose-mist/bloom
-# structure = periwinkle/ice/cyan-mist
-# ground    = night/indigo/star
+# Yazi flavor — Glacier Signal
+# Aligned with ~/.config/Styles/Glacier Signal.html
+# identity  = signal/glow/mint/frost
+# structure = steel/ice/azure
+# ground    = night/fjord/snow
 # Syntax highlighting in preview pane is delegated to ./tmtheme.xml
-# (symlinked to ~/.config/bat/themes/Violet Hour.tmTheme).
+# (symlinked to ~/.config/bat/themes/Glacier Signal.tmTheme).
 
 [manager]
 cwd = { fg = "#7fe0ff", bold = true }
@@ -46,7 +46,7 @@ progress_error = { fg = "#5ff2cf", bg = "#0d3547" }
 permissions_t = { fg = "#7fe0ff" }
 permissions_r = { fg = "#e0fbff" }
 permissions_w = { fg = "#22b8f5" }
-permissions_x = { fg = "#b9e0ff" }
+permissions_x = { fg = "#b8f1ff" }
 permissions_s = { fg = "#f3faf7" }
 
 [select]
@@ -92,7 +92,7 @@ footer = { fg = "#062230", bg = "#f3faf7" }
 [filetype]
 # Yazi 25+ requires `url` (or `mime`/`is`) on every rule. `name` was removed.
 # Categorias por color del espectro nuevo (2026-06): el listado se lee de un
-# vistazo en vez de ser todo violeta. Imagen=teal, video=azure, audio=orange,
+# vistazo en vez de ser monocromo. Imagen=teal, video=azure, audio=orange,
 # archivo=coral, markup=azure, codigo=gold, exec=green, dir=ice.
 rules = [
   # Image

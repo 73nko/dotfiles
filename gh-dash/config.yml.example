@@ -1,4 +1,4 @@
-# gh-dash · Violet Hour · Glass
+# gh-dash · Glacier Signal
 # Run with:  gh dash
 # Switch sections with:  Tab / Shift+Tab
 # Switch PRs/Issues with:  s
@@ -73,7 +73,7 @@ defaults:
   refetchIntervalMinutes: 30
   dateFormat: "DD-MM-YY"
 
-# Theme — Violet Hour · Glass
+# Theme — Glacier Signal
 theme:
   ui:
     sectionsShowCount: true
@@ -82,19 +82,19 @@ theme:
       compact: false
   colors:
     text:
-      primary:   "#f3faf7"   # star
+      primary:   "#f3faf7"   # snow
       secondary: "#7fe0ff"   # ice
       inverted:  "#062230"   # night
       faint:     "#839b9e"   # silver @ 58% pre-mixed over night
-      warning:   "#e0fbff"   # bloom
+      warning:   "#e0fbff"   # frost
       success:   "#7fe0ff"   # ice
-      error:     "#5ff2cf"   # rose mist
+      error:     "#5ff2cf"   # mint
     background:
-      selected:  "#0d3547"   # indigo
+      selected:  "#0d3547"   # fjord
     border:
       primary:   "#7fe0ff"   # ice
-      secondary: "#0d3547"   # indigo
-      faint:     "#113e51"   # orchid @ 12% pre-mixed over night
+      secondary: "#0d3547"   # fjord
+      faint:     "#113e51"   # signal @ 12% pre-mixed over night
 
 keybindings:
   prs:
